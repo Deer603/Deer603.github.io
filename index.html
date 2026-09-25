@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>603web · 战术寝室内网</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/interactions.css">
+<style>.view{animation:fade .25s ease}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}</style>
+</head>
+<body>
+
+<div class="wm">CN|UID3853714777830861395_220608050842<small>ave-Gout</small></div>
+<div class="hatch"></div>
+<div class="edge-tab">»</div>
+
+<!-- 解密进度条 -->
+<div class="decode-bar" id="decodeBar" role="progressbar" aria-label="解密进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="decodeFill"></span></div>
+
+<!-- ============ 顶栏 ============ -->
+<header class="top">
+  <a class="logo" href="#" data-view="v-home" aria-label="603 首页">
+    <svg width="30" height="26" viewBox="0 0 30 26" fill="none">
+      <rect x="10" y="1" width="10" height="10" transform="rotate(45 15 6)" fill="#1f6bf2"/>
+      <rect x="4" y="9" width="8" height="8" transform="rotate(45 8 13)" fill="#1f6bf2" opacity=".75"/>
+      <rect x="18" y="9" width="8" height="8" transform="rotate(45 22 13)" fill="#1f6bf2" opacity=".75"/>
+    </svg>
+    <span>HAAVK</span><small>603</small>
+  </a>
+  <nav class="main" aria-label="主导航">
+    <a href="#" class="active" data-view="v-home">寝室概况</a>
+    <a href="#" data-view="v-forum">寝室论坛</a>
+    <a href="#" data-view="v-solutions">603小卖部</a>
+    <a href="#" data-view="v-missing">查寝通报</a>
+  </nav>
+  <div class="points"><span class="p-ic">⚖</span>注意力点数 <b class="p-num" id="attVal">50</b></div>
+  <div class="wallet"><span class="coin">◉</span>603币 <b id="havVal">0</b>
+    <button class="get" id="salaryBtn">领取生活费</button>
+  </div>
+</header>
+
+<!-- =========================================================
+     视图一：寝室概况
+========================================================= -->
+<section class="view active" id="v-home">
+  <div class="hero">
+    <div class="hero-art asset-hero" role="img" aria-label="603 战术寝室主视觉"></div>
+    <div class="hero-copy">
+      <h1 id="heroTitle">603，我们的家</h1>
+      <svg class="sig" viewBox="0 0 260 54" fill="none">
+        <path d="M8 40 C 40 8, 58 10, 52 26 C 46 42, 30 46, 44 34 C 62 20, 84 12, 100 18 C 112 22, 108 34, 96 38 C 84 42, 92 30, 110 26 C 134 20, 150 24, 168 18 C 186 12, 196 16, 210 14 C 226 12, 240 18, 252 14" stroke="#1f6bf2" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M150 44 C 180 40, 214 40, 246 38" stroke="#1f6bf2" stroke-width="1.2" opacity=".5"/>
+      </svg>
+      <p class="sub" id="heroSub">守护六楼，为快乐生活保驾护航。</p>
+      <div class="dots" aria-label="首页标语切换"><button class="on" aria-label="第1条标语" aria-current="true"></button><button aria-label="第2条标语"></button><button aria-label="第3条标语"></button></div>
+    </div>
+  </div>
+
+  <div class="home-grid">
+    <div>
+      <h2 class="sec-title"><i></i><span data-surface="优秀室友" data-truth="内卷修罗场">优秀室友</span></h2>
+      <div class="staff-cards">
+        <article class="staff-card red">
+          <div class="ph asset-staff asset-staff-a" role="img" aria-label="詹困困"></div>
+          <div class="tag"><b>詹困困</b><span>寝室长 · 统筹全局</span></div>
+          <div class="slogan">寝室的定海神针</div>
+        </article>
+        <article class="staff-card blue">
+          <div class="ph asset-staff asset-staff-b" role="img" aria-label="罗宇伦"></div>
+          <div class="tag"><b>罗宇伦</b><span>普克委员 · 外号艾克普</span></div>
+          <div class="slogan">普克の意志</div>
+        </article>
+      </div>
+    </div>
+    <div>
+      <h2 class="sec-title"><i></i><span data-surface="室友之声" data-truth="真心话大冒险">室友之声</span></h2>
+      <div class="voices">
+        <div class="voice-card"><b>夏尾龟</b><div class="dept">后勤部</div><div class="portrait portrait-xiaweigui" role="img" aria-label="夏尾龟"></div><p>不论多晚<br>零食永不断供</p></div>
+        <div class="voice-card"><b>黎煎鱼</b><div class="dept">纪检部</div><div class="portrait ph portrait-classified" data-label="档案未公开"></div><p>理解的要熄灯<br>不理解的也要熄灯</p></div>
+        <div class="voice-card"><b>威兹奇</b><div class="dept">宣传部</div><div class="portrait portrait-weiziqi" role="img" aria-label="威兹奇"></div><p>发动态的永远是我们<br>火的是别人</p></div>
+        <div class="voice-card"><b>鹿腾辉</b><div class="dept">通讯部</div><div class="portrait portrait-lutenghui" role="img" aria-label="鹿腾辉"></div><p>耳机常驻<br>信号永不断线</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat">
+    <div class="chat-ava chat-ava-frog" role="img" aria-label="狗语佬"></div>
+    <div class="chat-box"><b>狗语佬</b><p>漂亮呢，所有寝室都把口号挂在门上，但是真正的秘密藏在一般人点不开的地方……</p></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     视图二：寝室论坛
+========================================================= -->
+<section class="view" id="v-forum">
+  <div class="page">
+    <aside class="side-card">
+      <h2 data-surface="寝室论坛" data-truth="树洞">寝室论坛</h2>
+      <p>所有的发言都必须扣除室员个人账户中相应的注意力点数。<br>注意力点数不足者禁止继续水群，违者按无聊灌水严肃处理。</p>
+      <p>请注意维护符合寝室价值观的舆论导向，603 智能系统将自动检测当前舆情的主要特点并总结如下。</p>
+      <div class="hot" id="hotList">
+        <div class="hot-item"><span class="h-ic">◆</span><div><b>卫生轮值</b><span>在公平分工与偷懒之间，我们正努力寻找平衡。</span></div></div>
+        <div class="hot-item"><span class="h-ic">◆</span><div><b>门禁时间</b><span>与楼管的周旋是权宜手段，对熄灯铃的警惕是长期原则。</span></div></div>
+        <div class="hot-item"><span class="h-ic">▤</span><div><b id="hot3Title">夜聊冷场</b><span id="hot3Desc">多位室员认为夜聊氛围影响次日体能。</span></div></div>
+      </div>
+      <button class="btn-post" id="postBtn">发 帖</button>
+      <button class="censor-btn" id="censorBtn">查看查寝日志（+解密）</button>
+    </aside>
+
+    <main>
+      <div class="forum-head"><div>标题</div><div>发帖人</div><div>回复</div><div>最后回复</div></div>
+      <div id="forumRows"></div>
+      <div class="forum-foot">
+        <span class="sys">⬆ 系统置顶</span>
+        <span><i class="dot full"></i>全新未读</span>
+        <span><i class="dot half"></i>有未读回复</span>
+        <span><i class="dot"></i>全部已读</span>
+      </div>
+    </main>
+  </div>
+</section>
+
+<!-- =========================================================
+     视图三：603小卖部
+========================================================= -->
+<section class="view" id="v-solutions">
+  <div class="page">
+    <aside class="side-card">
+      <h2 data-surface="603小卖部" data-truth="强制摊派">603小卖部</h2>
+      <p>室员有义务在执行寝务时自费购买寝室物资。<br>严禁使用来自隔壁寝室的不可靠物资。</p>
+      <p>603 致力于持续囤货，为复杂的寝室生活提供丰富的解决方案。</p>
+      <div class="badge"><span class="b-ic">▣</span><div><b>寝室严选</b><span>603 出品，闭眼入，绝不含糊。</span></div></div>
+    </aside>
+
+    <main>
+      <div class="promo">
+        <div class="ph asset-product" role="img" aria-label="603 限定战术装备"></div>
+        <div class="promo-copy">
+          <h3>603 寝室装备</h3>
+          <div class="hl">朴素，但足够醒目</div>
+          <div class="promo-feats">
+            <div><b>寝室限定</b>603 室员专属装备</div>
+            <div><b>日常耐穿</b>适配寝室多种场景</div>
+            <div><b>醒目标识</b>避免在人群中拿错</div>
+          </div>
+        </div>
+      </div>
+      <div class="prod-list" id="prodList"></div>
+    </main>
+  </div>
+</section>
+
+<!-- =========================================================
+     视图四：查寝通报
+========================================================= -->
+<section class="view" id="v-missing">
+  <div class="page">
+    <aside class="side-card">
+      <h2 data-surface="查寝通报" data-truth="点名黑名单">查寝通报</h2>
+      <p>为保障寝室与全楼安全，603 对部分失联室员持续加以特别关注。</p>
+      <p>室员或楼友如能提供这些失联室员的有效信息，寝室会发放合理的奖励。</p>
+      <p>我们相信，每一位室员都有回寝的权利。让我们伸出援手，帮他们早日归队。</p>
+      <p>603 保留对“归队”的全部解释权。</p>
+    </aside>
+
+    <main class="miss-grid">
+      <article class="miss-card red">
+        <div class="strip"><span>神出鬼没</span><span>夜不归宿</span></div>
+        <div class="m-ph"><div class="ph asset-missing asset-missing-a" role="img" aria-label="未归人员甲"></div></div>
+        <div class="m-info"><b>未归人员·甲</b><span>需返回寝室接受集体教育</span></div>
+        <div class="m-foot">
+          <div class="lab">悬赏 603币 总额</div>
+          <div class="big">999</div>
+          <button class="btn-m btn-done" disabled style="opacity:.7">档案待核查</button>
+          <button class="btn-archive" id="h42Archive">查看档案（+解密）</button>
+        </div>
+      </article>
+      <article class="miss-card red">
+        <div class="strip"><span>精准摸鱼</span><span>暴躁赖床</span></div>
+        <div class="m-ph"><div class="ph asset-missing asset-missing-b" role="img" aria-label="赖床惯犯乙"></div></div>
+        <div class="m-info"><b>赖床惯犯·乙</b><span>亟需室友帮助继续其睡眠研究</span></div>
+        <div class="m-foot">
+          <div class="lab">检举奖励</div>
+          <div class="big">免值日一天</div>
+          <button class="btn-m btn-tip" id="zuoyaClue"><span class="warn">⚠</span>提供线索</button>
+        </div>
+      </article>
+    </main>
+  </div>
+</section>
+
+<!-- 底部任务栏 -->
+<footer class="bar">
+  <button class="back-chip" id="backBtn"><span class="esc">Esc</span> 返回首页</button>
+  <div class="bar-right">
+    <button class="bar-action" title="重置本地进度" aria-label="重置本地进度" id="resetBtn">▦</button>
+    <a class="gift" href="#" data-open-event title="603 关系网">🎁</a>
+    <div class="bar-ava">603<i id="barAtt">50</i></div>
+  </div>
+</footer>
+
+<!-- =========================================================
+     活动 · 603 夜话（全屏弹层）
+========================================================= -->
+<div class="ev-overlay" id="evOverlay">
+  <button class="back-chip" data-close-event style="position:absolute;top:10px;left:16px;z-index:5"><span class="esc">Esc</span> 返回</button>
+  <div class="ev-title">活动</div>
+  <div class="ev-points">🖧 夜聊点数 <b>300</b> <span class="q">?</span></div>
+
+  <div class="ev-wrap">
+    <div class="ev-frame">
+      <div class="ev-tag">DELTA FORCE DTI SQUAD &nbsp;&nbsp;//</div>
+      <div class="ev-browser">
+        <div class="mini-top">
+          <a class="logo" href="#"><svg width="22" height="19" viewBox="0 0 30 26" fill="none"><rect x="10" y="1" width="10" height="10" transform="rotate(45 15 6)" fill="#1f6bf2"/><rect x="4" y="9" width="8" height="8" transform="rotate(45 8 13)" fill="#1f6bf2" opacity=".75"/><rect x="18" y="9" width="8" height="8" transform="rotate(45 22 13)" fill="#1f6bf2" opacity=".75"/></svg>603</a>
+          <nav><span>寝室概况</span><span>寝室论坛</span><span>603小卖部</span><span>查寝通报</span></nav>
+        </div>
+        <div class="mini-body">
+          <div class="mini-intro">
+            <h5>查寝通报</h5>
+            <p>为保障寝室与全楼安全，603 对部分失联室员持续加以特别关注。</p>
+            <p>室员或楼友如能提供这些失联室员的有效信息，寝室会发放合理的奖励。</p>
+            <p>我们相信，每一位室员都有回寝的权利。让我们伸出援手，帮他们早日归队。</p>
+            <p>603 保留对“归队”的全部解释权。</p>
+          </div>
+          <div class="mini-cards">
+            <div class="mini-card"><div class="ph" data-label="甲（待补）"></div><div class="m-strip"><span>神出鬼没</span><span>夜不归宿</span></div><div class="m-name"><b>未归人员·甲</b><span>需返回寝室接受集体教育</span></div><div class="m-price"><div class="lab">悬赏 603币 总额</div><div class="big">999</div></div><div class="m-btn end" id="endHuntBtn" style="cursor:pointer">提前结束</div></div>
+            <div class="mini-card"><div class="ph" data-label="乙（待补）"></div><div class="m-strip"><span>精准摸鱼</span><span>暴躁赖床</span></div><div class="m-name"><b>赖床惯犯·乙</b><span>亟需室友帮助继续其睡眠研究</span></div><div class="m-price"><div class="lab">检举奖励</div><div class="big">免值日一天</div></div><div class="m-btn tip"><span class="warn">⚠</span>提供线索</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="console">
+      <h5>狗语佬的控制台</h5>
+      <div class="ln">&gt; boot --profile 603DOG</div>
+      <div class="ln"><span class="ok">[OK]</span> Intrusion toolkit loaded</div>
+      <div class="ln">&nbsp;</div>
+      <div class="ln">&gt; operation init 603LINE</div>
+      <div class="ln"><span class="ok">[OK]</span> HTI server reverse proxy linked to FUTURE</div>
+      <div class="ln warn">// 会话已镜像，寝室长不可见</div>
+      <div class="ln">&gt; <span class="caret"></span></div>
+    </aside>
+  </div>
+
+  <button class="ev-gift" id="rewardBtn"><span class="g-ic">🎁</span>603 关系网</button>
+
+  <div class="chat">
+    <div class="chat-ava ph ph-dark" data-label="狗语佬"></div>
+    <div class="chat-box"><b>狗语佬</b><p>这是我给你准备的小界面，603 的运维可不知道。</p></div>
+  </div>
+</div>
+
+<!-- ============ 弹窗 ============ -->
+<div class="modal" id="postModal">
+  <div class="modal-box">
+    <h3>发布新帖</h3>
+    <div class="sub">发布将扣除 <b>8</b> 点注意力点数。当前剩余：<span id="postAtt">50</span></div>
+    <input id="postTitle" placeholder="标题（须符合寝室价值观）" maxlength="40">
+    <textarea id="postBody" placeholder="说点什么……" style="margin-top:10px"></textarea>
+    <div class="row">
+      <button class="btn-cancel" data-close-modal>取消</button>
+      <button class="btn-ok" id="postSubmit">发布</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="clueModal">
+  <div class="modal-box">
+    <h3>乙 · 提供线索</h3>
+    <div class="sub">你正在向<b style="color:#c01420">603 查寝系统</b>提交证据。提交后将计入解密进度。</div>
+    <textarea id="clueBody" placeholder="描述你掌握的乙行踪 / 赖床线索……"></textarea>
+    <div class="row">
+      <button class="btn-cancel" data-close-modal>取消</button>
+      <button class="btn-ok" id="clueSubmit">提交线索</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="rewardModal">
+  <div class="modal-box" style="width:560px">
+    <h3>603 关系网</h3>
+    <div class="sub">每一次检举、每一条线索、每一笔自费——都在为这张网供能。</div>
+    <svg class="reward-graph" viewBox="0 0 540 280">
+      <defs>
+        <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ff5a5a"/><stop offset="100%" stop-color="#7a0d12"/>
+        </radialGradient>
+      </defs>
+      <line x1="270" y1="140" x2="100" y2="60" stroke="#c01420" stroke-width="1.5" opacity=".7"/>
+      <line x1="270" y1="140" x2="440" y2="60" stroke="#c01420" stroke-width="1.5" opacity=".7"/>
+      <line x1="270" y1="140" x2="100" y2="220" stroke="#1f6bf2" stroke-width="1.5" opacity=".6"/>
+      <line x1="270" y1="140" x2="440" y2="220" stroke="#1f6bf2" stroke-width="1.5" opacity=".6"/>
+      <circle cx="270" cy="140" r="34" fill="url(#g1)"/>
+      <text x="270" y="144" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">603</text>
+      <circle cx="100" cy="60" r="24" fill="#1a222c" stroke="#c01420"/>
+      <text x="100" y="64" text-anchor="middle" fill="#fff" font-size="11">甲</text>
+      <circle cx="440" cy="60" r="24" fill="#1a222c" stroke="#c01420"/>
+      <text x="440" y="64" text-anchor="middle" fill="#fff" font-size="11">乙</text>
+      <circle cx="100" cy="220" r="24" fill="#1a222c" stroke="#1f6bf2"/>
+      <text x="100" y="224" text-anchor="middle" fill="#fff" font-size="10">室员</text>
+      <circle cx="440" cy="220" r="24" fill="#1a222c" stroke="#1f6bf2"/>
+      <text x="440" y="224" text-anchor="middle" fill="#fff" font-size="10">狗语佬</text>
+    </svg>
+    <div class="reward-line">现在你看见了，对吧。欢迎入住 603——或者，<b>逃</b>。</div>
+    <div class="row"><button class="btn-ok" data-close-modal>关闭</button></div>
+  </div>
+</div>
+
+<div class="modal" id="postDetailModal">
+  <div class="modal-box post-detail-box">
+    <div class="post-detail-head">
+      <div><h3 id="detailTitle"></h3><div class="sub" id="detailMeta"></div></div>
+      <button class="detail-close" data-close-modal aria-label="关闭">×</button>
+    </div>
+    <img id="detailImage" class="post-detail-image" alt="帖子附件">
+    <p id="detailBody" class="post-detail-copy"></p>
+    <div id="detailReplies" class="detail-replies"></div>
+  </div>
+</div>
+
+<div class="modal" id="replyModal">
+  <div class="modal-box">
+    <h3>回复帖子</h3>
+    <div class="sub" id="replyTarget"></div>
+    <textarea id="replyBody" placeholder="写下你的回复……" maxlength="500"></textarea>
+    <div class="row">
+      <button class="btn-cancel" data-close-modal>取消</button>
+      <button class="btn-ok" id="replySubmit">回复</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ===================== 状态 ===================== */
+const state = {
+  attention: 50,
+  havik: 0,
+  decode: 0,
+  exposed: false,
+  posts: [
+    {id:1,title:'关于“夜不归宿”线索的公开征集',user:'詹困困',dept:'寝室管理委员会',r:3,last:'詹困困',pinned:true},
+    {id:2,title:'求助：谁动了我的泡面',user:'罗宇伦',dept:'普克委员',r:2,last:'今天食堂有鱼'},
+    {id:3,title:'603 的猫到底是谁养的',user:'鸟鸟',dept:'机器人算法研发部',r:9,last:'吃饭最积极'},
+    {id:4,title:'有没有人能跟我换夜宵',user:'唐硬心',dept:'财政部',r:2,last:'咖啡比命贵'},
+    {id:5,title:'寝室羽毛球群还有坑位吗',user:'李艳毛',dept:'体能部',r:2,last:'李艳毛'},
+    {id:6,title:'我给大家少说两句',user:'威兹奇',dept:'宣传部',r:1,last:'威兹奇'},
+    {id:7,title:'称呼方式研究：今晚谁先开口',user:'王鹏涛',dept:'寝室气氛组',r:4,last:'别乱叫人'},
+    {id:8,title:'彼昂机器人今日运行报告',user:'彼昂机器人',dept:'自动化值守单元',r:1,last:'系统正常'},
+    {id:9,title:'今日园区巡查随手拍',user:'罗宇伦',dept:'普克委员',r:6,last:'墨镜不错',image:'assets/luo-moments-haavk.png',body:'天气不错，顺路完成园区巡查。照片经过 603 内网安全滤镜处理。'},
+    {id:10,title:'【加密附件】三方会谈记录',user:'彼昂机器人',dept:'自动化值守单元',r:0,last:'权限不足',image:'assets/easter-egg-haavk.png',body:'系统检测到一名身份不明的两栖情报顾问。该记录仅供 603 内部查阅。',egg:true},
+  ],
+  items: {
+    hongpu:{name:'红朴裤',price:60,limit:2,bought:0,desc:'高饱和红色长裤，朴素耐穿，是 603 最醒目的下装装备。'},
+    heipu:{name:'黑普衣',price:50,limit:2,bought:0,desc:'黑色短袖寝室战衣，胸前醒目标识，日常出勤与集体活动均可使用。'},
+  },
+  zuoyaClues: 0,
+  completed: {},
+};
+
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+/* ===================== 持久化（刷新/重访不丢进度） ===================== */
+const SAVE_KEY = 'dorm603_save_v1';
+function persist(){
+  try{
+    localStorage.setItem(SAVE_KEY, JSON.stringify({
+      attention:state.attention, havik:state.havik, decode:state.decode,
+      exposed:state.exposed, zuoyaClues:state.zuoyaClues,
+      bought:Object.fromEntries(Object.entries(state.items).map(([k,it])=>[k,it.bought])),
+      salaryDate:state.salaryDate || '',
+      completed:state.completed,
+      userPosts:state.posts.filter(p=>p.owned),
+      postReplies:Object.fromEntries(state.posts.filter(p=>!p.owned && p.replies?.length).map(p=>[p.id,p.replies]))
+    }));
+  }catch(e){}
+}
+function restore(){
+  try{
+    const d = JSON.parse(localStorage.getItem(SAVE_KEY));
+    if(!d) return;
+    state.attention = Math.max(0, Number(d.attention ?? 50) || 0);
+    state.havik = Math.max(0, Number(d.havik ?? 0) || 0);
+    state.decode = Math.max(0, Math.min(100, Number(d.decode) || 0));
+    state.exposed = !!d.exposed;
+    state.zuoyaClues = Math.max(0, Number(d.zuoyaClues) || 0);
+    state.completed = d.completed && typeof d.completed === 'object' ? d.completed : {};
+    Object.entries(d.bought || {}).forEach(([k,v])=>{ if(state.items[k]) state.items[k].bought = Math.max(0, Math.min(state.items[k].limit, Number(v) || 0)); });
+    if(Array.isArray(d.userPosts)) state.posts.unshift(...d.userPosts.filter(p=>p && p.owned && typeof p.title === 'string').slice(0,30));
+    state.posts.forEach(p=>{
+      if(!p.owned && Array.isArray(d.postReplies?.[p.id])){
+        p.replies=d.postReplies[p.id].filter(r=>typeof r==='string').slice(0,100);
+        p.r+=p.replies.length;
+        if(p.replies.length) p.last='（你）';
+      }
+    });
+    state.salaryDate = d.salaryDate || '';
+  }catch(e){}
+}
+
+function toast(msg, warn){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (warn ? ' warn' : '');
+  clearTimeout(t._t);
+  t._t = setTimeout(()=> t.className = 'toast' + (warn ? ' warn' : ''), 2600);
+}
+
+/* ===================== 渲染 ===================== */
+function renderTop(){
+  $('#attVal').textContent = state.attention;
+  $('#barAtt').textContent = state.attention;
+  $('#havVal').textContent = state.havik.toLocaleString();
+  if($('#postAtt')) $('#postAtt').textContent = state.attention;
+  $('#salaryBtn').disabled = state.salaryDate === new Date().toDateString();
+  $('#salaryBtn').textContent = $('#salaryBtn').disabled ? '今日已领取' : '领取生活费';
+}
+function escapeHTML(s){
+  return String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function renderPosts(){
+  const box = $('#forumRows');
+  box.innerHTML = state.posts.filter(p=>!p.egg || state.decode>=50).map(p=>`
+    <div class="forum-row ${p.image?'has-attachment':''} ${p.egg?'is-egg':''}" data-post="${p.id}">
+      <div class="f-title"><span class="sq"></span>${p.pinned?'<span class="top-tag">[置顶]</span>':''}<button class="post-open" data-id="${p.id}">${escapeHTML(p.title)}</button></div>
+      <div class="f-user"><div class="f-ava avatar-${({
+        '罗宇伦':'luoyulun','唐硬心':'tangyingxin','王鹏涛':'wangpengtao',
+        '彼昂机器人':'biangrobot','鸟鸟':'niaoniao','威兹奇':'weiziqi'
+      })[p.user] || 'default'}" role="img" aria-label="${p.user}头像"></div><div class="u"><b>${p.user}</b><span>${p.dept}</span></div></div>
+      <div class="f-num">${p.r}条</div>
+      <div class="f-last">${escapeHTML(p.last)} <button class="reply-link" data-id="${p.id}">回复</button></div>
+    </div>`).join('');
+}
+function renderItems(){
+  const box = $('#prodList');
+  box.innerHTML = Object.entries(state.items).map(([k,it])=>`
+    <div class="prod">
+      <div class="p-img item-${k}" role="img" aria-label="${it.name} 实物图"></div>
+      <div>
+        <h4>${it.name} <span class="limit">限购：<b>${it.bought}</b>/${it.limit}</span></h4>
+        <div class="desc">${it.desc}</div>
+      </div>
+      <div class="prod-right">
+        <div class="price">${it.price.toLocaleString()}</div>
+        <button class="btn-buy" data-item="${k}" ${it.bought>=it.limit?'disabled style="opacity:.5;cursor:not-allowed"':''}>${it.bought>=it.limit?'已售罄':'购 买'}</button>
+      </div>
+    </div>`).join('');
+}
+function renderDecode(){
+  const bar = $('#decodeBar');
+  if(state.decode > 0) bar.classList.add('show');
+  $('#decodeFill').style.width = state.decode + '%';
+  bar.setAttribute('aria-valuenow',state.decode);
+}
+function applyTruth(){
+  document.body.classList.toggle('exposed', state.exposed);
+  $$('[data-truth]').forEach(el=>{
+    el.textContent = state.exposed ? el.dataset.truth : el.dataset.surface;
+    el.classList.toggle('truth', state.exposed);
+  });
+}
+function addDecode(n){
+  if(state.decode >= 100) return;
+  state.decode = Math.min(100, state.decode + n);
+  if(state.decode >= 100){ state.exposed = true; applyTruth(); }
+  renderDecode(); persist();
+}
+function completeClue(key, amount, message, button){
+  if(state.completed[key]){ toast('这条线索已经记录。'); return; }
+  state.completed[key] = true;
+  addDecode(amount);
+  if(button) button.textContent = '已查看';
+  toast(message);
+}
+
+/* ===================== 交互 ===================== */
+function switchView(id){
+  if(!$('#'+id)) return;
+  $$('.view').forEach(v=>v.classList.remove('active'));
+  $('#'+id).classList.add('active');
+  $$('nav.main a').forEach(n=>{
+    n.classList.toggle('active', n.dataset.view===id);
+    if(n.dataset.view===id) n.setAttribute('aria-current','page');
+    else n.removeAttribute('aria-current');
+  });
+  window.scrollTo(0,0);
+}
+$$('nav.main a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();switchView(a.dataset.view);}));
+$('.logo').addEventListener('click',e=>{e.preventDefault();switchView('v-home');});
+$('#backBtn').addEventListener('click',()=>{ if(overlay.classList.contains('open')) overlay.classList.remove('open'); else switchView('v-home'); });
+
+$('#salaryBtn').addEventListener('click',()=>{
+  const today = new Date().toDateString();
+  if(state.salaryDate === today){ toast('今日生活费已发放，明天再来。', true); return; }
+  state.salaryDate = today;
+  state.havik += 100; renderTop(); persist();
+  toast('今日生活费已到账：+100 603币。');
+});
+
+$('#postBtn').addEventListener('click',()=>{ $('#postAtt').textContent = state.attention; openModal('#postModal'); });
+$('#postSubmit').addEventListener('click',()=>{
+  const title = $('#postTitle').value.trim();
+  const body = $('#postBody').value.trim();
+  if(!title){ toast('请填写标题', true); return; }
+  if(!body){ toast('请填写正文', true); return; }
+  if(state.attention < 8){ toast('注意力点数不足，按无聊灌水严肃处理。', true); return; }
+  state.attention -= 8;
+  state.posts.unshift({id:Date.now(),title,body,user:'（你）',dept:'603 室员',r:0,last:'（你）',owned:true,replies:[]});
+  rerollSummary();
+  renderPosts(); renderTop(); persist(); closeModal('#postModal');
+  $('#postTitle').value=''; $('#postBody').value='';
+  toast('帖子已发布，扣除注意力点数 8。');
+});
+$('#forumRows').addEventListener('click',e=>{
+  const a = e.target.closest('.reply-link');
+  if(a){
+    const p = state.posts.find(x=>x.id==a.dataset.id); if(!p) return;
+    $('#replyModal').dataset.post = p.id;
+    $('#replyTarget').textContent = p.title;
+    openModal('#replyModal'); return;
+  }
+  const open = e.target.closest('.post-open'); if(!open) return;
+  const p = state.posts.find(x=>x.id==open.dataset.id); if(!p) return;
+  $('#detailTitle').textContent = p.title;
+  $('#detailMeta').textContent = p.user+' · '+p.dept+' · '+p.r+'条回复';
+  $('#detailImage').hidden = !p.image;
+  if(p.image){ $('#detailImage').src = p.image; $('#detailImage').alt = p.title; }
+  $('#detailBody').textContent = p.body || '原帖暂无正文。';
+  $('#detailReplies').innerHTML = (p.replies || []).map(r=>'<p><b>你：</b>'+escapeHTML(r)+'</p>').join('');
+  openModal('#postDetailModal');
+});
+$('#replySubmit').addEventListener('click',()=>{
+  const body = $('#replyBody').value.trim();
+  if(!body){ toast('请填写回复内容',true); return; }
+  const p = state.posts.find(x=>x.id==$('#replyModal').dataset.post); if(!p) return;
+  p.replies = p.replies || [];
+  p.replies.push(body);
+  p.r++; p.last='（你）';
+  $('#replyBody').value='';
+  closeModal('#replyModal'); renderPosts(); persist();
+  toast('回复已发布。');
+});
+const SUMMARY_POOL = [
+  '多位室员认为夜聊氛围影响次日体能。',
+  '近期关于卫生轮值的匿名吐槽显著上升。',
+  '对强制摊派物资的抵触情绪需要引导。',
+  '关于“猫到底谁养”的私下讨论明显增多。',
+  '管理层重申：注意力点数关乎下届留任资格。',
+];
+function rerollSummary(){
+  const i = Math.floor(Math.random()*SUMMARY_POOL.length);
+  $('#hot3Desc').textContent = SUMMARY_POOL[i];
+}
+
+$('#prodList').addEventListener('click',e=>{
+  const b = e.target.closest('.btn-buy'); if(!b) return;
+  const it = state.items[b.dataset.item];
+  if(it.bought >= it.limit){ toast('已达限购上限。', true); return; }
+  if(state.havik < it.price){ toast('603币不足，请先领取生活费。', true); return; }
+  it.bought++; state.havik -= it.price;
+  renderItems(); renderTop(); persist();
+  toast('购买成功：'+it.name+'（'+it.bought+'/'+it.limit+'）');
+});
+
+$('#zuoyaClue').addEventListener('click',()=>openModal('#clueModal'));
+$('#clueSubmit').addEventListener('click',()=>{
+  const v = $('#clueBody').value.trim();
+  if(!v){ toast('请填写线索内容', true); return; }
+  state.zuoyaClues++;
+  closeModal('#clueModal'); $('#clueBody').value='';
+  if(!state.completed.clue){ completeClue('clue',25,'线索已记录，解密进度+25。'); }
+  else { persist(); toast('补充线索已记录。'); }
+});
+$('#h42Archive').addEventListener('click',()=>{
+  completeClue('archive',25,'甲的档案已查看，解密进度+25。',$('#h42Archive'));
+});
+$('#censorBtn').addEventListener('click',()=>{
+  completeClue('log',25,'查寝日志已读取，解密进度+25。',$('#censorBtn'));
+});
+
+const overlay = $('#evOverlay');
+$$('[data-open-event]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();overlay.classList.add('open');}));
+$$('[data-close-event]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();overlay.classList.remove('open');}));
+$('#rewardBtn').addEventListener('click',()=>{
+  if(state.decode < 100){ toast('解密达到100%后可查看完整关系网。',true); return; }
+  openModal('#rewardModal');
+});
+
+let priorFocus = null;
+function openModal(s){
+  priorFocus = document.activeElement;
+  const modal=$(s); modal.classList.add('open');
+  modal.setAttribute('role','dialog');
+  modal.setAttribute('aria-modal','true');
+  const focusTarget=modal.querySelector('input,textarea,button');
+  if(focusTarget) focusTarget.focus();
+}
+function closeModal(s){
+  $(s).classList.remove('open');
+  if(priorFocus?.isConnected) priorFocus.focus();
+}
+$$('[data-close-modal]').forEach(b=>b.addEventListener('click',()=>closeModal('#'+b.closest('.modal').id)));
+$$('.modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) closeModal('#'+m.id); }));
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    overlay.classList.remove('open');
+    $$('.modal.open').forEach(m=>closeModal('#'+m.id));
+  }
+});
+
+$('#endHuntBtn').addEventListener('click',()=>{
+  completeClue('hunt',25,'悬赏已结束，解密进度+25。',$('#endHuntBtn'));
+});
+$('#resetBtn').addEventListener('click',()=>{
+  if(confirm('确定重置内网数据？注意力点数 / 603币 / 解密进度将全部清零。')){
+    localStorage.removeItem(SAVE_KEY); location.reload();
+  }
+});
+
+/* 首页标语轮播（三个圆点联动） */
+const HERO_POOL = [
+  {h:'603，我们的家', s:'守护六楼，为快乐生活保驾护航。'},
+  {h:'603，战术驻地', s:'熄灯之后，行动才刚刚开始。'},
+  {h:'603，永不掉线', s:'信号常驻，室友常在。'}
+];
+let heroIdx = 0;
+function showHero(i){
+  heroIdx = i;
+  const t = $('#heroTitle'), s = $('#heroSub');
+  if(t) t.textContent = HERO_POOL[i].h;
+  if(s) s.textContent = HERO_POOL[i].s;
+  $$('.dots button').forEach((el,j)=>{
+    el.classList.toggle('on', j===i);
+    if(j===i) el.setAttribute('aria-current','true'); else el.removeAttribute('aria-current');
+  });
+}
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(()=>showHero((heroIdx+1)%HERO_POOL.length), 5200);
+$$('.dots button').forEach((el,i)=>el.addEventListener('click',()=>showHero(i)));
+
+/* 初始化 */
+restore();
+if(state.decode >= 100){ state.exposed = true; }
+renderTop(); renderPosts(); renderItems(); renderDecode(); applyTruth();
+if(state.completed.archive) $('#h42Archive').textContent='已查看';
+if(state.completed.log) $('#censorBtn').textContent='已查看';
+if(state.completed.hunt) $('#endHuntBtn').textContent='已结束';
+</script>
+
+</body>
+</html>

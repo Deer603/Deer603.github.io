@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "claims": [
+    {
+      "id": "static-entry",
+      "quote": "项目不需要安装依赖或构建。",
+      "level": "implementation",
+      "reasoning": "仓库入口是直接引用本地CSS和图片的HTML，未发现包清单或构建配置。",
+      "evidence": [
+        {"path": "index.html", "excerpt": "<link rel=\"stylesheet\" href=\"css/style.css\">"}
+      ]
+    },
+    {
+      "id": "local-state",
+      "quote": "页面没有账户系统或后端接口；刷新后状态由浏览器的`localStorage`恢复。",
+      "level": "implementation",
+      "reasoning": "状态保存在本地存储并在页面初始化时恢复；页面脚本未实现网络请求。",
+      "evidence": [
+        {"path": "index.html", "excerpt": "localStorage.setItem(SAVE_KEY, JSON.stringify({"},
+        {"path": "index.html", "excerpt": "const d = JSON.parse(localStorage.getItem(SAVE_KEY));"}
+      ]
+    },
+    {
+      "id": "unlock-graph",
+      "quote": "达到100%后可查看完整关系网。",
+      "level": "implementation",
+      "reasoning": "关系网按钮的事件处理在解密进度不足100%时返回。",
+      "evidence": [
+        {"path": "index.html", "excerpt": "if(state.decode < 100){ toast('解密达到100%后可查看完整关系网。',true); return; }"}
+      ]
+    }
+  ]
+}

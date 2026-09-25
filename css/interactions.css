@@ -1,0 +1,160 @@
+/* ================= 交互层样式 ================= */
+/* 钱包 / 头像盒等基础样式已并入 style.css 设计系统 */
+
+/* 解密进度条 */
+.decode-bar{
+  position:fixed;top:0;left:0;right:0;height:4px;z-index:212;
+  background:rgba(0,0,0,.18);display:none;
+}
+.decode-bar.show{display:block}
+.decode-bar span{
+  display:block;height:100%;width:0;
+  background:linear-gradient(90deg,#ff3b3b,#ff8a3b);
+  transition:width .6s ease;
+}
+.decode-bar b{
+  position:fixed;top:9px;right:18px;z-index:213;
+  font-size:11px;color:#ffb3a0;letter-spacing:1px;
+  background:rgba(20,6,8,.7);padding:2px 8px;border-radius:3px;
+}
+
+/* 真相揭示文字 */
+.truth{color:#c01420 !important;font-weight:800 !important}
+body.exposed .sec-title i{background:#c01420}
+body.exposed .side-card h2::after{background:#c01420}
+
+/* Toast */
+.toast{
+  position:fixed;left:50%;bottom:84px;transform:translateX(-50%) translateY(8px);
+  background:#1b212b;color:#e6edf4;padding:11px 20px;border-radius:6px;
+  font-size:13px;z-index:320;opacity:0;pointer-events:none;
+  transition:opacity .25s,transform .25s;
+  box-shadow:0 8px 26px rgba(0,0,0,.4);max-width:84%;text-align:center;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.warn{background:#3a1014;border:1px solid #7a2026;color:#ffd2cf}
+
+/* Modal */
+.modal{
+  position:fixed;inset:0;z-index:250;display:none;
+  align-items:center;justify-content:center;
+  background:rgba(8,12,18,.55);backdrop-filter:blur(2px);
+}
+.modal.open{display:flex}
+.modal-box{
+  background:#fff;border-radius:9px;width:460px;max-width:92vw;
+  padding:24px 24px 20px;box-shadow:0 24px 70px rgba(0,0,0,.45);
+  animation:pop .2s ease;
+}
+@keyframes pop{from{transform:scale(.94);opacity:.6}to{transform:none;opacity:1}}
+.modal-box h3{font-size:18px;margin-bottom:6px}
+.modal-box .sub{font-size:12px;color:#7a8492;margin-bottom:14px;line-height:1.6}
+.modal-box textarea,.modal-box input{
+  width:100%;border:1px solid #d3d9e0;border-radius:5px;padding:10px;
+  font:inherit;font-size:13px;resize:vertical;
+}
+.modal-box textarea{min-height:84px}
+.modal-box .row{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+.btn-ok{background:var(--blue);color:#fff;border:none;border-radius:4px;padding:8px 22px;font-size:13px;font-weight:700;letter-spacing:2px;cursor:pointer}
+.btn-ok:hover{background:var(--blue-d)}
+.btn-cancel{background:#eef1f5;color:#3a4350;border:none;border-radius:4px;padding:8px 18px;font-size:13px;cursor:pointer}
+
+/* 论坛：合规审查日志 / 回复 按钮 */
+.censor-btn{
+  margin-top:12px;width:100%;background:rgba(22,104,255,.06);
+  border:1px solid rgba(22,104,255,.25);color:var(--blue);
+  border-radius:4px;padding:9px 0;font-size:12.5px;font-weight:600;letter-spacing:2px;cursor:pointer;
+}
+.censor-btn:hover{background:rgba(22,104,255,.12)}
+.reply-link{color:var(--blue);font-size:12px;margin-left:10px;cursor:pointer}
+.reply-link:hover{text-decoration:underline}
+
+/* 寻人卡：查看档案 按钮 */
+.btn-archive{
+  margin-top:10px;width:100%;border:1px solid rgba(255,255,255,.4);
+  background:rgba(15,22,32,.6);color:#cfd9e6;border-radius:3px;
+  padding:8px 0;font-size:12px;font-weight:600;letter-spacing:3px;cursor:pointer;
+}
+
+/* 奖励网络弹层 */
+.reward-graph{width:100%;height:280px;background:#120608;border-radius:6px;margin:8px 0 12px}
+.reward-line{
+  font-size:13.5px;color:#2a3140;line-height:1.8;background:#f5f7fa;
+  border-left:3px solid var(--blue);padding:10px 14px;border-radius:0 4px 4px 0;margin-top:6px;
+}
+.reward-line b{color:#c01420}
+
+/* 事件弹层内：拓扑按钮 */
+.ev-gift{cursor:pointer}
+
+/* 603 UI refinement: same visual language, clearer actions and responsive rhythm */
+button{font:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #34b7ef;outline-offset:3px}
+button:disabled{cursor:not-allowed;opacity:.58}
+nav.main a{transition:color .18s ease}
+nav.main a:hover{color:var(--blue)}
+.dots button{display:block;cursor:pointer;padding:0;background:transparent}
+.dots button.on{background:#40b3ef}
+.post-open{border:0;background:transparent;text-align:left;color:inherit;cursor:pointer;font-size:inherit;font-weight:inherit;min-width:0;overflow-wrap:anywhere;padding:0}
+.post-open:hover{color:var(--blue);text-decoration:underline;text-underline-offset:4px}
+.reply-link{border:0;background:transparent;padding:4px;color:var(--blue);white-space:nowrap}
+.bar-action{border:0;background:transparent;color:inherit;cursor:pointer;font-size:inherit;padding:4px}
+.back-chip,.ev-gift{cursor:pointer}
+.detail-replies{padding:0 26px 20px;color:#3d4853;max-height:180px;overflow:auto}
+.detail-replies p{padding:10px 0;border-top:1px solid #cad4dd;font-size:14px;line-height:1.6}
+.post-detail-image[hidden]{display:none}
+.modal-box{max-height:min(88vh,900px);overflow:auto}
+.modal-box input,.modal-box textarea{line-height:1.5}
+.modal-box input:focus,.modal-box textarea:focus{border-color:var(--blue)}
+#salaryBtn:disabled{opacity:.55}
+
+@media(min-width:901px){
+  header.top{height:auto;min-height:124px;padding:24px clamp(24px,4vw,72px);gap:clamp(20px,2.5vw,48px);align-items:center;flex-wrap:wrap}
+  nav.main{gap:clamp(18px,2.2vw,42px);margin:0;font-size:clamp(15px,1.1vw,19px)}
+  nav.main a{padding:12px 0;border-bottom:3px solid transparent}
+  nav.main a.active{border-color:var(--blue)}
+  .points,.wallet{margin-top:0}
+  .points{margin-left:auto}
+  .hero{margin-top:0;height:clamp(340px,31vw,470px);min-height:0;overflow:hidden}
+  .hero-art{top:-80px;height:calc(100% + 110px);width:48%;background-size:contain}
+  .hero-copy{padding:clamp(70px,8vw,126px) 0 0 4.8vw}
+  .hero-copy h1{font-size:clamp(44px,4.4vw,68px)}
+  .hero-copy .sig{display:none}
+  .page{grid-template-columns:minmax(260px,330px) minmax(0,1fr);gap:clamp(24px,3vw,52px)}
+  .side-card{min-height:0;align-self:start}
+  .side-card p{font-size:clamp(14px,1vw,17px)}
+  .forum-head,.forum-row{grid-template-columns:minmax(0,1fr) minmax(150px,220px) 80px minmax(130px,175px);padding-left:20px;padding-right:20px}
+  .forum-row{min-height:86px;align-items:center}
+  .f-title{font-size:clamp(15px,1.05vw,18px)}
+  .f-ava{width:42px;height:42px}
+  .f-user .u b,.f-user .u span,.f-num,.f-last{font-size:13px}
+  .miss-grid{gap:clamp(16px,2vw,36px)}
+  .miss-card{height:clamp(500px,38vw,680px)}
+}
+@media(max-width:900px){
+  header.top{position:relative;gap:10px;padding-bottom:0}
+  nav.main{gap:0;justify-content:space-between;scrollbar-width:none}
+  nav.main a{padding:10px 8px;border-bottom:3px solid transparent}
+  nav.main a.active{border-color:var(--blue)}
+  .hero-art{background-size:cover}
+  .hero-copy{padding-top:22px}
+  .dots button{width:24px;height:10px}
+  .staff-card .tag{top:12px;left:12px}
+  .staff-card .tag span{display:block;line-height:1.35}
+  .page{padding-bottom:70px}
+  .forum-row{align-items:center;gap:8px}
+  .f-title .sq{width:10px;height:10px;flex:none}
+  .f-user .u span{display:none}
+  .forum-foot .sys,.forum-foot .dot{display:none}
+  .chat{position:relative;left:auto;right:auto;bottom:auto;margin:0 16px 70px}
+  .miss-card .m-foot .lab{font-size:14px}
+  .miss-card .m-foot .big{font-size:26px}
+  .ev-overlay{overflow:auto}
+  .ev-gift{z-index:4}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+.ev-gift{border:0;color:inherit;font:inherit}
+@media(max-width:900px){
+  .forum-row .f-last{display:block;grid-column:1/-1;text-align:right;font-size:11px}
+  .forum-row .f-num{display:none}
+}
