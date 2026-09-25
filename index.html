@@ -461,16 +461,15 @@ function applyTruth(){
   });
 }
 function addDecode(n){
-  if(state.decode >= 100) return;
   state.decode = Math.min(100, state.decode + n);
   if(state.decode >= 100){ state.exposed = true; applyTruth(); }
-  renderDecode(); persist();
+  renderDecode(); renderPosts(); persist();
 }
 function completeClue(key, amount, message, button){
   if(state.completed[key]){ toast('这条线索已经记录。'); return; }
   state.completed[key] = true;
   addDecode(amount);
-  if(button) button.textContent = '已查看';
+  if(button) button.textContent = key === 'hunt' ? '已结束' : '已查看';
   toast(message);
 }
 

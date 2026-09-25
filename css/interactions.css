@@ -201,3 +201,49 @@ nav.main a:hover{color:var(--blue)}
   .forum-foot{padding:10px 12px}
 }
 .hunt-status{margin-top:10px;padding:12px 16px;text-align:center;border:1px solid rgba(255,255,255,.38);background:rgba(8,22,38,.56);color:#dce9f5;font-weight:700;letter-spacing:.1em}
+
+/* Detail polish: preserve the existing layout, palette and square geometry. */
+button,a,input,textarea{-webkit-tap-highlight-color:transparent}
+button{line-height:1.45}
+button:not(.dots button){transition:background-color .15s,border-color .15s,opacity .15s}
+.wallet b,.points b,.price,.f-num,#eventDecode{font-variant-numeric:tabular-nums}
+.dots button{width:18px;height:18px;border:1px solid #8ea8c0;border-radius:0;background:transparent}
+.dots button.on{border-color:#40b3ef;background:#40b3ef}
+.f-title{min-width:0;align-items:baseline}
+.f-title .top-tag{white-space:nowrap;flex:none;font-size:.75em}
+.f-title .sq{flex:none;align-self:center}
+.post-open{line-height:1.65;overflow-wrap:anywhere}
+.forum-row{transition:background-color .15s}
+.forum-row.has-attachment{cursor:default}
+.f-user{min-width:0}
+.f-user .u{min-width:0}
+.f-user .u span{line-height:1.5;overflow-wrap:anywhere}
+.f-last{line-height:1.65}
+.reply-link{margin-left:6px;text-underline-offset:3px}
+.prod .desc{line-height:1.8}
+.prod .limit{white-space:nowrap}
+.staff-card .tag span{line-height:1.5;text-shadow:0 1px 4px #0008}
+.staff-card .slogan{text-shadow:0 2px 8px #0009}
+.voice-card p{line-height:1.8}
+.modal-box{border:1px solid #d3dce6}
+.modal-box h3{line-height:1.4;overflow-wrap:anywhere}
+.modal-box textarea,.modal-box input{background:#fbfcfe;transition:border-color .15s;line-height:1.65}
+.modal-box textarea:focus,.modal-box input:focus{background:white}
+.post-detail-copy,.detail-replies p{white-space:pre-wrap;overflow-wrap:anywhere}
+.post-detail-image{object-fit:contain}
+.btn-buy,.btn-m,.btn-post,.censor-btn,.btn-archive{letter-spacing:.06em}
+.btn-cancel,.btn-ok{min-height:38px;letter-spacing:.04em}
+.mini-card .m-name{text-shadow:0 1px 6px #0009}
+.mini-card .ph{background-image:url('../assets/missing-pair.png');background-size:205% auto;background-position:6% 35%}
+.mini-card:nth-child(2) .ph{background-position:94% 35%}
+.mini-card .ph::after{display:none}
+.mini-card::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(transparent 25%,rgba(9,22,38,.88))}
+.mini-card .m-btn{min-height:30px;line-height:1.4}
+.ev-title{padding-top:54px}
+@media(max-width:900px){
+  .dots button{width:24px;height:10px}
+  .staff-card .tag{right:10px}
+  .voice-card p{font-size:12px}
+  .prod .desc{font-size:12px}
+  .modal-box textarea,.modal-box input{font-size:16px}
+}
