@@ -12,7 +12,7 @@
 
 <div class="wm">CN|UID3853714777830861395_220608050842<small>ave-Gout</small></div>
 <div class="hatch"></div>
-<div class="edge-tab">»</div>
+<div class="edge-tab" aria-hidden="true">»</div>
 
 <!-- 解密进度条 -->
 <div class="decode-bar" id="decodeBar" role="progressbar" aria-label="解密进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="decodeFill"></span></div>
@@ -34,7 +34,7 @@
     <a href="#" data-view="v-missing">查寝通报</a>
   </nav>
   <div class="points"><span class="p-ic">⚖</span>注意力点数 <b class="p-num" id="attVal">50</b></div>
-  <div class="wallet"><span class="coin">◉</span>603币 <b id="havVal">0</b>
+  <div class="wallet"><span class="coin">◉</span>鹿币 <b id="havVal">0</b>
     <button class="get" id="salaryBtn">领取生活费</button>
   </div>
 </header>
@@ -111,10 +111,7 @@
       <div class="forum-head"><div>标题</div><div>发帖人</div><div>回复</div><div>最后回复</div></div>
       <div id="forumRows"></div>
       <div class="forum-foot">
-        <span class="sys">⬆ 系统置顶</span>
-        <span><i class="dot full"></i>全新未读</span>
-        <span><i class="dot half"></i>有未读回复</span>
-        <span><i class="dot"></i>全部已读</span>
+        <span class="sys">本地演示：帖子和回复仅保存在当前浏览器</span>
       </div>
     </main>
   </div>
@@ -169,9 +166,9 @@
         <div class="m-ph"><div class="ph asset-missing asset-missing-a" role="img" aria-label="未归人员甲"></div></div>
         <div class="m-info"><b>未归人员·甲</b><span>需返回寝室接受集体教育</span></div>
         <div class="m-foot">
-          <div class="lab">悬赏 603币 总额</div>
+          <div class="lab">悬赏总额（鹿币）</div>
           <div class="big">999</div>
-          <button class="btn-m btn-done" disabled style="opacity:.7">档案待核查</button>
+          <div class="hunt-status" id="h42Status" role="status">悬赏进行中</div>
           <button class="btn-archive" id="h42Archive">查看档案（+解密）</button>
         </div>
       </article>
@@ -194,7 +191,7 @@
   <button class="back-chip" id="backBtn"><span class="esc">Esc</span> 返回首页</button>
   <div class="bar-right">
     <button class="bar-action" title="重置本地进度" aria-label="重置本地进度" id="resetBtn">▦</button>
-    <a class="gift" href="#" data-open-event title="603 关系网">🎁</a>
+    <a class="gift" href="#" data-open-event title="打开603夜话">🎁</a>
     <div class="bar-ava">603<i id="barAtt">50</i></div>
   </div>
 </footer>
@@ -204,15 +201,15 @@
 ========================================================= -->
 <div class="ev-overlay" id="evOverlay">
   <button class="back-chip" data-close-event style="position:absolute;top:10px;left:16px;z-index:5"><span class="esc">Esc</span> 返回</button>
-  <div class="ev-title">活动</div>
-  <div class="ev-points">🖧 夜聊点数 <b>300</b> <span class="q">?</span></div>
+  <div class="ev-title">603夜话</div>
+  <div class="ev-points">解密进度 <b id="eventDecode">0%</b></div>
 
   <div class="ev-wrap">
     <div class="ev-frame">
       <div class="ev-tag">DELTA FORCE DTI SQUAD &nbsp;&nbsp;//</div>
       <div class="ev-browser">
         <div class="mini-top">
-          <a class="logo" href="#"><svg width="22" height="19" viewBox="0 0 30 26" fill="none"><rect x="10" y="1" width="10" height="10" transform="rotate(45 15 6)" fill="#1f6bf2"/><rect x="4" y="9" width="8" height="8" transform="rotate(45 8 13)" fill="#1f6bf2" opacity=".75"/><rect x="18" y="9" width="8" height="8" transform="rotate(45 22 13)" fill="#1f6bf2" opacity=".75"/></svg>603</a>
+          <span class="logo"><svg width="22" height="19" viewBox="0 0 30 26" fill="none"><rect x="10" y="1" width="10" height="10" transform="rotate(45 15 6)" fill="#1f6bf2"/><rect x="4" y="9" width="8" height="8" transform="rotate(45 8 13)" fill="#1f6bf2" opacity=".75"/><rect x="18" y="9" width="8" height="8" transform="rotate(45 22 13)" fill="#1f6bf2" opacity=".75"/></svg>603</span>
           <nav><span>寝室概况</span><span>寝室论坛</span><span>603小卖部</span><span>查寝通报</span></nav>
         </div>
         <div class="mini-body">
@@ -224,8 +221,8 @@
             <p>603 保留对“归队”的全部解释权。</p>
           </div>
           <div class="mini-cards">
-            <div class="mini-card"><div class="ph" data-label="甲（待补）"></div><div class="m-strip"><span>神出鬼没</span><span>夜不归宿</span></div><div class="m-name"><b>未归人员·甲</b><span>需返回寝室接受集体教育</span></div><div class="m-price"><div class="lab">悬赏 603币 总额</div><div class="big">999</div></div><div class="m-btn end" id="endHuntBtn" style="cursor:pointer">提前结束</div></div>
-            <div class="mini-card"><div class="ph" data-label="乙（待补）"></div><div class="m-strip"><span>精准摸鱼</span><span>暴躁赖床</span></div><div class="m-name"><b>赖床惯犯·乙</b><span>亟需室友帮助继续其睡眠研究</span></div><div class="m-price"><div class="lab">检举奖励</div><div class="big">免值日一天</div></div><div class="m-btn tip"><span class="warn">⚠</span>提供线索</div></div>
+            <div class="mini-card"><div class="ph" data-label="甲（待补）"></div><div class="m-strip"><span>神出鬼没</span><span>夜不归宿</span></div><div class="m-name"><b>未归人员·甲</b><span>需返回寝室接受集体教育</span></div><div class="m-price"><div class="lab">悬赏总额（鹿币）</div><div class="big">999</div></div><button class="m-btn end" id="endHuntBtn">结束悬赏</button></div>
+            <div class="mini-card"><div class="ph" data-label="乙（待补）"></div><div class="m-strip"><span>精准摸鱼</span><span>暴躁赖床</span></div><div class="m-name"><b>赖床惯犯·乙</b><span>亟需室友帮助继续其睡眠研究</span></div><div class="m-price"><div class="lab">检举奖励</div><div class="big">免值日一天</div></div><button class="m-btn tip" id="eventClueBtn"><span class="warn">⚠</span>提供线索</button></div>
           </div>
         </div>
       </div>
@@ -257,7 +254,7 @@
     <h3>发布新帖</h3>
     <div class="sub">发布将扣除 <b>8</b> 点注意力点数。当前剩余：<span id="postAtt">50</span></div>
     <input id="postTitle" placeholder="标题（须符合寝室价值观）" maxlength="40">
-    <textarea id="postBody" placeholder="说点什么……" style="margin-top:10px"></textarea>
+    <textarea id="postBody" maxlength="2000" placeholder="说点什么……" style="margin-top:10px"></textarea>
     <div class="row">
       <button class="btn-cancel" data-close-modal>取消</button>
       <button class="btn-ok" id="postSubmit">发布</button>
@@ -454,6 +451,7 @@ function renderDecode(){
   if(state.decode > 0) bar.classList.add('show');
   $('#decodeFill').style.width = state.decode + '%';
   bar.setAttribute('aria-valuenow',state.decode);
+  $('#eventDecode').textContent = state.decode + '%';
 }
 function applyTruth(){
   document.body.classList.toggle('exposed', state.exposed);
@@ -497,7 +495,7 @@ $('#salaryBtn').addEventListener('click',()=>{
   if(state.salaryDate === today){ toast('今日生活费已发放，明天再来。', true); return; }
   state.salaryDate = today;
   state.havik += 100; renderTop(); persist();
-  toast('今日生活费已到账：+100 603币。');
+  toast('今日生活费已到账：+100 鹿币。');
 });
 
 $('#postBtn').addEventListener('click',()=>{ $('#postAtt').textContent = state.attention; openModal('#postModal'); });
@@ -559,13 +557,14 @@ $('#prodList').addEventListener('click',e=>{
   const b = e.target.closest('.btn-buy'); if(!b) return;
   const it = state.items[b.dataset.item];
   if(it.bought >= it.limit){ toast('已达限购上限。', true); return; }
-  if(state.havik < it.price){ toast('603币不足，请先领取生活费。', true); return; }
+  if(state.havik < it.price){ toast('鹿币不足，请先领取生活费。', true); return; }
   it.bought++; state.havik -= it.price;
   renderItems(); renderTop(); persist();
-  toast('购买成功：'+it.name+'（'+it.bought+'/'+it.limit+'）');
+  toast('购买成功：'+it.name+'，支付'+it.price+'鹿币（'+it.bought+'/'+it.limit+'）');
 });
 
 $('#zuoyaClue').addEventListener('click',()=>openModal('#clueModal'));
+$('#eventClueBtn').addEventListener('click',()=>openModal('#clueModal'));
 $('#clueSubmit').addEventListener('click',()=>{
   const v = $('#clueBody').value.trim();
   if(!v){ toast('请填写线索内容', true); return; }
@@ -613,10 +612,13 @@ document.addEventListener('keydown',e=>{
 });
 
 $('#endHuntBtn').addEventListener('click',()=>{
+  if(state.completed.hunt){ toast('悬赏已经结束。'); return; }
+  if(!confirm('确定结束甲的悬赏？结束后将无法再次操作。')) return;
   completeClue('hunt',25,'悬赏已结束，解密进度+25。',$('#endHuntBtn'));
+  $('#h42Status').textContent = '悬赏已结束';
 });
 $('#resetBtn').addEventListener('click',()=>{
-  if(confirm('确定重置内网数据？注意力点数 / 603币 / 解密进度将全部清零。')){
+  if(confirm('确定重置内网数据？注意力点数 / 鹿币 / 解密进度将全部清零。')){
     localStorage.removeItem(SAVE_KEY); location.reload();
   }
 });
@@ -647,7 +649,7 @@ if(state.decode >= 100){ state.exposed = true; }
 renderTop(); renderPosts(); renderItems(); renderDecode(); applyTruth();
 if(state.completed.archive) $('#h42Archive').textContent='已查看';
 if(state.completed.log) $('#censorBtn').textContent='已查看';
-if(state.completed.hunt) $('#endHuntBtn').textContent='已结束';
+if(state.completed.hunt){ $('#endHuntBtn').textContent='已结束'; $('#h42Status').textContent='悬赏已结束'; }
 </script>
 
 </body>
