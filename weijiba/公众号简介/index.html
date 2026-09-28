@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="zh-CN" data-text-size="standard" data-page-width="standard" data-color-mode="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="公众号简介—魏鸡百科词条。">
+    <title>公众号简介—魏鸡百科，困困的百科全书</title>
+    <script>
+      try {
+        const saved = JSON.parse(localStorage.getItem("weijiba-appearance") || "{}");
+        const root = document.documentElement;
+        if (["small", "standard", "large"].includes(saved.textSize)) root.dataset.textSize = saved.textSize;
+        if (["standard", "wide"].includes(saved.pageWidth)) root.dataset.pageWidth = saved.pageWidth;
+        if (["auto", "light", "dark"].includes(saved.colorMode)) root.dataset.colorMode = saved.colorMode;
+      } catch (_) {}
+    </script>
+    <link rel="icon" type="image/webp" href="../assets/wikipedia-logo-v2.svg.webp?v=20260904">
+    <link rel="shortcut icon" type="image/webp" href="../assets/wikipedia-logo-v2.svg.webp?v=20260904">
+    <link rel="stylesheet" href="../article.css?v=20260923-21">
+  </head>
+  <body class="article-page">
+    <a class="skip-link" href="#article-content">跳到内容</a>
+
+    <header class="wiki-header">
+      <div class="header-start">
+        <button class="icon-button menu-trigger" type="button" aria-controls="main-menu" aria-expanded="false" aria-label="打开主菜单">
+          <span aria-hidden="true">☰</span>
+        </button>
+        <a class="brand" href="../index.html" aria-label="魏鸡百科首页">
+          <img src="../assets/weijiba-logo.png" alt="魏鸡百科，困困的百科全书">
+        </a>
+      </div>
+
+      <form class="header-search" id="article-search" role="search">
+        <label class="sr-only" for="article-search-input">搜索魏鸡百科</label>
+        <button class="search-icon" type="button" aria-label="展开搜索框" aria-expanded="false">⌕</button>
+        <input id="article-search-input" type="search" placeholder="搜索魏鸡百科" autocomplete="off">
+        <button type="submit">搜索</button>
+      </form>
+
+      <nav class="account-links" aria-label="个人工具">
+        <a href="#support">资助魏鸡百科</a>
+        <button type="button" data-demo="创建账号">创建账号</button>
+        <button type="button" data-demo="登录">登录</button>
+        <button class="more-button" type="button" data-demo="更多个人工具" aria-label="更多个人工具">•••</button>
+      </nav>
+    </header>
+
+    <div class="site-banner" id="site-banner" role="status">
+      <span>魏鸡百科资料整理项目欢迎你继续浏览；群内资料持续更新，欢迎加入条目整理与讨论。具体语境请以原始聊天上下文为准。</span>
+      <a href="../index.html">返回首页</a>
+      <button type="button" data-close-banner aria-label="关闭公告">×</button>
+    </div>
+
+    <div class="drawer-backdrop" data-close-drawers hidden></div>
+    <aside class="main-menu" id="main-menu" aria-label="主菜单" aria-hidden="true">
+      <div class="drawer-heading"><strong>主菜单</strong><button type="button" data-close-drawers aria-label="关闭主菜单">×</button></div>
+      <h2>导航</h2>
+      <a href="../index.html">首页</a>
+      <a href="../index.html#articles">分类索引</a>
+      <a href="../index.html#featured">特色内容</a>
+      <a href="../index.html#news">新闻动态</a>
+      <a href="../index.html#random">随机条目</a>
+      <a href="../index.html#about">关于魏鸡百科</a>
+      <h2>贡献</h2>
+      <a href="../index.html#participate">帮助</a>
+      <a href="../index.html#participate">编辑入门</a>
+      <a href="#history-note">最近更改</a>
+    </aside>
+
+    <div class="article-layout">
+      <aside class="contents-rail" aria-label="目录">
+        <div class="sticky-rail">
+          <div class="rail-title"><strong>目录</strong><button type="button" data-collapse-toc>隐藏</button></div>
+          <nav class="toc" id="toc">
+            <a class="is-active" href="#top">序言</a>
+            <a href="#aliases"><span>1</span> 称呼与身份语境</a>
+            <a href="#language"><span>2</span> 语言风格</a>
+            <a href="#topics"><span>3</span> 常见话题</a>
+            <a href="#interaction"><span>4</span> 互动节奏</a>
+            <a href="#culture"><span>5</span> 群内角色</a>
+            <a href="#archive"><span>6</span> 资料中的角色轨迹</a>
+            <a href="#method"><span>7</span> 阅读方法</a>
+            <a href="#editorial"><span>8</span> 条目写法与边界</a>
+            <a href="#see-also"><span>9</span> 参见</a>
+            <a href="#references"><span>10</span> 资料来源</a>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="article-main" id="article-content">
+        <article id="top">
+          <header class="article-heading">
+            <div class="title-line">
+              <h1>困困</h1>
+              <button class="language-button" type="button" id="article-language-button" aria-expanded="false" aria-controls="article-language-menu">
+                <span aria-hidden="true">文</span> 2种语言
+              </button>
+              <div class="language-menu" id="article-language-menu" hidden>
+                <button type="button" data-language="简体中文">简体中文</button>
+                <button type="button" data-language="繁體中文">繁體中文</button>
+              </div>
+            </div>
+
+            <div class="article-toolbar">
+              <div class="subject-tabs">
+                <a class="active" href="#top">条目</a>
+                <button type="button" data-demo="讨论页">讨论</button>
+              </div>
+              <div class="variant-control">
+                <button type="button" data-demo="字词转换">不转换⌄</button>
+              </div>
+              <div class="view-tabs">
+                <a class="active" href="#top">阅读</a>
+                <button type="button" data-demo="编辑">编辑</button>
+                <button type="button" data-demo="查看历史">查看历史</button>
+                <button type="button" data-demo="工具">工具⌄</button>
+              </div>
+            </div>
+          </header>
+
+          <p class="article-tagline">魏鸡百科，困困的百科全书</p>
+
+          <div class="article-notice" role="note">
+            <span class="notice-icon" aria-hidden="true">i</span>
+            <p>此条目记录的是鹿群内部的称呼、表达与互动语境。它不是人物传记，也不用于推断现实人格、政治立场或心理状态。</p>
+          </div>
+
+          <aside class="infobox" aria-label="困困概要">
+            <div class="infobox-title">困困</div>
+            <div class="infobox-subtitle">鹿群语境中的人物条目</div>
+            <table>
+              <tbody>
+                <tr><th>对应姓名</th><td>詹绍源</td></tr>
+                <tr><th>常用称呼</th><td>困困、詹哥、困教练</td></tr>
+                <tr><th>群内称号</th><td>困困大王、高认知担当</td></tr>
+                <tr><th>表达特征</th><td>短句、直给、连续追问</td></tr>
+                <tr><th>常见回应</th><td>“稳了”“nb”“6”</td></tr>
+                <tr><th>常见话题</th><td>工程学习、AI 工具、校园事务、游戏与健身</td></tr>
+                <tr><th>所属语境</th><td>鹿群 / 603 系</td></tr>
+              </tbody>
+            </table>
+          </aside>
+
+          <p><b>困困</b>，是鹿群聊天资料中对<b>詹绍源</b>的主要称呼，也是本条目的标题。这里用“詹绍源”解释“困困”所对应的资料对象；“困困”则是群内更常用、更能体现关系语境的称呼。在不同统计快照中，詹绍源留下约 1,800 条发言，其中可分析的文本消息约 1,200 条。<sup><a href="#ref-1">[1]</a></sup> 这些消息以短句为主，经常用于确认、追问、接梗或迅速表达判断。</p>
+
+          <p>“困困”在这里既是自称，也是群友使用的关系化称呼。随着群聊发展，它又延伸出“困教练”“困教”“困困大王”等玩笑角色。相关称呼并不对应正式职位，而是由篮球、校园生活、技术讨论和群内叙事叠加形成。</p>
+
+          <p>从聊天资料看，他会发起工程课程和技术问题，也频繁参与 AI 工具、数码设备、游戏、饮食与校园事务的讨论。其表达通常很短，但意义高度依赖前后文：同一句“稳了”，可能是确认结果，也可能是调侃或暂时结束话题。</p>
+          <p>如果把这些材料放在一起看，詹绍源在群里的辨识度并不只来自发言数量，而来自他常常能把一个话题迅速推进到“现在要做什么”。他会用短句切开问题、用追问补齐条件，再在得到回应后给出明确的接受或否定；当讨论需要放松时，他又会把同一套判断转换成玩笑和角色称呼。</p>
+
+          <section id="aliases" class="article-section">
+            <h2><span>称呼与身份语境</span><button type="button" data-demo="编辑称呼与身份语境">编辑</button></h2>
+            <p>本条目以“困困”为主标题，资料中出现的“詹绍源”是用于解释这一称呼所对应对象的姓名写法。能够稳定识别的其他称呼还包括“詹哥”“困教练”和“zsy”。“困困”是覆盖面最广的称呼；“詹哥”更强调熟人关系；“困教练”通常出现在体育、指挥或团队玩笑中。</p>
+            <p>他曾在对话中直接确认“我叫困困”。这类自称与群友称呼相互强化，使“困困”逐渐从昵称变为一套群内角色的入口。后来出现的“困教”“教主”“大王”等说法，属于持续叠加的共同创作。</p>
+            <div class="wiki-quote"><p>称呼不是固定标签，而是关系发生时留下的接口。</p></div>
+          </section>
+
+          <section id="language" class="article-section">
+            <h2><span>语言风格</span><button type="button" data-demo="编辑语言风格">编辑</button></h2>
+            <p>在一个包含约 1,203 条文本消息的分析快照中，詹绍源的单条文本平均约 7.17 个字符，中位数约 5 个字符，约 77% 的消息不超过 8 个字符。<sup><a href="#ref-2">[2]</a></sup> 高频完整回复包括“nb”“？”“稳了”“人物”和“666”。</p>
+            <p>这种短句不是孤立的语言习惯，而是高语境群聊中的协作方式。引用消息、上一位说话人、表情包和共同经历承担了大量信息，所以文字本身可以很短。常见节奏是：先用一个短句表态，再补充问题或细节。</p>
+
+            <table class="wikitable">
+              <caption>文本风格快照</caption>
+              <thead><tr><th>指标</th><th>观察值</th><th>说明</th></tr></thead>
+              <tbody>
+                <tr><td>文本消息</td><td>约 1,203 条</td><td>来自一个人物分析快照</td></tr>
+                <tr><td>中位长度</td><td>约 5 字符</td><td>典型消息非常短</td></tr>
+                <tr><td>不超过 8 字符</td><td>约 77%</td><td>以确认、反应和追问为主</td></tr>
+                <tr><td>50 字符以上</td><td>约 0.5%</td><td>长段表达较少</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="topics" class="article-section">
+            <h2><span>常见话题</span><button type="button" data-demo="编辑常见话题">编辑</button></h2>
+            <h3>工程学习与项目</h3>
+            <p>群聊中可见不少课程、设计和计算类问题，例如对雅可比矩阵奇异性的快速提问。这类消息通常以“速问速答”式的直给句开场，期待群友立刻给出可执行答案。</p>
+            <h3>AI 与数字工具</h3>
+            <p>ChatGPT、Codex、豆包、云电脑和其他开发工具是高频话题。他对工具的关注通常偏向实际用途：能不能完成任务、是否稳定、怎样切换配置，以及是否值得继续投入时间。</p>
+            <h3>校园与日常生活</h3>
+            <p>校园管理、课程安排、聚餐地点、饮料、游戏和健身共同构成日常讨论。对形式主义或低效率安排的批评，经常被概括为“多做实事少搞虚的”一类务实表达。</p>
+          </section>
+
+          <section id="interaction" class="article-section">
+            <h2><span>互动节奏</span><button type="button" data-demo="编辑互动节奏">编辑</button></h2>
+            <p>从文本样本中可以观察到一种相对稳定的参与方式：先用极短的消息回应当前信息，再根据对方是否继续追问，决定要不要补充具体细节。这样的节奏让他既能快速进入很多话题，也不会把每一次发言都写成完整说明。</p>
+            <p>短句、问号、引用和表情共同组成了一个分层结构。第一层负责确认“我看到了”，第二层负责说明“我关心哪一点”，第三层才进入解决方案或经验分享。群友熟悉这套节奏后，往往可以从一个词判断对话接下来会继续展开还是暂时收束。</p>
+            <table class="wikitable">
+              <caption>常见互动动作</caption>
+              <thead><tr><th>动作</th><th>表面形式</th><th>可能承担的功能</th></tr></thead>
+              <tbody>
+                <tr><td>进入话题</td><td>一句短问或截图</td><td>快速暴露最需要解决的卡点</td></tr>
+                <tr><td>即时反应</td><td>“6”“nb”“人物”</td><td>确认在场、表达态度或接住气氛</td></tr>
+                <tr><td>继续追问</td><td>“？”或补充一句</td><td>要求对方缩小范围、补足条件</td></tr>
+                <tr><td>阶段收束</td><td>“稳了”或明确结论</td><td>确认下一步，暂时结束往返</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="culture" class="article-section">
+            <h2><span>群内角色</span><button type="button" data-demo="编辑群内角色">编辑</button></h2>
+            <p>在群内玩笑系统中，詹绍源常被放在“高认知担当”的位置。“高认知”“共🦌主义”“困教”和“指挥部”等词彼此关联，形成一种可不断续写的内部世界观。<sup><a href="#ref-3">[3]</a></sup></p>
+            <p>这些表达主要承担社交功能：确认共同语境、制造接话机会、把严肃讨论降温，或把一个普通事件升级为群体叙事。它们不应被当作现实政治立场、组织关系或权威身份。</p>
+            <div class="hatnote">相关条目：<a href="../article.html?entry=luchun">鹿群</a>、<a href="../article.html?entry=gonglu">共🦌主义</a></div>
+          </section>
+
+          <section id="archive" class="article-section">
+            <h2><span>资料中的角色轨迹</span><button type="button" data-demo="编辑资料中的角色轨迹">编辑</button></h2>
+            <p>在不同类型的聊天材料里，“困困”会随着主题变化而呈现出不同侧面：工程学习场景里更接近一个希望快速得到判断的人，AI 和数码话题里更关注工具能否完成任务，校园事务中则更容易出现对规则、效率和现实安排的直接反应。</p>
+            <p>这些侧面并不是互相矛盾的多个身份，而是同一个群内角色在不同问题上的投影。群聊让成员可以在严肃讨论、生活吐槽和玩笑设定之间来回移动，资料记录到的往往是某个瞬间的功能，而不是一份脱离场景的性格定论。</p>
+            <p>从群史角度看，称呼的变化也会反过来影响记忆。当“困教练”“困教”或“困困大王”被重复使用时，个人发言会被放入更大的内部叙事中；后来的人先认识到这个角色，再通过原始上下文理解它具体指向哪一次对话。</p>
+          </section>
+
+          <section id="method" class="article-section">
+            <h2><span>阅读方法</span><button type="button" data-demo="编辑阅读方法">编辑</button></h2>
+            <p>阅读群聊人物资料时，至少需要同时保留四层上下文：消息前后句、引用对象、成员关系和当时事件。单独截取短句，容易把赞同误读成反讽，也可能把内部玩笑误读成严肃判断。</p>
+            <ol>
+              <li>先确认消息回应的是谁、哪一条内容。</li>
+              <li>区分自称、他称和临时玩笑称号。</li>
+              <li>对不同报告中的统计数字标注快照差异。</li>
+              <li>不从群聊反应直接推断现实人格或心理状态。</li>
+            </ol>
+          </section>
+
+          <section id="editorial" class="article-section">
+            <h2><span>条目写法与边界</span><button type="button" data-demo="编辑条目写法与边界">编辑</button></h2>
+            <p>本条目采用“可观察表达优先”的写法：可以确认的称呼、消息长度、出现话题和互动动作写得更具体；无法仅凭群聊确认的动机、长期人格和群外关系，则保留为不确定或直接不写。</p>
+            <p>统计数字采用约数，是因为不同报告的导出时间和筛选口径不完全相同。数字适合帮助读者理解规模和倾向，不适合替代原始上下文，更不适合被用来给成员建立固定排名。</p>
+            <div class="wiki-quote"><p>把一条消息放回它发生的关系网络里，才算真正读完它。</p></div>
+            <p>如果未来补充新的聊天导出，新增内容应同时说明时间范围、材料类型和整理方法。这样词条可以继续变长，却不会因为“显得多”而丢失来源边界。</p>
+          </section>
+
+          <section id="see-also" class="article-section">
+            <h2><span>参见</span></h2>
+            <ul class="see-also-list">
+              <li><a href="../article.html?entry=luchun">鹿群</a></li>
+              <li><a href="../article.html?entry=short-messages">短句连发</a></li>
+              <li><a href="../article.html?entry=high-cognition">高认知（鹿群用语）</a></li>
+              <li><a href="../article.html?entry=kun-coach">困教练</a></li>
+              <li><a href="../article.html?entry=gonglu">共🦌主义</a></li>
+              <li><a href="../article.html?entry=ai-tools">AI 与大模型</a></li>
+              <li><a href="../article.html?entry=projects">项目与竞赛</a></li>
+              <li><a href="../article.html?entry=nb-context">nb（鹿群语境）</a></li>
+            </ul>
+          </section>
+
+          <section id="references" class="article-section references">
+            <h2><span>资料来源</span><button type="button" data-demo="编辑资料来源">编辑</button></h2>
+            <ol>
+              <li id="ref-1">鹿群聊天导出与人物数据集概览。不同分析文件的导出时间不同，因此正文采用约数。</li>
+              <li id="ref-2">《ZhanShaoyuan 语言风格分析报告》，基于 1,203 条文本消息的统计快照。</li>
+              <li id="ref-3">《鹿群聊天记录话题主轴综合分析报告》《鹿群成员性格与语言风格专项报告》及群内术语材料。</li>
+            </ol>
+          </section>
+
+          <div class="categories"><span>分类：</span><a href="../article.html?entry=luchun">鹿群人物</a><a href="../article.html?entry=short-messages">群聊语言</a><a href="../article.html?entry=gonglu">内部文化</a><a href="../article.html?entry=history">群史关联</a></div>
+          <p class="last-edited" id="history-note">本页面最后修订于 2026 年 9 月 4 日。页面内容仅用于非官方群内文化记录。</p>
+        </article>
+
+        <footer class="article-footer" id="support">
+          <div class="article-footer-copy">
+            <p>本站文字为个人项目的二次编写内容。魏鸡百科与维基百科、维基媒体基金会及任何学校、机构无关。</p>
+            <nav aria-label="页脚导航"><a href="../index.html#about">隐私说明</a><a href="../index.html#about">免责声明</a><a href="../index.html#participate">联系我们</a><a href="../index.html">返回首页</a></nav>
+          </div>
+          <a class="project-badge" href="../index.html" aria-label="WEIJIBA project">
+            <img src="../assets/weijiba-project.png" alt="">
+            <span><strong>WEIJIBA</strong><small>project</small></span>
+          </a>
+        </footer>
+      </main>
+
+      <aside class="appearance-rail" id="appearance-rail" aria-label="外观设置" aria-hidden="false">
+        <div class="appearance-sticky">
+          <div class="appearance-heading">
+            <strong>外观</strong>
+            <button type="button" id="hide-appearance">隐藏</button>
+          </div>
+
+          <fieldset class="appearance-group">
+            <legend>文本</legend>
+            <label><input type="radio" name="text-size" value="small"><span>小</span></label>
+            <label><input type="radio" name="text-size" value="standard"><span>标准</span></label>
+            <label><input type="radio" name="text-size" value="large"><span>大</span></label>
+          </fieldset>
+
+          <fieldset class="appearance-group">
+            <legend>宽度</legend>
+            <label><input type="radio" name="page-width" value="standard"><span>标准</span></label>
+            <label><input type="radio" name="page-width" value="wide"><span>宽</span></label>
+          </fieldset>
+
+          <fieldset class="appearance-group">
+            <legend>颜色 <small>（测试版）</small></legend>
+            <label><input type="radio" name="color-mode" value="auto"><span>自动</span></label>
+            <label><input type="radio" name="color-mode" value="light"><span>浅色</span></label>
+            <label><input type="radio" name="color-mode" value="dark"><span>深色</span></label>
+          </fieldset>
+
+          <p class="appearance-note">设置只保存在这台设备的浏览器中。</p>
+        </div>
+      </aside>
+    </div>
+
+    <button class="appearance-restore" id="appearance-restore" type="button" aria-controls="appearance-rail" aria-expanded="true">
+      <span aria-hidden="true">◐</span> 外观
+    </button>
+    <div class="article-toast" id="article-toast" role="status" aria-live="polite"></div>
+    <script src="../entry-routes.js?v=20260923-21"></script>
+    <script src="../entry-writing.js?v=20260923-21"></script>
+    <script src="../entry-data.js?v=20260923-21"></script>
+    <script src="../article.js?v=20260923-21"></script>
+  </body>
+</html>
