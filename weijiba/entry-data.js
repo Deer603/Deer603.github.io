@@ -509,7 +509,7 @@
       related: ["603-vision", "coding", "platforms", "ai-tools", "hardware", "kuncode-windows", "kuncode-macos", "kuncode-code-oss", "kuncode-kunkun-ai", "kuncode-open-vsx", "kuncode-release"],
       externalLinks: [
         ["KunCode GitHub 仓库", "https://github.com/Roylyl/KunCode/"],
-        ["KunCode 在线介绍页", "https://roylyl.github.io/kuncode/"],
+        ["KunCode 在线介绍页", "https://deer603.github.io/kuncode/"],
         ["KunCode Releases", "https://github.com/Roylyl/KunCode/releases"]
       ]
     },

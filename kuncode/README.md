@@ -60,7 +60,7 @@ python -m http.server 8000 --bind 127.0.0.1
 | [script.js](script.js) | 生成发行链接、识别系统、切换静态对话示例 |
 | [app-icon.png](app-icon.png) | KunCode水豚品牌图标 |
 | `favicon.png`、`favicon-32.png`、`apple-touch-icon.png` | 浏览器与移动设备图标 |
-| [og-image-v2.jpg](og-image-v2.jpg) | 页面当前使用的社交分享图 |
+| [share-cover.jpg](share-cover.jpg)、[share-thumb.jpg](share-thumb.jpg) | 页面当前使用的横版分享封面与方形缩略图 |
 
 功能图标集中使用`index.html`中的SVG符号与`.icon`样式。新增图标沿用同一套尺寸和对齐规则；水豚品牌图继续使用原有图片素材。
 
@@ -84,7 +84,7 @@ python -m http.server 8000 --bind 127.0.0.1
 
 保持`kuncode/`位于`Deer603.github.io`仓库根目录，与其他站点共用仓库的Pages发布设置。发布流程见[仓库首页的GitHub Pages说明](../README.md#发布到github-pages)，此目录对应的访问路径为`/kuncode/`。
 
-迁移时还需将`index.html`中的`canonical`、`og:url`改为`https://deer603.github.io/kuncode/`，并将`og:image`、`twitter:image`改为`https://deer603.github.io/kuncode/og-image-v2.jpg`。目前这些元信息仍指向旧站点；[部署说明.txt](部署说明.txt)中的旧账号与旧地址也需同步。这些官网地址与应用源码、下载地址分别维护。
+`index.html`中的`canonical`、`og:url`使用`https://deer603.github.io/kuncode/`，`og:image`、`twitter:image`使用`https://deer603.github.io/kuncode/share-cover.jpg`。[部署说明.txt](部署说明.txt)也使用当前托管账号与地址。这些官网地址与应用源码、下载地址分别维护。分享文案与图片维护见[网站分享信息](../docs/sharing.md)。
 
 ## 产品来源
 

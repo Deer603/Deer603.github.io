@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
+import { refreshShareMetadata } from "../../tools/share-metadata.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const version = "20261003-icons2";
@@ -57,5 +58,6 @@ function visit(directory) {
   }
 }
 visit(root);
+if (!check) refreshShareMetadata();
 console.log(JSON.stringify({ pages, changed, missing, check, version }));
 if (check && (changed || missing)) process.exitCode = 1;

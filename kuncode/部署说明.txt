@@ -1,9 +1,9 @@
 KunCode官网部署说明
 
-官网地址：https://roylyl.github.io/kuncode/
+官网地址：https://deer603.github.io/kuncode/
 产品仓库：https://github.com/Roylyl/KunCode
 
-本目录已位于roylyl.github.io仓库根目录。使用GitHub Desktop提交官网修改，再Push origin，沿用现有GitHub Pages配置即可。
+本目录位于Deer603.github.io仓库根目录。使用GitHub Desktop提交官网修改，再Push origin，沿用现有GitHub Pages配置即可。
 
 发布新版本时：
 1. 先确认KunCode的GitHub Release标签及三个实际附件名称。
