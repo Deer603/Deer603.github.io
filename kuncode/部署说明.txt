@@ -1,0 +1,17 @@
+KunCode官网部署说明
+
+官网地址：https://roylyl.github.io/kuncode/
+产品仓库：https://github.com/Roylyl/KunCode
+
+本目录已位于roylyl.github.io仓库根目录。使用GitHub Desktop提交官网修改，再Push origin，沿用现有GitHub Pages配置即可。
+
+发布新版本时：
+1. 先确认KunCode的GitHub Release标签及三个实际附件名称。
+2. 在index.html中分别更新kuncode-release与kuncode-version。例如发行标签V2.0.0，对应产品版本2.0.0。
+3. 更新windows、mac-arm64、mac-x64三个asset元信息。文件名的{version}使用产品版本，不使用带V的标签。
+4. 同步HTML默认下载链接、文件名、版本、大小、页面标题、分享说明和新增功能。
+5. 更新style.css或script.js时同步页面中的?v=缓存版本。
+
+页面使用本地水豚素材，不依赖框架。困困AI区域展示对话与思考练习，围绕引导思考、解决问题、拒绝AI依赖介绍产品理念。浏览器只识别系统，Mac用户自行在“关于本机”确认M系列或Intel处理器。
+
+从仓库根目录执行python3 -m http.server 8000，访问http://localhost:8000/kuncode/预览。详细维护说明见本目录README.md。
