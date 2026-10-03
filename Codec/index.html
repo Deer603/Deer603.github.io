@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07110d">
+  <title>加密鹿｜把文字藏进鹿群里</title>
+  <meta name="description" content="把想说的话藏进鹿群符号。支持可选密钥、智能转换与一键复制，在浏览器中完成趣味编码。">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="加密鹿｜把文字藏进鹿群里">
+  <meta property="og:description" content="写一句话，藏进一片森林。一个轻巧的鹿群暗号工具。">
+  <meta property="og:url" content="https://deer603.github.io/Codec/">
+  <meta property="og:site_name" content="加密鹿">
+  <meta property="og:image" content="https://deer603.github.io/Codec/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="加密鹿｜把文字藏进鹿群里">
+  <meta name="twitter:description" content="写一句话，藏进一片森林。">
+  <meta name="twitter:image" content="https://deer603.github.io/Codec/og-image.jpg">
+  <link rel="stylesheet" href="style.css?v=8">
+  <script src="script.js?v=4" defer></script>
+</head>
+<body>
+  <div class="app">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="加密鹿首页"><span class="brand-mark" aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 10 6 4 3 2m3 2L6 1m2 9L3 8m13 2 2-6 3-2m-3 2V1m-2 9 5-2M8 10c-2 3-1 8 4 11 5-3 6-8 4-11ZM9 14v.01m6-.01v.01M11 18h2"/></svg></span><span>加密鹿<span class="brand-sub">鹿群暗号工具</span></span></a>
+      <nav aria-label="页面导航"><a href="../">603小站<span aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 16 19 5M10 5h9v9"/></svg></span></a></nav>
+    </header>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <h1 id="hero-title">把文字，<span>藏进鹿群。</span></h1>
+        <p>输入文字生成暗号，用相同密钥还原。</p>
+      </section>
+      <section class="workspace" aria-labelledby="workspace-title">
+        <div class="workspace-heading"><h2 id="workspace-title">文字转换</h2><span class="workspace-status" id="workspaceStatus" role="status"><span class="live-dot"></span>准备就绪</span></div>
+        <div class="keybar">
+          <label for="pwd">密钥<span class="optional">可选</span></label>
+          <div class="key-input"><input id="pwd" type="password" placeholder="留空也可以" autocomplete="off" spellcheck="false" aria-describedby="keyHint"><button id="btnToggleKey" type="button" aria-label="显示密钥" aria-pressed="false">显示</button></div>
+          <span class="key-hint" id="keyHint">还原时使用相同密钥</span>
+        </div>
+        <div class="editors">
+          <div class="field input-field">
+            <div class="field-head"><label for="input">原文/密文</label><button class="text-button" id="btnExample" type="button">填入示例</button></div>
+            <textarea id="input" placeholder="输入文字或粘贴鹿群密文…" spellcheck="false"></textarea>
+            <div class="field-foot"><div class="utility-actions"><button class="btn utility" id="btnSwap" type="button">交换</button><button class="btn utility" id="btnClear" type="button">清空</button></div><span id="inCount">0字</span></div>
+          </div>
+          <div class="actions">
+            <div class="primary-actions"><button class="btn primary" id="btnEncrypt" type="button">鹿加密<span aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></span></button><button class="btn secondary" id="btnDecrypt" type="button">鹿出来</button><button class="btn subtle" id="btnSmart" type="button">智能转换</button></div>
+          </div>
+          <div class="field output-field">
+            <div class="field-head"><label for="output" id="resultLabel">转换结果</label><button class="text-button" id="btnCopy" type="button" disabled>复制结果</button></div>
+            <textarea id="output" readonly placeholder="结果会显示在这里" spellcheck="false" aria-describedby="resultHint"></textarea>
+            <div class="field-foot"><span id="resultHint">等待转换</span><span id="outCount">0字符</span></div>
+          </div>
+        </div>
+        <div class="workspace-note"><span><span class="live-dot"></span>本地处理，不上传文字与密钥</span><span class="shortcut">Ctrl/⌘+Enter智能转换</span></div>
+      </section>
+      <details class="guide"><summary><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg>怎么使用？</summary><p>输入文字，按需设置密钥，点击“鹿加密”。还原时粘贴密文，填写相同密钥，点击“鹿出来”。不填密钥时，两次都留空即可。</p></details>
+    </main>
+    <footer><span>加密鹿</span></footer>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

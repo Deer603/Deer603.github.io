@@ -1730,3 +1730,16 @@ body.high-contrast {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* SVG界面图标：独立尺寸，不使用字体基线。 */
+.ui-icon { width: 18px; height: 18px; flex: 0 0 auto; display: inline-block; vertical-align: middle; overflow: visible; }
+
+.icon-button,.mobile-search-button { align-items: center; justify-content: center; }
+.icon-button { display: inline-flex; }
+.menu-icon,.chevron { display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+.breadcrumbs { align-items: center; }
+.breadcrumbs .ui-icon,.chevron .ui-icon { width: 14px; height: 14px; }
+.notice-mark { border: 0; }
+.notice-mark .ui-icon { width: 20px; height: 20px; }
+[aria-label^="关闭"] { display: inline-flex; align-items: center; justify-content: center; }
+.icon-button > span[aria-hidden],.menu-icon { display: inline-flex; align-items: center; justify-content: center; line-height: 0; }

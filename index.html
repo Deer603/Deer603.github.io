@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>603web · 战术寝室内网</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=icons-1">
 <link rel="stylesheet" href="css/interactions.css">
 <style>.view{animation:fade .25s ease}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}</style>
 </head>
@@ -12,7 +12,7 @@
 
 <div class="wm">CN|UID3853714777830861395_220608050842<small>ave-Gout</small></div>
 <div class="hatch"></div>
-<div class="edge-tab" aria-hidden="true">»</div>
+<div class="edge-tab" aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m5 6 6 6-6 6m8-12 6 6-6 6"/></svg></div>
 
 <!-- 解密进度条 -->
 <div class="decode-bar" id="decodeBar" role="progressbar" aria-label="解密进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="decodeFill"></span></div>
@@ -33,8 +33,8 @@
     <a href="#" data-view="v-solutions">603小卖部</a>
     <a href="#" data-view="v-missing">查寝通报</a>
   </nav>
-  <div class="points"><span class="p-ic">⚖</span>注意力点数 <b class="p-num" id="attVal">50</b></div>
-  <div class="wallet"><span class="coin">◉</span>鹿币 <b id="havVal">0</b>
+  <div class="points"><span class="p-ic"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v18M6 21h12M4 7h16M5 7l-3 7h6Zm14 0-3 7h6Z"/></svg></span>注意力点数 <b class="p-num" id="attVal">50</b></div>
+  <div class="wallet"><span class="coin"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></span>鹿币 <b id="havVal">0</b>
     <button class="get" id="salaryBtn">领取生活费</button>
   </div>
 </header>
@@ -99,9 +99,9 @@
       <p>所有的发言都必须扣除室员个人账户中相应的注意力点数。<br>注意力点数不足者禁止继续水群，违者按无聊灌水严肃处理。</p>
       <p>请注意维护符合寝室价值观的舆论导向，603 智能系统将自动检测当前舆情的主要特点并总结如下。</p>
       <div class="hot" id="hotList">
-        <div class="hot-item"><span class="h-ic">◆</span><div><b>卫生轮值</b><span>在公平分工与偷懒之间，我们正努力寻找平衡。</span></div></div>
-        <div class="hot-item"><span class="h-ic">◆</span><div><b>门禁时间</b><span>与楼管的周旋是权宜手段，对熄灯铃的警惕是长期原则。</span></div></div>
-        <div class="hot-item"><span class="h-ic">▤</span><div><b id="hot3Title">夜聊冷场</b><span id="hot3Desc">多位室员认为夜聊氛围影响次日体能。</span></div></div>
+        <div class="hot-item"><span class="h-ic"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 9-9 9-9-9Z"/></svg></span><div><b>卫生轮值</b><span>在公平分工与偷懒之间，我们正努力寻找平衡。</span></div></div>
+        <div class="hot-item"><span class="h-ic"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 9-9 9-9-9Z"/></svg></span><div><b>门禁时间</b><span>与楼管的周旋是权宜手段，对熄灯铃的警惕是长期原则。</span></div></div>
+        <div class="hot-item"><span class="h-ic"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><div><b id="hot3Title">夜聊冷场</b><span id="hot3Desc">多位室员认为夜聊氛围影响次日体能。</span></div></div>
       </div>
       <button class="btn-post" id="postBtn">发 帖</button>
       <button class="censor-btn" id="censorBtn">查看查寝日志（+解密）</button>
@@ -126,7 +126,7 @@
       <h2 data-surface="603小卖部" data-truth="强制摊派">603小卖部</h2>
       <p>室员有义务在执行寝务时自费购买寝室物资。<br>严禁使用来自隔壁寝室的不可靠物资。</p>
       <p>603 致力于持续囤货，为复杂的寝室生活提供丰富的解决方案。</p>
-      <div class="badge"><span class="b-ic">▣</span><div><b>寝室严选</b><span>603 出品，闭眼入，绝不含糊。</span></div></div>
+      <div class="badge"><span class="b-ic"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="m8 12 3 3 5-6"/></svg></span><div><b>寝室严选</b><span>603 出品，闭眼入，绝不含糊。</span></div></div>
     </aside>
 
     <main>
@@ -179,7 +179,7 @@
         <div class="m-foot">
           <div class="lab">检举奖励</div>
           <div class="big">免值日一天</div>
-          <button class="btn-m btn-tip" id="zuoyaClue"><span class="warn">⚠</span>提供线索</button>
+          <button class="btn-m btn-tip" id="zuoyaClue"><span class="warn"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 10 18H2Z"/><path d="M12 9v5m0 3v.01"/></svg></span>提供线索</button>
         </div>
       </article>
     </main>
@@ -190,8 +190,8 @@
 <footer class="bar">
   <button class="back-chip" id="backBtn"><span class="esc">Esc</span> 返回首页</button>
   <div class="bar-right">
-    <button class="bar-action" title="重置本地进度" aria-label="重置本地进度" id="resetBtn">▦</button>
-    <a class="gift" href="#" data-open-event title="打开603夜话">🎁</a>
+    <button class="bar-action" title="重置本地进度" aria-label="重置本地进度" id="resetBtn"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+    <a class="gift" href="#" data-open-event title="打开603夜话"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13"/><path d="M12 8H8a3 3 0 1 1 3-3Zm0 0h4a3 3 0 1 0-3-3Z"/></svg></a>
     <div class="bar-ava">603<i id="barAtt">50</i></div>
   </div>
 </footer>
@@ -222,7 +222,7 @@
           </div>
           <div class="mini-cards">
             <div class="mini-card"><div class="ph" data-label="甲（待补）"></div><div class="m-strip"><span>神出鬼没</span><span>夜不归宿</span></div><div class="m-name"><b>未归人员·甲</b><span>需返回寝室接受集体教育</span></div><div class="m-price"><div class="lab">悬赏总额（鹿币）</div><div class="big">999</div></div><button class="m-btn end" id="endHuntBtn">结束悬赏</button></div>
-            <div class="mini-card"><div class="ph" data-label="乙（待补）"></div><div class="m-strip"><span>精准摸鱼</span><span>暴躁赖床</span></div><div class="m-name"><b>赖床惯犯·乙</b><span>亟需室友帮助继续其睡眠研究</span></div><div class="m-price"><div class="lab">检举奖励</div><div class="big">免值日一天</div></div><button class="m-btn tip" id="eventClueBtn"><span class="warn">⚠</span>提供线索</button></div>
+            <div class="mini-card"><div class="ph" data-label="乙（待补）"></div><div class="m-strip"><span>精准摸鱼</span><span>暴躁赖床</span></div><div class="m-name"><b>赖床惯犯·乙</b><span>亟需室友帮助继续其睡眠研究</span></div><div class="m-price"><div class="lab">检举奖励</div><div class="big">免值日一天</div></div><button class="m-btn tip" id="eventClueBtn"><span class="warn"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 10 18H2Z"/><path d="M12 9v5m0 3v.01"/></svg></span>提供线索</button></div>
           </div>
         </div>
       </div>
@@ -240,7 +240,7 @@
     </aside>
   </div>
 
-  <button class="ev-gift" id="rewardBtn"><span class="g-ic">🎁</span>603 关系网</button>
+  <button class="ev-gift" id="rewardBtn"><span class="g-ic"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13"/><path d="M12 8H8a3 3 0 1 1 3-3Zm0 0h4a3 3 0 1 0-3-3Z"/></svg></span>603 关系网</button>
 
   <div class="chat">
     <div class="chat-ava ph ph-dark" data-label="狗语佬"></div>
@@ -308,7 +308,7 @@
   <div class="modal-box post-detail-box">
     <div class="post-detail-head">
       <div><h3 id="detailTitle"></h3><div class="sub" id="detailMeta"></div></div>
-      <button class="detail-close" data-close-modal aria-label="关闭">×</button>
+      <button class="detail-close" data-close-modal aria-label="关闭"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
     </div>
     <img id="detailImage" class="post-detail-image" alt="帖子附件">
     <p id="detailBody" class="post-detail-copy"></p>

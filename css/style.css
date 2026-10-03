@@ -766,3 +766,13 @@ footer.bar{height:72px;background:#020303;border-top:0;padding:0 5vw}.back-chip{
   .modal-box{width:92vw !important;max-width:92vw;padding:18px 16px}
   .reward-graph{width:100%;height:auto}
 }
+
+/* SVG界面图标：独立尺寸，不使用字体基线。 */
+.ui-icon { width: 18px; height: 18px; flex: 0 0 auto; display: inline-block; vertical-align: middle; overflow: visible; }
+
+.p-ic,.coin,.h-ic,.b-ic,.g-ic,span.warn { display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+.p-ic .ui-icon,.coin .ui-icon,.h-ic .ui-icon,.b-ic .ui-icon,.g-ic .ui-icon { width: 1em; height: 1em; }
+.gift,.bar-action,.detail-close { display: inline-flex; align-items: center; justify-content: center; }
+.gift .ui-icon,.g-ic .ui-icon { width: 22px; height: 22px; }
+.edge-tab .ui-icon { width: 1em; height: 1em; }
+.price::before { content: ""; display: inline-block; width: 11px; height: 11px; margin-right: 4px; vertical-align: middle; background: currentColor; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2' d='M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-5 0a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z'/%3E%3C/svg%3E") center / contain no-repeat; }

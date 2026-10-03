@@ -6,7 +6,7 @@ import vm from "node:vm";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const version = "20260923-21";
+const version = "20261003-icons2";
 const check = process.argv.includes("--check");
 let pages = 0, changed = 0, missing = 0;
 
