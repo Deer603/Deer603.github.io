@@ -1,6 +1,6 @@
 # 603web与鹿群小站
 
-603寝室与鹿群的静态网站合集：一个互动首页、一本群内百科、一个趣味编码工具，以及KunCode产品官网。所有站点由`Deer603/Deer603.github.io`统一托管，通过GitHub Pages发布。
+603寝室与鹿群的静态网站合集，包含互动首页、沉浸式寝室博客、群内百科、趣味编码工具和KunCode产品官网。所有站点由`Deer603/Deer603.github.io`统一托管，通过GitHub Pages发布。
 
 [![GitHub Pages](https://img.shields.io/badge/hosting-GitHub%20Pages-2563eb?style=flat-square)](#发布到github-pages)
 [![纯静态网站](https://img.shields.io/badge/site-HTML%20%2F%20CSS%20%2F%20JavaScript-555555?style=flat-square)](#本地预览)
@@ -10,16 +10,17 @@
 
 ## 站点导航
 
-按下文启用Pages并完成发布后，首页和三个子站使用以下地址：
+按下文启用Pages并完成发布后，首页和四个子站使用以下地址：
 
 | 站点 | 内容 | 访问地址 | 说明 |
 | --- | --- | --- | --- |
 | 603web | 寝室概况、论坛、小卖部和查寝通报 | [deer603.github.io](https://deer603.github.io/) | [首页功能](#603web首页) |
+| 青蛙的角落 | 六人寝室场景、青蛙角色与摄影相册 | [deer603.github.io/room/](https://deer603.github.io/room/) | [子站README](room/README.md) |
 | 魏鸡百科 | 鹿群主题百科、词条检索与文章阅读 | [deer603.github.io/weijiba/](https://deer603.github.io/weijiba/) | [子站README](weijiba/README.md) |
 | 加密鹿 | 将文字转换为鹿群符号，并使用相同密钥还原，两秒内逐字输出结果 | [deer603.github.io/codec/](https://deer603.github.io/codec/) | [子站README](codec/README.md) |
 | KunCode | KunCode项目介绍与下载入口 | [deer603.github.io/kuncode/](https://deer603.github.io/kuncode/) | [子站README](kuncode/README.md) |
 
-首页使用根路径，三个子站使用各自的子目录，共用仓库根目录的发布源。加密鹿的目录为`codec/`，访问路径统一使用小写。
+首页使用根路径，四个子站使用`room/`、`weijiba/`、`codec/`和`kuncode/`，共用仓库根目录的发布源。子站入口目录统一使用小写；魏鸡百科的词条继续使用各自的中文目录。
 
 ## 本地预览
 
@@ -34,11 +35,12 @@ python -m http.server 8000 --bind 127.0.0.1
 | 页面 | 本地地址 |
 | --- | --- |
 | 603web首页 | [打开首页](http://127.0.0.1:8000/) |
+| 青蛙的角落 | [打开寝室博客](http://127.0.0.1:8000/room/) |
 | 魏鸡百科 | [打开魏鸡百科](http://127.0.0.1:8000/weijiba/) |
 | 加密鹿 | [打开加密鹿](http://127.0.0.1:8000/codec/) |
 | KunCode官网 | [打开KunCode](http://127.0.0.1:8000/kuncode/) |
 
-建议从根目录启动服务，便于同时预览首页、子站和文章链接。
+建议从根目录启动服务，便于同时预览首页、子站和文章链接。`room/`使用ES Modules，必须通过HTTP访问；也可单独运行`python room/serve.py`，打开`http://127.0.0.1:8765/`。
 
 ## 603web首页
 
@@ -51,7 +53,7 @@ python -m http.server 8000 --bind 127.0.0.1
 
 ## 发布到GitHub Pages
 
-本仓库使用账号站点仓库名`Deer603.github.io`，发布源应选仓库根目录。首页与三个子站一起发布，无需分别配置三个Pages站点。
+本仓库使用账号站点仓库名`Deer603.github.io`，发布源应选仓库根目录。首页与四个子站一起发布，无需为子站分别配置Pages。
 
 1. 将需要发布的文件提交并推送到`Deer603/Deer603.github.io`的`main`分支。
 2. 打开仓库的`Settings`→`Pages`。
@@ -59,7 +61,7 @@ python -m http.server 8000 --bind 127.0.0.1
 4. 将分支设为`main`，目录设为`/(root)`，点击`Save`。
 5. 等待Pages部署完成，再使用上方站点导航中的地址访问。
 
-目录选择`/(root)`，才能同时发布根目录的`index.html`及`weijiba/`、`codec/`、`kuncode/`。子站路径统一使用小写。操作说明见[GitHub Pages官方文档](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)。
+目录选择`/(root)`，才能同时发布根目录的`index.html`及`room/`、`weijiba/`、`codec/`、`kuncode/`。操作说明见[GitHub Pages官方文档](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)。
 
 ## 目录与维护
 
@@ -68,9 +70,12 @@ python -m http.server 8000 --bind 127.0.0.1
 ├── index.html             # 603web首页与交互脚本
 ├── css/                   # 首页样式
 ├── assets/                # 首页图片
+├── room/                  # 青蛙的角落与寝室博客
 ├── weijiba/               # 魏鸡百科与词条页面
 ├── codec/                 # 加密鹿
-└── kuncode/               # KunCode静态官网
+├── kuncode/               # KunCode静态官网
+├── tools/                 # 分享元信息与图片维护工具
+└── docs/                  # 分享与维护说明
 ```
 
 | 修改内容 | 编辑位置 |
@@ -78,6 +83,7 @@ python -m http.server 8000 --bind 127.0.0.1
 | 首页文字与交互 | [index.html](index.html) |
 | 首页布局与配色 | [css/style.css](css/style.css)、[css/interactions.css](css/interactions.css) |
 | 首页图片 | [assets/](assets/) |
+| 寝室场景、角色与摄影相册 | [room/README.md](room/README.md)中的维护说明 |
 | 魏鸡百科内容与导航 | [weijiba/README.md](weijiba/README.md)中的文件说明 |
 | 加密鹿界面与转换逻辑 | [codec/README.md](codec/README.md)中的文件说明 |
 | KunCode介绍、链接与下载入口 | [kuncode/README.md](kuncode/README.md)中的维护说明 |
@@ -89,8 +95,8 @@ python -m http.server 8000 --bind 127.0.0.1
 - 站点自身的`canonical`、`og:url`、`og:image`和`twitter:image`使用当前Pages地址及对应的小写子目录。
 - 应用源码、发行下载和其他外部项目链接指向实际来源，官网迁移不代表应用仓库迁移。
 
-各站点提供横版分享封面、方形缩略图与静态分享元信息。修改分享文案或词条数据后，在仓库根目录运行`node tools/share-metadata.mjs`。图片位置与微信分享说明见[网站分享信息](docs/sharing.md)。
+603web、魏鸡百科、加密鹿和KunCode已提供横版分享封面、方形缩略图与静态分享元信息。修改这些站点的分享文案或百科词条数据后，在仓库根目录运行`node tools/share-metadata.mjs`。当前脚本不包含`room/`，图片位置与微信分享说明见[网站分享信息](docs/sharing.md)。
 
 ## 素材与许可
 
-当前仓库未附LICENSE文件。首页图片位于`assets/`，各子站素材保留在对应目录中。
+当前仓库未附统一的LICENSE文件。首页图片位于`assets/`，各子站素材保留在对应目录中。`room/`的摄影、音效、字体与第三方库授权见其[素材与授权](room/README.md#素材与授权)；KunCode应用许可见其[产品来源](kuncode/README.md#产品来源)。

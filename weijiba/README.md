@@ -10,11 +10,11 @@
 [![运行方式](https://img.shields.io/badge/platform-browser-555555?style=flat-square)](#快速开始)
 [![GitHub Stars](https://img.shields.io/github/stars/Deer603/Deer603.github.io?style=flat-square)](https://github.com/Deer603/Deer603.github.io/stargazers)
 
-[站点入口](https://deer603.github.io/weijiba/) · [快速开始](#快速开始) · [主要功能](#主要功能) · [内容维护](#内容维护) · [仓库首页](../README.md)
+[站点入口](https://deer603.github.io/weijiba/) · [快速开始](#快速开始) · [主要功能](#主要功能) · [内容维护](#内容维护) · [返回站点导航](../README.md#站点导航)
 
 ## 快速开始
 
-日常浏览使用现代浏览器即可；本地预览需要Python，无需安装前端依赖或执行构建。
+子站位于`weijiba/`，词条入口放在其下的独立中文目录。日常浏览使用现代浏览器即可；本地预览需要Python，无需安装前端依赖或执行构建。
 
 在`Deer603.github.io`仓库根目录执行：
 

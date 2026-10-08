@@ -54,6 +54,8 @@ python -m http.server 8000 --bind 127.0.0.1
 
 子站目录与访问路径为`codec/`，线上地址为`https://deer603.github.io/codec/`，路径统一使用小写。页面提供静态分享标题、简介、横版封面和方形缩略图，维护方法见[网站分享信息](../docs/sharing.md)。
 
+修改分享文案后，在仓库根目录运行`node tools/share-metadata.mjs`，将配置同步到页面HTML。其他子站入口见[根目录站点导航](../README.md#站点导航)。
+
 ## 文件说明
 
 | 文件 | 用途 |

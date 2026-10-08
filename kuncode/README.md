@@ -11,7 +11,7 @@ KunCode的静态产品官网，集中介绍开发工作台、困困AI与各平�
   <a href="https://github.com/Roylyl/KunCode/releases"><img src="https://img.shields.io/badge/download-Windows%20%7C%20macOS-527565?style=flat-square" alt="KunCode应用下载" /></a>
 </p>
 
-[官网入口](https://deer603.github.io/kuncode/) · [本地预览](#本地预览) · [下载KunCode](https://github.com/Roylyl/KunCode/releases/tag/V2.0.0) · [应用源码](https://github.com/Roylyl/KunCode)
+[官网入口](https://deer603.github.io/kuncode/) · [本地预览](#本地预览) · [下载KunCode](https://github.com/Roylyl/KunCode/releases/tag/V2.0.0) · [应用源码](https://github.com/Roylyl/KunCode) · [返回站点导航](../README.md#站点导航)
 
 官网页面由本仓库维护；KunCode应用的源码、Release与问题反馈仍在[Roylyl/KunCode](https://github.com/Roylyl/KunCode)。迁移官网托管账号时，保留这些应用链接。
 
@@ -76,7 +76,7 @@ python -m http.server 8000 --bind 127.0.0.1
 <meta name="kuncode-mac-x64-asset" content="KunCode-macOS-x64-{version}.pkg" />
 ```
 
-`script.js`据此生成`releases/download/{tag}/{asset}`链接。更新时同步HTML中的默认下载链接、文件名、版本、包大小、页面标题与分享说明，保持禁用JavaScript时的下载入口可用。文件名以应用Release附件为准。
+`script.js`据此生成`releases/download/{tag}/{asset}`链接。更新时同步HTML中的默认下载链接、文件名、版本与包大小，保持禁用JavaScript时的下载入口可用。文件名以应用Release附件为准。分享标题与简介集中维护在根目录的`tools/share-metadata.mjs`中，修改后运行`node tools/share-metadata.mjs`同步页面信息。
 
 若应用仓库或发行渠道另行迁移，再更新`script.js`中的`RELEASE_BASE`与HTML内的应用链接。仅迁移官网时，无需更改`Roylyl/KunCode`。
 
