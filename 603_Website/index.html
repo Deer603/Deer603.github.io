@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#111812">
+    <title>青蛙的角落</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="shell/shell.css">
+    <script type="module" src="shell/main.js"></script>
+  </head>
+  <body data-stage="room" data-awake="false">
+    <main id="experience">
+      <section class="room-scene" aria-label="固定视角寝室">
+        <div class="room-world">
+          <div id="room-layer" class="room-layer" aria-label="依据照片绘制的上床下桌寝室">
+            <picture>
+              <source media="(max-width: 760px)" srcset="shell/assets/room-close-mobile.webp" />
+              <img class="room-backdrop" src="shell/assets/room-close-v5.webp"
+                alt="从寝室内部朝入口看，入口旁左侧床位：银灰床架、白色桌柜、黄色衣柜和宽踏板梯，灰色入口门在右侧"
+                draggable="false" />
+            </picture>
+          </div>
+          <div class="room-light" aria-hidden="true"></div>
+          <div class="ground-shadow" aria-hidden="true"></div>
+        </div>
+        <div class="room-vignette" aria-hidden="true"></div>
+      </section>
+      <div class="transition-cut" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+      <header class="site-header"></header>
+      <nav class="room-view-controls" aria-label="床位切换"></nav>
+      <footer class="scene-footer"></footer>
+      <div class="sr-only" role="status" aria-live="polite" id="status"></div>
+    </main>
+  </body>
+</html>
