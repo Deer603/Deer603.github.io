@@ -1,0 +1,2 @@
+请将正式简历 PDF 放入 public/assets，并命名为 resume-pdf.pdf。
+随后把代码中的 /assets/resume-pdf-placeholder.txt 替换为 /assets/resume-pdf.pdf。

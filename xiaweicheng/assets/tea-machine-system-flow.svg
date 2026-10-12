@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">智能泡茶机系统架构与任务流程</title>
+  <desc id="desc">展示 STM32 主控连接传感器、执行器、本地交互与 ESP8266 云端链路，以及泡茶任务状态流程。</desc>
+  <rect width="1600" height="1000" fill="#f3f5f7"/>
+  <g font-family="Inter, Source Han Sans SC, Microsoft YaHei, sans-serif">
+    <text x="92" y="96" fill="#111418" font-size="26" font-weight="700" letter-spacing="4">SYSTEM ARCHITECTURE</text>
+    <text x="92" y="150" fill="#111418" font-size="50" font-weight="650">从感知、决策到执行与云端同步</text>
+    <text x="92" y="190" fill="#69717a" font-size="21">基于实际原理图与程序模块整理</text>
+
+    <g fill="#fff" stroke="#d5dbe1" stroke-width="2">
+      <rect x="92" y="264" width="330" height="350" rx="12"/>
+      <rect x="510" y="264" width="330" height="350" rx="12"/>
+      <rect x="928" y="264" width="260" height="350" rx="12"/>
+      <rect x="1276" y="264" width="232" height="350" rx="12"/>
+    </g>
+
+    <text x="124" y="312" fill="#4d7fff" font-size="15" font-weight="700" letter-spacing="3">01 / SENSE</text>
+    <text x="124" y="358" fill="#111418" font-size="30" font-weight="650">状态感知</text>
+    <g fill="#59616a" font-size="21">
+      <text x="124" y="414">DS18B20 · 水温</text>
+      <text x="124" y="462">HX711 · 茶叶称重</text>
+      <text x="124" y="510">ADC · 水位检测</text>
+      <text x="124" y="558">DS1302 · 预约时钟</text>
+    </g>
+
+    <text x="542" y="312" fill="#4d7fff" font-size="15" font-weight="700" letter-spacing="3">02 / CONTROL</text>
+    <text x="542" y="358" fill="#111418" font-size="30" font-weight="650">STM32F103C8T6</text>
+    <g fill="#59616a" font-size="21">
+      <text x="542" y="414">任务状态机</text>
+      <text x="542" y="462">阈值与时序判断</text>
+      <text x="542" y="510">异常状态处理</text>
+      <text x="542" y="558">本地 / 远程指令协调</text>
+    </g>
+
+    <text x="960" y="312" fill="#4d7fff" font-size="15" font-weight="700" letter-spacing="3">03 / ACT</text>
+    <text x="960" y="358" fill="#111418" font-size="30" font-weight="650">执行与反馈</text>
+    <g fill="#59616a" font-size="21">
+      <text x="960" y="414">继电器 · 泡茶</text>
+      <text x="960" y="462">继电器 · 保温</text>
+      <text x="960" y="510">OLED · 状态显示</text>
+      <text x="960" y="558">按键 · 本地操作</text>
+    </g>
+
+    <text x="1308" y="312" fill="#4d7fff" font-size="15" font-weight="700" letter-spacing="3">04 / IOT</text>
+    <text x="1308" y="358" fill="#111418" font-size="30" font-weight="650">远程连接</text>
+    <g fill="#59616a" font-size="20">
+      <text x="1308" y="414">ESP8266</text>
+      <text x="1308" y="462">MQTT</text>
+      <text x="1308" y="510">阿里云 IoT</text>
+      <text x="1308" y="558">手机端</text>
+    </g>
+
+    <g fill="none" stroke="#4d7fff" stroke-width="3">
+      <path d="M422 439H510"/>
+      <path d="M840 439H928"/>
+      <path d="M1188 439H1276"/>
+    </g>
+    <g fill="#4d7fff">
+      <path d="M498 432l14 7-14 7z"/><path d="M916 432l14 7-14 7z"/><path d="M1264 432l14 7-14 7z"/>
+    </g>
+
+    <text x="92" y="708" fill="#111418" font-size="16" font-weight="700" letter-spacing="3">TASK FLOW</text>
+    <g fill="#111418" font-size="23" font-weight="600">
+      <text x="92" y="790">预约 / 一键启动</text>
+      <text x="402" y="790">状态检查</text>
+      <text x="672" y="790">泡茶控制</text>
+      <text x="942" y="790">保温管理</text>
+      <text x="1212" y="790">状态上报</text>
+    </g>
+    <g stroke="#cbd2d9" stroke-width="2" fill="none">
+      <path d="M92 824H1468"/>
+    </g>
+    <g fill="#4d7fff">
+      <circle cx="154" cy="824" r="8"/><circle cx="464" cy="824" r="8"/><circle cx="734" cy="824" r="8"/><circle cx="1004" cy="824" r="8"/><circle cx="1274" cy="824" r="8"/>
+    </g>
+    <text x="92" y="904" fill="#69717a" font-size="19">关键原则：执行前检查水位与茶量；本地操作、预约任务和远程指令共享同一设备状态。</text>
+  </g>
+</svg>
