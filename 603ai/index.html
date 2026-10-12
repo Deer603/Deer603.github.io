@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff8e8">
+  <title>603AI｜把603装进口袋</title>
+  <meta name="description" content="603AI是603的口袋寝室。与困困、朴AI、龟龟和探戈聊天，浏览语录、收藏灵感，在Android上遇见熟悉的伙伴。">
+  <meta name="603ai-repository" content="https://github.com/Deer603/603AI">
+  <!-- APK下载和版本信息集中在这里，后续发布时更新对应值。 -->
+  <meta name="603ai-apk-url" content="https://github.com/Deer603/603AI/releases/download/V1.0.0/603AI-1.0.0.apk">
+  <meta name="603ai-release-url" content="https://github.com/Deer603/603AI/releases/tag/V1.0.0">
+  <meta name="603ai-apk-size" content="18.0MiB">
+  <meta name="603ai-release-date" content="2026-10-12">
+  <link rel="canonical" href="https://deer603.github.io/603ai/">
+  <link rel="icon" type="image/png" href="./assets/app-icon.png">
+  <link rel="apple-touch-icon" href="./assets/app-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="603AI｜把603装进口袋">
+  <meta property="og:description" content="四个角色，一间寝室。把聊天、语录和日常灵感一起带走。">
+  <meta property="og:url" content="https://deer603.github.io/603ai/">
+  <meta property="og:image" content="https://deer603.github.io/603ai/assets/app-icon.png">
+  <meta property="og:image:alt" content="603AI黑鹿应用图标">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="603AI｜把603装进口袋">
+  <meta name="twitter:description" content="四个角色，一间寝室。把聊天、语录和日常灵感一起带走。">
+  <meta name="twitter:image" content="https://deer603.github.io/603ai/assets/app-icon.png">
+  <link rel="stylesheet" href="./style.css?v=20261012-2">
+  <script src="./script.js?v=20261012-2" defer></script>
+  <script src="./persona.js?v=20261012-2" defer></script>
+</head>
+<body>
+  <svg class="icon-sprite" width="0" height="0" aria-hidden="true"><defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11a8 8 0 0 1-8 8H6l-4 3V11a8 8 0 0 1 8-8h3a8 8 0 0 1 8 8Z"/><path d="M7 9h10M7 13h7"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21 3 12C-2 6 6-1 12 6c6-7 14 0 9 6l-9 9Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v16M12 5C8 2 4 2 2 3v16c4-1 7 0 10 2 3-2 6-3 10-2V3c-2-1-6-1-10 2Z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m2 11 10-9 10 9M5 9v12h14V9M9 21v-7h6v7"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14M10 3H4v17h17v-6"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+  </defs></svg>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
+  <header class="site-header wrap">
+    <a class="brand" href="#main" aria-label="603AI首页">
+      <img src="./assets/app-icon.png?v=20261012-1" width="44" height="44" alt="">
+      <span><b>603AI</b><small>603的口袋寝室</small></span>
+    </a>
+    <button class="nav-toggle" data-nav-toggle type="button" aria-label="展开导航" aria-expanded="false" aria-controls="site-nav"><svg class="icon"><use href="#i-menu"/></svg></button>
+    <nav id="site-nav" class="nav" data-nav-menu aria-label="主要导航">
+      <a href="#features">应用功能</a><a href="#characters">认识伙伴</a><a href="#download">下载</a>
+      <a class="nav-source" href="https://github.com/Deer603/603AI" target="_blank" rel="noopener noreferrer">GitHub<svg class="icon"><use href="#i-external"/></svg></a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="edition"><span class="status-dot" aria-hidden="true"></span>ANDROID APP<span class="edition-version">1.0.0</span></div>
+        <h1 id="hero-title">把603，<br><span>装进口袋。</span></h1>
+        <p class="hero-lead">四个角色，一间寝室。</p>
+        <p class="hero-description">和熟悉的伙伴聊两句，收藏一句有意思的话，再去寝室转转。603AI把聊天、语录和日常灵感，一起带到你的手机里。</p>
+        <div class="hero-actions">
+          <a class="button button-yellow" href="#download"><svg class="icon"><use href="#i-download"/></svg>获取Android版<svg class="icon arrow"><use href="#i-arrow"/></svg></a>
+          <a class="button button-paper" href="#characters">认识四位伙伴<svg class="icon"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="hero-meta"><span><svg class="icon"><use href="#i-check"/></svg>Android8.0+</span><span><svg class="icon"><use href="#i-check"/></svg>无需账号</span><span><svg class="icon"><use href="#i-check"/></svg>本地保存</span></div>
+        <a class="hero-bottom-link" href="#features">往下看看，603里有什么<svg class="icon"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="hero-visual">
+        <div class="visual-board">
+          <span class="board-number" aria-hidden="true">603</span>
+          <svg class="visual-star" viewBox="0 0 100 100" aria-hidden="true"><path d="m50 2 9 30 28-17-17 28 28 9-30 9 17 28-28-17-9 26-9-30-28 17 17-28-28-9 30-9-17-28 28 17Z"/></svg>
+          <div id="demo-screen" class="phone" data-persona="kunkun" aria-label="603AI角色聊天界面示意">
+            <div class="phone-header"><img src="./assets/app-icon.png?v=20261012-1" width="25" height="25" alt=""><b>603AI</b><span>角色聊天</span></div>
+            <div class="phone-content">
+              <div class="phone-persona"><img id="demo-avatar" src="./assets/kunkun.png?v=20261012-1" width="92" height="92" alt="困困"><div><h2 id="demo-name">困困</h2><span id="demo-tag">认知·成长·长期主义</span></div></div>
+              <p class="phone-greeting">今天，想聊点什么？</p>
+              <p id="demo-question" class="bubble bubble-question">总和别人比较，该怎么办？</p>
+              <div class="bubble bubble-answer"><span class="bubble-label">角色语录</span><p id="demo-quote">焦虑大多来自拿别人的结果，丈量自己的过程。每个人的时区不同，专注自己的刻度就好。</p><svg class="icon"><use href="#i-heart"/></svg></div>
+              <div class="phone-topics"><span>聊聊生活</span><span>随机灵感<svg class="icon"><use href="#i-star"/></svg></span></div>
+            </div>
+            <div class="phone-nav" aria-hidden="true"><span class="active"><svg class="icon"><use href="#i-chat"/></svg>聊天</span><span><svg class="icon"><use href="#i-home"/></svg>寝室</span><span><svg class="icon"><use href="#i-book"/></svg>语录</span><span><svg class="icon"><use href="#i-heart"/></svg>收藏</span></div>
+          </div>
+        </div>
+        <div class="persona-picker" role="group" aria-label="切换角色示例">
+          <button type="button" data-persona="kunkun" aria-pressed="true"><img src="./assets/kunkun.png?v=20261012-1" width="38" height="38" alt="">困困</button>
+          <button type="button" data-persona="piaoai" aria-pressed="false"><img src="./assets/piaoai.png?v=20261012-1" width="38" height="38" alt="">朴AI</button>
+          <button type="button" data-persona="guigui" aria-pressed="false"><img src="./assets/guigui.png?v=20261012-1" width="38" height="38" alt="">龟龟</button>
+          <button type="button" data-persona="tango" aria-pressed="false"><img src="./assets/tango.png?v=20261012-1" width="38" height="38" alt="">探戈</button>
+        </div>
+        <p class="visual-caption">点击切换角色·界面示意与内置语录展示</p>
+      </div>
+    </section>
+
+    <div class="identity-strip"><div class="wrap"><b>603AI</b><span>聊天有来有回</span><svg class="icon"><use href="#i-star"/></svg><span>灵感随手收藏</span><svg class="icon"><use href="#i-star"/></svg><span>熟悉的603，随身带走</span></div></div>
+
+    <section id="features" class="section wrap" aria-labelledby="features-title">
+      <div class="section-heading"><div><p class="eyebrow">01/日常，也能有点意思</p><h2 id="features-title">从一句话开始，<br>遇见更多小乐趣。</h2></div><p>聊天之外，还有喜欢的语录、<br>熟悉的寝室和属于自己的记录。</p></div>
+      <div class="feature-layout">
+        <article class="feature-primary retro-card">
+          <div class="feature-title"><span class="feature-icon"><svg class="icon"><use href="#i-chat"/></svg></span><span class="tag">角色对话</span></div>
+          <h3>换个伙伴，<br>换一种聊天方式。</h3><p>困困、朴AI、龟龟和探戈，各自有不同的话题与表达。围绕生活、学习或兴趣展开交流，也可以用随机灵感开启新话题。</p>
+          <div class="topic-cloud"><span>生活</span><span>成长</span><span>音乐</span><span>Linux</span><span>养龟</span><span>游戏</span></div>
+          <div class="feature-foot"><span>四个角色，各有主张。</span><a href="#characters" aria-label="了解四位角色"><svg class="icon"><use href="#i-arrow"/></svg></a></div>
+        </article>
+        <div class="feature-side">
+          <article class="feature-row"><span class="feature-icon blue"><svg class="icon"><use href="#i-book"/></svg></span><div><h3>好句子，留给自己。</h3><p>按关键词搜索、按主题浏览语录。遇到喜欢的内容，收藏、复制或分享给朋友。</p></div></article>
+          <article class="feature-row"><span class="feature-icon green"><svg class="icon"><use href="#i-home"/></svg></span><div><h3>去603寝室转一转。</h3><p>浏览3D寝室场景，点击角色进入对话，让熟悉的伙伴出现在熟悉的地方。</p></div></article>
+          <article class="feature-row"><span class="feature-icon pink"><svg class="icon"><use href="#i-star"/></svg></span><div><h3>每天，都有新的一句。</h3><p>查看今日一句和使用概览。对话、收藏与统计保存在设备上，随时回来继续。</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="characters" class="section characters-section" aria-labelledby="characters-title"><div class="wrap">
+      <div class="section-heading"><div><p class="eyebrow">02/认识603的伙伴</p><h2 id="characters-title">四个角色，<span class="highlight">各有各的有趣。</span></h2></div><p>点选一位伙伴，<br>看看他会带来怎样的一句话。</p></div>
+      <div class="character-grid" role="group" aria-label="选择角色">
+        <button class="character-card" type="button" data-persona="kunkun" aria-pressed="true"><span class="character-number">01</span><span class="character-portrait yellow"><img src="./assets/kunkun.png?v=20261012-1" width="144" height="144" alt="棕色像素水豚困困" loading="lazy"></span><span class="character-name">困困</span><span class="character-subtitle">换个角度，想透一点。</span><span class="character-tags">认知·成长·生活</span><span class="character-select">看看他的语录<svg class="icon"><use href="#i-arrow"/></svg></span></button>
+        <button class="character-card" type="button" data-persona="piaoai" aria-pressed="false"><span class="character-number">02</span><span class="character-portrait blue"><img src="./assets/piaoai.png?v=20261012-1" width="144" height="144" alt="卷毛花衬衫企鹅朴AI" loading="lazy"></span><span class="character-name">朴AI</span><span class="character-subtitle">直来直去，聊点喜欢的。</span><span class="character-tags">电脑·音乐·日常</span><span class="character-select">看看他的语录<svg class="icon"><use href="#i-arrow"/></svg></span></button>
+        <button class="character-card" type="button" data-persona="guigui" aria-pressed="false"><span class="character-number">03</span><span class="character-portrait green"><img src="./assets/guigui.png?v=20261012-1" width="144" height="144" alt="卷毛黄喉龟龟龟" loading="lazy"></span><span class="character-name">龟龟</span><span class="character-subtitle">养龟、焊板子，都有话说。</span><span class="character-tags">养龟·嵌入式·RoboMaster</span><span class="character-select">看看他的语录<svg class="icon"><use href="#i-arrow"/></svg></span></button>
+        <button class="character-card" type="button" data-persona="tango" aria-pressed="false"><span class="character-number">04</span><span class="character-portrait orange"><img src="./assets/tango.png?v=20261012-1" width="144" height="144" alt="黄色胖熊探戈" loading="lazy"></span><span class="character-name">探戈</span><span class="character-subtitle">聊完代码，再聊吃什么。</span><span class="character-tags">Linux·游戏·美食</span><span class="character-select">看看他的语录<svg class="icon"><use href="#i-arrow"/></svg></span></button>
+      </div>
+      <div class="persona-note" aria-live="polite"><span class="quote-mark" aria-hidden="true">“</span><div><p id="persona-quote">焦虑大多来自拿别人的结果，丈量自己的过程。每个人的时区不同，专注自己的刻度就好。</p><span>— <b id="persona-name">困困</b>·内置语录</span></div><svg class="icon"><use href="#i-chat"/></svg></div>
+    </div></section>
+
+    <section id="download" class="download-section" aria-labelledby="download-title"><div class="wrap download-layout">
+      <div class="download-copy"><p class="eyebrow">03/带走你的口袋寝室</p><h2 id="download-title">下一次聊天，<br><span>在603见。</span></h2><p>为Android准备的角色聊天与语录应用。<br>安装后，选择一位伙伴就能开始。</p><div class="download-points"><span><svg class="icon"><use href="#i-check"/></svg>无需注册账号</span><span><svg class="icon"><use href="#i-check"/></svg>无需配置API密钥</span><span><svg class="icon"><use href="#i-check"/></svg>记录保存在本机</span></div></div>
+      <div class="download-card"><div class="download-card-top"><img src="./assets/app-icon.png?v=20261012-1" width="66" height="66" alt="603AI应用图标" loading="lazy"><div><h3>603AI</h3><span>Android安装包</span></div><span class="tag">APK</span></div><dl class="release-details"><div><dt>应用版本</dt><dd id="release-version">1.0.0</dd></div><div><dt>系统要求</dt><dd>Android8.0及以上</dd></div><div><dt>发布日期</dt><dd id="release-date">2026-10-12</dd></div><div><dt>文件大小</dt><dd id="release-size">18.0MiB</dd></div></dl><a class="button button-yellow download-button" data-apk-download href="https://github.com/Deer603/603AI/releases/download/V1.0.0/603AI-1.0.0.apk"><svg class="icon"><use href="#i-download"/></svg><span data-download-label>下载Android安装包</span></a><p id="release-note" class="release-note">下载APK后，按照系统提示完成安装，即可选择角色开始对话。</p><a class="release-link" data-release-link href="https://github.com/Deer603/603AI/releases/tag/V1.0.0" target="_blank" rel="noopener noreferrer">查看版本说明<svg class="icon"><use href="#i-external"/></svg></a></div>
+    </div></section>
+
+    <section id="faq" class="section wrap faq-section" aria-labelledby="faq-title"><div class="faq-heading"><p class="eyebrow">04/安装与使用</p><h2 id="faq-title">还有几个<br>小问题。</h2><p>从安装到开始聊天，<br>这里有你可能需要的信息。</p></div><div class="faq-list">
+      <details><summary>我的手机可以安装吗？<svg class="icon"><use href="#i-plus"/></svg></summary><p>603AI适用于Android8.0及以上设备。当前提供Android应用，iPhone和iPad无法安装APK。</p></details>
+      <details><summary>需要登录或配置模型吗？<svg class="icon"><use href="#i-plus"/></svg></summary><p>无需注册账号，也无需提供API密钥。应用使用内置语料、关键词匹配与角色话术生成回复，安装后即可选择角色开始交流。</p></details>
+      <details><summary>聊天和收藏保存在哪里？<svg class="icon"><use href="#i-plus"/></svg></summary><p>对话、收藏、所选角色和使用统计保存在当前设备上。清除应用数据或卸载应用会影响这些本地记录，建议提前复制或分享想保留的内容。</p></details>
+      <details><summary>下载APK后，应该怎样安装？<svg class="icon"><use href="#i-plus"/></svg></summary><p>打开下载的APK，按系统提示完成安装。如果系统要求安装权限，请为当前用于打开APK的浏览器或文件管理器启用相应权限，再继续安装。</p></details>
+      <details><summary>可以在哪里反馈建议？<svg class="icon"><use href="#i-plus"/></svg></summary><p>欢迎通过<a href="https://github.com/Deer603/603AI/issues" target="_blank" rel="noopener noreferrer">GitHub Issues</a>反馈使用问题、语录建议和角色想法。说明手机系统版本与具体操作，会更方便我们了解情况。</p></details>
+    </div></section>
+
+    <section class="about-section wrap" aria-labelledby="about-title"><div><p class="eyebrow">MADE BY 603</p><h2 id="about-title">熟悉的603，<br>也可以有新的故事。</h2><p>欢迎分享你喜欢的语录、想聊的话题，以及对这个小应用的建议。一起让603AI更有意思，也更贴近日常。</p><a class="button button-paper" href="https://github.com/Deer603/603AI" target="_blank" rel="noopener noreferrer">前往项目仓库<svg class="icon"><use href="#i-external"/></svg></a></div><div class="about-mark" aria-hidden="true"><img src="./assets/app-icon.png?v=20261012-1" width="144" height="144" loading="lazy" alt=""><span>HELLO FROM 603.</span></div></section>
+  </main>
+  <footer class="wrap"><a class="footer-brand" href="#main">603AI<span>把603装进口袋。</span></a><div class="footer-links"><a href="../">603主页</a><a href="../kuncode/">KunCode</a><a href="https://github.com/Deer603/603AI" target="_blank" rel="noopener noreferrer">GitHub<svg class="icon"><use href="#i-external"/></svg></a></div><p>角色对话·日常语录·603寝室</p></footer>
+</body>
+</html>
