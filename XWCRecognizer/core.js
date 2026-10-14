@@ -1,4 +1,4 @@
-export const MAX_SAMPLES = 8;
+export const MAX_SAMPLES = 16;
 export const DESCRIPTOR_SIZE = 128;
 export const MIN_MARGIN = 3;
 
@@ -42,7 +42,7 @@ export function validateProfiles(data) {
     if (typeof person.id !== 'string' || !/^[a-zA-Z0-9-]{1,80}$/.test(person.id) || ids.has(person.id)) throw new Error('人员编号无效或重复');
     ids.add(person.id);
     if (typeof person.name !== 'string' || !person.name.trim() || person.name.trim().length > 40) throw new Error('人员姓名无效');
-    if (!Array.isArray(person.samples) || !person.samples.length || person.samples.length > MAX_SAMPLES) throw new Error('每人需要1～8个人脸样本');
+    if (!Array.isArray(person.samples) || !person.samples.length || person.samples.length > MAX_SAMPLES) throw new Error(`每人需要1～${MAX_SAMPLES}个人脸样本`);
     return {
       id: person.id, name: person.name.trim(),
       samples: person.samples.map(sample => {

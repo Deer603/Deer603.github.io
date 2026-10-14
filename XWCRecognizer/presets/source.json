@@ -1,6 +1,6 @@
 {
-  "revision": 2,
-  "description": "初始样本来自按姓名搜索的相册截图；新增参考样本按特征相似度和分差筛选。",
+  "revision": 5,
+  "description": "初始样本沿用来源标签；20261014-01和20261014-02批次按用户逐图提供的姓名归档。第一批替换了同源旧裁图，第二批新增16张参考图。；20261014-named-folders批次按用户命名文件夹导入35张主图，去除相册界面，姓名直接沿用文件夹标签。",
   "people": [
     {
       "id": "preset-xiaweicheng",
@@ -8,7 +8,12 @@
       "files": [
         "./presets/images/xiaweicheng-01.jpg",
         "./presets/images/xiaweicheng-02.jpg",
-        "./presets/images/xiaweicheng-03.jpg"
+        "./presets/images/xiaweicheng-03.jpg",
+        "./presets/images/confirmed-20261014-02-xiaweicheng-39.jpg",
+        "./presets/images/confirmed-20261014-02-xiaweicheng-40.jpg",
+        "./presets/images/folder-20261014-xiaweicheng-11.jpg",
+        "./presets/images/folder-20261014-xiaweicheng-12.jpg",
+        "./presets/images/folder-20261014-xiaweicheng-13.jpg"
       ]
     },
     {
@@ -17,8 +22,14 @@
       "files": [
         "./presets/images/luoyulun-01.jpg",
         "./presets/images/luoyulun-02.jpg",
-        "./presets/images/preset-luoyulun-39-0.jpg",
-        "./presets/images/preset-luoyulun-117-2.jpg"
+        "./presets/images/confirmed-20261014-luoyulun-02.jpg",
+        "./presets/images/confirmed-20261014-luoyulun-05.jpg",
+        "./presets/images/confirmed-20261014-luoyulun-08.jpg",
+        "./presets/images/confirmed-20261014-luoyulun-10.jpg",
+        "./presets/images/confirmed-20261014-02-luoyulun-24.jpg",
+        "./presets/images/confirmed-20261014-02-luoyulun-27.jpg",
+        "./presets/images/confirmed-20261014-02-luoyulun-30.jpg",
+        "./presets/images/confirmed-20261014-02-luoyulun-33.jpg"
       ]
     },
     {
@@ -37,7 +48,12 @@
       "name": "魏子奇",
       "files": [
         "./presets/images/weiziqi-01.jpg",
-        "./presets/images/weiziqi-03.jpg"
+        "./presets/images/weiziqi-03.jpg",
+        "./presets/images/confirmed-20261014-weiziqi-09.jpg",
+        "./presets/images/confirmed-20261014-02-weiziqi-23.jpg",
+        "./presets/images/confirmed-20261014-02-weiziqi-26.jpg",
+        "./presets/images/confirmed-20261014-02-weiziqi-29.jpg",
+        "./presets/images/confirmed-20261014-02-weiziqi-32.jpg"
       ]
     },
     {
@@ -46,8 +62,615 @@
       "files": [
         "./presets/images/tangyinxin-01.jpg",
         "./presets/images/tangyinxin-02.jpg",
-        "./presets/images/tangyinxin-03.jpg"
+        "./presets/images/tangyinxin-03.jpg",
+        "./presets/images/confirmed-20261014-02-tangyinxin-43.jpg",
+        "./presets/images/folder-20261014-tangyinxin-08.jpg",
+        "./presets/images/folder-20261014-tangyinxin-09.jpg",
+        "./presets/images/folder-20261014-tangyinxin-10.jpg"
+      ]
+    },
+    {
+      "id": "preset-lijianyu",
+      "name": "黎健毓",
+      "files": [
+        "./presets/images/confirmed-20261014-lijianyu-01.jpg",
+        "./presets/images/confirmed-20261014-lijianyu-18.jpg",
+        "./presets/images/folder-20261014-lijianyu-32.jpg",
+        "./presets/images/folder-20261014-lijianyu-33.jpg",
+        "./presets/images/folder-20261014-lijianyu-34.jpg",
+        "./presets/images/folder-20261014-lijianyu-35.jpg"
+      ]
+    },
+    {
+      "id": "preset-zhanshaoyuan",
+      "name": "詹绍源",
+      "files": [
+        "./presets/images/confirmed-20261014-zhanshaoyuan-11.jpg",
+        "./presets/images/confirmed-20261014-02-zhanshaoyuan-25.jpg",
+        "./presets/images/confirmed-20261014-02-zhanshaoyuan-28.jpg",
+        "./presets/images/confirmed-20261014-02-zhanshaoyuan-31.jpg",
+        "./presets/images/confirmed-20261014-02-zhanshaoyuan-34.jpg",
+        "./presets/images/folder-20261014-zhanshaoyuan-24.jpg",
+        "./presets/images/folder-20261014-zhanshaoyuan-25.jpg",
+        "./presets/images/folder-20261014-zhanshaoyuan-26.jpg",
+        "./presets/images/folder-20261014-zhanshaoyuan-27.jpg",
+        "./presets/images/folder-20261014-zhanshaoyuan-28.jpg"
+      ]
+    },
+    {
+      "id": "preset-huangxin",
+      "name": "黄鑫",
+      "files": [
+        "./presets/images/confirmed-20261014-huangxin-12.jpg"
+      ]
+    },
+    {
+      "id": "preset-wuzixuan",
+      "name": "吴子轩",
+      "files": [
+        "./presets/images/confirmed-20261014-wuzixuan-20.jpg",
+        "./presets/images/folder-20261014-wuzixuan-01.jpg",
+        "./presets/images/folder-20261014-wuzixuan-02.jpg",
+        "./presets/images/folder-20261014-wuzixuan-03.jpg"
+      ]
+    },
+    {
+      "id": "preset-pengpeng",
+      "name": "彭鹏",
+      "files": [
+        "./presets/images/confirmed-20261014-pengpeng-21.jpg",
+        "./presets/images/folder-20261014-pengpeng-14.jpg",
+        "./presets/images/folder-20261014-pengpeng-15.jpg",
+        "./presets/images/folder-20261014-pengpeng-16.jpg"
+      ]
+    },
+    {
+      "id": "preset-liqintong",
+      "name": "李沁佟",
+      "files": [
+        "./presets/images/confirmed-20261014-02-liqintong-42.jpg"
+      ]
+    },
+    {
+      "id": "preset-tangbofu",
+      "name": "唐博釜",
+      "files": [
+        "./presets/images/folder-20261014-tangbofu-04.jpg",
+        "./presets/images/folder-20261014-tangbofu-05.jpg",
+        "./presets/images/folder-20261014-tangbofu-06.jpg",
+        "./presets/images/folder-20261014-tangbofu-07.jpg"
+      ]
+    },
+    {
+      "id": "preset-tutenghui",
+      "name": "涂腾辉",
+      "files": [
+        "./presets/images/folder-20261014-tutenghui-17.jpg",
+        "./presets/images/folder-20261014-tutenghui-18.jpg",
+        "./presets/images/folder-20261014-tutenghui-19.jpg",
+        "./presets/images/folder-20261014-tutenghui-20.jpg",
+        "./presets/images/folder-20261014-tutenghui-21.jpg",
+        "./presets/images/folder-20261014-tutenghui-22.jpg",
+        "./presets/images/folder-20261014-tutenghui-23.jpg"
+      ]
+    },
+    {
+      "id": "preset-dengyuhang",
+      "name": "邓宇航",
+      "files": [
+        "./presets/images/folder-20261014-dengyuhang-29.jpg",
+        "./presets/images/folder-20261014-dengyuhang-30.jpg",
+        "./presets/images/folder-20261014-dengyuhang-31.jpg"
       ]
     }
-  ]
+  ],
+  "annotations": [
+    {
+      "batch": "20261014-01",
+      "number": 1,
+      "name": "黎健毓",
+      "sourceFile": "./presets/images/confirmed-20261014-lijianyu-01.jpg",
+      "originalFilename": "20251221_053120132_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-01",
+      "number": 2,
+      "name": "罗宇伦",
+      "sourceFile": "./presets/images/confirmed-20261014-luoyulun-02.jpg",
+      "originalFilename": "20251221_053120132_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-01",
+      "number": 5,
+      "name": "罗宇伦",
+      "sourceFile": "./presets/images/confirmed-20261014-luoyulun-05.jpg",
+      "originalFilename": "20250916_134504000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-01",
+      "number": 8,
+      "name": "罗宇伦",
+      "sourceFile": "./presets/images/confirmed-20261014-luoyulun-08.jpg",
+      "originalFilename": "20250726_094200915_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-01",
+      "number": 9,
+      "name": "魏子奇",
+      "sourceFile": "./presets/images/confirmed-20261014-weiziqi-09.jpg",
+      "originalFilename": "20250426_131229000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-01",
+      "number": 10,
+      "name": "罗宇伦",
+      "sourceFile": "./presets/images/confirmed-20261014-luoyulun-10.jpg",
+      "originalFilename": "20250426_131229000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-01",
+      "number": 11,
+      "name": "詹绍源",
+      "sourceFile": "./presets/images/confirmed-20261014-zhanshaoyuan-11.jpg",
+      "originalFilename": "20250426_131229000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-01",
+      "number": 12,
+      "name": "黄鑫",
+      "sourceFile": "./presets/images/confirmed-20261014-huangxin-12.jpg",
+      "originalFilename": "20250927_170406000_iOS.heic",
+      "labelSource": "user-confirmed",
+      "qualityNote": "原图偏模糊，待补充清晰参考图"
+    },
+    {
+      "batch": "20261014-01",
+      "number": 18,
+      "name": "黎健毓",
+      "sourceFile": "./presets/images/confirmed-20261014-lijianyu-18.jpg",
+      "originalFilename": "20250930_120717748_iOS.heic",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-01",
+      "number": 20,
+      "name": "吴子轩",
+      "sourceFile": "./presets/images/confirmed-20261014-wuzixuan-20.jpg",
+      "originalFilename": "20260830_065109695_iOS.heic",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-01",
+      "number": 21,
+      "name": "彭鹏",
+      "sourceFile": "./presets/images/confirmed-20261014-pengpeng-21.jpg",
+      "originalFilename": "20260913_133130325_iOS.heic",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 24,
+      "name": "罗宇伦",
+      "sourceFile": "./presets/images/confirmed-20261014-02-luoyulun-24.jpg",
+      "originalFilename": "20250426_130958000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 27,
+      "name": "罗宇伦",
+      "sourceFile": "./presets/images/confirmed-20261014-02-luoyulun-27.jpg",
+      "originalFilename": "20250426_131143000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 30,
+      "name": "罗宇伦",
+      "sourceFile": "./presets/images/confirmed-20261014-02-luoyulun-30.jpg",
+      "originalFilename": "20250426_131344000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 33,
+      "name": "罗宇伦",
+      "sourceFile": "./presets/images/confirmed-20261014-02-luoyulun-33.jpg",
+      "originalFilename": "20250426_131725019_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 25,
+      "name": "詹绍源",
+      "sourceFile": "./presets/images/confirmed-20261014-02-zhanshaoyuan-25.jpg",
+      "originalFilename": "20250426_130958000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 28,
+      "name": "詹绍源",
+      "sourceFile": "./presets/images/confirmed-20261014-02-zhanshaoyuan-28.jpg",
+      "originalFilename": "20250426_131143000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 31,
+      "name": "詹绍源",
+      "sourceFile": "./presets/images/confirmed-20261014-02-zhanshaoyuan-31.jpg",
+      "originalFilename": "20250426_131344000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 34,
+      "name": "詹绍源",
+      "sourceFile": "./presets/images/confirmed-20261014-02-zhanshaoyuan-34.jpg",
+      "originalFilename": "20250426_131725019_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 23,
+      "name": "魏子奇",
+      "sourceFile": "./presets/images/confirmed-20261014-02-weiziqi-23.jpg",
+      "originalFilename": "20250426_130958000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 26,
+      "name": "魏子奇",
+      "sourceFile": "./presets/images/confirmed-20261014-02-weiziqi-26.jpg",
+      "originalFilename": "20250426_131143000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 29,
+      "name": "魏子奇",
+      "sourceFile": "./presets/images/confirmed-20261014-02-weiziqi-29.jpg",
+      "originalFilename": "20250426_131344000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 32,
+      "name": "魏子奇",
+      "sourceFile": "./presets/images/confirmed-20261014-02-weiziqi-32.jpg",
+      "originalFilename": "20250426_131725019_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 39,
+      "name": "夏炜城",
+      "sourceFile": "./presets/images/confirmed-20261014-02-xiaweicheng-39.jpg",
+      "originalFilename": "20260827_101013911_iOS.heic",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 40,
+      "name": "夏炜城",
+      "sourceFile": "./presets/images/confirmed-20261014-02-xiaweicheng-40.jpg",
+      "originalFilename": "20260828_103001701_iOS.heic",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 42,
+      "name": "李沁佟",
+      "sourceFile": "./presets/images/confirmed-20261014-02-liqintong-42.jpg",
+      "originalFilename": "20260914_065332000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-02",
+      "number": 43,
+      "name": "唐胤鑫",
+      "sourceFile": "./presets/images/confirmed-20261014-02-tangyinxin-43.jpg",
+      "originalFilename": "20260914_071807000_iOS.jpg",
+      "labelSource": "user-confirmed"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "吴子轩",
+      "sourceFile": "./presets/images/folder-20261014-wuzixuan-01.jpg",
+      "originalFilename": "微信图片_20261014165118_182_28.png",
+      "sourceFolder": "吴子轩",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "吴子轩",
+      "sourceFile": "./presets/images/folder-20261014-wuzixuan-02.jpg",
+      "originalFilename": "微信图片_20261014165118_183_28.png",
+      "sourceFolder": "吴子轩",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "吴子轩",
+      "sourceFile": "./presets/images/folder-20261014-wuzixuan-03.jpg",
+      "originalFilename": "微信图片_20261014165118_184_28.png",
+      "sourceFolder": "吴子轩",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "唐博釜",
+      "sourceFile": "./presets/images/folder-20261014-tangbofu-04.jpg",
+      "originalFilename": "微信图片_20261014164815_162_28.png",
+      "sourceFolder": "唐博釜",
+      "labelSource": "user-named-folder",
+      "preprocessing": "main-photo-with-padding"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "唐博釜",
+      "sourceFile": "./presets/images/folder-20261014-tangbofu-05.jpg",
+      "originalFilename": "微信图片_20261014164815_163_28.png",
+      "sourceFolder": "唐博釜",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "唐博釜",
+      "sourceFile": "./presets/images/folder-20261014-tangbofu-06.jpg",
+      "originalFilename": "微信图片_20261014164815_164_28.png",
+      "sourceFolder": "唐博釜",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "唐博釜",
+      "sourceFile": "./presets/images/folder-20261014-tangbofu-07.jpg",
+      "originalFilename": "微信图片_20261014164815_165_28.png",
+      "sourceFolder": "唐博釜",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "唐胤鑫",
+      "sourceFile": "./presets/images/folder-20261014-tangyinxin-08.jpg",
+      "originalFilename": "微信图片_20261014165237_188_28.png",
+      "sourceFolder": "唐胤鑫",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "唐胤鑫",
+      "sourceFile": "./presets/images/folder-20261014-tangyinxin-09.jpg",
+      "originalFilename": "微信图片_20261014165237_189_28.png",
+      "sourceFolder": "唐胤鑫",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "唐胤鑫",
+      "sourceFile": "./presets/images/folder-20261014-tangyinxin-10.jpg",
+      "originalFilename": "微信图片_20261014165237_190_28.png",
+      "sourceFolder": "唐胤鑫",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "夏炜城",
+      "sourceFile": "./presets/images/folder-20261014-xiaweicheng-11.jpg",
+      "originalFilename": "微信图片_20261014164845_166_28.png",
+      "sourceFolder": "夏炜城",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "夏炜城",
+      "sourceFile": "./presets/images/folder-20261014-xiaweicheng-12.jpg",
+      "originalFilename": "微信图片_20261014164845_167_28.png",
+      "sourceFolder": "夏炜城",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "夏炜城",
+      "sourceFile": "./presets/images/folder-20261014-xiaweicheng-13.jpg",
+      "originalFilename": "微信图片_20261014164845_168_28.png",
+      "sourceFolder": "夏炜城",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "彭鹏",
+      "sourceFile": "./presets/images/folder-20261014-pengpeng-14.jpg",
+      "originalFilename": "微信图片_20261014165004_176_28.png",
+      "sourceFolder": "彭鹏",
+      "labelSource": "user-named-folder",
+      "preprocessing": "main-photo-with-padding"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "彭鹏",
+      "sourceFile": "./presets/images/folder-20261014-pengpeng-15.jpg",
+      "originalFilename": "微信图片_20261014165004_177_28.png",
+      "sourceFolder": "彭鹏",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "彭鹏",
+      "sourceFile": "./presets/images/folder-20261014-pengpeng-16.jpg",
+      "originalFilename": "微信图片_20261014165004_178_28.png",
+      "sourceFolder": "彭鹏",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "涂腾辉",
+      "sourceFile": "./presets/images/folder-20261014-tutenghui-17.jpg",
+      "originalFilename": "微信图片_20261014164931_169_28.png",
+      "sourceFolder": "涂腾辉",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "涂腾辉",
+      "sourceFile": "./presets/images/folder-20261014-tutenghui-18.jpg",
+      "originalFilename": "微信图片_20261014164931_170_28.png",
+      "sourceFolder": "涂腾辉",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "涂腾辉",
+      "sourceFile": "./presets/images/folder-20261014-tutenghui-19.jpg",
+      "originalFilename": "微信图片_20261014164931_171_28.png",
+      "sourceFolder": "涂腾辉",
+      "labelSource": "user-named-folder",
+      "preprocessing": "main-photo-with-padding"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "涂腾辉",
+      "sourceFile": "./presets/images/folder-20261014-tutenghui-20.jpg",
+      "originalFilename": "微信图片_20261014164931_172_28.png",
+      "sourceFolder": "涂腾辉",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "涂腾辉",
+      "sourceFile": "./presets/images/folder-20261014-tutenghui-21.jpg",
+      "originalFilename": "微信图片_20261014164931_173_28.png",
+      "sourceFolder": "涂腾辉",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "涂腾辉",
+      "sourceFile": "./presets/images/folder-20261014-tutenghui-22.jpg",
+      "originalFilename": "微信图片_20261014164931_174_28.png",
+      "sourceFolder": "涂腾辉",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "涂腾辉",
+      "sourceFile": "./presets/images/folder-20261014-tutenghui-23.jpg",
+      "originalFilename": "微信图片_20261014164931_175_28.png",
+      "sourceFolder": "涂腾辉",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "詹绍源",
+      "sourceFile": "./presets/images/folder-20261014-zhanshaoyuan-24.jpg",
+      "originalFilename": "微信图片_20261014164623_153_28.png",
+      "sourceFolder": "詹绍源",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "詹绍源",
+      "sourceFile": "./presets/images/folder-20261014-zhanshaoyuan-25.jpg",
+      "originalFilename": "微信图片_20261014164623_154_28.png",
+      "sourceFolder": "詹绍源",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "詹绍源",
+      "sourceFile": "./presets/images/folder-20261014-zhanshaoyuan-26.jpg",
+      "originalFilename": "微信图片_20261014164623_155_28.png",
+      "sourceFolder": "詹绍源",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "詹绍源",
+      "sourceFile": "./presets/images/folder-20261014-zhanshaoyuan-27.jpg",
+      "originalFilename": "微信图片_20261014164623_156_28.png",
+      "sourceFolder": "詹绍源",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "詹绍源",
+      "sourceFile": "./presets/images/folder-20261014-zhanshaoyuan-28.jpg",
+      "originalFilename": "微信图片_20261014164623_157_28.png",
+      "sourceFolder": "詹绍源",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "邓宇航",
+      "sourceFile": "./presets/images/folder-20261014-dengyuhang-29.jpg",
+      "originalFilename": "微信图片_20261014165204_185_28.png",
+      "sourceFolder": "邓宇航",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "邓宇航",
+      "sourceFile": "./presets/images/folder-20261014-dengyuhang-30.jpg",
+      "originalFilename": "微信图片_20261014165204_186_28.png",
+      "sourceFolder": "邓宇航",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "邓宇航",
+      "sourceFile": "./presets/images/folder-20261014-dengyuhang-31.jpg",
+      "originalFilename": "微信图片_20261014165204_187_28.png",
+      "sourceFolder": "邓宇航",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "黎健毓",
+      "sourceFile": "./presets/images/folder-20261014-lijianyu-32.jpg",
+      "originalFilename": "微信图片_20261014164722_158_28.png",
+      "sourceFolder": "黎健毓",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "黎健毓",
+      "sourceFile": "./presets/images/folder-20261014-lijianyu-33.jpg",
+      "originalFilename": "微信图片_20261014164722_159_28.png",
+      "sourceFolder": "黎健毓",
+      "labelSource": "user-named-folder"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "黎健毓",
+      "sourceFile": "./presets/images/folder-20261014-lijianyu-34.jpg",
+      "originalFilename": "微信图片_20261014164722_160_28.png",
+      "sourceFolder": "黎健毓",
+      "labelSource": "user-named-folder",
+      "preprocessing": "main-photo-with-padding"
+    },
+    {
+      "batch": "20261014-named-folders",
+      "name": "黎健毓",
+      "sourceFile": "./presets/images/folder-20261014-lijianyu-35.jpg",
+      "originalFilename": "微信图片_20261014164722_161_28.png",
+      "sourceFolder": "黎健毓",
+      "labelSource": "user-confirmed-foreground",
+      "preprocessing": "main-photo-with-padding"
+    }
+  ],
+  "replacedFiles": [
+    "./presets/images/preset-luoyulun-39-0.jpg",
+    "./presets/images/preset-luoyulun-117-2.jpg"
+  ],
+  "pendingImports": []
 }
