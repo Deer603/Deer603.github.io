@@ -38,8 +38,8 @@ async function initialize() {
   if (state.loading || state.ready) return;
   state.loading = true;
   $('retry-model').disabled = true;
-  $('model-status').textContent = '正在准备识别';
-  $('model-detail').textContent = '加载本地模型与预设人物，照片无需上传。';
+  $('model-status').textContent = '正在加载模型…';
+  $('model-detail').textContent = '读取本地模型与预设数据';
   controls();
   try {
     const api = window.faceapi;
@@ -64,11 +64,11 @@ async function initialize() {
     state.people = validateProfiles(await response.json());
     if (!state.people.length) throw new Error('预设人物库为空');
     state.ready = true;
-    $('model-status').textContent = '识别已就绪';
+    $('model-status').textContent = '已就绪';
     $('model-status').className = 'status-badge ready';
-    $('model-detail').textContent = `已记住${state.people.length}位人物·本地${api.tf.getBackend() === 'webgl' ? 'GPU' : 'CPU'}推理`;
+    $('model-detail').textContent = '本机运行';
     $('retry-model').hidden = true;
-    $('camera-message').textContent = '预设人物已就绪，开启摄像头即可比对。';
+    $('camera-message').textContent = '摄像头未开启';
   } catch (error) {
     $('model-status').textContent = '加载失败';
     $('model-status').className = 'status-badge error';
@@ -127,7 +127,7 @@ async function startCamera() {
     $('video').hidden = false;
     $('still-canvas').hidden = true;
     $('camera-placeholder').hidden = true;
-    $('camera-message').textContent = '摄像头已开启，正在识别人脸。';
+    $('camera-message').textContent = '正在检测人脸…';
     acquired.getVideoTracks()[0].addEventListener('ended', () => { if (state.stream === acquired) { stopCamera(); toast('摄像头已断开，请重新开启。'); } });
     await enumerateCameras();
     if (session !== state.session) return;
@@ -150,7 +150,7 @@ function stopCamera() {
   $('video').srcObject = null;
   $('still-canvas').hidden = true;
   $('camera-placeholder').hidden = false;
-  $('camera-message').textContent = '等待开启摄像头或对比照片。';
+  $('camera-message').textContent = '摄像头未开启';
   $('face-count').textContent = '0';
   $('inference-time').textContent = '—';
   resetMatches();
@@ -189,7 +189,7 @@ async function loop(session) {
 
 function resetMatches() {
   state.faces = [];
-  $('match-list').replaceChildren(element('div', '开启摄像头或选择照片，即可显示与预设人物的匹配度。', 'empty-state plain-empty'));
+  $('match-list').replaceChildren(element('div', '等待画面', 'empty-state plain-empty'));
   $('match-summary').textContent = '等待画面';
   ctx.clearRect(0, 0, $('overlay').width, $('overlay').height);
 }
@@ -201,7 +201,7 @@ function showResults(faces, frame, elapsed) {
   $('face-count').textContent = String(faces.length);
   $('inference-time').textContent = String(Math.round(elapsed));
   renderMatches();
-  $('camera-message').textContent = faces.length ? `检测到${faces.length}张人脸` : '未检测到人脸，请正对镜头并保持光线充足。';
+  $('camera-message').textContent = faces.length ? `检测到${faces.length}张人脸` : '未检测到人脸';
 }
 
 function renderMatches() {
@@ -210,7 +210,7 @@ function renderMatches() {
   $('match-list').replaceChildren();
   const threshold = Number($('threshold').value);
   $('match-summary').textContent = faces.length ? `${faces.length}张人脸` : '未检测到人脸';
-  if (!faces.length) { $('match-list').append(element('div', '请将面部移入镜头，已离开画面的结果会自动清除。', 'empty-state plain-empty')); return; }
+  if (!faces.length) { $('match-list').append(element('div', '未检测到人脸', 'empty-state plain-empty')); return; }
   faces.forEach((face, index) => {
     const ranking = validDescriptor(face.descriptor) ? rankProfiles(face.descriptor, state.people) : [];
     const decision = matchDecision(ranking, threshold);
@@ -237,7 +237,7 @@ function renderMatches() {
 function drawFace(face, index, decision, score) {
   const box = face.detection.box;
   const x = state.mode === 'camera' && $('mirror').checked ? $('overlay').width - box.x - box.width : box.x;
-  const color = decision.type === 'match' ? '#65daa9' : decision.type === 'ambiguous' ? '#e9b43c' : '#9f7ae1';
+  const color = decision.type === 'match' ? '#65daa9' : decision.type === 'ambiguous' ? '#e9b43c' : '#c9c9c9';
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
   ctx.strokeRect(x, box.y, box.width, box.height);
@@ -246,7 +246,7 @@ function drawFace(face, index, decision, score) {
   const width = Math.min($('overlay').width, ctx.measureText(text).width + 16);
   const left = Math.max(0, Math.min(x, $('overlay').width - width));
   const top = box.y >= 27 ? box.y - 27 : box.y + 2;
-  ctx.fillStyle = '#151521e8';
+  ctx.fillStyle = '#171717e8';
   ctx.fillRect(left, top, width, 25);
   ctx.fillStyle = color;
   ctx.fillText(text, left + 8, top + 17, width - 16);
@@ -290,7 +290,7 @@ $('mirror').addEventListener('change', () => { $('video').style.transform = $('m
 $('video').style.transform = $('mirror').checked ? 'scaleX(-1)' : '';
 $('threshold').addEventListener('input', () => {
   $('threshold-value').textContent = `${$('threshold').value}%`;
-  $('threshold').style.background = `linear-gradient(to right,#a28bcf 0%,#a28bcf ${(($('threshold').value - 40) / 45) * 100}%,#eee9f5 ${(($('threshold').value - 40) / 45) * 100}%,#eee9f5 100%)`;
+  $('threshold').style.background = `linear-gradient(to right,#333 0%,#333 ${(($('threshold').value - 40) / 45) * 100}%,#ddd ${(($('threshold').value - 40) / 45) * 100}%,#ddd 100%)`;
   if (state.faces.length) renderMatches();
 });
 document.addEventListener('visibilitychange', () => { if (document.hidden && state.stream) resetMatches(); });
