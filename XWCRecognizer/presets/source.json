@@ -1,0 +1,53 @@
+{
+  "revision": 2,
+  "description": "初始样本来自按姓名搜索的相册截图；新增参考样本按特征相似度和分差筛选。",
+  "people": [
+    {
+      "id": "preset-xiaweicheng",
+      "name": "夏炜城",
+      "files": [
+        "./presets/images/xiaweicheng-01.jpg",
+        "./presets/images/xiaweicheng-02.jpg",
+        "./presets/images/xiaweicheng-03.jpg"
+      ]
+    },
+    {
+      "id": "preset-luoyulun",
+      "name": "罗宇伦",
+      "files": [
+        "./presets/images/luoyulun-01.jpg",
+        "./presets/images/luoyulun-02.jpg",
+        "./presets/images/preset-luoyulun-39-0.jpg",
+        "./presets/images/preset-luoyulun-117-2.jpg"
+      ]
+    },
+    {
+      "id": "preset-liyanzhen",
+      "name": "李彦臻",
+      "files": [
+        "./presets/images/liyanzhen-01.jpg",
+        "./presets/images/liyanzhen-02.jpg",
+        "./presets/images/liyanzhen-03.jpg",
+        "./presets/images/liyanzhen-04.jpg",
+        "./presets/images/preset-liyanzhen-205-0.jpg"
+      ]
+    },
+    {
+      "id": "preset-weiziqi",
+      "name": "魏子奇",
+      "files": [
+        "./presets/images/weiziqi-01.jpg",
+        "./presets/images/weiziqi-03.jpg"
+      ]
+    },
+    {
+      "id": "preset-tangyinxin",
+      "name": "唐胤鑫",
+      "files": [
+        "./presets/images/tangyinxin-01.jpg",
+        "./presets/images/tangyinxin-02.jpg",
+        "./presets/images/tangyinxin-03.jpg"
+      ]
+    }
+  ]
+}
