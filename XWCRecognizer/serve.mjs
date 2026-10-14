@@ -28,6 +28,8 @@ const contentTypes = {
   '.mjs': 'text/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
   '.bin': 'application/octet-stream',
+  '.onnx': 'application/octet-stream',
+  '.wasm': 'application/wasm',
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',

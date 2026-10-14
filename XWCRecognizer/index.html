@@ -8,13 +8,14 @@
     <title>XWCRecognizer</title>
     <link rel="stylesheet" href="styles.css" />
     <script defer src="vendor/face-api.js"></script>
+    <script defer src="vendor/ort/ort.wasm.min.js"></script>
     <script type="module" src="app.js"></script>
   </head>
   <body>
     <div class="app-shell">
       <header class="site-header">
         <h1><a class="brand" href="./">XWC检测器</a></h1>
-        <div class="model-line" aria-live="polite">
+        <div id="model-line" class="model-line" aria-live="polite" hidden>
           <span id="model-status" class="status-badge">正在加载模型…</span>
           <span id="model-detail" class="model-detail">本机运行</span>
           <button id="retry-model" class="text-button" type="button">重试</button>
@@ -34,8 +35,17 @@
             <canvas id="still-canvas" aria-label="用于对比的照片" hidden></canvas>
             <canvas id="overlay" aria-hidden="true"></canvas>
             <div id="camera-placeholder" class="camera-placeholder">
-              <svg viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="8" width="26" height="19" rx="2"/><path d="m10 8 2-4h8l2 4"/><circle cx="16" cy="17.5" r="5"/></svg>
-              <p>摄像头未开启</p>
+              <div id="loading-panel" class="loading-panel" role="status" aria-live="polite">
+                <p id="loading-title" class="loading-title">正在加载模型</p>
+                <div id="loading-percent" class="loading-percent">0%</div>
+                <div id="loading-progress" class="loading-progress" role="progressbar" aria-label="模型加载进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="loading-fill" class="loading-fill"></div></div>
+                <p id="loading-message" class="loading-message">正在准备</p>
+                <button id="loading-retry" class="button" type="button" hidden>重新加载</button>
+              </div>
+              <div id="idle-placeholder" class="idle-placeholder" hidden>
+                <svg viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="8" width="26" height="19" rx="2"/><path d="m10 8 2-4h8l2 4"/><circle cx="16" cy="17.5" r="5"/></svg>
+                <p>摄像头未开启</p>
+              </div>
             </div>
           </div>
           <div class="camera-controls">
@@ -49,32 +59,15 @@
           </div>
           <div class="camera-footer">
             <span id="camera-message" aria-live="polite">摄像头未开启</span>
-            <div class="camera-stats"><span>人脸<span id="face-count">0</span></span><span>耗时<span><span id="inference-time">—</span>ms</span></span></div>
+            <div hidden><span id="face-count">0</span><span id="inference-time">—</span></div>
           </div>
         </section>
         <section class="matches-panel" aria-labelledby="matches-title">
           <div class="panel-heading"><h2 id="matches-title">匹配结果</h2><span id="match-summary" aria-live="polite">等待画面</span></div>
           <div class="result-columns" aria-hidden="true"><span>人物</span><span>匹配度</span></div>
           <div id="match-list" class="match-list" aria-live="polite" aria-atomic="false"><div class="empty-state">暂无结果</div></div>
-          <div class="threshold-control">
-            <div class="threshold-heading"><label for="threshold">匹配阈值</label><output id="threshold-value" for="threshold">65%</output></div>
-            <input id="threshold" type="range" min="40" max="85" value="65" step="1"/>
-            <div class="range-labels"><span>40%</span><span>85%</span></div>
-          </div>
         </section>
       </main>
-      <footer class="site-footer">
-        <details class="explanation">
-          <summary>说明</summary>
-          <div class="explanation-content">
-            <p>匹配度采用最接近的两张参考图的平均特征距离换算：clamp(1−distance/1.2,0,1)×100%，不是身份正确率。两张参考图都达到阈值才可确认；只有一张参考图时仅展示分数。分差仅供参考，不因分差小否定第一名。</p>
-            <p>摄像头按人脸框位置关联连续画面，对最近5帧中每个人物的评分取平均，再重新排名；首次采集满3帧后显示判定。人脸离开画面或过小时重新采集。对比照片使用单张静态图。</p>
-            <p>摄像头画面与对比照片在浏览器中处理。程序没有活体检测，照片和屏幕中的人脸也可能被匹配。</p>
-            <p>识别库：<a href="https://github.com/vladmandic/face-api" target="_blank" rel="noopener noreferrer">face-api</a>。</p>
-          </div>
-        </details>
-        <span class="local-note">图像在本机处理</span>
-      </footer>
     </div>
     <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
   </body>

@@ -12,6 +12,22 @@ XWCRecognizer包含以下第三方代码和模型。分发本目录时，请一�
 
 该项目从face-api.js发展而来，浏览器构建包含TensorFlow.js。上游仓库于2025年2月5日归档，目前为只读状态。
 
+## OpenCV Zoo SFace
+
+- 模型：face_recognition_sface_2021dec.onnx，MobileFaceNet网络，采用SFace损失训练。
+- 来源：[OpenCV Zoo SFace](https://github.com/opencv/opencv_zoo/tree/main/models/face_recognition_sface)。
+- 本地文件：models/face_recognition_sface_2021dec.onnx。
+- 上游目录声明Apache-2.0许可，保留全文：[vendor/SFace-LICENSE.txt](vendor/SFace-LICENSE.txt)。模型文件未修改。
+- 112×112输入、RGB排列和5点对齐目标参考[OpenCV FaceRecognizerSF实现](https://github.com/opencv/opencv/blob/4.x/modules/objdetect/src/face_recognize.cpp)。本项目使用独立实现的二维相似变换求解。
+
+## ONNX Runtime Web
+
+- 版本：1.30.0。
+- 来源：[microsoft/onnxruntime](https://github.com/microsoft/onnxruntime)，npm包onnxruntime-web。
+- 用途：SFace模型的浏览器WebAssembly推理。
+- 本地文件：vendor/ort/中的JavaScript、ES模块与WebAssembly文件。
+- 许可：MIT，保留[LICENSE.txt](vendor/ort/LICENSE.txt)及[ThirdPartyNotices.txt](vendor/ort/ThirdPartyNotices.txt)。
+
 ## 原face-api.js
 
 - 项目：[justadudewhohacks/face-api.js](https://github.com/justadudewhohacks/face-api.js)。
@@ -43,7 +59,7 @@ SSD Mobilenet V1人脸检测权重由[yeephycho/tensorflow-face-detection](https
 
 人脸识别权重来自Davis King训练的dlib识别网络，输出128维人脸特征。其原始模型仓库[davisking/dlib-models](https://github.com/davisking/dlib-models)将这些模型声明为公有领域，并提供[CC0-1.0许可](https://github.com/davisking/dlib-models/blob/master/LICENSE)。本目录保留face-api仓库分发时的模型文件及其来源说明。
 
-预设人物的初始参考资料来自提供的手机相册搜索截图，姓名沿用资料中的来源标签。新增样本从2025/2026年的本机照片中按特征相似度、与第二名分差及画质筛选，未经人工身份核实。新增样本用于提取特征、扩充人物参考库，不是从头训练上述模型；人物照片与特征也不因此取得第三方代码的开源许可。
+预设人物的初始参考资料来自提供的手机相册搜索截图，姓名沿用资料中的来源标签；后续批次沿用用户提供的逐图标签与姓名文件夹。SFace参考库复用当前13人、76张参考图的标签，未自行重新分配人物姓名。参考图用于提取特征，不是从头训练上述模型；人物照片与特征也不因此取得第三方代码的开源许可。具体批次见README与presets/source.json。
 
 本说明记录所用组件的许可和上游来源，不将依赖库的MIT许可扩展为XWCRecognizer自身的项目许可。
 

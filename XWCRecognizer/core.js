@@ -47,7 +47,7 @@ function overlap(a, b) {
 
 // Associate boxes by position, independently of each frame's leading candidate.
 // Average every candidate over the window before deciding who ranks first.
-export function stabilizeMatches(current, previous = [], threshold = 65) {
+export function stabilizeMatches(current, previous = [], threshold = 65, decide = matchDecision) {
   const used = new Set();
   return current.map(item => {
     if (item.qualityBlocked || !item.ranking.length) return { ...item, history: [], frameCount: 0 };
@@ -62,12 +62,16 @@ export function stabilizeMatches(current, previous = [], threshold = 65) {
     const ranking = item.ranking.map(person => {
       const samples = history.map(frame => frame.find(candidate => candidate.id === person.id)).filter(Boolean);
       const average = key => samples.reduce((sum, sample) => sum + sample[key], 0) / samples.length;
-      return { ...person, distance: average('distance'), score: average('score'),
+      const averaged = { ...person, distance: average('distance'), score: average('score'),
         supportScore: person.sampleCount >= 2 ? average('supportScore') : null };
+      for (const key of ['faceScore','sfaceScore','faceSupport','sfaceSupport']) {
+        if (samples.every(sample => Number.isFinite(sample[key]))) averaged[key] = average(key);
+      }
+      return averaged;
     }).sort((a, b) => b.score - a.score);
     const frameCount = history.length;
     return { ...item, ranking, id: ranking[0]?.id, history, frameCount,
-      decision: frameCount >= REQUIRED_FRAMES ? matchDecision(ranking, threshold)
+      decision: frameCount >= REQUIRED_FRAMES ? decide(ranking, threshold)
         : { type: 'pending', label: `采集中（${frameCount}/${REQUIRED_FRAMES}帧）` } };
   });
 }

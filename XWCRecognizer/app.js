@@ -1,9 +1,13 @@
-import { rankProfiles, matchDecision, stabilizeMatches, validateProfiles, validDescriptor } from './core.js';
+import { stabilizeMatches, validateProfiles, validDescriptor } from './core.js';
+import { rankDualProfiles, dualDecision, validateSFaceLibrary } from './ensemble.js';
+import { extractSFace } from './sface.js';
+import { loadModels } from './model-loader.js';
 
 const $ = id => document.getElementById(id);
 const state = { people: [], ready: false, models: false, loading: false, stream: null, opening: false, session: 0, timer: null, faces: [], mode: 'idle', toastTimer: null };
 const inputCanvas = document.createElement('canvas');
 let results = [];
+let sfacePeople = [];
 const ctx = $('overlay').getContext('2d');
 let detectionTail = Promise.resolve();
 
@@ -28,16 +32,33 @@ function controls() {
 }
 
 function detect(input) {
-  const task = detectionTail.then(() => window.faceapi.detectAllFaces(input,
+  const task = detectionTail.then(async () => {
+    const faces = await window.faceapi.detectAllFaces(input,
     new window.faceapi.SsdMobilenetv1Options({ minConfidence: 0.55, maxResults: 20 }))
-    .withFaceLandmarks().withFaceDescriptors());
+    .withFaceLandmarks().withFaceDescriptors();
+    for (const face of faces) face.sfaceDescriptor = await extractSFace(input, face.landmarks);
+    return faces;
+  });
   detectionTail = task.catch(() => {});
   return task;
+}
+
+function loadingProgress(percent, message) {
+  $('loading-percent').textContent = `${percent}%`;
+  $('loading-fill').style.width = `${percent}%`;
+  $('loading-progress').setAttribute('aria-valuenow', String(percent));
+  $('loading-message').textContent = message;
 }
 
 async function initialize() {
   if (state.loading || state.ready) return;
   state.loading = true;
+  $('model-line').hidden = true;
+  $('loading-panel').hidden = false;
+  $('idle-placeholder').hidden = true;
+  $('loading-title').textContent = '正在加载模型';
+  $('loading-retry').hidden = true;
+  loadingProgress(0, '正在准备');
   $('retry-model').disabled = true;
   $('model-status').textContent = '正在加载模型…';
   $('model-detail').textContent = '读取本地模型与预设数据';
@@ -50,11 +71,7 @@ async function initialize() {
       try { gpu = await api.tf.setBackend('webgl'); } catch {}
       if (!gpu) await api.tf.setBackend('cpu');
       await api.tf.ready();
-      await Promise.all([
-        api.nets.ssdMobilenetv1.loadFromUri('./models'),
-        api.nets.faceLandmark68Net.loadFromUri('./models'),
-        api.nets.faceRecognitionNet.loadFromUri('./models'),
-      ]);
+      await loadModels(api, loadingProgress);
       const warm = document.createElement('canvas');
       warm.width = warm.height = 128;
       await detect(warm);
@@ -64,13 +81,24 @@ async function initialize() {
     if (!response.ok) throw new Error('预设人物库无法加载');
     state.people = validateProfiles(await response.json());
     if (!state.people.length) throw new Error('预设人物库为空');
+    const second = await fetch('./presets/sface-library.json');
+    if (!second.ok) throw new Error('第二模型参考库无法加载');
+    sfacePeople = validateSFaceLibrary(await second.json(), state.people);
+    loadingProgress(100, '加载完成');
     state.ready = true;
+    $('loading-panel').hidden = true;
+    $('idle-placeholder').hidden = false;
+    $('model-line').hidden = false;
     $('model-status').textContent = '已就绪';
     $('model-status').className = 'status-badge ready';
     $('model-detail').textContent = '本机运行';
     $('retry-model').hidden = true;
     $('camera-message').textContent = '摄像头未开启';
   } catch (error) {
+    console.error(error);
+    $('loading-title').textContent = '加载失败';
+    $('loading-message').textContent = '请检查网络连接后重试';
+    $('loading-retry').hidden = false;
     $('model-status').textContent = '加载失败';
     $('model-status').className = 'status-badge error';
     $('model-detail').textContent = `${error.message}。请通过localhost或HTTPS打开，确认模型与预设文件在同一网站目录。`;
@@ -208,16 +236,16 @@ function showResults(faces, frame, elapsed) {
 }
 
 function evaluateMatches() {
-  const threshold = Number($('threshold').value);
+  const threshold = 65;
   const current = state.faces.map(face => {
-    const ranking = validDescriptor(face.descriptor) ? rankProfiles(face.descriptor, state.people) : [];
+    const ranking = validDescriptor(face.descriptor) && face.sfaceDescriptor ? rankDualProfiles(face.descriptor, face.sfaceDescriptor, state.people, sfacePeople) : [];
     const box = face.detection.box;
     const qualityBlocked = Math.min(box.width, box.height) < 80;
     const decision = qualityBlocked
-      ? { type: 'uncertain', label: '人脸太小，请靠近镜头' } : matchDecision(ranking, threshold);
+      ? { type: 'uncertain', label: '请靠近镜头' } : dualDecision(ranking, threshold);
     return { ranking, qualityBlocked, id: ranking[0]?.id, box: { x: box.x, y: box.y, width: box.width, height: box.height }, decision };
   });
-  results = state.mode === 'camera' ? stabilizeMatches(current, results, threshold) : current;
+  results = state.mode === 'camera' ? stabilizeMatches(current, results, threshold, dualDecision) : current;
 }
 
 function renderMatches() {
@@ -229,13 +257,11 @@ function renderMatches() {
   faces.forEach((face, index) => {
     const { ranking, decision } = results[index];
     const group = element('section', undefined, 'face-result');
-    const heading = element('div', undefined, 'result-heading');
-    heading.append(element('span', `人脸${index + 1}`, 'face-number'), element('span', decision.label, `decision ${decision.type}`));
-    group.append(heading);
-    const details = [];
-    if (state.mode === 'camera' && results[index].frameCount) details.push(`最近${results[index].frameCount}帧平均`);
-    if (ranking.length > 1) details.push(`前两名相差${(ranking[0].score - ranking[1].score).toFixed(1)}个百分点`);
-    if (details.length) group.append(element('p', details.join(' · '), 'result-detail'));
+    if (faces.length > 1) group.append(element('div', `人脸${index + 1}`, 'result-heading'));
+    if (decision.type === 'pending' || currentQualityBlocked(face)) {
+      group.append(element('div', decision.type === 'pending' ? '正在识别…' : '请靠近镜头', 'empty-state plain-empty'));
+      $('match-list').append(group); drawFace(face, index, null); return;
+    }
     ranking.forEach((person, position) => {
       const row = element('div', undefined, `match-row${position === 0 ? ' best' : ''}`);
       const top = element('div', undefined, 'match-top');
@@ -248,18 +274,20 @@ function renderMatches() {
       group.append(row);
     });
     $('match-list').append(group);
-    drawFace(face, index, decision, ranking[0]?.score);
+    drawFace(face, index, ranking[0]);
   });
 }
 
-function drawFace(face, index, decision, score) {
+function currentQualityBlocked(face) { return Math.min(face.detection.box.width, face.detection.box.height) < 80; }
+
+function drawFace(face, index, person) {
   const box = face.detection.box;
   const x = state.mode === 'camera' && $('mirror').checked ? $('overlay').width - box.x - box.width : box.x;
-  const color = decision.type === 'match' ? '#65daa9' : ['ambiguous', 'uncertain', 'pending'].includes(decision.type) ? '#e9b43c' : '#c9c9c9';
+  const color = '#c9c9c9';
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
   ctx.strokeRect(x, box.y, box.width, box.height);
-  const text = `人脸${index + 1} · ${decision.label}${score !== undefined ? ` ${score.toFixed(1)}%` : ''}`;
+  const text = person ? `${person.name} ${person.score.toFixed(1)}%` : `人脸${index + 1}`;
   ctx.font = '14px sans-serif';
   const width = Math.min($('overlay').width, ctx.measureText(text).width + 16);
   const left = Math.max(0, Math.min(x, $('overlay').width - width));
@@ -299,6 +327,7 @@ async function comparePhoto(event) {
 }
 
 $('retry-model').addEventListener('click', initialize);
+$('loading-retry').addEventListener('click', initialize);
 $('start-camera').addEventListener('click', startCamera);
 $('stop-camera').addEventListener('click', stopCamera);
 $('compare-photo').addEventListener('click', () => $('compare-file').click());
@@ -306,11 +335,6 @@ $('compare-file').addEventListener('change', comparePhoto);
 $('camera-select').addEventListener('change', async () => { if (state.stream) { stopCamera(); await startCamera(); } });
 $('mirror').addEventListener('change', () => { $('video').style.transform = $('mirror').checked ? 'scaleX(-1)' : ''; if (state.faces.length) renderMatches(); });
 $('video').style.transform = $('mirror').checked ? 'scaleX(-1)' : '';
-$('threshold').addEventListener('input', () => {
-  $('threshold-value').textContent = `${$('threshold').value}%`;
-  $('threshold').style.background = `linear-gradient(to right,#333 0%,#333 ${(($('threshold').value - 40) / 45) * 100}%,#ddd ${(($('threshold').value - 40) / 45) * 100}%,#ddd 100%)`;
-  if (state.faces.length) { results = []; evaluateMatches(); renderMatches(); }
-});
 document.addEventListener('visibilitychange', () => { if (document.hidden && state.stream) resetMatches(); });
 window.addEventListener('pagehide', stopCamera);
 navigator.mediaDevices?.addEventListener('devicechange', enumerateCameras);
