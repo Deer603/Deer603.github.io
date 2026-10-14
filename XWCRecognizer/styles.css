@@ -74,6 +74,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .score-track { height: 2px; background: #dedfd8; margin-top: 10px; }
 .score-track > span { display: block; height: 100%; background: #a5aaa0; }
 .match-row.best .score-track > span { background: #40483a; }
+.result-detail { margin: 6px 0 10px; color: var(--muted); font-size: 11px; }
+.decision.uncertain, .decision.pending { color: #8a6826; }
 .threshold-control { border-top: 1px solid var(--line); margin-top: 20px; padding: 18px 0 0; }
 .threshold-heading { display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
 .threshold-heading output { font-variant-numeric: tabular-nums; }

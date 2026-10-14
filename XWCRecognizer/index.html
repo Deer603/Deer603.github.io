@@ -67,7 +67,8 @@
         <details class="explanation">
           <summary>说明</summary>
           <div class="explanation-content">
-            <p>匹配度由人脸特征距离换算：clamp(1−distance/1.2,0,1)×100%。每个人取最高样本分数，达到阈值后显示匹配；前两名分差不足3个百分点时提示结果接近。百分比不代表身份正确率。</p>
+            <p>匹配度采用最接近的两张参考图的平均特征距离换算：clamp(1−distance/1.2,0,1)×100%，不是身份正确率。两张参考图都达到阈值、领先第二名至少6个百分点才可确认；只有一张参考图时仅展示分数。</p>
+            <p>摄像头需要连续3帧满足条件才显示姓名。人脸太小、样本支持不足或排名接近时提示无法确认。参考图数量增加并不保证准确率提高。</p>
             <p>摄像头画面与对比照片在浏览器中处理。程序没有活体检测，照片和屏幕中的人脸也可能被匹配。</p>
             <p>识别库：<a href="https://github.com/vladmandic/face-api" target="_blank" rel="noopener noreferrer">face-api</a>。</p>
           </div>

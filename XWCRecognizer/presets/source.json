@@ -1,5 +1,5 @@
 {
-  "revision": 5,
+  "revision": 6,
   "description": "初始样本沿用来源标签；20261014-01和20261014-02批次按用户逐图提供的姓名归档。第一批替换了同源旧裁图，第二批新增16张参考图。；20261014-named-folders批次按用户命名文件夹导入35张主图，去除相册界面，姓名直接沿用文件夹标签。",
   "people": [
     {
@@ -122,13 +122,6 @@
         "./presets/images/folder-20261014-pengpeng-14.jpg",
         "./presets/images/folder-20261014-pengpeng-15.jpg",
         "./presets/images/folder-20261014-pengpeng-16.jpg"
-      ]
-    },
-    {
-      "id": "preset-liqintong",
-      "name": "李沁佟",
-      "files": [
-        "./presets/images/confirmed-20261014-02-liqintong-42.jpg"
       ]
     },
     {
@@ -364,14 +357,6 @@
       "name": "夏炜城",
       "sourceFile": "./presets/images/confirmed-20261014-02-xiaweicheng-40.jpg",
       "originalFilename": "20260828_103001701_iOS.heic",
-      "labelSource": "user-confirmed"
-    },
-    {
-      "batch": "20261014-02",
-      "number": 42,
-      "name": "李沁佟",
-      "sourceFile": "./presets/images/confirmed-20261014-02-liqintong-42.jpg",
-      "originalFilename": "20260914_065332000_iOS.jpg",
       "labelSource": "user-confirmed"
     },
     {

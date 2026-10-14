@@ -1,8 +1,9 @@
-import { rankProfiles, matchDecision, validateProfiles, validDescriptor } from './core.js';
+import { rankProfiles, matchDecision, stabilizeMatches, validateProfiles, validDescriptor } from './core.js';
 
 const $ = id => document.getElementById(id);
 const state = { people: [], ready: false, models: false, loading: false, stream: null, opening: false, session: 0, timer: null, faces: [], mode: 'idle', toastTimer: null };
 const inputCanvas = document.createElement('canvas');
+let results = [];
 const ctx = $('overlay').getContext('2d');
 let detectionTail = Promise.resolve();
 
@@ -172,7 +173,7 @@ async function loop(session) {
   if (session !== state.session || !state.stream) return;
   if (!document.hidden && $('video').readyState >= 2) {
     try {
-      const frame = snapshot($('video'), inputCanvas, 640);
+      const frame = snapshot($('video'), inputCanvas, 960);
       const started = performance.now();
       const faces = await detect(frame);
       if (session !== state.session || !state.stream) return;
@@ -189,6 +190,7 @@ async function loop(session) {
 
 function resetMatches() {
   state.faces = [];
+  results = [];
   $('match-list').replaceChildren(element('div', '等待画面', 'empty-state plain-empty'));
   $('match-summary').textContent = '等待画面';
   ctx.clearRect(0, 0, $('overlay').width, $('overlay').height);
@@ -200,24 +202,36 @@ function showResults(faces, frame, elapsed) {
   $('overlay').height = frame.height;
   $('face-count').textContent = String(faces.length);
   $('inference-time').textContent = String(Math.round(elapsed));
+  evaluateMatches();
   renderMatches();
   $('camera-message').textContent = faces.length ? `检测到${faces.length}张人脸` : '未检测到人脸';
+}
+
+function evaluateMatches() {
+  const threshold = Number($('threshold').value);
+  const current = state.faces.map(face => {
+    const ranking = validDescriptor(face.descriptor) ? rankProfiles(face.descriptor, state.people) : [];
+    const box = face.detection.box;
+    const decision = Math.min(box.width, box.height) < 80
+      ? { type: 'uncertain', label: '人脸太小，请靠近镜头' } : matchDecision(ranking, threshold);
+    return { ranking, id: ranking[0]?.id, box: { x: box.x, y: box.y, width: box.width, height: box.height }, decision };
+  });
+  results = state.mode === 'camera' ? stabilizeMatches(current, results) : current;
 }
 
 function renderMatches() {
   const faces = state.faces;
   ctx.clearRect(0, 0, $('overlay').width, $('overlay').height);
   $('match-list').replaceChildren();
-  const threshold = Number($('threshold').value);
   $('match-summary').textContent = faces.length ? `${faces.length}张人脸` : '未检测到人脸';
   if (!faces.length) { $('match-list').append(element('div', '未检测到人脸', 'empty-state plain-empty')); return; }
   faces.forEach((face, index) => {
-    const ranking = validDescriptor(face.descriptor) ? rankProfiles(face.descriptor, state.people) : [];
-    const decision = matchDecision(ranking, threshold);
+    const { ranking, decision } = results[index];
     const group = element('section', undefined, 'face-result');
     const heading = element('div', undefined, 'result-heading');
     heading.append(element('span', `人脸${index + 1}`, 'face-number'), element('span', decision.label, `decision ${decision.type}`));
     group.append(heading);
+    if (ranking.length > 1) group.append(element('p', `前两名相差${(ranking[0].score - ranking[1].score).toFixed(1)}个百分点`, 'result-detail'));
     ranking.forEach((person, position) => {
       const row = element('div', undefined, `match-row${position === 0 ? ' best' : ''}`);
       const top = element('div', undefined, 'match-top');
@@ -237,7 +251,7 @@ function renderMatches() {
 function drawFace(face, index, decision, score) {
   const box = face.detection.box;
   const x = state.mode === 'camera' && $('mirror').checked ? $('overlay').width - box.x - box.width : box.x;
-  const color = decision.type === 'match' ? '#65daa9' : decision.type === 'ambiguous' ? '#e9b43c' : '#c9c9c9';
+  const color = decision.type === 'match' ? '#65daa9' : ['ambiguous', 'uncertain', 'pending'].includes(decision.type) ? '#e9b43c' : '#c9c9c9';
   ctx.strokeStyle = color;
   ctx.lineWidth = 2;
   ctx.strokeRect(x, box.y, box.width, box.height);
@@ -291,7 +305,7 @@ $('video').style.transform = $('mirror').checked ? 'scaleX(-1)' : '';
 $('threshold').addEventListener('input', () => {
   $('threshold-value').textContent = `${$('threshold').value}%`;
   $('threshold').style.background = `linear-gradient(to right,#333 0%,#333 ${(($('threshold').value - 40) / 45) * 100}%,#ddd ${(($('threshold').value - 40) / 45) * 100}%,#ddd 100%)`;
-  if (state.faces.length) renderMatches();
+  if (state.faces.length) { results = []; evaluateMatches(); renderMatches(); }
 });
 document.addEventListener('visibilitychange', () => { if (document.hidden && state.stream) resetMatches(); });
 window.addEventListener('pagehide', stopCamera);
