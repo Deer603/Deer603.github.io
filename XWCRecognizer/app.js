@@ -212,11 +212,12 @@ function evaluateMatches() {
   const current = state.faces.map(face => {
     const ranking = validDescriptor(face.descriptor) ? rankProfiles(face.descriptor, state.people) : [];
     const box = face.detection.box;
-    const decision = Math.min(box.width, box.height) < 80
+    const qualityBlocked = Math.min(box.width, box.height) < 80;
+    const decision = qualityBlocked
       ? { type: 'uncertain', label: '人脸太小，请靠近镜头' } : matchDecision(ranking, threshold);
-    return { ranking, id: ranking[0]?.id, box: { x: box.x, y: box.y, width: box.width, height: box.height }, decision };
+    return { ranking, qualityBlocked, id: ranking[0]?.id, box: { x: box.x, y: box.y, width: box.width, height: box.height }, decision };
   });
-  results = state.mode === 'camera' ? stabilizeMatches(current, results) : current;
+  results = state.mode === 'camera' ? stabilizeMatches(current, results, threshold) : current;
 }
 
 function renderMatches() {
@@ -231,7 +232,10 @@ function renderMatches() {
     const heading = element('div', undefined, 'result-heading');
     heading.append(element('span', `人脸${index + 1}`, 'face-number'), element('span', decision.label, `decision ${decision.type}`));
     group.append(heading);
-    if (ranking.length > 1) group.append(element('p', `前两名相差${(ranking[0].score - ranking[1].score).toFixed(1)}个百分点`, 'result-detail'));
+    const details = [];
+    if (state.mode === 'camera' && results[index].frameCount) details.push(`最近${results[index].frameCount}帧平均`);
+    if (ranking.length > 1) details.push(`前两名相差${(ranking[0].score - ranking[1].score).toFixed(1)}个百分点`);
+    if (details.length) group.append(element('p', details.join(' · '), 'result-detail'));
     ranking.forEach((person, position) => {
       const row = element('div', undefined, `match-row${position === 0 ? ' best' : ''}`);
       const top = element('div', undefined, 'match-top');

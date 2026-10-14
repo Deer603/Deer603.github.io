@@ -1,7 +1,7 @@
 export const MAX_SAMPLES = 16;
 export const DESCRIPTOR_SIZE = 128;
-export const MIN_MARGIN = 6;
 export const REQUIRED_FRAMES = 3;
+export const FRAME_WINDOW = 5;
 
 export function validDescriptor(value) {
   return (Array.isArray(value) || ArrayBuffer.isView(value)) && value.length === DESCRIPTOR_SIZE
@@ -33,7 +33,6 @@ export function rankProfiles(descriptor, profiles) {
 export function matchDecision(ranking, threshold) {
   if (!ranking.length) return { type: 'empty', label: '请先登记人员' };
   if (ranking[0].score < threshold) return { type: 'unknown', label: '未匹配到已登记人员' };
-  if (ranking[1] && ranking[0].score - ranking[1].score < MIN_MARGIN) return { type: 'ambiguous', label: '结果接近，需确认' };
   if (ranking[0].sampleCount < 2) return { type: 'uncertain', label: '参考样本不足，无法确认' };
   if (!Number.isFinite(ranking[0].supportScore) || ranking[0].supportScore < threshold) return { type: 'uncertain', label: '样本支持不足，无法确认' };
   return { type: 'match', label: ranking[0].name };
@@ -46,20 +45,30 @@ function overlap(a, b) {
   return intersection / (a.width * a.height + b.width * b.height - intersection || 1);
 }
 
-// Tracks nearby boxes between frames; rendering alone must not advance confirmation.
-export function stabilizeMatches(current, previous = []) {
+// Associate boxes by position, independently of each frame's leading candidate.
+// Average every candidate over the window before deciding who ranks first.
+export function stabilizeMatches(current, previous = [], threshold = 65) {
   const used = new Set();
   return current.map(item => {
-    if (item.decision.type !== 'match') return { ...item, streak: 0 };
+    if (item.qualityBlocked || !item.ranking.length) return { ...item, history: [], frameCount: 0 };
     let best = -1, bestOverlap = .4;
     previous.forEach((candidate, index) => {
-      if (used.has(index) || candidate.id !== item.id || !candidate.streak) return;
+      if (used.has(index) || !candidate.history?.length) return;
       const value = overlap(item.box, candidate.box);
       if (value > bestOverlap) { best = index; bestOverlap = value; }
     });
     if (best >= 0) used.add(best);
-    const streak = best >= 0 ? Math.min(REQUIRED_FRAMES, previous[best].streak + 1) : 1;
-    return { ...item, streak, decision: streak >= REQUIRED_FRAMES ? item.decision : { type: 'pending', label: `确认中（${streak}/${REQUIRED_FRAMES}）` } };
+    const history = [...(best >= 0 ? previous[best].history : []), item.ranking].slice(-FRAME_WINDOW);
+    const ranking = item.ranking.map(person => {
+      const samples = history.map(frame => frame.find(candidate => candidate.id === person.id)).filter(Boolean);
+      const average = key => samples.reduce((sum, sample) => sum + sample[key], 0) / samples.length;
+      return { ...person, distance: average('distance'), score: average('score'),
+        supportScore: person.sampleCount >= 2 ? average('supportScore') : null };
+    }).sort((a, b) => b.score - a.score);
+    const frameCount = history.length;
+    return { ...item, ranking, id: ranking[0]?.id, history, frameCount,
+      decision: frameCount >= REQUIRED_FRAMES ? matchDecision(ranking, threshold)
+        : { type: 'pending', label: `采集中（${frameCount}/${REQUIRED_FRAMES}帧）` } };
   });
 }
 
