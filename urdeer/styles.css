@@ -23,6 +23,8 @@ button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible
 .site-header { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid #d2d2d7; }
 .site-header h1 { font-size: 24px; line-height: 1.2; font-weight: 600; letter-spacing: -.7px; }
 .brand { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+.brand-block { padding: 10px 0; }
+.site-subtitle { color: var(--muted); font-size: 12px; line-height: 1.5; }
 .model-line { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 10px; font-size: 12px; color: var(--muted); }
 .status-badge { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
 .status-badge::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }

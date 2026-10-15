@@ -20,7 +20,7 @@
 |KunCode官网|开发工作台介绍、困困AI展示与应用下载|[/kuncode/](https://deer603.github.io/kuncode/)|[README](kuncode/README.md)|
 |603AI官网|角色介绍、语录展示与Android应用下载|[/603ai/](https://deer603.github.io/603ai/)|[README](603ai/README.md)|
 |夏炜城作品集|智能硬件、机器人、AI产品与个人摄影|[/xiaweicheng/](https://deer603.github.io/xiaweicheng/)|[README](xiaweicheng/README.md)|
-|XWC检测器|摄像头与照片的双模型匹配度排行|[/XWCRecognizer/](https://deer603.github.io/XWCRecognizer/)|[README](XWCRecognizer/README.md)|
+|你是个鹿嘞|摄像头与照片的双模型匹配度排行|[/urdeer/](https://deer603.github.io/urdeer/)|[README](urdeer/README.md)|
 
 上表对应仓库发布后的页面路径。应用源码与安装包由各自的产品仓库维护，入口见对应子站README。
 
@@ -32,14 +32,14 @@
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-打开[本地首页](http://127.0.0.1:8000/)，在地址后添加上表中的子目录即可访问对应页面，例如[加密鹿](http://127.0.0.1:8000/codec/)和[XWC检测器](http://127.0.0.1:8000/XWCRecognizer/)。使用`python3`命令的系统可相应替换。
+打开[本地首页](http://127.0.0.1:8000/)，在地址后添加上表中的子目录即可访问对应页面，例如[加密鹿](http://127.0.0.1:8000/codec/)和[你是个鹿嘞](http://127.0.0.1:8000/urdeer/)。使用`python3`命令的系统可相应替换。
 
 |项目|预览时需要注意|
 |---|---|
 |青蛙的角落|使用ES Modules，需要HTTP服务；也可从根目录运行`python room/serve.py`，使用端口8765。|
 |加密鹿|使用Worker在后台转换文字，需要HTTP服务；每次原文最多4000字。|
 |夏炜城作品集|当前目录是Next.js静态导出文件，资源路径以`/xiaweicheng/`开头，应从仓库根目录启动服务。|
-|XWC检测器|点击“开始使用”后加载模型与运行库；摄像头需要HTTPS或localhost等安全上下文。也可运行`node XWCRecognizer/serve.mjs 8766`单独预览。|
+|你是个鹿嘞|点击“开始使用”后加载模型与运行库；摄像头需要HTTPS或localhost等安全上下文。也可运行`node urdeer/serve.mjs 8766`单独预览。|
 
 独立预览服务可能使用相同端口，同时启动时需选择不同端口。浏览器处理的数据与交互方式见各子站说明。
 
@@ -65,14 +65,14 @@ python -m http.server 8000 --bind 127.0.0.1
 ├── kuncode/         # KunCode官网
 ├── 603ai/           # 603AI官网
 ├── xiaweicheng/     # 个人作品集静态导出文件
-├── XWCRecognizer/   # 双模型匹配工具、模型与预设库
+├── urdeer/   # 双模型匹配工具、模型与预设库
 ├── tools/           # 站点维护脚本
 └── docs/            # 分享信息等维护说明
 ```
 
 首页文字和交互编辑[index.html](index.html)，配色与布局编辑[css/style.css](css/style.css)及[css/interactions.css](css/interactions.css)。子站的文件入口、内容配置和素材说明放在各自README中。
 
-维护时保持目录大小写与链接完全一致：加密鹿使用`codec/`，XWC检测器使用`XWCRecognizer/`。不要创建仅大小写不同的重复目录。保留根目录的`.nojekyll`，避免静态导出中的`_next/`等目录被Jekyll规则忽略。
+维护时保持目录大小写与链接完全一致：加密鹿使用`codec/`，你是个鹿嘞使用`urdeer/`。不要创建仅大小写不同的重复目录。保留根目录的`.nojekyll`，避免静态导出中的`_next/`等目录被Jekyll规则忽略。
 
 ### 网页图片
 
@@ -88,7 +88,7 @@ python tools/optimize-site-images.py
 
 ### 分享信息
 
-根首页、加密鹿、魏鸡百科、KunCode、青蛙的角落、XWC检测器和夏炜城作品集的分享元信息统一维护。在根目录运行：
+根首页、加密鹿、魏鸡百科、KunCode、青蛙的角落、你是个鹿嘞和夏炜城作品集的分享元信息统一维护。在根目录运行：
 
 ```sh
 node tools/share-metadata.mjs
@@ -111,6 +111,6 @@ node tools/share-metadata.mjs
 仓库未提供统一的项目LICENSE。第三方代码的许可不自动覆盖人物照片、摄影作品、品牌素材或整个网站。
 
 - 寝室博客的摄影、字体、音效与第三方库见[素材与授权](room/README.md#素材与授权)。
-- XWC检测器的模型与运行库见[第三方组件说明](XWCRecognizer/THIRD_PARTY_NOTICES.md)。其预设照片和特征随静态文件提供，公开部署前应确认这部分资料的发布范围。
+- 你是个鹿嘞的模型与运行库见[第三方组件说明](urdeer/THIRD_PARTY_NOTICES.md)。其预设照片和特征随静态文件提供，公开部署前应确认这部分资料的发布范围。
 - 作品集素材中的实物图、渲染图和概念图见[素材说明](xiaweicheng/assets/README.md)。
 - KunCode和603AI应用的源码、发行信息与许可由各自产品仓库维护。

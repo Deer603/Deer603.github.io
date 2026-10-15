@@ -9,7 +9,7 @@
 | 魏鸡百科 | [share-cover.jpg](../weijiba/assets/share-cover.jpg) | [share-thumb.jpg](../weijiba/assets/share-thumb.jpg) |
 | KunCode | [share-cover.jpg](../kuncode/share-cover.jpg) | [share-thumb.jpg](../kuncode/share-thumb.jpg) |
 | 青蛙的角落 | [share-cover.jpg](../room/share-cover.jpg) | [share-thumb.jpg](../room/share-thumb.jpg) |
-| XWC检测器 | [share-cover.jpg](../XWCRecognizer/share-cover.jpg) | [share-thumb.jpg](../XWCRecognizer/share-thumb.jpg) |
+| 你是个鹿嘞 | [share-cover.jpg](../urdeer/share-cover.jpg) | [share-thumb.jpg](../urdeer/share-thumb.jpg) |
 | 夏炜城作品集 | [个人大头照](../xiaweicheng/assets/xia-weicheng-portrait.png) | [个人大头照](../xiaweicheng/assets/xia-weicheng-portrait.png) |
 | RoboMaster功率控制板 | [横版封面](../xiaweicheng/assets/robomaster-power-control-share-cover.jpg) | [方形缩略图](../xiaweicheng/assets/robomaster-power-control-share-thumb.jpg) |
 | 智能泡茶机 | [横版封面](../xiaweicheng/assets/smart-tea-machine-share-cover.jpg) | [方形缩略图](../xiaweicheng/assets/smart-tea-machine-share-thumb.jpg) |
@@ -38,7 +38,7 @@ python tools/create-share-images.py
 node tools/share-metadata.mjs
 ```
 
-只重建青蛙的角落、XWC检测器及三个项目页的五套图片时，可使用`python tools/create-share-images.py --new-only`。两个首页使用对应站点风格，项目页从现有项目封面生成横版与方形版本。作品集首页直接引用个人照，不经过图片生成器。
+只重建青蛙的角落、你是个鹿嘞及三个项目页的五套图片时，可使用`python tools/create-share-images.py --new-only`。仅更新“你是个鹿嘞”的分享图时，使用`python tools/create-share-images.py --site urdeer`。两个首页使用对应站点风格，项目页从现有项目封面生成横版与方形版本。作品集首页直接引用个人照，不经过图片生成器。
 
 更新图片后可更换文件名，并同步元信息生成脚本中的地址，以便后续分享使用新的图片URL。站内WebP展示图由另一份[图片优化脚本](../tools/optimize-site-images.py)维护，不与分享JPEG共用生成流程。
 

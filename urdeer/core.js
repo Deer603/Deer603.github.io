@@ -78,7 +78,7 @@ export function stabilizeMatches(current, previous = [], threshold = 65, decide 
 
 export function validateProfiles(data) {
   if (data?.format !== 'xwc-recognizer' || data.version !== 1 || data.engine !== '@vladmandic/face-api@1.7.15') {
-    throw new Error('请选择XWCRecognizer导出的人员库文件');
+    throw new Error('请选择urdeer导出的人员库文件');
   }
   if (!Array.isArray(data.people) || data.people.length > 100) throw new Error('人员库最多支持100人');
   const ids = new Set();

@@ -1,6 +1,6 @@
 # 第三方组件说明
 
-XWCRecognizer包含以下第三方代码和模型。分发本目录时，请一并保留vendor目录中的许可文件以及本说明。
+urdeer包含以下第三方代码和模型。分发本目录时，请一并保留vendor目录中的许可文件以及本说明。
 
 ## @vladmandic/face-api
 
@@ -61,7 +61,7 @@ SSD Mobilenet V1人脸检测权重由[yeephycho/tensorflow-face-detection](https
 
 预设人物的初始参考资料来自提供的手机相册搜索截图，姓名沿用资料中的来源标签；后续批次沿用用户提供的逐图标签与姓名文件夹。SFace参考库复用当前13人、76张参考图的标签，未自行重新分配人物姓名。参考图用于提取特征，不是从头训练上述模型；人物照片与特征也不因此取得第三方代码的开源许可。具体批次见README与presets/source.json。
 
-本说明记录所用组件的许可和上游来源，不将依赖库的MIT许可扩展为XWCRecognizer自身的项目许可。
+本说明记录所用组件的许可和上游来源，不将依赖库的MIT许可扩展为urdeer自身的项目许可。
 
 ## TensorFlow.js许可全文
 

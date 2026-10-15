@@ -142,7 +142,7 @@ server.on('error', (error) => {
 });
 
 server.listen(port, host, () => {
-  console.log(`XWCRecognizer已启动：http://localhost:${port}`);
+  console.log(`urdeer已启动：http://localhost:${port}`);
   console.log(`备用地址：http://${host}:${port}`);
   console.log('仅允许当前电脑访问。按Ctrl+C停止服务器。');
 });

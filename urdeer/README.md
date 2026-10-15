@@ -1,8 +1,10 @@
-# XWC检测器
+# 你是个鹿嘞
 
-XWCRecognizer是一款在浏览器中运行的摄像头与照片匹配工具。face-api与SFace两个识别模型共同计算综合分数，摄像头结合连续多帧结果显示人物百分比排行。当前预设库包含13人、76张参考图，两套模型分别保存对应特征。
+检测你是哪一只鹿。
 
-[![网页入口](https://img.shields.io/badge/网页-XWCRecognizer-0071e3?style=flat-square)](https://deer603.github.io/XWCRecognizer/)
+“你是个鹿嘞”是一款在浏览器中运行的摄像头与照片匹配工具。face-api与SFace两个识别模型共同计算综合分数，摄像头结合连续多帧结果显示人物百分比排行。当前预设库包含13人、76张参考图，两套模型分别保存对应特征。
+
+[![网页入口](https://img.shields.io/badge/网页-urdeer-0071e3?style=flat-square)](https://deer603.github.io/urdeer/)
 [![运行方式](https://img.shields.io/badge/运行-浏览器本地-555555?style=flat-square)](#运行要求)
 [![双模型](https://img.shields.io/badge/识别-face--api%20%2B%20SFace-0071e3?style=flat-square)](#匹配方式)
 [![静态部署](https://img.shields.io/badge/部署-静态网站-555555?style=flat-square)](#部署与资料范围)
@@ -86,7 +88,7 @@ SFace分数=clamp(c,0,1)×100
 
 ## 部署与资料范围
 
-将完整目录作为静态站点部署，保留`models/`、`vendor/`和`presets/`的相对位置。仓库使用区分大小写的`/XWCRecognizer/`路径，发布方式见[根README](../README.md#发布到github-pages)。
+将完整目录作为静态站点部署，保留`models/`、`vendor/`和`presets/`的相对位置。仓库使用区分大小写的`/urdeer/`路径，发布方式见[根README](../README.md#发布到github-pages)。
 
 预设姓名、照片和特征保存在静态文件中，会随网站发布并可被访问。公开部署前确认资料的发布范围；需要限制访问时，使用本地环境或具备访问控制的托管方式。
 

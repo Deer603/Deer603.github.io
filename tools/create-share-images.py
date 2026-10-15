@@ -1,7 +1,7 @@
 """Render code-drawn share artwork; no remote assets or build dependencies beyond Pillow."""
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageOps
-import sys
+import argparse
 
 ROOT = Path(__file__).resolve().parent.parent
 FONT = 'C:/Windows/Fonts/msyh.ttc'
@@ -12,8 +12,13 @@ SITES = [
     ('weijiba/assets', 'book', '魏鸡百科', '困困的百科全书', '人物 · 故事 · 术语 · 科技', (237, 242, 237), (43, 85, 66)),
     ('kuncode', 'code', 'KunCode', '让写代码变得更轻松', '开发工作台与困困AI', (10, 27, 23), (177, 228, 199)),
     ('room', 'room', '青蛙的角落', '从寝室走进个人世界', '寝室场景 · 摄影相册', (20, 30, 23), (212, 222, 181)),
-    ('XWCRecognizer', 'face', 'XWC检测器', '看看你与谁更相似', '照片与摄像头 · 本地处理', (242, 242, 238), (45, 66, 53)),
+    ('urdeer', 'face', '你是个鹿嘞', '检测你是哪一只鹿', '照片与摄像头 · 本地处理', (242, 242, 238), (45, 66, 53)),
 ]
+
+parser = argparse.ArgumentParser(description='Generate website share artwork.')
+parser.add_argument('--new-only', action='store_true')
+parser.add_argument('--site', choices=[site[0] for site in SITES])
+args = parser.parse_args()
 
 def font(size, bold=False):
     return ImageFont.truetype(BOLD if bold else FONT, size)
@@ -51,7 +56,8 @@ def icon(draw, kind, center, size, color):
         for dx in [-.3,.3]: draw.ellipse((x+s*dx-4,y+s*.25-4,x+s*dx+4,y+s*.25+4),fill=color)
 
 for directory,kind,title,subtitle,detail,bg,accent in SITES:
-    if '--new-only' in sys.argv and directory not in ('room','XWCRecognizer'): continue
+    if args.site and directory != args.site: continue
+    if args.new_only and directory not in ('room','urdeer'): continue
     out=ROOT/directory
     for square in [False,True]:
         w,h=(400,400) if square else (1200,630)
@@ -63,7 +69,7 @@ for directory,kind,title,subtitle,detail,bg,accent in SITES:
             icon(d,kind,(200,158),170,accent)
             d.text((200,302),title,font=font(45 if len(title)<7 else 40,True),fill=accent,anchor='mm')
         else:
-            label={'assets':'603WEB','codec':'CODEC','weijiba/assets':'WEIJIBA','kuncode':'KUNCODE','room':'ROOM','XWCRecognizer':'XWC RECOGNIZER','xiaweicheng/assets':'PORTFOLIO'}[directory]
+            label={'assets':'603WEB','codec':'CODEC','weijiba/assets':'WEIJIBA','kuncode':'KUNCODE','room':'ROOM','urdeer':'URDEER','xiaweicheng/assets':'PORTFOLIO'}[directory]
             d.text((76,92),'DEER603 / '+label,font=font(22),fill=accent)
             d.text((76,225),title,font=font(66 if len(title)>5 else 76,True),fill=accent)
             d.text((80,343),subtitle,font=font(37),fill=accent)
@@ -73,6 +79,9 @@ for directory,kind,title,subtitle,detail,bg,accent in SITES:
             d.rounded_rectangle((840,185,1110,455),radius=55,outline=border,width=3)
             icon(d,kind,(975,320),210,accent)
         im.save(out/('share-thumb.jpg' if square else 'share-cover.jpg'),quality=90,optimize=True)
+if args.site:
+    print(f'Share artwork created for {args.site}.')
+    raise SystemExit(0)
 for slug,source in [('robomaster-power-control','rm-power-controller-cover.webp'),('smart-tea-machine','tea-machine-pcb-powered.webp'),('ai-photography-assistant','ai-photography-cover.webp')]:
     original=Image.open(ROOT/'xiaweicheng/assets'/source).convert('RGB')
     for square in (False,True):
