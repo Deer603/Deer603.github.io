@@ -1,8 +1,8 @@
 # 网站分享信息
 
-统一分享脚本覆盖7个首页、夏炜城作品集的3个项目页及魏鸡百科词条。各首页和项目页有独立封面与缩略图；百科词条共用百科图片，标题、简介和规范地址按词条分别生成。603AI保留自身已有的分享元信息，由该子站单独维护。
+统一分享脚本覆盖7个首页、夏炜城作品集的3个项目页及魏鸡百科词条。夏炜城作品集首页使用个人大头照作为分享图，其他首页和项目页使用各自封面与缩略图；百科词条共用百科图片，标题、简介和规范地址按词条分别生成。603AI保留自身已有的分享元信息，由该子站单独维护。
 
-| 站点 | 横版封面 | 方形缩略图 |
+| 站点 | 分享封面 | 分享缩略图 |
 | --- | --- | --- |
 | 603web | [share-cover.jpg](../assets/share-cover.jpg) | [share-thumb.jpg](../assets/share-thumb.jpg) |
 | 加密鹿 | [share-cover.jpg](../codec/share-cover.jpg) | [share-thumb.jpg](../codec/share-thumb.jpg) |
@@ -10,12 +10,12 @@
 | KunCode | [share-cover.jpg](../kuncode/share-cover.jpg) | [share-thumb.jpg](../kuncode/share-thumb.jpg) |
 | 青蛙的角落 | [share-cover.jpg](../room/share-cover.jpg) | [share-thumb.jpg](../room/share-thumb.jpg) |
 | XWC检测器 | [share-cover.jpg](../XWCRecognizer/share-cover.jpg) | [share-thumb.jpg](../XWCRecognizer/share-thumb.jpg) |
-| 夏炜城作品集 | [share-cover.jpg](../xiaweicheng/assets/share-cover.jpg) | [share-thumb.jpg](../xiaweicheng/assets/share-thumb.jpg) |
+| 夏炜城作品集 | [个人大头照](../xiaweicheng/assets/xia-weicheng-portrait.png) | [个人大头照](../xiaweicheng/assets/xia-weicheng-portrait.png) |
 | RoboMaster功率控制板 | [横版封面](../xiaweicheng/assets/robomaster-power-control-share-cover.jpg) | [方形缩略图](../xiaweicheng/assets/robomaster-power-control-share-thumb.jpg) |
 | 智能泡茶机 | [横版封面](../xiaweicheng/assets/smart-tea-machine-share-cover.jpg) | [方形缩略图](../xiaweicheng/assets/smart-tea-machine-share-thumb.jpg) |
 | LensPilot AI摄影助手 | [横版封面](../xiaweicheng/assets/ai-photography-assistant-share-cover.jpg) | [方形缩略图](../xiaweicheng/assets/ai-photography-assistant-share-thumb.jpg) |
 
-横版图片为1200×630，方形图片为400×400，均采用JPEG。页面在静态HTML中提供标题、简介、Open Graph、Twitter Card、规范地址与图片入口，不依赖浏览器执行脚本。
+夏炜城作品集首页直接使用517×607的PNG个人照，Open Graph、Twitter Card和缩略图字段均指向该照片。其余横版图片为1200×630，方形图片为400×400，均采用JPEG。页面在静态HTML中提供标题、简介、规范地址与图片入口，不依赖浏览器执行脚本。
 
 普通HTML页面的正文开头另提供不影响布局的缩略图，作为图片抓取的候选，是否采用由客户端规则决定。作品集属于Next.js静态导出，保持正文结构不变，通过头部元信息提供图片，不插入额外的隐藏首图。
 
@@ -38,7 +38,7 @@ python tools/create-share-images.py
 node tools/share-metadata.mjs
 ```
 
-只重建青蛙的角落、XWC检测器、作品集首页及三个项目页的六套图片时，可使用`python tools/create-share-images.py --new-only`。前三套首页使用对应站点风格，项目页从现有项目封面生成横版与方形版本。
+只重建青蛙的角落、XWC检测器及三个项目页的五套图片时，可使用`python tools/create-share-images.py --new-only`。两个首页使用对应站点风格，项目页从现有项目封面生成横版与方形版本。作品集首页直接引用个人照，不经过图片生成器。
 
 更新图片后可更换文件名，并同步元信息生成脚本中的地址，以便后续分享使用新的图片URL。站内WebP展示图由另一份[图片优化脚本](../tools/optimize-site-images.py)维护，不与分享JPEG共用生成流程。
 

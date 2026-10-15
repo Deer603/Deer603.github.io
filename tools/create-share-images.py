@@ -13,7 +13,6 @@ SITES = [
     ('kuncode', 'code', 'KunCode', '让写代码变得更轻松', '开发工作台与困困AI', (10, 27, 23), (177, 228, 199)),
     ('room', 'room', '青蛙的角落', '从寝室走进个人世界', '寝室场景 · 摄影相册', (20, 30, 23), (212, 222, 181)),
     ('XWCRecognizer', 'face', 'XWC检测器', '看看你与谁更相似', '照片与摄像头 · 本地处理', (242, 242, 238), (45, 66, 53)),
-    ('xiaweicheng/assets', 'code', '夏炜城作品集', '连接硬件、AI与真实场景', '智能硬件 · 机器人 · 产品设计', (239, 242, 246), (35, 64, 103)),
 ]
 
 def font(size, bold=False):
@@ -52,7 +51,7 @@ def icon(draw, kind, center, size, color):
         for dx in [-.3,.3]: draw.ellipse((x+s*dx-4,y+s*.25-4,x+s*dx+4,y+s*.25+4),fill=color)
 
 for directory,kind,title,subtitle,detail,bg,accent in SITES:
-    if '--new-only' in sys.argv and directory not in ('room','XWCRecognizer','xiaweicheng/assets'): continue
+    if '--new-only' in sys.argv and directory not in ('room','XWCRecognizer'): continue
     out=ROOT/directory
     for square in [False,True]:
         w,h=(400,400) if square else (1200,630)

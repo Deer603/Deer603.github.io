@@ -7,7 +7,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const origin = 'https://deer603.github.io';
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 
-function update(file, {title, description, url, site, image, thumbnail, type = 'website', next = false}) {
+function update(file, {title, description, url, site, image, thumbnail, type = 'website', next = false, imageType = 'image/jpeg', imageWidth = 1200, imageHeight = 630, imageAlt = `${site}分享封面`, twitterCard = 'summary_large_image'}) {
   let html = fs.readFileSync(file, 'utf8');
   html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escape(title)}</title>`)
     .replace(/\s*<meta\b[^>]*(?:name|property)=["'](?:description|og:[^"']+|twitter:[^"']+|image|thumbnail|title)["'][^>]*>/gi, '')
@@ -21,11 +21,11 @@ function update(file, {title, description, url, site, image, thumbnail, type = '
     ['property','og:site_name',site], ['property','og:title',title],
     ['property','og:description',description], ['property','og:url',url],
     ['property','og:image',image], ['property','og:image:secure_url',image],
-    ['property','og:image:type','image/jpeg'], ['property','og:image:width','1200'],
-    ['property','og:image:height','630'], ['property','og:image:alt',`${site}分享封面`],
-    ['name','twitter:card','summary_large_image'], ['name','twitter:title',title],
+    ['property','og:image:type',imageType], ['property','og:image:width',String(imageWidth)],
+    ['property','og:image:height',String(imageHeight)], ['property','og:image:alt',imageAlt],
+    ['name','twitter:card',twitterCard], ['name','twitter:title',title],
     ['name','twitter:description',description], ['name','twitter:image',image],
-    ['name','twitter:image:alt',`${site}分享封面`], ['name','image',thumbnail],
+    ['name','twitter:image:alt',imageAlt], ['name','image',thumbnail],
     ['name','thumbnail',thumbnail], ['itemprop','name',title],
     ['itemprop','description',description], ['itemprop','image',thumbnail]
   ];
@@ -85,7 +85,8 @@ export function refreshShareMetadata() {
     ['xiaweicheng', '夏炜城｜智能硬件与AI产品作品集', '连接智能硬件、机器人、AI产品与真实场景，了解项目案例、个人摄影与经历。', '夏炜城作品集', 'xiaweicheng/assets']
   ];
   for (const [directory,title,description,site,assets] of sites) {
-    update(path.join(root,directory,'index.html'), {title,description,site,url:`${origin}/${directory ? directory+'/' : ''}`,image:`${origin}/${assets}/share-cover.jpg`,thumbnail:`${origin}/${assets}/share-thumb.jpg`,next:directory==='xiaweicheng'});
+    const portrait = directory==='xiaweicheng' ? {image:`${origin}/${assets}/xia-weicheng-portrait.png`,thumbnail:`${origin}/${assets}/xia-weicheng-portrait.png`,imageType:'image/png',imageWidth:517,imageHeight:607,imageAlt:'夏炜城个人照',twitterCard:'summary'} : {};
+    update(path.join(root,directory,'index.html'), {title,description,site,url:`${origin}/${directory ? directory+'/' : ''}`,image:`${origin}/${assets}/share-cover.jpg`,thumbnail:`${origin}/${assets}/share-thumb.jpg`,next:directory==='xiaweicheng',...portrait});
   }
   for(const [slug,title,description] of [
     ['robomaster-power-control','RoboMaster功率控制板｜夏炜城作品集','从机器人功率管理需求到控制板设计，了解方案、工程实现与项目复盘。'],
