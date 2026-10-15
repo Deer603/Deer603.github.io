@@ -81,7 +81,7 @@ export function refreshShareMetadata() {
     ['weijiba', '魏鸡百科｜困困的百科全书', '记录鹿群人物、趣事、术语与科技话题。检索词条，阅读故事，发现群内共同记忆。', '魏鸡百科', 'weijiba/assets'],
     ['kuncode', 'KunCode｜开源开发工作台与困困AI', '认识KunCode与困困AI，了解中文开发工作台、水豚主题和Windows、macOS安装入口。', 'KunCode', 'kuncode'],
     ['room', '青蛙的角落｜寝室故事与摄影相册', '从六人寝室走进舍友的个人空间，翻阅青蛙的摄影作品与故事。', '青蛙的角落', 'room'],
-    ['XWCRecognizer', 'XWC检测器｜照片与摄像头匹配', '通过照片或摄像头查看双模型匹配度排行，在浏览器本地处理。', 'XWC检测器', 'XWCRecognizer'],
+    ['XWCRecognizer', 'XWC检测器｜照片与摄像头匹配', '通过照片或摄像头查看人物相似度排行，画面在本机处理。', 'XWC检测器', 'XWCRecognizer'],
     ['xiaweicheng', '夏炜城｜拓竹全栈工程师', '夏炜城，拓竹全栈工程师。以全栈工程视角连接软件、硬件与AI，展示项目案例、个人摄影与经历。', '夏炜城作品集', 'xiaweicheng/assets']
   ];
   for (const [directory,title,description,site,assets] of sites) {

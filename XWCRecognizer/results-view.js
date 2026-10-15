@@ -17,9 +17,10 @@ export function createResultsView(list, announcement) {
 
   function makeGroup() {
     const section = make('section', undefined, 'face-result');
-    const heading = make('div', '', 'result-heading');
+    const heading = make('h3', '', 'result-heading');
     const status = make('div', '', 'empty-state plain-empty');
-    const rows = make('div');
+    const rows = make('ol', undefined, 'results-list');
+    rows.setAttribute('role', 'list');
     section.append(heading, status, rows);
     list.append(section);
     return { section, heading, status, rows, people: new Map() };
@@ -45,7 +46,10 @@ export function createResultsView(list, announcement) {
     results.forEach(({ ranking, decision, qualityBlocked }, index) => {
       const group = groups[index] || (groups[index] = makeGroup());
       text(group.heading, `人脸${index + 1}`);
-      group.heading.hidden = results.length < 2;
+      group.heading.id = `face-result-title-${index + 1}`;
+      group.section.setAttribute('aria-labelledby', group.heading.id);
+      group.heading.classList.toggle('sr-only', results.length < 2);
+      group.rows.setAttribute('aria-label', `人脸${index + 1}相似度排行`);
       const pending = decision.type === 'pending';
       const status = qualityBlocked ? '请靠近镜头' : pending ? '正在识别…' : !ranking.length ? '暂无匹配结果' : '';
       group.status.hidden = !status;
@@ -64,11 +68,12 @@ export function createResultsView(list, announcement) {
       ranking.forEach((person, position) => {
         let row = group.people.get(person.id);
         if (!row) {
-          const node = make('div', undefined, 'match-row');
+          const node = make('li', undefined, 'match-row');
           const top = make('div', undefined, 'match-top');
           const name = make('span', person.name, 'match-name');
           const score = make('span', '', 'match-score');
           const track = make('div', undefined, 'score-track');
+          track.setAttribute('aria-hidden', 'true');
           const fill = make('span');
           top.append(name, score);
           track.append(fill);
@@ -86,7 +91,7 @@ export function createResultsView(list, announcement) {
         }
       });
       keys.push(ranking[0].id);
-      summaries.push(`${prefix}当前最高匹配度：${ranking[0].name}，${ranking[0].score.toFixed(1)}%`);
+      summaries.push(`${prefix}当前最高相似度：${ranking[0].name}，${ranking[0].score.toFixed(1)}%`);
     });
     const signature = JSON.stringify(keys);
     if (signature === candidate) repeats++;

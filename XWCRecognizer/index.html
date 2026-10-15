@@ -3,19 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f4f4f2" />
+    <meta name="theme-color" content="#f5f5f7" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <title>XWC检测器｜照片与摄像头匹配</title>
     <link rel="stylesheet" href="styles.css" />
     <script type="module" src="app.js"></script>
     <!-- share-metadata:start -->
-    <meta name="description" content="通过照片或摄像头查看双模型匹配度排行，在浏览器本地处理。">
+    <meta name="description" content="通过照片或摄像头查看人物相似度排行，画面在本机处理。">
     <meta name="title" content="XWC检测器｜照片与摄像头匹配">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="zh_CN">
     <meta property="og:site_name" content="XWC检测器">
     <meta property="og:title" content="XWC检测器｜照片与摄像头匹配">
-    <meta property="og:description" content="通过照片或摄像头查看双模型匹配度排行，在浏览器本地处理。">
+    <meta property="og:description" content="通过照片或摄像头查看人物相似度排行，画面在本机处理。">
     <meta property="og:url" content="https://deer603.github.io/XWCRecognizer/">
     <meta property="og:image" content="https://deer603.github.io/XWCRecognizer/share-cover.jpg">
     <meta property="og:image:secure_url" content="https://deer603.github.io/XWCRecognizer/share-cover.jpg">
@@ -25,18 +25,18 @@
     <meta property="og:image:alt" content="XWC检测器分享封面">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="XWC检测器｜照片与摄像头匹配">
-    <meta name="twitter:description" content="通过照片或摄像头查看双模型匹配度排行，在浏览器本地处理。">
+    <meta name="twitter:description" content="通过照片或摄像头查看人物相似度排行，画面在本机处理。">
     <meta name="twitter:image" content="https://deer603.github.io/XWCRecognizer/share-cover.jpg">
     <meta name="twitter:image:alt" content="XWC检测器分享封面">
     <meta name="image" content="https://deer603.github.io/XWCRecognizer/share-thumb.jpg">
     <meta name="thumbnail" content="https://deer603.github.io/XWCRecognizer/share-thumb.jpg">
     <meta itemprop="name" content="XWC检测器｜照片与摄像头匹配">
-    <meta itemprop="description" content="通过照片或摄像头查看双模型匹配度排行，在浏览器本地处理。">
+    <meta itemprop="description" content="通过照片或摄像头查看人物相似度排行，画面在本机处理。">
     <meta itemprop="image" content="https://deer603.github.io/XWCRecognizer/share-thumb.jpg">
     <link rel="canonical" href="https://deer603.github.io/XWCRecognizer/">
     <link rel="image_src" href="https://deer603.github.io/XWCRecognizer/share-thumb.jpg">
     <!-- share-metadata:end -->
-</head>
+  </head>
   <body>
     <!-- share-thumbnail:start -->
     <img src="share-thumb.jpg" width="400" height="400" alt="" aria-hidden="true" fetchpriority="low" style="position:absolute;left:-10000px;top:0;width:400px;height:400px;pointer-events:none">
@@ -50,13 +50,14 @@
           <button id="retry-model" class="text-button" type="button">重试</button>
         </div>
       </header>
+      <noscript><p class="camera-notice">此页面需要JavaScript。请在浏览器中启用后刷新页面。</p></noscript>
       <main class="workspace-grid">
         <section class="camera-panel" aria-labelledby="camera-title">
           <div class="panel-heading">
             <h2 id="camera-title">画面</h2>
             <label class="camera-device">
               <span class="sr-only">选择摄像头</span>
-              <select id="camera-select" aria-label="选择摄像头"><option value="">默认摄像头</option></select>
+              <select id="camera-select" aria-label="选择摄像头" disabled><option value="">默认摄像头</option></select>
             </label>
           </div>
           <div class="camera-stage">
@@ -65,40 +66,61 @@
             <canvas id="overlay" aria-hidden="true"></canvas>
             <div id="camera-placeholder" class="camera-placeholder">
               <div id="loading-panel" class="loading-panel">
-                <p id="loading-title" class="loading-title" role="status">本机人脸匹配</p>
+                <p id="loading-title" class="loading-title" role="status">从一张照片开始</p>
                 <div id="loading-percent" class="loading-percent" hidden>0%</div>
-                <div id="loading-progress" class="loading-progress" role="progressbar" aria-label="模型与运行库加载进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><div id="loading-fill" class="loading-fill"></div></div>
-                <p id="loading-message" class="loading-message">首次使用需下载约65.4MB模型与运行文件。准备好后，可选择摄像头或照片，画面在本机处理。</p>
-                <button id="load-models" class="button button-primary" type="button">开始使用</button>
+                <div id="loading-progress" class="loading-progress" role="progressbar" aria-label="准备进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><div id="loading-fill" class="loading-fill"></div></div>
+                <p id="loading-message" class="loading-message">选择照片或开启摄像头，查看人物相似度排行。首次使用需要联网准备，画面只在本机处理。</p>
+                <button id="load-models" class="button button-primary" type="button" disabled>开始使用</button>
                 <button id="loading-retry" class="button" type="button" hidden>重新加载</button>
+                <button id="loading-cancel" class="button button-on-dark" type="button" hidden>取消准备</button>
               </div>
               <div id="idle-placeholder" class="idle-placeholder" hidden>
                 <svg viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="8" width="26" height="19" rx="2"/><path d="m10 8 2-4h8l2 4"/><circle cx="16" cy="17.5" r="5"/></svg>
-                <p>摄像头未开启</p>
+                <p id="idle-message">摄像头未开启</p>
+              </div>
+            </div>
+            <div id="photo-processing" class="photo-processing" hidden>
+              <div class="photo-processing-content">
+                <span class="processing-indicator" aria-hidden="true"></span>
+                <p id="photo-processing-message" role="status">正在处理照片…</p>
+                <button id="cancel-photo" class="button button-on-dark" type="button">取消</button>
               </div>
             </div>
           </div>
           <div class="camera-controls">
             <div class="camera-actions">
-              <button id="start-camera" class="button button-primary" type="button">开启摄像头</button>
+              <button id="start-camera" class="button button-primary" type="button" disabled>开启摄像头</button>
               <button id="stop-camera" class="button" type="button" disabled>停止</button>
-              <button id="compare-photo" class="button" type="button">对比照片</button>
+              <button id="compare-photo" class="button" type="button" disabled>对比照片</button>
               <input id="compare-file" type="file" accept="image/*" hidden/>
             </div>
-            <label class="toggle-label"><input id="mirror" type="checkbox" checked/>镜像</label>
+            <label class="toggle-label"><input id="mirror" type="checkbox" checked disabled/>镜像</label>
           </div>
           <div class="camera-footer">
             <span id="camera-message" aria-live="polite">摄像头未开启</span>
             <div hidden><span id="face-count">0</span><span id="inference-time">—</span></div>
           </div>
+          <div id="camera-notice" class="camera-notice" hidden>
+            <p id="camera-notice-message" role="status"></p>
+            <button id="resume-camera" class="button" type="button" hidden>恢复摄像头</button>
+          </div>
         </section>
         <section class="matches-panel" aria-labelledby="matches-title">
           <div class="panel-heading"><h2 id="matches-title">匹配结果</h2><span id="match-summary">等待画面</span></div>
-          <div class="result-columns" aria-hidden="true"><span>人物</span><span>匹配度</span></div>
-          <div id="match-list" class="match-list"><div class="empty-state">暂无结果</div></div>
+          <div class="result-columns" aria-hidden="true"><span>人物</span><span>相似度</span></div>
+          <div id="match-list" class="match-list" tabindex="0" aria-label="相似度排行"><div class="empty-state">暂无结果</div></div>
           <p id="match-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
         </section>
       </main>
+      <details class="usage-guide">
+        <summary>使用说明</summary>
+        <div class="usage-guide-content">
+          <p>选择照片或开启摄像头后，即可查看人物相似度排行。照片和摄像头画面只在本机处理。</p>
+          <p>请选择浏览器支持的图片，单张不超过20MB。</p>
+          <p>相似度用于比较画面与已收录人物的接近程度，不是身份正确概率。光线、角度和清晰度会影响结果。</p>
+          <p>点击“停止”即可结束摄像头使用。</p>
+        </div>
+      </details>
     </div>
     <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
   </body>

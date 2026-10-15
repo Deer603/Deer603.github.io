@@ -5,7 +5,8 @@ import { loadModels, loadRuntime } from './model-loader.js';
 import { createResultsView } from './results-view.js';
 
 const $ = id => document.getElementById(id);
-const state = { people: [], ready: false, models: false, loading: false, stream: null, opening: false, session: 0, timer: null, faces: [], mode: 'idle', toastTimer: null };
+const state = { people: [], ready: false, models: false, loading: false, loadController: null, stream: null, opening: false, session: 0, timer: null, faces: [], mode: 'idle', toastTimer: null, photoJob: null, backgroundSince: 0, backgroundTimer: null };
+const BACKGROUND_GRACE_MS = 30000;
 const inputCanvas = document.createElement('canvas');
 let results = [];
 let sfacePeople = [];
@@ -28,9 +29,18 @@ function toast(message) {
 }
 
 function controls() {
-  $('start-camera').disabled = !state.ready || state.opening || !!state.stream || state.mode === 'processing';
-  $('stop-camera').disabled = !state.stream && !state.opening && state.mode === 'idle';
-  $('compare-photo').disabled = !state.ready || state.opening || state.mode === 'processing';
+  $('start-camera').disabled = !state.ready || state.opening || !!state.stream || !!state.photoJob;
+  $('stop-camera').disabled = !state.stream && !state.opening && !state.photoJob && state.mode === 'idle';
+  $('compare-photo').disabled = !state.ready || state.opening || !!state.photoJob;
+  $('camera-select').disabled = !state.ready || state.opening || !!state.photoJob;
+  $('mirror').disabled = !state.ready || !!state.photoJob || state.mode === 'photo';
+  $('load-models').disabled = state.loading;
+}
+
+function cameraNotice(message = '', resume = false) {
+  $('camera-notice').hidden = !message;
+  $('camera-notice-message').textContent = message;
+  $('resume-camera').hidden = !resume;
 }
 
 function detect(input) {
@@ -46,15 +56,41 @@ function detect(input) {
 }
 
 function loadingProgress(percent, message) {
-  if ($('loading-percent').textContent !== `${percent}%`) $('loading-percent').textContent = `${percent}%`;
-  $('loading-fill').style.width = `${percent}%`;
-  $('loading-progress').setAttribute('aria-valuenow', String(percent));
+  const preparing = percent === null;
+  $('loading-percent').textContent = preparing ? '准备中' : `${percent}%`;
+  $('loading-percent').classList.toggle('is-preparing', preparing);
+  $('loading-progress').classList.toggle('is-indeterminate', preparing);
+  if (preparing) $('loading-progress').removeAttribute('aria-valuenow');
+  else {
+    $('loading-fill').style.width = `${percent}%`;
+    $('loading-progress').setAttribute('aria-valuenow', String(percent));
+  }
   $('loading-message').textContent = message;
+}
+
+async function readLibrary(path, signal) {
+  const request = new AbortController();
+  const abort = () => request.abort(signal.reason);
+  signal.addEventListener('abort', abort, { once: true });
+  const timeout = setTimeout(() => request.abort(new DOMException('资料请求超时', 'TimeoutError')), 30000);
+  try {
+    signal.throwIfAborted();
+    const response = await fetch(path, { signal: request.signal });
+    if (!response.ok) throw new Error(`Reference data HTTP${response.status}`);
+    return await response.json();
+  } finally {
+    clearTimeout(timeout);
+    signal.removeEventListener('abort', abort);
+  }
 }
 
 async function initialize() {
   if (state.loading || state.ready) return;
   state.loading = true;
+  const controller = new AbortController();
+  const { signal } = controller;
+  state.loadController = controller;
+  const report = (percent, message) => { if (!signal.aborted) loadingProgress(percent, message); };
   $('model-line').hidden = true;
   $('loading-panel').hidden = false;
   $('idle-placeholder').hidden = true;
@@ -63,33 +99,40 @@ async function initialize() {
   $('loading-percent').hidden = false;
   $('loading-progress').hidden = false;
   $('loading-retry').hidden = true;
-  loadingProgress(0, '正在准备');
+  $('loading-cancel').hidden = false;
+  $('loading-cancel').disabled = false;
+  loadingProgress(null, '首次准备可能需要一点时间。');
   $('retry-model').disabled = true;
   $('model-status').textContent = '正在加载模型…';
-  $('model-detail').textContent = '读取本地模型与预设数据';
+  $('model-detail').textContent = '正在准备';
   controls();
   try {
-    await loadRuntime(loadingProgress);
+    await loadRuntime(report, { signal });
+    signal.throwIfAborted();
     const api = window.faceapi;
     if (!api) throw new Error('识别脚本未加载，请刷新网页');
     if (!state.models) {
       let gpu = false;
       try { gpu = await api.tf.setBackend('webgl'); } catch {}
+      signal.throwIfAborted();
       if (!gpu) await api.tf.setBackend('cpu');
+      signal.throwIfAborted();
       await api.tf.ready();
-      await loadModels(api, loadingProgress);
+      signal.throwIfAborted();
+      await loadModels(api, report, { signal });
+      signal.throwIfAborted();
       const warm = document.createElement('canvas');
       warm.width = warm.height = 128;
       await detect(warm);
+      signal.throwIfAborted();
       state.models = true;
     }
-    const response = await fetch('./presets/library.json');
-    if (!response.ok) throw new Error(`预设人物库无法加载（HTTP${response.status}），请确认presets/library.json已部署。`);
-    state.people = validateProfiles(await response.json());
+    const library = await readLibrary('./presets/library.json', signal);
+    state.people = validateProfiles(library);
     if (!state.people.length) throw new Error('预设人物库为空');
-    const second = await fetch('./presets/sface-library.json');
-    if (!second.ok) throw new Error(`第二模型参考库无法加载（HTTP${second.status}），请确认presets/sface-library.json已部署。`);
-    sfacePeople = validateSFaceLibrary(await second.json(), state.people);
+    const second = await readLibrary('./presets/sface-library.json', signal);
+    sfacePeople = validateSFaceLibrary(second, state.people);
+    signal.throwIfAborted();
     loadingProgress(100, '加载完成');
     state.ready = true;
     $('loading-panel').hidden = true;
@@ -101,20 +144,36 @@ async function initialize() {
     $('retry-model').hidden = true;
     $('camera-message').textContent = '摄像头未开启';
   } catch (error) {
-    console.error(error);
-    $('loading-title').textContent = '加载失败';
-    $('loading-message').textContent = error.message || '加载失败，请重试。';
+    const cancelled = signal.aborted;
+    if (!cancelled) console.error('Preparation failed:', error);
+    $('loading-title').textContent = cancelled ? '已取消加载' : '暂时无法完成加载';
+    $('loading-message').textContent = cancelled ? '准备好后，随时可以重新开始。'
+      : !navigator.onLine ? '网络已断开。连接网络后，请重新加载。'
+      : error.name === 'TimeoutError' ? '网络响应时间过长，请检查连接后重试。'
+      : '请检查网络后重新加载。如仍无法完成，请更新浏览器或稍后再试。';
+    $('loading-percent').hidden = true;
+    $('loading-progress').hidden = true;
     $('loading-retry').hidden = false;
-    $('model-status').textContent = '加载失败';
+    $('loading-retry').textContent = cancelled ? '重新开始' : '重新加载';
+    $('model-status').textContent = cancelled ? '待开始' : '加载失败';
     $('model-status').className = 'status-badge error';
-    $('model-detail').textContent = error.message;
+    $('model-detail').textContent = '请重新加载';
     $('loading-retry').focus({ preventScroll: true });
   } finally {
     state.loading = false;
+    state.loadController = null;
+    $('loading-cancel').hidden = true;
     $('retry-model').disabled = false;
     controls();
     if (state.ready) $('start-camera').focus({ preventScroll: true });
   }
+}
+
+function cancelLoading() {
+  if (!state.loadController || state.loadController.signal.aborted) return;
+  state.loadController.abort();
+  $('loading-cancel').disabled = true;
+  $('loading-message').textContent = '正在取消，请稍候。';
 }
 
 async function enumerateCameras() {
@@ -140,18 +199,20 @@ function cameraError(error) {
     NotFoundError: '没有找到摄像头，请连接摄像头后重试。',
     NotReadableError: '摄像头无法读取，可能正被其他应用占用。',
     OverconstrainedError: '所选摄像头不可用，请切换到默认摄像头。',
-    SecurityError: '浏览器阻止了摄像头访问，请通过localhost或HTTPS打开。',
-  })[error.name] || `摄像头启动失败：${error.message}`;
+    SecurityError: '浏览器阻止了摄像头访问，请使用安全连接打开页面后重试。',
+    AbortError: '摄像头连接已中断，请重新开启。',
+  })[error.name] || '摄像头暂时无法启动，请重新开启或选择其他摄像头。';
 }
 
 async function startCamera() {
-  if (!state.ready || state.opening || state.stream || state.mode === 'processing') return;
-  if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) { toast('摄像头需要HTTPS或localhost，请使用node serve.mjs启动网页。'); return; }
+  if (!state.ready || state.opening || state.stream || state.photoJob) return;
+  if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) { cameraNotice('当前环境无法使用摄像头，请通过HTTPS地址或本地预览打开。'); return; }
   stopCamera();
   const session = ++state.session;
   state.opening = true;
   $('camera-message').textContent = '正在请求摄像头权限…';
   controls();
+  if (document.hidden) handleVisibility();
   let acquired;
   try {
     const selected = $('camera-select').value;
@@ -173,17 +234,24 @@ async function startCamera() {
     await enumerateCameras();
     if (session !== state.session) return;
     state.opening = false;
+    if (document.hidden) handleVisibility();
     controls();
     loop(session);
   } catch (error) {
     acquired?.getTracks().forEach(track => track.stop());
-    if (session === state.session) { stopCamera(); toast(cameraError(error)); $('camera-message').textContent = cameraError(error); }
+    if (session === state.session) { console.error('Camera failed:', error); stopCamera(); cameraNotice(cameraError(error)); $('camera-message').textContent = '摄像头未开启'; }
   } finally { if (session === state.session) { state.opening = false; controls(); } }
 }
 
 function stopCamera() {
   ++state.session;
   clearTimeout(state.timer);
+  clearTimeout(state.backgroundTimer);
+  state.backgroundSince = 0;
+  if (state.photoJob) state.photoJob.cancelled = true;
+  state.photoJob = null;
+  $('photo-processing').hidden = true;
+  $('compare-photo').removeAttribute('aria-busy');
   state.stream?.getTracks().forEach(track => track.stop());
   state.stream = null;
   state.opening = false;
@@ -192,10 +260,33 @@ function stopCamera() {
   $('still-canvas').hidden = true;
   $('camera-placeholder').hidden = false;
   $('camera-message').textContent = '摄像头未开启';
+  $('idle-message').textContent = '摄像头未开启';
+  cameraNotice();
   $('face-count').textContent = '0';
   $('inference-time').textContent = '—';
   resetMatches();
   controls();
+}
+
+function suspendCamera() {
+  if (!state.stream && !state.opening) return;
+  stopCamera();
+  $('idle-message').textContent = '摄像头已暂停';
+  $('camera-message').textContent = '摄像头已暂停';
+  cameraNotice('离开页面一段时间，摄像头已自动关闭。', true);
+}
+
+function handleVisibility() {
+  clearTimeout(state.backgroundTimer);
+  if (document.hidden) {
+    if (!state.stream && !state.opening) return;
+    if (!state.backgroundSince) state.backgroundSince = Date.now();
+    resetMatches();
+    state.backgroundTimer = setTimeout(suspendCamera, Math.max(0, BACKGROUND_GRACE_MS - (Date.now() - state.backgroundSince)));
+  } else {
+    if (state.backgroundSince && Date.now() - state.backgroundSince >= BACKGROUND_GRACE_MS) suspendCamera();
+    state.backgroundSince = 0;
+  }
 }
 
 function snapshot(source, canvas = document.createElement('canvas'), maxWidth = 1280) {
@@ -217,11 +308,12 @@ async function loop(session) {
       const started = performance.now();
       const faces = await detect(frame);
       if (session !== state.session || !state.stream) return;
-      showResults(faces, frame, performance.now() - started);
+      if (!document.hidden) showResults(faces, frame, performance.now() - started);
     } catch (error) {
       if (session !== state.session) return;
       stopCamera();
-      toast(`识别中断：${error.message}。可重新开启摄像头。`);
+      console.error('Camera processing failed:', error);
+      cameraNotice('画面处理已中断，请重新开启摄像头。', true);
       return;
     }
   }
@@ -296,43 +388,85 @@ function drawFace(face, index, person) {
 async function comparePhoto(event) {
   const file = event.target.files[0];
   event.target.value = '';
-  if (!file || !state.ready) return;
-  stopCamera();
-  const session = state.session;
-  state.mode = 'processing';
+  if (!file || !state.ready || state.photoJob || state.opening) return;
+  if (!file.type.startsWith('image/')) { toast('请选择JPG、PNG或浏览器支持的图片。'); return; }
+  if (!file.size || file.size > 20 * 1024 * 1024) { toast('请选择20MB以内的有效图片。'); return; }
+  const job = { phase: 'decode', session: state.session, cancelled: false };
+  state.photoJob = job;
+  $('photo-processing').hidden = false;
+  $('photo-processing-message').textContent = '正在打开照片';
+  $('compare-photo').setAttribute('aria-busy', 'true');
   controls();
-  $('camera-message').textContent = '正在对比照片…';
   let bitmap;
   try {
-    if (!file.type.startsWith('image/') || file.size > 20 * 1024 * 1024) throw new Error('请选择20MB以内的图片');
     bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
-    if (session !== state.session) return;
+    if (job.cancelled || job !== state.photoJob || job.session !== state.session) return;
     const frame = snapshot(bitmap);
+    // Commit the mode change only after the new image can be displayed.
+    state.photoJob = null;
+    stopCamera();
+    job.phase = 'processing';
+    job.session = state.session;
+    state.photoJob = job;
+    state.mode = 'processing';
+    $('photo-processing').hidden = false;
+    $('photo-processing-message').textContent = '正在处理照片';
+    $('compare-photo').setAttribute('aria-busy', 'true');
+    $('camera-message').textContent = '正在处理照片…';
+    controls();
     const started = performance.now();
     const faces = await detect(frame);
-    if (session !== state.session) return;
+    if (job.cancelled || job !== state.photoJob || job.session !== state.session) return;
     snapshot(frame, $('still-canvas'));
     state.mode = 'photo';
     $('video').hidden = true;
     $('still-canvas').hidden = false;
     $('camera-placeholder').hidden = true;
     showResults(faces, frame, performance.now() - started);
-  } catch (error) { if (session === state.session) { stopCamera(); toast(`照片对比失败：${error.message}`); } }
-  finally { bitmap?.close(); if (session === state.session) controls(); }
+  } catch (error) {
+    if (!job.cancelled && job === state.photoJob && job.session === state.session) {
+      console.error('Photo processing failed:', error);
+      if (job.phase === 'processing') stopCamera();
+      toast(job.phase === 'decode' ? '无法打开这张照片，请选择有效的JPG或PNG图片。' : '照片处理未完成，请重试或选择其他照片。');
+    }
+  } finally {
+    bitmap?.close();
+    if (state.photoJob === job) {
+      state.photoJob = null;
+      $('photo-processing').hidden = true;
+      $('compare-photo').removeAttribute('aria-busy');
+      controls();
+    }
+  }
+}
+
+function cancelPhoto() {
+  const job = state.photoJob;
+  if (!job) return;
+  job.cancelled = true;
+  state.photoJob = null;
+  $('photo-processing').hidden = true;
+  $('compare-photo').removeAttribute('aria-busy');
+  if (job.phase === 'processing') stopCamera();
+  else controls();
+  $('compare-photo').focus({ preventScroll: true });
 }
 
 $('retry-model').addEventListener('click', initialize);
 $('load-models').addEventListener('click', initialize);
 $('loading-retry').addEventListener('click', initialize);
+$('loading-cancel').addEventListener('click', cancelLoading);
 $('start-camera').addEventListener('click', startCamera);
+$('resume-camera').addEventListener('click', startCamera);
 $('stop-camera').addEventListener('click', stopCamera);
+$('cancel-photo').addEventListener('click', cancelPhoto);
 $('compare-photo').addEventListener('click', () => $('compare-file').click());
 $('compare-file').addEventListener('change', comparePhoto);
 $('camera-select').addEventListener('change', async () => { if (state.stream) { stopCamera(); await startCamera(); } });
 $('mirror').addEventListener('change', () => { $('video').style.transform = $('mirror').checked ? 'scaleX(-1)' : ''; if (state.faces.length) renderMatches(); });
 $('video').style.transform = $('mirror').checked ? 'scaleX(-1)' : '';
-document.addEventListener('visibilitychange', () => { if (document.hidden && state.stream) resetMatches(); });
-window.addEventListener('pagehide', stopCamera);
+document.addEventListener('visibilitychange', handleVisibility);
+window.addEventListener('pagehide', () => { cancelLoading(); stopCamera(); });
 navigator.mediaDevices?.addEventListener('devicechange', enumerateCameras);
 controls();
 enumerateCameras();
