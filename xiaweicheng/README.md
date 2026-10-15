@@ -1,6 +1,6 @@
 # 夏炜城作品集
 
-面向智能硬件、机器人与AI产品方向的个人作品集，展示项目案例、个人摄影、生活兴趣与经历。当前目录是Next.js生成的静态导出内容，可直接用于静态托管。
+拓竹全栈工程师夏炜城的个人作品集，展示软件、智能硬件、机器人与AI方向的项目案例，以及个人摄影、生活兴趣与经历。当前目录是Next.js生成的静态导出内容，可直接用于静态托管。
 
 [![网页入口](https://img.shields.io/badge/网页-xiaweicheng-1d1d1f?style=flat-square)](https://deer603.github.io/xiaweicheng/)
 [![导出方式](https://img.shields.io/badge/页面-Next.js静态导出-555555?style=flat-square)](#维护方式)

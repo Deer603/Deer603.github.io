@@ -82,16 +82,16 @@ export function refreshShareMetadata() {
     ['kuncode', 'KunCode｜开源开发工作台与困困AI', '认识KunCode与困困AI，了解中文开发工作台、水豚主题和Windows、macOS安装入口。', 'KunCode', 'kuncode'],
     ['room', '青蛙的角落｜寝室故事与摄影相册', '从六人寝室走进舍友的个人空间，翻阅青蛙的摄影作品与故事。', '青蛙的角落', 'room'],
     ['XWCRecognizer', 'XWC检测器｜照片与摄像头匹配', '通过照片或摄像头查看双模型匹配度排行，在浏览器本地处理。', 'XWC检测器', 'XWCRecognizer'],
-    ['xiaweicheng', '夏炜城｜智能硬件与AI产品作品集', '连接智能硬件、机器人、AI产品与真实场景，了解项目案例、个人摄影与经历。', '夏炜城作品集', 'xiaweicheng/assets']
+    ['xiaweicheng', '夏炜城｜拓竹全栈工程师', '夏炜城，拓竹全栈工程师。以全栈工程视角连接软件、硬件与AI，展示项目案例、个人摄影与经历。', '夏炜城作品集', 'xiaweicheng/assets']
   ];
   for (const [directory,title,description,site,assets] of sites) {
     const portrait = directory==='xiaweicheng' ? {image:`${origin}/${assets}/xia-weicheng-portrait.png`,thumbnail:`${origin}/${assets}/xia-weicheng-portrait.png`,imageType:'image/png',imageWidth:517,imageHeight:607,imageAlt:'夏炜城个人照',twitterCard:'summary'} : {};
     update(path.join(root,directory,'index.html'), {title,description,site,url:`${origin}/${directory ? directory+'/' : ''}`,image:`${origin}/${assets}/share-cover.jpg`,thumbnail:`${origin}/${assets}/share-thumb.jpg`,next:directory==='xiaweicheng',...portrait});
   }
   for(const [slug,title,description] of [
-    ['robomaster-power-control','RoboMaster功率控制板｜夏炜城作品集','从机器人功率管理需求到控制板设计，了解方案、工程实现与项目复盘。'],
-    ['smart-tea-machine','智能泡茶机｜夏炜城作品集','了解智能泡茶机的电路、硬件原型与产品交互设计。'],
-    ['ai-photography-assistant','LensPilot AI摄影助手｜夏炜城作品集','面向摄影新手的多模态拍摄指导与照片复盘方案，展示概念界面与设计思路。']
+    ['robomaster-power-control','RoboMaster功率控制板｜夏炜城·拓竹全栈工程师','拓竹全栈工程师夏炜城的个人项目案例：从机器人功率管理需求到控制板设计，了解工程实现与项目复盘。'],
+    ['smart-tea-machine','智能泡茶机｜夏炜城·拓竹全栈工程师','拓竹全栈工程师夏炜城的个人项目案例：智能泡茶机的电路、硬件原型与产品交互设计。'],
+    ['ai-photography-assistant','LensPilot AI摄影助手｜夏炜城·拓竹全栈工程师','拓竹全栈工程师夏炜城的个人项目案例：面向摄影新手的多模态拍摄指导与照片复盘方案。']
   ]) update(path.join(root,'xiaweicheng/projects',slug,'index.html'),{title,description,site:'夏炜城作品集',url:`${origin}/xiaweicheng/projects/${slug}/`,image:`${origin}/xiaweicheng/assets/${slug}-share-cover.jpg`,thumbnail:`${origin}/xiaweicheng/assets/${slug}-share-thumb.jpg`,next:true});
   const context = { history:{}, URL, URLSearchParams, window:{location:{pathname:'/weijiba/',search:'',href:`${origin}/weijiba/`},scrollTo(){},addEventListener(){},setTimeout(){}},document:{querySelectorAll:()=>[],querySelector:()=>null} };
   vm.createContext(context);
