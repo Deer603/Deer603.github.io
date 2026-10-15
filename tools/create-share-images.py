@@ -1,6 +1,7 @@
 """Render code-drawn share artwork; no remote assets or build dependencies beyond Pillow."""
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
+import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 FONT = 'C:/Windows/Fonts/msyh.ttc'
@@ -10,6 +11,9 @@ SITES = [
     ('codec', 'deer', '加密鹿', '把文字藏进鹿群里', '文字转换 · 鹿群暗号', (7, 24, 17), (185, 242, 204)),
     ('weijiba/assets', 'book', '魏鸡百科', '困困的百科全书', '人物 · 故事 · 术语 · 科技', (237, 242, 237), (43, 85, 66)),
     ('kuncode', 'code', 'KunCode', '让写代码变得更轻松', '开发工作台与困困AI', (10, 27, 23), (177, 228, 199)),
+    ('room', 'room', '青蛙的角落', '从寝室走进个人世界', '寝室场景 · 摄影相册', (20, 30, 23), (212, 222, 181)),
+    ('XWCRecognizer', 'face', 'XWC检测器', '看看你与谁更相似', '照片与摄像头 · 本地处理', (242, 242, 238), (45, 66, 53)),
+    ('xiaweicheng/assets', 'code', '夏炜城作品集', '连接硬件、AI与真实场景', '智能硬件 · 机器人 · 产品设计', (239, 242, 246), (35, 64, 103)),
 ]
 
 def font(size, bold=False):
@@ -28,6 +32,16 @@ def icon(draw, kind, center, size, color):
         draw.line([(x-s*.5,y-s),(x-s*1.3,y),(x-s*.5,y+s)],fill=color,width=9)
         draw.line([(x+s*.5,y-s),(x+s*1.3,y),(x+s*.5,y+s)],fill=color,width=9)
         draw.line([(x+s*.2,y-s),(x-s*.2,y+s)],fill=color,width=7)
+    elif kind == 'room':
+        s=size*.34
+        draw.line([(x-s,y+s),(x-s,y-s*.2),(x,y-s),(x+s,y-s*.2),(x+s,y+s),(x-s,y+s)],fill=color,width=7)
+        draw.rectangle((x-s*.25,y+s*.2,x+s*.25,y+s),outline=color,width=6)
+    elif kind == 'face':
+        s=size*.4
+        for dx in (-1,1):
+            for dy in (-1,1):
+                draw.line([(x+dx*s*.6,y+dy*s),(x+dx*s,y+dy*s),(x+dx*s,y+dy*s*.6)],fill=color,width=7)
+        draw.ellipse((x-s*.4,y-s*.5,x+s*.4,y+s*.4),outline=color,width=6)
     else:
         s=size*.3
         draw.line([(x-s*.7,y-s*.2),(x-s,y-s*1.3),(x-s*1.5,y-s*1.65)],fill=color,width=7)
@@ -38,6 +52,7 @@ def icon(draw, kind, center, size, color):
         for dx in [-.3,.3]: draw.ellipse((x+s*dx-4,y+s*.25-4,x+s*dx+4,y+s*.25+4),fill=color)
 
 for directory,kind,title,subtitle,detail,bg,accent in SITES:
+    if '--new-only' in sys.argv and directory not in ('room','XWCRecognizer','xiaweicheng/assets'): continue
     out=ROOT/directory
     for square in [False,True]:
         w,h=(400,400) if square else (1200,630)
@@ -49,8 +64,9 @@ for directory,kind,title,subtitle,detail,bg,accent in SITES:
             icon(d,kind,(200,158),170,accent)
             d.text((200,302),title,font=font(45 if len(title)<7 else 40,True),fill=accent,anchor='mm')
         else:
-            d.text((76,92),'DEER603 / '+('603WEB' if kind=='603' else {'deer':'CODEC','book':'WEIJIBA','code':'KUNCODE'}[kind]),font=font(22),fill=accent)
-            d.text((76,225),title,font=font(76,True),fill=accent)
+            label={'assets':'603WEB','codec':'CODEC','weijiba/assets':'WEIJIBA','kuncode':'KUNCODE','room':'ROOM','XWCRecognizer':'XWC RECOGNIZER','xiaweicheng/assets':'PORTFOLIO'}[directory]
+            d.text((76,92),'DEER603 / '+label,font=font(22),fill=accent)
+            d.text((76,225),title,font=font(66 if len(title)>5 else 76,True),fill=accent)
             d.text((80,343),subtitle,font=font(37),fill=accent)
             d.text((80,420),detail,font=font(23),fill=accent)
             d.line((80,512,620,512),fill=border,width=2)
@@ -58,4 +74,11 @@ for directory,kind,title,subtitle,detail,bg,accent in SITES:
             d.rounded_rectangle((840,185,1110,455),radius=55,outline=border,width=3)
             icon(d,kind,(975,320),210,accent)
         im.save(out/('share-thumb.jpg' if square else 'share-cover.jpg'),quality=90,optimize=True)
-print('Created 4 covers and 4 square thumbnails.')
+for slug,source in [('robomaster-power-control','rm-power-controller-cover.webp'),('smart-tea-machine','tea-machine-pcb-powered.webp'),('ai-photography-assistant','ai-photography-cover.webp')]:
+    original=Image.open(ROOT/'xiaweicheng/assets'/source).convert('RGB')
+    for square in (False,True):
+        canvas=Image.new('RGB',(400,400) if square else (1200,630),(239,242,246))
+        fitted=ImageOps.contain(original,canvas.size,Image.Resampling.LANCZOS)
+        canvas.paste(fitted,((canvas.width-fitted.width)//2,(canvas.height-fitted.height)//2))
+        canvas.save(ROOT/'xiaweicheng/assets'/f'{slug}-share-{"thumb" if square else "cover"}.jpg',quality=88,optimize=True)
+print('Share artwork and project image derivatives created.')

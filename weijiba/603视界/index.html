@@ -15,7 +15,7 @@
     </script>
     <link rel="icon" type="image/webp" href="../assets/wikipedia-logo-v2.svg.webp?v=20260904">
     <link rel="shortcut icon" type="image/webp" href="../assets/wikipedia-logo-v2.svg.webp?v=20260904">
-    <link rel="stylesheet" href="../article.css?v=20261003-icons2">
+    <link rel="stylesheet" href="../article.css?v=20261015-pages">
     <!-- share-metadata:start -->
     <meta name="description" content="603视界—一个把寝室日常写成动态、游记、人物志与创客故事的微信公众号。">
     <meta name="title" content="603视界｜魏鸡百科">
@@ -72,7 +72,7 @@
         <a href="#support">资助魏鸡百科</a>
         <button type="button" data-demo="创建账号">创建账号</button>
         <button type="button" data-demo="登录">登录</button>
-        <button class="more-button" type="button" data-demo="更多个人工具" aria-label="更多个人工具">•••</button>
+        <button class="more-button" type="button" data-demo="更多个人工具" aria-label="更多个人工具"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></button>
       </nav>
     </header>
 
@@ -83,7 +83,7 @@
     </div>
 
     <div class="drawer-backdrop" data-close-drawers hidden></div>
-    <aside class="main-menu" id="main-menu" aria-label="主菜单" aria-hidden="true">
+    <aside class="main-menu" id="main-menu" aria-label="主菜单" aria-hidden="true" inert>
       <div class="drawer-heading"><strong>主菜单</strong><button type="button" data-close-drawers aria-label="关闭主菜单"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
       <h2>导航</h2>
       <a href="../index.html">首页</a>
@@ -102,191 +102,35 @@
       <aside class="contents-rail" aria-label="目录">
         <div class="sticky-rail">
           <div class="rail-title"><strong>目录</strong><button type="button" data-collapse-toc>隐藏</button></div>
-          <nav class="toc" id="toc">
-            <a class="is-active" href="#top">序言</a>
-            <a href="#aliases"><span>1</span> 称呼与身份语境</a>
-            <a href="#language"><span>2</span> 语言风格</a>
-            <a href="#topics"><span>3</span> 常见话题</a>
-            <a href="#interaction"><span>4</span> 互动节奏</a>
-            <a href="#culture"><span>5</span> 群内角色</a>
-            <a href="#archive"><span>6</span> 资料中的角色轨迹</a>
-            <a href="#method"><span>7</span> 阅读方法</a>
-            <a href="#editorial"><span>8</span> 条目写法与边界</a>
-            <a href="#see-also"><span>9</span> 参见</a>
-            <a href="#references"><span>10</span> 资料来源</a>
-          </nav>
+          <nav class="toc" id="toc"><a class="is-active" href="#top">序言</a><a href="#public-voice"><span>1</span> 寝室小事穿上西装</a><a href="#profile"><span>2</span> 公众号主页上的可见档案</a><a href="#space"><span>3</span> 南603与校园生活</a><a href="#columns"><span>4</span> 六条内容支流</a><a href="#projects"><span>5</span> 从寝室道具到科技设想</a><a href="#kuncode"><span>6</span> KunCode：置顶文章里的开发入口</a><a href="#tech-light"><span>7</span> 置顶文章：科技之光</a><a href="#people"><span>8</span> 人物不是名单，而是叙事位置</a><a href="#articles"><span>9</span> 目前可核对的文章样本</a><a href="#distinction"><span>10</span> 不要与603社区混在一起</a><a href="#read-archive"><span>11</span> 已经整理到哪些文章</a><a href="#related"><span>12</span> 相关条目</a><a href="#references"><span>13</span> 资料来源</a></nav>
         </div>
       </aside>
 
       <main class="article-main" id="article-content">
         <article id="top">
-          <header class="article-heading">
-            <div class="title-line">
-              <h1>困困</h1>
-              <button class="language-button" type="button" id="article-language-button" aria-expanded="false" aria-controls="article-language-menu">
-                <span aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 5h12M9 2v3m-4 3c1 4 4 7 8 9M13 5c-1 6-4 10-10 13m11 3 4-10 4 10m-6-4h4"/></svg></span> 2种语言
-              </button>
-              <div class="language-menu" id="article-language-menu" hidden>
-                <button type="button" data-language="简体中文">简体中文</button>
-                <button type="button" data-language="繁體中文">繁體中文</button>
-              </div>
-            </div>
-
-            <div class="article-toolbar">
-              <div class="subject-tabs">
-                <a class="active" href="#top">条目</a>
-                <button type="button" data-demo="讨论页">讨论</button>
-              </div>
-              <div class="variant-control">
-                <button type="button" data-demo="字词转换">不转换<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
-              </div>
-              <div class="view-tabs">
-                <a class="active" href="#top">阅读</a>
-                <button type="button" data-demo="编辑">编辑</button>
-                <button type="button" data-demo="查看历史">查看历史</button>
-                <button type="button" data-demo="工具">工具<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button>
-              </div>
-            </div>
-          </header>
-
-          <p class="article-tagline">魏鸡百科，困困的百科全书</p>
-
-          <div class="article-notice" role="note">
-            <span class="notice-icon" aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.01"/></svg></span>
-            <p>此条目记录的是鹿群内部的称呼、表达与互动语境。它不是人物传记，也不用于推断现实人格、政治立场或心理状态。</p>
-          </div>
-
-          <aside class="infobox" aria-label="困困概要">
-            <div class="infobox-title">困困</div>
-            <div class="infobox-subtitle">鹿群语境中的人物条目</div>
-            <table>
-              <tbody>
-                <tr><th>对应姓名</th><td>詹绍源</td></tr>
-                <tr><th>常用称呼</th><td>困困、詹哥、困教练</td></tr>
-                <tr><th>群内称号</th><td>困困大王、高认知担当</td></tr>
-                <tr><th>表达特征</th><td>短句、直给、连续追问</td></tr>
-                <tr><th>常见回应</th><td>“稳了”“nb”“6”</td></tr>
-                <tr><th>常见话题</th><td>工程学习、AI 工具、校园事务、游戏与健身</td></tr>
-                <tr><th>所属语境</th><td>鹿群 / 603 系</td></tr>
-              </tbody>
-            </table>
-          </aside>
-
-          <p><b>困困</b>，是鹿群聊天资料中对<b>詹绍源</b>的主要称呼，也是本条目的标题。这里用“詹绍源”解释“困困”所对应的资料对象；“困困”则是群内更常用、更能体现关系语境的称呼。在不同统计快照中，詹绍源留下约 1,800 条发言，其中可分析的文本消息约 1,200 条。<sup><a href="#ref-1">[1]</a></sup> 这些消息以短句为主，经常用于确认、追问、接梗或迅速表达判断。</p>
-
-          <p>“困困”在这里既是自称，也是群友使用的关系化称呼。随着群聊发展，它又延伸出“困教练”“困教”“困困大王”等玩笑角色。相关称呼并不对应正式职位，而是由篮球、校园生活、技术讨论和群内叙事叠加形成。</p>
-
-          <p>从聊天资料看，他会发起工程课程和技术问题，也频繁参与 AI 工具、数码设备、游戏、饮食与校园事务的讨论。其表达通常很短，但意义高度依赖前后文：同一句“稳了”，可能是确认结果，也可能是调侃或暂时结束话题。</p>
-          <p>如果把这些材料放在一起看，詹绍源在群里的辨识度并不只来自发言数量，而来自他常常能把一个话题迅速推进到“现在要做什么”。他会用短句切开问题、用追问补齐条件，再在得到回应后给出明确的接受或否定；当讨论需要放松时，他又会把同一套判断转换成玩笑和角色称呼。</p>
-
-          <section id="aliases" class="article-section">
-            <h2><span>称呼与身份语境</span><button type="button" data-demo="编辑称呼与身份语境">编辑</button></h2>
-            <p>本条目以“困困”为主标题，资料中出现的“詹绍源”是用于解释这一称呼所对应对象的姓名写法。能够稳定识别的其他称呼还包括“詹哥”“困教练”和“zsy”。“困困”是覆盖面最广的称呼；“詹哥”更强调熟人关系；“困教练”通常出现在体育、指挥或团队玩笑中。</p>
-            <p>他曾在对话中直接确认“我叫困困”。这类自称与群友称呼相互强化，使“困困”逐渐从昵称变为一套群内角色的入口。后来出现的“困教”“教主”“大王”等说法，属于持续叠加的共同创作。</p>
-            <div class="wiki-quote"><p>称呼不是固定标签，而是关系发生时留下的接口。</p></div>
-          </section>
-
-          <section id="language" class="article-section">
-            <h2><span>语言风格</span><button type="button" data-demo="编辑语言风格">编辑</button></h2>
-            <p>在一个包含约 1,203 条文本消息的分析快照中，詹绍源的单条文本平均约 7.17 个字符，中位数约 5 个字符，约 77% 的消息不超过 8 个字符。<sup><a href="#ref-2">[2]</a></sup> 高频完整回复包括“nb”“？”“稳了”“人物”和“666”。</p>
-            <p>这种短句不是孤立的语言习惯，而是高语境群聊中的协作方式。引用消息、上一位说话人、表情包和共同经历承担了大量信息，所以文字本身可以很短。常见节奏是：先用一个短句表态，再补充问题或细节。</p>
-
-            <table class="wikitable">
-              <caption>文本风格快照</caption>
-              <thead><tr><th>指标</th><th>观察值</th><th>说明</th></tr></thead>
-              <tbody>
-                <tr><td>文本消息</td><td>约 1,203 条</td><td>来自一个人物分析快照</td></tr>
-                <tr><td>中位长度</td><td>约 5 字符</td><td>典型消息非常短</td></tr>
-                <tr><td>不超过 8 字符</td><td>约 77%</td><td>以确认、反应和追问为主</td></tr>
-                <tr><td>50 字符以上</td><td>约 0.5%</td><td>长段表达较少</td></tr>
-              </tbody>
-            </table>
-          </section>
-
-          <section id="topics" class="article-section">
-            <h2><span>常见话题</span><button type="button" data-demo="编辑常见话题">编辑</button></h2>
-            <h3>工程学习与项目</h3>
-            <p>群聊中可见不少课程、设计和计算类问题，例如对雅可比矩阵奇异性的快速提问。这类消息通常以“速问速答”式的直给句开场，期待群友立刻给出可执行答案。</p>
-            <h3>AI 与数字工具</h3>
-            <p>ChatGPT、Codex、豆包、云电脑和其他开发工具是高频话题。他对工具的关注通常偏向实际用途：能不能完成任务、是否稳定、怎样切换配置，以及是否值得继续投入时间。</p>
-            <h3>校园与日常生活</h3>
-            <p>校园管理、课程安排、聚餐地点、饮料、游戏和健身共同构成日常讨论。对形式主义或低效率安排的批评，经常被概括为“多做实事少搞虚的”一类务实表达。</p>
-          </section>
-
-          <section id="interaction" class="article-section">
-            <h2><span>互动节奏</span><button type="button" data-demo="编辑互动节奏">编辑</button></h2>
-            <p>从文本样本中可以观察到一种相对稳定的参与方式：先用极短的消息回应当前信息，再根据对方是否继续追问，决定要不要补充具体细节。这样的节奏让他既能快速进入很多话题，也不会把每一次发言都写成完整说明。</p>
-            <p>短句、问号、引用和表情共同组成了一个分层结构。第一层负责确认“我看到了”，第二层负责说明“我关心哪一点”，第三层才进入解决方案或经验分享。群友熟悉这套节奏后，往往可以从一个词判断对话接下来会继续展开还是暂时收束。</p>
-            <table class="wikitable">
-              <caption>常见互动动作</caption>
-              <thead><tr><th>动作</th><th>表面形式</th><th>可能承担的功能</th></tr></thead>
-              <tbody>
-                <tr><td>进入话题</td><td>一句短问或截图</td><td>快速暴露最需要解决的卡点</td></tr>
-                <tr><td>即时反应</td><td>“6”“nb”“人物”</td><td>确认在场、表达态度或接住气氛</td></tr>
-                <tr><td>继续追问</td><td>“？”或补充一句</td><td>要求对方缩小范围、补足条件</td></tr>
-                <tr><td>阶段收束</td><td>“稳了”或明确结论</td><td>确认下一步，暂时结束往返</td></tr>
-              </tbody>
-            </table>
-          </section>
-
-          <section id="culture" class="article-section">
-            <h2><span>群内角色</span><button type="button" data-demo="编辑群内角色">编辑</button></h2>
-            <p>在群内玩笑系统中，詹绍源常被放在“高认知担当”的位置。“高认知”“共🦌主义”“困教”和“指挥部”等词彼此关联，形成一种可不断续写的内部世界观。<sup><a href="#ref-3">[3]</a></sup></p>
-            <p>这些表达主要承担社交功能：确认共同语境、制造接话机会、把严肃讨论降温，或把一个普通事件升级为群体叙事。它们不应被当作现实政治立场、组织关系或权威身份。</p>
-            <div class="hatnote">相关条目：<a href="../article.html?entry=luchun">鹿群</a>、<a href="../article.html?entry=gonglu">共🦌主义</a></div>
-          </section>
-
-          <section id="archive" class="article-section">
-            <h2><span>资料中的角色轨迹</span><button type="button" data-demo="编辑资料中的角色轨迹">编辑</button></h2>
-            <p>在不同类型的聊天材料里，“困困”会随着主题变化而呈现出不同侧面：工程学习场景里更接近一个希望快速得到判断的人，AI 和数码话题里更关注工具能否完成任务，校园事务中则更容易出现对规则、效率和现实安排的直接反应。</p>
-            <p>这些侧面并不是互相矛盾的多个身份，而是同一个群内角色在不同问题上的投影。群聊让成员可以在严肃讨论、生活吐槽和玩笑设定之间来回移动，资料记录到的往往是某个瞬间的功能，而不是一份脱离场景的性格定论。</p>
-            <p>从群史角度看，称呼的变化也会反过来影响记忆。当“困教练”“困教”或“困困大王”被重复使用时，个人发言会被放入更大的内部叙事中；后来的人先认识到这个角色，再通过原始上下文理解它具体指向哪一次对话。</p>
-          </section>
-
-          <section id="method" class="article-section">
-            <h2><span>阅读方法</span><button type="button" data-demo="编辑阅读方法">编辑</button></h2>
-            <p>阅读群聊人物资料时，至少需要同时保留四层上下文：消息前后句、引用对象、成员关系和当时事件。单独截取短句，容易把赞同误读成反讽，也可能把内部玩笑误读成严肃判断。</p>
-            <ol>
-              <li>先确认消息回应的是谁、哪一条内容。</li>
-              <li>区分自称、他称和临时玩笑称号。</li>
-              <li>对不同报告中的统计数字标注快照差异。</li>
-              <li>不从群聊反应直接推断现实人格或心理状态。</li>
-            </ol>
-          </section>
-
-          <section id="editorial" class="article-section">
-            <h2><span>条目写法与边界</span><button type="button" data-demo="编辑条目写法与边界">编辑</button></h2>
-            <p>本条目采用“可观察表达优先”的写法：可以确认的称呼、消息长度、出现话题和互动动作写得更具体；无法仅凭群聊确认的动机、长期人格和群外关系，则保留为不确定或直接不写。</p>
-            <p>统计数字采用约数，是因为不同报告的导出时间和筛选口径不完全相同。数字适合帮助读者理解规模和倾向，不适合替代原始上下文，更不适合被用来给成员建立固定排名。</p>
-            <div class="wiki-quote"><p>把一条消息放回它发生的关系网络里，才算真正读完它。</p></div>
-            <p>如果未来补充新的聊天导出，新增内容应同时说明时间范围、材料类型和整理方法。这样词条可以继续变长，却不会因为“显得多”而丢失来源边界。</p>
-          </section>
-
-          <section id="see-also" class="article-section">
-            <h2><span>参见</span></h2>
-            <ul class="see-also-list">
-              <li><a href="../article.html?entry=luchun">鹿群</a></li>
-              <li><a href="../article.html?entry=short-messages">短句连发</a></li>
-              <li><a href="../article.html?entry=high-cognition">高认知（鹿群用语）</a></li>
-              <li><a href="../article.html?entry=kun-coach">困教练</a></li>
-              <li><a href="../article.html?entry=gonglu">共🦌主义</a></li>
-              <li><a href="../article.html?entry=ai-tools">AI 与大模型</a></li>
-              <li><a href="../article.html?entry=projects">项目与竞赛</a></li>
-              <li><a href="../article.html?entry=nb-context">nb（鹿群语境）</a></li>
-            </ul>
-          </section>
-
-          <section id="references" class="article-section references">
-            <h2><span>资料来源</span><button type="button" data-demo="编辑资料来源">编辑</button></h2>
-            <ol>
-              <li id="ref-1">鹿群聊天导出与人物数据集概览。不同分析文件的导出时间不同，因此正文采用约数。</li>
-              <li id="ref-2">《ZhanShaoyuan 语言风格分析报告》，基于 1,203 条文本消息的统计快照。</li>
-              <li id="ref-3">《鹿群聊天记录话题主轴综合分析报告》《鹿群成员性格与语言风格专项报告》及群内术语材料。</li>
-            </ol>
-          </section>
-
-          <div class="categories"><span>分类：</span><a href="../article.html?entry=luchun">鹿群人物</a><a href="../article.html?entry=short-messages">群聊语言</a><a href="../article.html?entry=gonglu">内部文化</a><a href="../article.html?entry=history">群史关联</a></div>
-          <p class="last-edited" id="history-note">本页面最后修订于 2026 年 9 月 4 日。页面内容仅用于非官方群内文化记录。</p>
+    <header class="article-heading">
+      <div class="title-line">
+        <h1>603视界</h1>
+        <button class="language-button" type="button" id="article-language-button" aria-expanded="false" aria-controls="article-language-menu"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 5h12M9 2v3m-4 3c1 4 4 7 8 9M13 5c-1 6-4 10-10 13m11 3 4-10 4 10m-6-4h4"/></svg> 2种语言</button>
+        <div class="language-menu" id="article-language-menu" hidden><button type="button" data-language="简体中文">简体中文</button><button type="button" data-language="繁體中文">繁體中文</button></div>
+      </div>
+      <div class="article-toolbar">
+        <div class="subject-tabs"><a class="active" href="#top">条目</a><button type="button" data-demo="讨论页">讨论</button></div>
+        <div class="variant-control"><button type="button" data-demo="字词转换">不转换<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button></div>
+        <div class="view-tabs"><a class="active" href="#top">阅读</a><button type="button" data-demo="编辑">编辑</button><button type="button" data-demo="查看历史">查看历史</button><button type="button" data-demo="工具">工具<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></button></div>
+      </div>
+    </header>
+    <p class="article-tagline">魏鸡百科，困困的百科全书</p>
+    <div class="article-notice" role="note"><span class="notice-icon" aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.01"/></svg></span><p>根据603视界文章及已有阅读笔记整理；项目效果与事件细节按发布方自述保留。</p></div>
+    <aside class="infobox" aria-label="603视界概要"><div class="infobox-title">603视界</div><div class="infobox-subtitle">校园公众号与寝室记录</div><table><tbody><tr><th>内容载体</th><td>微信公众号</td></tr><tr><th>公开账号标识</th><td>biz Mzk2NDAwMTc2Mw==（由公开文章 URL 提取）</td></tr><tr><th>公众号自述关联</th><td>湖南农业大学芷兰24栋南603寝室</td></tr><tr><th>公开自述成员</th><td>黎健毓、魏子奇、罗宇伦、詹绍源、夏炜城、李彦臻</td></tr><tr><th>可见栏目</th><td>603动态、603观察、603游记、603创客、603人物志、603杂笔</td></tr><tr><th>公众号简介</th><td>603视界，最新芷兰信息，领先一步。</td></tr><tr><th>主页可见信息</th><td>湖南·长沙；62篇原创内容；56个朋友关注（截图时页面显示）</td></tr><tr><th>当前置顶文章</th><td>603动态｜603官方 IDE「KunCode」MacOS版本上线！（页面显示为8月11日，年份未由截图确认）</td></tr><tr><th>资料状态</th><td>部分公开文章可检索；认证主体与完整归档无法确认</td></tr><tr><th>账号区分</th><td>不与603社区混用</td></tr></tbody></table></aside>
+    <p>603视界是微信公众号，不是一栋楼，也不是正式研究院。它把芷兰24栋南603及周边的日常写成动态、游记、人物志与创客故事：小事照样有标题，寝室也可以拥有自己的连续剧。</p><p>空调异味、雨夜取糕、乐队排练、软件发布，放在一起并没有统一的剧情。让它们连起来的，是反复出现的人物和一种很认真的玩笑口气——事情可以很小，旁白往往先穿上西装。</p>
+    <section id="public-voice" class="article-section"><h2><span>寝室小事穿上西装</span><button type="button" data-demo="编辑寝室小事穿上西装">编辑</button></h2><p>603视界最拿手的不是把小事假装成大事，而是认真给小事配旁白。空调异味可以有调查气氛，雨夜取糕可以有行动路线，乐队排练也能被写成一支队伍的出场。读者看到的是公众号的叙事选择，不是给每句修辞都盖上事实章。</p><p>把这些文章并排放看，最像系列片的道具也许是那扇门：同一扇门里会走出软件、乐器、旅行海报和一张生日蛋糕。门牌号没有变，标题的戏剧性却不断加戏。</p></section><section id="profile" class="article-section"><h2><span>公众号主页上的可见档案</span><button type="button" data-demo="编辑公众号主页上的可见档案">编辑</button></h2><p>用户提供的公众号主页截图显示，603视界的头像是浅灰圆底上的黑色鹿形图案，账号名右侧有星标，地区一栏写作“湖南 长沙”。这类页面元素能帮助读者确认自己看到的是哪个账号，但头像、星标和地区显示仍属于页面可见信息，不等同于认证主体证明。</p><p>同一截图中的简介是“603视界，最新芷兰信息，领先一步。”页面还显示“62篇原创内容”“56个朋友关注”，并在置顶区域展示《603动态｜603官方 IDE「KunCode」MacOS版本上线！》。由于公众号页面会随时间更新，本页把这些数字和置顶标题记录为截图时状态；若以后主页发生变化，应以新的页面截面或原文为准。</p></section><section id="space" class="article-section"><h2><span>南603与校园生活</span><button type="button" data-demo="编辑南603与校园生活">编辑</button></h2><p>公众号自述把湖南农业大学芷兰24栋南603写成内容的核心空间。这里的“空间”不只包含床位、桌面、空调和门禁，也包含谁在什么时候出现、谁被写进一段游记、谁因为一个小事件成为当天的主角。603与604、寝室、查寝、活动接龙和校园生活等词一起出现时，门牌就从静态坐标变成了集体记忆的索引。</p><p>这种校园叙事有一种很特别的尺度：它可以从一块蛋糕、一台空调或一部手机开始，迅速扩大到寝室秩序、善意、成长和“我们如何共同生活”的问题；然后又在下一条消息里回到吃什么。严肃主题和生活细节并不互相抵消，反而是公众号能够继续写下去的燃料。</p></section><section id="columns" class="article-section"><h2><span>六条内容支流</span><button type="button" data-demo="编辑六条内容支流">编辑</button></h2><p>从公开检索到的标题看，“603动态”偏向日常事件与账号近况，“603观察”偏向从一件小事抽出观点，“603游记”承担出行和散文性叙事，“603创客”把寝室经验连接到科技设想，“603人物志”把成员写成可阅读的角色，“603杂笔”则允许校园碎片保留暧昧和余味。栏目之间没有硬墙，能源、电费、生日、空调、游记、人物和项目可以在同一套世界观里互相借用。</p><p>这套栏目结构也解释了为什么“603视界”不能只用“寝室公众号”四个字概括：它同时做生活记录、青年写作、人物观察和项目叙事。它不像一份稳定的机构通讯，更像一个由几位学生共同维护的内容实验场；但“共同运营”的具体分工、发稿流程和编辑制度，目前没有公开资料可以确认。</p></section><section id="projects" class="article-section"><h2><span>从寝室道具到科技设想</span><button type="button" data-demo="编辑从寝室道具到科技设想">编辑</button></h2><p>公众号自述中能够看到若干科技项目或设想：百元级 DIY 移动冷气机、被动制冷涂料、立体绿化降温网，以及一款被描述为包含四个 AI 角色和三维寝室地图的 Android 应用。它们把空调异味、夏季降温和寝室设备这些日常问题，翻译成半导体制冷、帕尔贴效应、仿生结构、应用程序和认知地图等技术词汇。</p><p>需要注意，文章里出现的项目不等于已经通过第三方测试的产品。公开核查报告把这些内容标为“公众号自述”，并指出 DIY 冷气机的成本、出风口温度、制冷涂料的节能效果、Android 应用的下载安全性等均没有找到独立验证。603视界的有趣之处，恰恰在于它敢把一个寝室小麻烦写成创客提案；读者的责任则是把提案、原型、成品和证据分开。</p></section><section id="kuncode" class="article-section"><h2><span>KunCode：置顶文章里的开发入口</span><button type="button" data-demo="编辑KunCode：置顶文章里的开发入口">编辑</button></h2><p>公众号主页截图中，置顶卡片的标题写作《603动态｜603官方 IDE「KunCode」MacOS版本上线！》，封面也使用了代码编辑器、绿色字符和卡通形象等视觉元素。就截图能够证明的范围而言，可以确认603视界把 KunCode 作为一篇置顶文章的主题，并将其描述为 MacOS 版本上线；截图本身不能证明软件下载地址、功能完整度、版本号或持续维护状态。</p><p>这个条目适合与 IDE、MacOS、文章标题、置顶文章和公开文章互相跳转。读者可以把“文章标题里说了什么”“页面上能打开什么”“软件实际能运行什么”分成三个问题，避免把公众号的发布表达直接等同于独立的产品验收报告。</p></section><section id="tech-light" class="article-section"><h2><span>置顶文章：科技之光</span><button type="button" data-demo="编辑置顶文章：科技之光">编辑</button></h2><p>通过用户打开的微信公众号窗口实际查看到的另一篇置顶文章，标题为《科技之光｜603寝室成员在招新宣讲会后展示创新成果》。文章页面显示原创、603视界、2025年9月16日22:15，并在开头把招新宣讲会与芷兰24栋南603寝室成员的项目展示连接起来。</p><p>文章正文把詹绍源安排在“无人机应用解决生态难题”的段落中心，配图图注为“詹绍源（左二）”。关于无人机载具、特制气动装置和带电飞针的内容属于文章自述；本页已经单独建立文章整理页，并明确不把它扩写成制作教程、实验结论或现实行动建议。</p></section><section id="people" class="article-section"><h2><span>人物不是名单，而是叙事位置</span><button type="button" data-demo="编辑人物不是名单，而是叙事位置">编辑</button></h2><p>公开文章清单里，黎健毓被写进人物志和贝斯手叙事，魏子奇与罗宇伦出现在技术项目或影像记录的语境，夏炜城和李彦臻更多以寝室共同体成员的方式出现，詹绍源则在材料研究、岳阳楼游记的远程缺席和拾金不昧故事中拥有明显的叙事位置。这里的“位置”指文章如何安排角色，不等同于现实履历或正式职务。</p><p>特别是詹绍源：公众号自述把他放在“寝室长”这一角色称呼、制冷涂料设想、一次集体出游的缺席旁白和拾金不昧故事的交叉点上。因此，在603视界的文本里，他更像一个会在技术、道德事件和远程缺席之间切换的关键节点；这种突出来自公开文章的叙事分配，不是对现实人物的能力排名。读者可沿着詹绍源、罗宇伦、黎健毓、魏子奇等词条继续核对各自语境。</p></section><section id="articles" class="article-section"><h2><span>目前可核对的文章样本</span><button type="button" data-demo="编辑目前可核对的文章样本">编辑</button></h2><p>公开核查报告列出了以下署名为603视界的文章样本：《对于公众号催更的一些回应》《603动态｜603遭遇能源危机》《603游记｜岳阳楼，望浙江》《603创客｜603对欧洲空调困局的技术解法》《603观察｜雨夜失糕，一份生日惊喜背后的感慨与深思》《603动态｜拾金不昧扬正气，善行微光暖芷兰》。其中可看到的日期包括：催更回应落款为2025年11月，《岳阳楼，望浙江》正文记叙为2026年3月8日，拾金不昧一文正文为2026年3月22日；其余日期不在当前可见摘要中强行推算。</p><p>同一份报告还列出《603人物志｜湖南农业大学最强贝斯手黎健毓》《603观察｜世界欠603一个诺贝尔奖》《603动态｜寝委书记黎健毓深入湖南乡间开展调查，选址定兽为全寝大会谋良策》《603动态｜603视界AI安卓端应用程序重磅推出！》《603动态｜空调异味突袭，寝室生态临时告急》《603杂笔｜被刻进农专缝隙里的三个字》。这些标题可以作为检索入口，但标题本身不是第三方事实证明；页面保留它们，是为了让读者知道文章目录从何而来。</p></section><section id="distinction" class="article-section"><h2><span>不要与603社区混在一起</span><button type="button" data-demo="编辑不要与603社区混在一起">编辑</button></h2><p>“603社区”是另一个公众号，公开资料指向社区基金会知识与公益实践；“603视界”则指向湖南农业大学芷兰24栋南603的校园叙事。两者都带有603三个数字，但一个主要谈社区基金会知识平台，一个主要写寝室生活、游记、创客和人物。把“603社区”的运营机构、知识库、数据库或定期更新说法套到603视界上，属于把两扇门的门牌贴反了。</p><p>因此，本页对“603社区”只做辨误，不把它的背景并入603视界，也不因为两者都使用微信公众号这一载体就假设存在合作关系。若需要查阅另一账号，应进入603社区词条；若要理解603视界，则应回到文章栏目、芷兰24栋南603的自述关联和鹿群材料中的寝室语境。</p></section><section id="read-archive" class="article-section"><h2><span>已经整理到哪些文章</span><button type="button" data-demo="编辑已经整理到哪些文章">编辑</button></h2><p>现有阅读笔记整理了空调异味、校园刻字、Android应用、科技展示、寻根海报、Desk Park、能源危机、岳阳楼游记、制冷设想、寝室协商、雨夜失糕、拾得手机和贝斯手人物志等材料。相关人物和事件都有独立入口。</p><p>这些材料包括直接可见页面及元宝转述的阅读结果，不等同于本轮重新读完全部原文。只有标题或封面的内容保留为线索；具体性能和事件结果若没有进一步证据，就按文章自述标明。603视界与603社区也不混作同一账号。</p></section>
+    
+    
+    <section id="related" class="article-section"><h2><span>相关条目</span></h2><p><a href="/weijiba/%E9%B9%BF%E7%BE%A4/" target="_blank" rel="noopener">鹿群</a>、<a href="/weijiba/%E7%BE%A4%E5%86%85%E7%BC%96%E5%B9%B4%E5%8F%B2%E4%B8%8E%E7%BE%A4%E5%8F%B2/" target="_blank" rel="noopener">群内编年史与群史</a>、<a href="/weijiba/%E9%B9%BF%E7%BE%A4%E7%A7%91%E6%8A%80%E8%AF%9D%E9%A2%98/" target="_blank" rel="noopener">鹿群科技话题</a>、<a href="/weijiba/%E9%A1%B9%E7%9B%AE%E4%B8%8E%E7%AB%9E%E8%B5%9B/" target="_blank" rel="noopener">项目与竞赛</a>、<a href="/weijiba/%E6%95%B0%E5%AD%97%E5%B9%B3%E5%8F%B0%E4%B8%8E%E4%BA%A7%E5%93%81/" target="_blank" rel="noopener">数字平台与产品</a>、<a href="/weijiba/AI%E4%B8%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B/" target="_blank" rel="noopener">AI 与大模型</a>、<a href="/weijiba/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9F%BA%E7%A1%80/" target="_blank" rel="noopener">机器人基础</a>、<a href="/weijiba/%E5%9B%B0%E5%9B%B0/" target="_blank" rel="noopener">困困</a>、<a href="/weijiba/%E9%AD%8F%E5%AD%90%E5%A5%87/" target="_blank" rel="noopener">魏子奇</a>、<a href="/weijiba/%E9%BB%8E%E5%81%A5%E6%AF%93/" target="_blank" rel="noopener">黎健毓</a>、<a href="/weijiba/%E6%9D%8E%E5%BD%A6%E8%87%BB/" target="_blank" rel="noopener">李彦臻</a>、<a href="/weijiba/%E5%A4%8F%E7%82%9C%E5%9F%8E/" target="_blank" rel="noopener">夏炜城</a>、<a href="/weijiba/KunCode/" target="_blank" rel="noopener">KunCode</a>、<a href="/weijiba/%E5%85%AC%E4%BC%97%E5%8F%B7%E4%B8%BB%E9%A1%B5/" target="_blank" rel="noopener">公众号主页</a>、<a href="/weijiba/%E7%BD%AE%E9%A1%B6%E6%96%87%E7%AB%A0/" target="_blank" rel="noopener">置顶文章</a>、<a href="/weijiba/%E5%A4%8F%E7%82%9C%E5%9F%8E%E7%9A%84%E5%AF%BB%E6%A0%B9%E4%B9%8B%E6%97%85/" target="_blank" rel="noopener">夏炜城的寻根之旅</a>、<a href="/weijiba/603%E7%A9%BA%E8%B0%83%E5%BC%82%E5%91%B3%E4%BA%8B%E4%BB%B6/" target="_blank" rel="noopener">603空调异味事件</a>、<a href="/weijiba/%E8%A2%AB%E5%88%BB%E8%BF%9B%E5%86%9C%E4%B8%93%E7%BC%9D%E9%9A%99%E9%87%8C%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AD%97/" target="_blank" rel="noopener">被刻进农专缝隙里的三个字</a>、<a href="/weijiba/603%E8%A7%86%E7%95%8CAI%E5%AE%89%E5%8D%93%E7%AB%AF%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" target="_blank" rel="noopener">603视界AI安卓端应用程序</a>、<a href="/weijiba/Desk%20Park%E4%B9%90%E9%98%9F/" target="_blank" rel="noopener">Desk Park乐队</a>、<a href="/weijiba/603%E8%83%BD%E6%BA%90%E5%8D%B1%E6%9C%BA/" target="_blank" rel="noopener">603能源危机</a>、<a href="/weijiba/%E5%B2%B3%E9%98%B3%E6%A5%BC%EF%BC%8C%E6%9C%9B%E6%B5%99%E6%B1%9F/" target="_blank" rel="noopener">岳阳楼，望浙江</a>、<a href="/weijiba/603%E6%AC%A7%E6%B4%B2%E7%A9%BA%E8%B0%83%E5%9B%B0%E5%B1%80/" target="_blank" rel="noopener">603欧洲空调困局</a>、<a href="/weijiba/%E4%B8%96%E7%95%8C%E6%AC%A0603%E4%B8%80%E4%B8%AA%E8%AF%BA%E8%B4%9D%E5%B0%94%E5%A5%96/" target="_blank" rel="noopener">世界欠603一个诺贝尔奖</a>、<a href="/weijiba/%E9%9B%A8%E5%A4%9C%E5%A4%B1%E7%B3%95/" target="_blank" rel="noopener">雨夜失糕</a>、<a href="/weijiba/%E6%8B%BE%E9%87%91%E4%B8%8D%E6%98%A7%E6%89%AC%E6%AD%A3%E6%B0%94%EF%BC%8C%E5%96%84%E8%A1%8C%E5%BE%AE%E5%85%89%E6%9A%96%E8%8A%B7%E5%85%B0/" target="_blank" rel="noopener">拾金不昧扬正气，善行微光暖芷兰</a>、<a href="/weijiba/%E6%B9%96%E5%8D%97%E5%86%9C%E4%B8%9A%E5%A4%A7%E5%AD%A6%E6%9C%80%E5%BC%BA%E8%B4%9D%E6%96%AF%E6%89%8B%E9%BB%8E%E5%81%A5%E6%AF%93/" target="_blank" rel="noopener">湖南农业大学最强贝斯手黎健毓</a>、<a href="/weijiba/%E7%BD%97%E5%AE%87%E4%BC%A6%E4%B8%8E%E5%AE%81%E7%8E%AE%E7%90%A6%E7%A0%B4%E5%86%B0%E6%BC%94%E5%87%BA/" target="_blank" rel="noopener">罗宇伦与宁玮琦破冰演出</a>、<a href="/weijiba/%E7%A7%91%E6%8A%80%E4%B9%8B%E5%85%89%EF%BD%9C603%E5%AF%9D%E5%AE%A4%E6%88%90%E5%91%98%E5%9C%A8%E6%8B%9B%E6%96%B0%E5%AE%A3%E8%AE%B2%E4%BC%9A%E5%90%8E%E5%B1%95%E7%A4%BA%E5%88%9B%E6%96%B0%E6%88%90%E6%9E%9C/" target="_blank" rel="noopener">科技之光｜603寝室成员在招新宣讲会后展示创新成果</a></p></section>
+    <section id="references" class="article-section references"><h2><span>资料来源</span><button type="button" data-demo="编辑资料来源">编辑</button></h2><ol><li id="ref-1">腾讯元宝公开检索与《603视界》公开资料核查报告（检索截止2026年9月4日）：区分公众号自述、第三方资料与无法确认项。</li><li id="ref-2">公开文章索引中可见的603视界标题、部分正文日期与微信 biz 标识 Mzk2NDAwMTc2Mw==；部分文章链接需要通过微信客户端或浏览器打开。</li><li id="ref-3">用户提供的603视界公众号主页截图：可见简介、地区、原创内容数量、朋友关注数量与置顶文章卡片；其中数字按截图时状态记录。</li><li id="ref-4">鹿群聊天导出中的603、604、寝室、查寝、杜邦线、活动接龙与公众号叙事语境。</li><li id="ref-5">“603社区”相关公开资料属于另一公众号；本条目仅引用其用于辨误的名称差异，不把两者信息合并。</li></ol></section>
+    <div class="categories"><span>分类：</span><a href="/weijiba/index.html#articles">数字寝室</a><a target="_blank" rel="noopener" href="/weijiba/%E9%B9%BF%E7%BE%A4/">校园熟人群体</a><a href="/weijiba/index.html#articles">校园媒体</a><a target="_blank" rel="noopener" href="/weijiba/%E9%B9%BF%E7%BE%A4/">鹿群文化</a><a target="_blank" rel="noopener" href="/weijiba/%E9%B9%BF%E7%BE%A4/">基础名词</a></div>
+    <p class="last-edited" id="history-note">本页面最后修订于 2026 年 9 月 23 日。页面内容用于非官方群内文化记录与趣味阅读。</p>
         </article>
 
         <footer class="article-footer" id="support">
@@ -337,9 +181,8 @@
       <span aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor" stroke="none"/></svg></span> 外观
     </button>
     <div class="article-toast" id="article-toast" role="status" aria-live="polite"></div>
-    <script src="../entry-routes.js?v=20260923-21"></script>
-    <script src="../entry-writing.js?v=20260923-21"></script>
-    <script src="../entry-data.js?v=20260923-21"></script>
-    <script src="../article.js?v=20260923-21"></script>
+      <script src="../entry-routes.js?v=20261015-pages"></script>
+    <script src="../focus-scope.js?v=20261015-pages"></script>
+    <script src="../article.js?v=20261015-pages"></script>
   </body>
 </html>

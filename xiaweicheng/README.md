@@ -22,7 +22,7 @@ python -m http.server 8000 --bind 127.0.0.1
 
 ## 页面内容
 
-- 个人介绍、能力方向与联系方式。
+- 个人介绍、能力方向与联系方式，首屏配有大幅个人照；桌面左右分栏，手机按标题、照片和简介排列。
 - 旅行、摄影、生活兴趣和校园经历。
 - RoboMaster功率控制板、智能泡茶机与LensPilot AI三个项目案例。
 - 项目背景、职责、方案、原型与复盘内容。
@@ -40,6 +40,9 @@ python -m http.server 8000 --bind 127.0.0.1
 |文件或目录|用途|
 |---|---|
 |[index.html](index.html)|首页导出文件|
+|[hero-portrait.css](hero-portrait.css)|首页人物照、两栏布局与手机适配，由共享CSS引入|
+|[assets/xia-weicheng-portrait.png](assets/xia-weicheng-portrait.png)|首页个人照原图，保留原始比例|
+|[lightbox-accessibility.js](lightbox-accessibility.js)|图片预览的Esc关闭、焦点限制与关闭后焦点恢复|
 |[projects/](projects/)|三个项目的案例页面|
 |`_next/`|导出页面使用的JavaScript与CSS|
 |[assets/](assets/)|项目图片、摄影与下载素材|
@@ -47,6 +50,16 @@ python -m http.server 8000 --bind 127.0.0.1
 |`404.html`、`404/`、`_not-found/`|导出的未找到页面资源|
 
 日常替换图片可沿用已有文件名和尺寸。修改页面结构、交互或项目正文时，应在原始Next.js工程完成后重新导出，并同步HTML、`_next/`和路由数据，避免只改HTML后被客户端内容覆盖。
+
+首页个人照已同步到HTML、内联页面数据和独立路由数据。重新导出时，应将照片布局纳入源工程，保留头像样式引用，并在首页和三个项目页保留`lightbox-accessibility.js`入口。该脚本增强现有图片预览，不替换React维护的页面内容。
+
+重新导出后，在仓库根目录运行以下命令，同步首页与项目页的分享标题、简介、封面和规范地址：
+
+```sh
+node tools/share-metadata.mjs
+```
+
+分享文案与封面的维护入口见[网站分享信息](../docs/sharing.md)。
 
 保留`/xiaweicheng/`路径与`.nojekyll`。如果迁移到其他目录，需要在原始工程中修改对应路径配置并重新导出。
 

@@ -24,6 +24,9 @@
   const searchableModules = [...document.querySelectorAll("[data-searchable]")];
   let toastTimer;
   let lastFocusedElement;
+  let releaseSidebarFocus = null;
+  let releaseModalFocus = null;
+  const mobileNavigation = window.matchMedia("(max-width: 980px)");
 
   const getEntryUrl = (slug) => window.WEIJIBA_ENTRY_URL?.(slug)
     || `article.html?entry=${encodeURIComponent(slug)}`;
@@ -142,10 +145,15 @@
 
   function setSidebar(open) {
     const wasOpen = body.classList.contains("sidebar-open");
+    releaseSidebarFocus?.();
+    releaseSidebarFocus = null;
+    open = Boolean(open && mobileNavigation.matches);
     body.classList.toggle("sidebar-open", open);
     if (sidebarBackdrop) sidebarBackdrop.hidden = !open;
     if (openSidebarButton) openSidebarButton.setAttribute("aria-expanded", String(open));
+    if (sidebar) sidebar.inert = mobileNavigation.matches && !open;
     if (open && sidebar) {
+      releaseSidebarFocus = window.WEIJIBA_FOCUS_SCOPE?.(sidebar, [sidebarBackdrop]);
       const firstLink = sidebar.querySelector(".nav-link");
       if (firstLink) firstLink.focus();
     } else if (wasOpen && openSidebarButton) {
@@ -222,12 +230,16 @@
   function openModal(viewName) {
     const view = modalViews[viewName];
     if (!modal || !view) return;
-    lastFocusedElement = document.activeElement;
+    const trigger = document.activeElement;
+    setSidebar(false);
+    lastFocusedElement = trigger?.closest("#sidebar") && mobileNavigation.matches ? openSidebarButton : trigger;
     modalTitle.textContent = view.title;
     modalContent.innerHTML = view.html;
     window.WEIJIBA_NORMALIZE_ENTRY_LINKS?.(modalContent);
     modal.hidden = false;
     body.classList.add("modal-open");
+    releaseModalFocus?.();
+    releaseModalFocus = window.WEIJIBA_FOCUS_SCOPE?.(modal.querySelector(".modal-card"), [modal.querySelector(".modal-backdrop")]);
     modalCloseButton?.focus();
   }
 
@@ -235,6 +247,8 @@
     if (!modal || modal.hidden) return;
     modal.hidden = true;
     body.classList.remove("modal-open");
+    releaseModalFocus?.();
+    releaseModalFocus = null;
     if (lastFocusedElement && typeof lastFocusedElement.focus === "function") lastFocusedElement.focus();
   }
 
@@ -316,6 +330,11 @@
   }
 
   if (footerYear) footerYear.textContent = String(new Date().getFullYear());
+  if (sidebar) sidebar.inert = mobileNavigation.matches;
+  mobileNavigation.addEventListener("change", () => {
+    if (modal && !modal.hidden) closeModal();
+    setSidebar(false);
+  });
   renderMegaEntryIndex();
   window.WEIJIBA_NORMALIZE_ENTRY_LINKS?.();
 })();

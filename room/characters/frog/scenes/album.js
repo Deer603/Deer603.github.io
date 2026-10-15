@@ -439,7 +439,8 @@ export default {
       openingIndex = spreads.findIndex((spread) =>
         [spread.left, spread.right].some((page) => page.photoIds.includes(capture.openingPhotoId || openingPhotoId))
       );
-      void turn.load();
+      // 先准备当前与相邻跨页，其余纹理随翻页请求加载。
+      void turn.load(Math.max(0, openingIndex - 1), Math.min(spreads.length - 1, openingIndex + 1)).catch(() => {});
       state.active = true;
       state.phase = 'gathering';
       state.gatherProgress = 0;
@@ -717,7 +718,7 @@ export default {
       returnToDesk,
       refreshLayout,
       reset,
-      preload: () => Promise.all([hand.decode(), shadowImage.decode(), turn.load()]),
+      preload: () => Promise.all([hand.decode(), shadowImage.decode(), turn.load(openingIndex)]),
     };
     dispose = () => {
       reset();

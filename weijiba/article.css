@@ -925,11 +925,13 @@ body.appearance-hidden .appearance-restore {
   box-shadow: 8px 0 24px rgba(0, 0, 0, 0.18);
   flex-direction: column;
   transform: translateX(-105%);
+  visibility: hidden;
   transition: transform 180ms ease;
 }
 
 body.menu-open .main-menu {
   transform: translateX(0);
+  visibility: visible;
 }
 
 .drawer-heading {
@@ -1185,11 +1187,13 @@ body.menu-open .main-menu {
     background: var(--raised-surface);
     box-shadow: -8px 0 24px rgba(0, 0, 0, 0.18);
     transform: translateX(105%);
+    visibility: hidden;
     transition: transform 180ms ease;
   }
 
   body.appearance-open .appearance-rail {
     transform: translateX(0);
+    visibility: visible;
   }
 
   .appearance-sticky {

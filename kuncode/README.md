@@ -1,4 +1,4 @@
-<p align="center"><img src="app-icon.png" width="104" alt="KunCode水豚图标"></p>
+<p align="center"><img src="app-icon-400.webp" width="104" alt="KunCode水豚图标"></p>
 
 # KunCode官网
 
@@ -49,8 +49,11 @@ python -m http.server 8000 --bind 127.0.0.1
 |[index.html](index.html)|文案、发行配置、默认下载链接与分享信息|
 |[style.css](style.css)|主题、布局与响应式样式|
 |[script.js](script.js)|发行链接生成、系统判断与对话示例切换|
-|[app-icon.png](app-icon.png)|水豚品牌图标|
+|[app-icon.png](app-icon.png)|水豚品牌原图|
+|[app-icon-96.webp](app-icon-96.webp)、[app-icon-400.webp](app-icon-400.webp)|顶栏、对话头像和介绍区域使用的展示图|
 |[share-cover.jpg](share-cover.jpg)、[share-thumb.jpg](share-thumb.jpg)|分享封面与缩略图|
+
+更换品牌原图后，在安装Pillow的Python环境中从仓库根目录运行`python tools/optimize-site-images.py`，重新生成96px与400px展示图。该脚本同时更新首页的展示图片，并保留原始素材。
 
 ### 更新版本
 

@@ -19,6 +19,7 @@
   const tocLinks = [...document.querySelectorAll(".toc a")];
   const sections = [...document.querySelectorAll("#top, .article-section")];
   let toastTimer;
+  let releaseDrawerFocus = null;
 
   function setSearchExpanded(expanded) {
     if (!searchForm) return;
@@ -118,7 +119,7 @@
     ["稳了", "short-messages"],
     ["61", "61"],
     ["nb", "nb-context"],
-    ...(window.WEIJIBA_ENTRY_TERMS || [])
+    ...(window.WEIJIBA_ENTRY_TERMS || Object.entries(window.WEIJIBA_ENTRY_PATHS || {}).map(([slug, title]) => [title, slug]))
   ].sort((a, b) => b[0].length - a[0].length);
 
   function escapeRegExp(value) {
@@ -214,8 +215,12 @@
     root.dataset.pageWidth = preferences.pageWidth;
     root.dataset.colorMode = preferences.colorMode;
     body.classList.toggle("appearance-hidden", Boolean(preferences.appearanceHidden));
-    if (appearanceRail) appearanceRail.setAttribute("aria-hidden", String(Boolean(preferences.appearanceHidden)));
-    if (restoreAppearanceButton) restoreAppearanceButton.setAttribute("aria-expanded", String(!preferences.appearanceHidden));
+    const appearanceVisible = isNarrowScreen() ? body.classList.contains("appearance-open") : !preferences.appearanceHidden;
+    if (appearanceRail) {
+      appearanceRail.setAttribute("aria-hidden", String(!appearanceVisible));
+      appearanceRail.inert = !appearanceVisible || body.classList.contains("menu-open");
+    }
+    if (restoreAppearanceButton) restoreAppearanceButton.setAttribute("aria-expanded", String(appearanceVisible));
     setChecked("text-size", preferences.textSize);
     setChecked("page-width", preferences.pageWidth);
     setChecked("color-mode", preferences.colorMode);
@@ -235,19 +240,26 @@
     const menuWasOpen = body.classList.contains("menu-open");
     const appearanceWasOpen = body.classList.contains("appearance-open");
     body.classList.remove("menu-open", "appearance-open");
+    releaseDrawerFocus?.();
+    releaseDrawerFocus = null;
+    if (mainMenu) mainMenu.inert = true;
     mainMenu?.setAttribute("aria-hidden", "true");
     menuTrigger?.setAttribute("aria-expanded", "false");
     setBackdrop(false);
+    applyPreferences();
     if (menuWasOpen) menuTrigger?.focus();
     if (appearanceWasOpen) restoreAppearanceButton?.focus();
   }
 
   menuTrigger?.addEventListener("click", () => {
+    closeDrawers();
     body.classList.remove("appearance-open");
     body.classList.add("menu-open");
+    if (mainMenu) mainMenu.inert = false;
     mainMenu?.setAttribute("aria-hidden", "false");
     menuTrigger.setAttribute("aria-expanded", "true");
     setBackdrop(true);
+    releaseDrawerFocus = window.WEIJIBA_FOCUS_SCOPE?.(mainMenu, [drawerBackdrop]);
     mainMenu?.querySelector("a")?.focus();
   });
 
@@ -272,10 +284,14 @@
 
   restoreAppearanceButton?.addEventListener("click", () => {
     if (isNarrowScreen()) {
+      closeDrawers();
       body.classList.remove("menu-open");
       body.classList.add("appearance-open");
+      if (appearanceRail) appearanceRail.inert = false;
       appearanceRail?.setAttribute("aria-hidden", "false");
+      restoreAppearanceButton.setAttribute("aria-expanded", "true");
       setBackdrop(true);
+      releaseDrawerFocus = window.WEIJIBA_FOCUS_SCOPE?.(appearanceRail, [drawerBackdrop]);
       hideAppearanceButton?.focus();
       return;
     }
@@ -379,13 +395,8 @@
     }
   });
 
-  window.addEventListener("resize", () => {
-    if (!isNarrowScreen()) {
-      body.classList.remove("appearance-open");
-      setBackdrop(body.classList.contains("menu-open"));
-      applyPreferences();
-    }
-  });
+  window.matchMedia("(max-width: 820px)").addEventListener("change", closeDrawers);
 
+  if (mainMenu) mainMenu.inert = true;
   applyPreferences();
 })();

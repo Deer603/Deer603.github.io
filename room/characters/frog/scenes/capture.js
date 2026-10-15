@@ -320,7 +320,7 @@ function mount(root, ctx) {
     stage.makePapers();
     const runId = state.runId;
     const decodePromises = [
-      ctx.preloadCapture(),
+      ctx.preloadCapture(stage.records.map(record => record.id)),
       ...[...stage.records.map(record => record.image), paperStage.gobo].map(image => image.decode()),
     ];
     desk.style.opacity = '1';

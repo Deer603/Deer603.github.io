@@ -36,10 +36,11 @@ export function alignedFace(source, landmarks) {
   return canvas;
 }
 
-export function loadSFace(modelBytes) {
+export function loadSFace(modelBytes, wasmBytes) {
   if (!sessionPromise) sessionPromise=(async()=>{
     if (!globalThis.ort) throw new Error('第二模型运行库未加载');
     ort.env.wasm.wasmPaths=new URL('./vendor/ort/',import.meta.url).href;
+    if (wasmBytes) ort.env.wasm.wasmBinary=wasmBytes;
     ort.env.wasm.numThreads=1;
     ort.env.logLevel='error';
     return ort.InferenceSession.create(modelBytes || new URL('./models/face_recognition_sface_2021dec.onnx',import.meta.url).href,

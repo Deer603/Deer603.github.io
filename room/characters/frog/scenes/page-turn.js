@@ -116,14 +116,16 @@ export function createPageTurn({ canvas, book, shadow, tabs, setPages, onRender,
     const P3 = new Float32Array(NV * 3);
     const NR = new Float32Array(NV * 3);
     const tex = new Map();
-    let loading = null;
+    const loading = new Map();
     let uploadQueue = Promise.resolve();
-    async function loadTex(id) {
+    function loadTex(id) {
+      if (tex.has(id)) return Promise.resolve();
+      if (loading.has(id)) return loading.get(id);
       const img = new Image();
       img.src = new URL(`../assets/pages/${id}.webp`, import.meta.url).href;
       const previousUpload = uploadQueue;
       uploadQueue = (async () => {
-        await previousUpload;
+        await previousUpload.catch(() => {});
         if (disposed || fallback) return;
         await img.decode();
         if (disposed || fallback) return;
@@ -144,18 +146,21 @@ export function createPageTurn({ canvas, book, shadow, tabs, setPages, onRender,
           bitmap?.close();
         }
       })();
-      return uploadQueue;
+      const pending = uploadQueue.catch(error => {
+        loading.delete(id);
+        throw error;
+      });
+      loading.set(id, pending);
+      return pending;
     }
-    function loadTextures() {
-      if (!loading) {
-        loading = Promise.all(spreads.flatMap((s) => [s.left.id, s.right.id]).map(loadTex));
-        loading
-          .then(() => {
-            if (!disposed) render();
-          })
-          .catch((error) => console.error(error));
-      }
-      return loading;
+    function textureIds(from, to = from) {
+      return spreads.slice(Math.max(0, Math.floor(from)), Math.min(N, Math.ceil(to)) + 1)
+        .flatMap(spread => [spread.left.id, spread.right.id]);
+    }
+    function loadTextures(from, to = from) {
+      return Promise.all(textureIds(from, to).map(loadTex)).then(() => {
+        if (!disposed) render();
+      });
     }
 
     const BEND = 1.25;
@@ -229,6 +234,7 @@ export function createPageTurn({ canvas, book, shadow, tabs, setPages, onRender,
     }
     renderer = {
       load: loadTextures,
+      ready: (from, to) => textureIds(from, to).every(id => tex.has(id)),
       drawLeaf,
       clear() {
         gl.clearColor(0, 0, 0, 0);
@@ -251,10 +257,29 @@ export function createPageTurn({ canvas, book, shadow, tabs, setPages, onRender,
     };
   }
 
-  function load() {
-    return renderer?.load() ?? Promise.resolve();
+  function load(from = Math.round(shown), to = from) {
+    return renderer?.load(from, to) ?? Promise.resolve();
   }
 
+  let loadRevision = 0;
+  function ensureTextures(goal, resume) {
+    const from = Math.min(shown, goal), to = Math.max(shown, goal);
+    if (fallback || !renderer || renderer.ready(from, to)) return true;
+    const token = ++loadRevision;
+    cancelAnimationFrame(raf);
+    raf = 0;
+    tween?.kill();
+    tween = null;
+    void load(from, to).then(() => {
+      if (!disposed && token === loadRevision) resume();
+    }).catch(() => {
+      if (disposed || token !== loadRevision) return;
+      // 纹理失败时仍能直接阅读DOM页面，不让翻页操作停住。
+      fallback = true;
+      resume();
+    });
+    return false;
+  }
   let shown = 0;
   let target = 0;
   let raf = 0;
@@ -349,6 +374,7 @@ export function createPageTurn({ canvas, book, shadow, tabs, setPages, onRender,
     }
   }
   function stop() {
+    loadRevision++;
     clearTimeout(snapTimer);
     tween?.kill();
     tween = null;
@@ -358,6 +384,13 @@ export function createPageTurn({ canvas, book, shadow, tabs, setPages, onRender,
     riffleRun = null;
   }
   function tweenTo(goal, ms, ease, complete) {
+    if (!ensureTextures(goal, () => tweenTo(goal, ms, ease, complete))) return;
+    if (fallback) {
+      shown = target = goal;
+      render();
+      complete?.();
+      return;
+    }
     const driver = { value: target };
     tween?.kill();
     tween = window.gsap.to(driver, {
@@ -392,9 +425,12 @@ export function createPageTurn({ canvas, book, shadow, tabs, setPages, onRender,
       render();
       return;
     }
-    go();
-    clearTimeout(snapTimer);
-    snapTimer = setTimeout(snap, 180);
+    const begin = () => {
+      go();
+      clearTimeout(snapTimer);
+      snapTimer = setTimeout(snap, 180);
+    };
+    if (ensureTextures(target, begin)) begin();
   }
   function step(d) {
     if (riffleRun) stop();
@@ -409,6 +445,7 @@ export function createPageTurn({ canvas, book, shadow, tabs, setPages, onRender,
   }
   function riffle(to, complete) {
     stop();
+    if (!ensureTextures(to, () => riffle(to, complete))) return;
     const from = Math.round(shown);
     if (to === from) {
       complete?.();

@@ -1,15 +1,6 @@
 (() => {
   "use strict";
 
-  const forceScrollTop = () => window.scrollTo(0, 0);
-  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-  forceScrollTop();
-  window.addEventListener("pageshow", forceScrollTop);
-  window.addEventListener("load", () => {
-    forceScrollTop();
-    window.setTimeout(forceScrollTop, 0);
-  }, { once: true });
-
   const entryPaths = {
     kunkun: "困困",
     luchun: "鹿群",
@@ -312,6 +303,9 @@
         : (luchunBaseTopicSet.has(topic) ? "鹿群资料" : "常用词")
     });
   });
+  // Windows无法同时保存macOS和MacOS目录，保留两篇文章并明确区分路径。
+  const spellingEntry = baseEntryRecords.find(record => record.title === "MacOS");
+  if (spellingEntry) entryPaths[spellingEntry.slug] = "MacOS（大小写写法）";
   Object.freeze(entryPaths);
 
   const slugByPath = Object.fromEntries(Object.entries(entryPaths).map(([slug, path]) => [path, slug]));
@@ -330,7 +324,7 @@
   }
 
   function getEntryFromPath(pathname) {
-    let path = pathname.split("/").filter(Boolean).pop() || "";
+    let path = pathname.replace(/\/index\.html$/, "/").split("/").filter(Boolean).pop() || "";
     try {
       path = decodeURIComponent(path);
     } catch (_) {}

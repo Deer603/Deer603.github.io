@@ -590,7 +590,7 @@ nav.main a.active{color:var(--blue)}
 /* 首页 */
 .hero{height:490px;min-height:490px;margin-top:-30px;overflow:visible}
 .hero-art{top:-190px;right:0;width:48%;height:710px;clip-path:none;border:0;background-color:transparent}
-.asset-hero{background:url("../assets/hero.png") center right/cover no-repeat}
+.asset-hero{background:url("../assets/optimized/hero.webp") center right/cover no-repeat}
 .hero-copy{padding:150px 0 0 4.8vw;max-width:58%}
 .hero-copy h1{font-size:72px;letter-spacing:.02em;color:#07090b}
 .hero-copy .sub{font-size:21px;letter-spacing:.04em;margin-top:6px}
@@ -600,7 +600,7 @@ nav.main a.active{color:var(--blue)}
 .sec-title{font-size:28px;margin-bottom:16px}.sec-title i{width:5px;height:32px;background:#36b8ef;border-radius:0}
 .staff-cards{gap:0}.staff-card{height:365px;border-radius:0;box-shadow:none;border:0}
 .staff-card:hover,.voice-card:hover{transform:none;box-shadow:none}
-.staff-card .ph{background-image:url("../assets/missing-pair.png");background-size:205% auto;background-repeat:no-repeat}
+.staff-card .ph{background-image:url("../assets/optimized/missing-pair.webp");background-size:205% auto;background-repeat:no-repeat}
 .staff-card .ph::after,.asset-product::after,.asset-missing::after{display:none}
 .asset-staff-a{background-position:9% 40%}.asset-staff-b{background-position:91% 40%}
 .staff-card.red::after{background:linear-gradient(90deg,rgba(20,94,188,.82),rgba(20,94,188,.18) 66%,transparent)}
@@ -619,16 +619,16 @@ nav.main a.active{color:var(--blue)}
 .badge,.hot-item{border-radius:0;background:rgba(255,255,255,.45);border:0}
 .badge{padding:18px}.badge b{font-size:20px}.badge span{font-size:16px}
 .promo{height:258px;border-radius:0;box-shadow:none;background:#262c32}
-.promo .ph{width:58%;opacity:1}.asset-product{background:url("../assets/dorm-gear-banner-haavk.png") center left/cover no-repeat}
+.promo .ph{width:58%;opacity:1}.asset-product{background:url("../assets/optimized/dorm-gear-banner-haavk.webp") center left/cover no-repeat}
 .promo-copy{width:55%;padding:30px 44px}.promo-copy h3{font-size:46px}.promo-copy .hl{font-size:25px;color:#37b8ef}.promo-feats{margin-top:32px;gap:40px}.promo-feats b{font-size:19px}.promo-feats div{font-size:14px}
 .prod-list{gap:12px;margin-top:22px}.prod{grid-template-columns:150px 1fr 250px;border-radius:0;box-shadow:none;border:0;padding:20px 38px;background:rgba(247,249,251,.75)}
-.prod:hover{transform:none;box-shadow:none}.prod .p-img{width:130px;height:96px;border-radius:0;background-image:url("../assets/product-banner.png");background-size:420%;background-position:left center}.prod h4{font-size:28px}.prod h4 .limit{font-size:20px;color:var(--blue)}.prod .desc,.prod .detail{font-size:16px}.price{font-size:24px}.btn-buy{border-radius:0;font-size:20px;width:220px;padding:14px 0}
+.prod:hover{transform:none;box-shadow:none}.prod .p-img{width:130px;height:96px;border-radius:0;background-image:url("../assets/optimized/product-banner.webp");background-size:420%;background-position:left center}.prod h4{font-size:28px}.prod h4 .limit{font-size:20px;color:var(--blue)}.prod .desc,.prod .detail{font-size:16px}.price{font-size:24px}.btn-buy{border-radius:0;font-size:20px;width:220px;padding:14px 0}
 
 .hot{gap:16px}.hot-item{padding:18px}.hot-item b{font-size:20px}.hot-item span{font-size:16px}.btn-post{border-radius:0;font-size:20px;padding:16px}.censor-btn{border-radius:0;font-size:16px;padding:13px}
 .forum-head{grid-template-columns:1fr 340px 150px 220px;padding:18px 56px;border-bottom:5px solid var(--blue);font-size:22px}
 .forum-row{grid-template-columns:1fr 340px 150px 220px;padding:18px 56px;background:transparent;border-bottom:1px solid #4d84b6}.f-title{font-size:21px}.f-title .sq{width:22px;height:22px;border-radius:0}.f-ava{width:62px;height:62px;border-radius:0}.f-user .u b{font-size:18px}.f-user .u span,.f-num,.f-last{font-size:16px}.forum-foot{border-radius:0;border:0;font-size:16px;padding:14px 50px;background:rgba(255,255,255,.42)}
 
-.miss-grid{grid-template-columns:1fr 1fr;gap:54px}.miss-card{height:780px;border-radius:0;box-shadow:none;border:0;background:#18385a}.miss-card .strip{font-size:22px;padding:24px 42px;justify-content:center}.miss-card .m-ph .ph{background-image:url("../assets/missing-pair.png");background-size:205% auto;background-repeat:no-repeat}.asset-missing-a{background-position:6% 45%}.asset-missing-b{background-position:94% 45%}.miss-card .m-info{top:140px;left:28px}.miss-card .m-info b{font-size:58px}.miss-card .m-info span{font-size:20px;max-width:560px}.miss-card .m-foot{left:28px;right:28px;bottom:36px}.miss-card .m-foot .lab{font-size:24px}.miss-card .m-foot .big{font-size:54px}.btn-m,.btn-archive{border-radius:0;font-size:20px;padding:16px}
+.miss-grid{grid-template-columns:1fr 1fr;gap:54px}.miss-card{height:780px;border-radius:0;box-shadow:none;border:0;background:#18385a}.miss-card .strip{font-size:22px;padding:24px 42px;justify-content:center}.miss-card .m-ph .ph{background-image:url("../assets/optimized/missing-pair.webp");background-size:205% auto;background-repeat:no-repeat}.asset-missing-a{background-position:6% 45%}.asset-missing-b{background-position:94% 45%}.miss-card .m-info{top:140px;left:28px}.miss-card .m-info b{font-size:58px}.miss-card .m-info span{font-size:20px;max-width:560px}.miss-card .m-foot{left:28px;right:28px;bottom:36px}.miss-card .m-foot .lab{font-size:24px}.miss-card .m-foot .big{font-size:54px}.btn-m,.btn-archive{border-radius:0;font-size:20px;padding:16px}
 
 footer.bar{height:72px;background:#020303;border-top:0;padding:0 5vw}.back-chip{border-radius:0;background:#030405;border:1px solid #343a40;font-size:14px}.bar-right{font-size:25px;gap:38px}.bar-ava{width:52px;height:52px;border-radius:0;background:#103d5b;color:#76c5ed}
 
@@ -641,20 +641,20 @@ footer.bar{height:72px;background:#020303;border-top:0;padding:0 5vw}.back-chip{
 
 /* 实拍身份素材统一重绘后的角色与商品资源 */
 .staff-card .asset-staff-a{
-  background-image:url("../assets/zhan-kunkun-haavk.png");
+  background-image:url("../assets/optimized/zhan-kunkun-haavk.webp");
   background-size:cover;background-position:center 18%;
 }
 .staff-card .asset-staff-b{
-  background-image:url("../assets/luo-yulun-haavk.png");
+  background-image:url("../assets/optimized/luo-yulun-haavk.webp");
   background-size:cover;background-position:center 16%;
 }
 .voice-card .portrait{
   background-size:cover;background-repeat:no-repeat;background-position:center 24%;
   border:0;
 }
-.voice-card .portrait-xiaweigui{background-image:url("../assets/xia-weigui-haavk.png")}
-.voice-card .portrait-weiziqi{background-image:url("../assets/wei-ziqi-haavk.png")}
-.voice-card .portrait-lutenghui{background-image:url("../assets/lu-tenghui-haavk.png")}
+.voice-card .portrait-xiaweigui{background-image:url("../assets/optimized/xia-weigui-haavk.webp")}
+.voice-card .portrait-weiziqi{background-image:url("../assets/optimized/wei-ziqi-haavk.webp")}
+.voice-card .portrait-lutenghui{background-image:url("../assets/optimized/lu-tenghui-haavk.webp")}
 .voice-card .portrait::after{display:none}
 .voice-card .portrait-classified{
   background:#456f9f;
@@ -664,21 +664,21 @@ footer.bar{height:72px;background:#020303;border-top:0;padding:0 5vw}.back-chip{
   display:block;content:attr(data-label);color:rgba(255,255,255,.72);font-size:12px;letter-spacing:.18em;
 }
 .chat-ava-frog{
-  background:url("../assets/easter-egg-haavk.png") 10% center/cover no-repeat;
+  background:url("../assets/optimized/easter-egg-haavk-avatar.webp") 10% center/cover no-repeat;
 }
 
 .prod .p-img{background-color:#dce3e9;background-size:cover;background-repeat:no-repeat;background-position:center;border:0}
-.prod .item-hongpu{background-image:url("../assets/hongpu-pants-haavk.png")}
-.prod .item-heipu{background-image:url("../assets/heipu-shirt-haavk.png")}
+.prod .item-hongpu{background-image:url("../assets/optimized/hongpu-pants-haavk.webp")}
+.prod .item-heipu{background-image:url("../assets/optimized/heipu-shirt-haavk.webp")}
 
 .f-ava{background-color:#cad5df;background-size:cover;background-repeat:no-repeat;background-position:center 22%;border:1px solid rgba(38,96,147,.16)}
-.avatar-luoyulun{background-image:url("../assets/luo-yulun-haavk.png")}
-.avatar-tangyingxin{background-image:url("../assets/tang-yingxin-haavk.png")}
-.avatar-wangpengtao{background-image:url("../assets/wang-pengtao-haavk.png")}
-.avatar-biangrobot{background-image:url("../assets/biang-robot-haavk.png")}
-.avatar-niaoniao{background-image:url("../assets/niaoniao-haavk.png")}
-.avatar-weiziqi{background-image:url("../assets/wei-ziqi-haavk.png")}
-.avatar-default{background-image:url("../assets/missing-pair.png");background-size:205%;background-position:8% 30%}
+.avatar-luoyulun{background-image:url("../assets/optimized/luo-yulun-haavk-avatar.webp")}
+.avatar-tangyingxin{background-image:url("../assets/optimized/tang-yingxin-haavk-avatar.webp")}
+.avatar-wangpengtao{background-image:url("../assets/optimized/wang-pengtao-haavk-avatar.webp")}
+.avatar-biangrobot{background-image:url("../assets/optimized/biang-robot-haavk-avatar.webp")}
+.avatar-niaoniao{background-image:url("../assets/optimized/niaoniao-haavk-avatar.webp")}
+.avatar-weiziqi{background-image:url("../assets/optimized/wei-ziqi-haavk-avatar.webp")}
+.avatar-default{background-image:url("../assets/optimized/missing-pair-avatar.webp");background-size:205%;background-position:8% 30%}
 
 .forum-row.has-attachment{cursor:pointer;border-left:4px solid rgba(22,116,207,.38)}
 .forum-row.has-attachment:hover{background:rgba(255,255,255,.46)}

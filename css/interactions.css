@@ -1,4 +1,5 @@
 /* ================= 交互层样式 ================= */
+.js .deferred-image{background-image:none!important}
 /* 钱包 / 头像盒等基础样式已并入 style.css 设计系统 */
 
 /* 解密进度条 */
@@ -234,7 +235,7 @@ button:not(.dots button){transition:background-color .15s,border-color .15s,opac
 .btn-buy,.btn-m,.btn-post,.censor-btn,.btn-archive{letter-spacing:.06em}
 .btn-cancel,.btn-ok{min-height:38px;letter-spacing:.04em}
 .mini-card .m-name{text-shadow:0 1px 6px #0009}
-.mini-card .ph{background-image:url('../assets/missing-pair.png');background-size:205% auto;background-position:6% 35%}
+.mini-card .ph{background-image:url('../assets/optimized/missing-pair.webp');background-size:205% auto;background-position:6% 35%}
 .mini-card:nth-child(2) .ph{background-position:94% 35%}
 .mini-card .ph::after{display:none}
 .mini-card::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(transparent 25%,rgba(9,22,38,.88))}

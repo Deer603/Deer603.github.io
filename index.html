@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>document.documentElement.classList.add('js');</script>
 <title>603web｜603，我们的家</title>
-<link rel="stylesheet" href="css/style.css?v=icons-1">
-<link rel="stylesheet" href="css/interactions.css">
+<link rel="stylesheet" href="css/style.css?v=20261015">
+<link rel="stylesheet" href="css/interactions.css?v=20261015">
 <style>.view{animation:fade .25s ease}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}</style>
     <!-- share-metadata:start -->
     <meta name="description" content="寝室概况、论坛、小卖部与查寝通报。走进603，发现室友故事与鹿群小站。">
@@ -92,12 +93,12 @@
       <h2 class="sec-title"><i></i><span data-surface="优秀室友" data-truth="内卷修罗场">优秀室友</span></h2>
       <div class="staff-cards">
         <article class="staff-card red">
-          <div class="ph asset-staff asset-staff-a" role="img" aria-label="詹困困"></div>
+          <div class="ph asset-staff asset-staff-a deferred-image" role="img" aria-label="詹困困"></div>
           <div class="tag"><b>詹困困</b><span>寝室长 · 统筹全局</span></div>
           <div class="slogan">寝室的定海神针</div>
         </article>
         <article class="staff-card blue">
-          <div class="ph asset-staff asset-staff-b" role="img" aria-label="罗宇伦"></div>
+          <div class="ph asset-staff asset-staff-b deferred-image" role="img" aria-label="罗宇伦"></div>
           <div class="tag"><b>罗宇伦</b><span>普克委员 · 外号艾克普</span></div>
           <div class="slogan">普克の意志</div>
         </article>
@@ -106,10 +107,10 @@
     <div>
       <h2 class="sec-title"><i></i><span data-surface="室友之声" data-truth="真心话大冒险">室友之声</span></h2>
       <div class="voices">
-        <div class="voice-card"><b><a href="/xiaweicheng/" title="查看夏炜城个人网站">夏尾龟↗</a></b><div class="dept">后勤部</div><div class="portrait portrait-xiaweigui" role="img" aria-label="夏尾龟"></div><p>不论多晚<br>零食永不断供</p></div>
+        <div class="voice-card"><b><a href="/xiaweicheng/" title="查看夏炜城个人网站">夏尾龟↗</a></b><div class="dept">后勤部</div><div class="portrait portrait-xiaweigui deferred-image" role="img" aria-label="夏尾龟"></div><p>不论多晚<br>零食永不断供</p></div>
         <div class="voice-card"><b>黎煎鱼</b><div class="dept">纪检部</div><div class="portrait ph portrait-classified" data-label="档案未公开"></div><p>理解的要熄灯<br>不理解的也要熄灯</p></div>
-        <div class="voice-card"><b>威兹奇</b><div class="dept">宣传部</div><div class="portrait portrait-weiziqi" role="img" aria-label="威兹奇"></div><p>发动态的永远是我们<br>火的是别人</p></div>
-        <div class="voice-card"><b>鹿腾辉</b><div class="dept">通讯部</div><div class="portrait portrait-lutenghui" role="img" aria-label="鹿腾辉"></div><p>耳机常驻<br>信号永不断线</p></div>
+        <div class="voice-card"><b>威兹奇</b><div class="dept">宣传部</div><div class="portrait portrait-weiziqi deferred-image" role="img" aria-label="威兹奇"></div><p>发动态的永远是我们<br>火的是别人</p></div>
+        <div class="voice-card"><b>鹿腾辉</b><div class="dept">通讯部</div><div class="portrait portrait-lutenghui deferred-image" role="img" aria-label="鹿腾辉"></div><p>耳机常驻<br>信号永不断线</p></div>
       </div>
     </div>
   </div>
@@ -377,8 +378,8 @@ const state = {
     {id:6,title:'我给大家少说两句',user:'威兹奇',dept:'宣传部',r:1,last:'威兹奇'},
     {id:7,title:'称呼方式研究：今晚谁先开口',user:'王鹏涛',dept:'寝室气氛组',r:4,last:'别乱叫人'},
     {id:8,title:'彼昂机器人今日运行报告',user:'彼昂机器人',dept:'自动化值守单元',r:1,last:'系统正常'},
-    {id:9,title:'今日园区巡查随手拍',user:'罗宇伦',dept:'普克委员',r:6,last:'墨镜不错',image:'assets/luo-moments-haavk.png',body:'天气不错，顺路完成园区巡查。照片经过 603 内网安全滤镜处理。'},
-    {id:10,title:'【加密附件】三方会谈记录',user:'彼昂机器人',dept:'自动化值守单元',r:0,last:'权限不足',image:'assets/easter-egg-haavk.png',body:'系统检测到一名身份不明的两栖情报顾问。该记录仅供 603 内部查阅。',egg:true},
+    {id:9,title:'今日园区巡查随手拍',user:'罗宇伦',dept:'普克委员',r:6,last:'墨镜不错',image:'assets/optimized/luo-moments-haavk.webp',body:'天气不错，顺路完成园区巡查。照片经过 603 内网安全滤镜处理。'},
+    {id:10,title:'【加密附件】三方会谈记录',user:'彼昂机器人',dept:'自动化值守单元',r:0,last:'权限不足',image:'assets/optimized/easter-egg-haavk.webp',body:'系统检测到一名身份不明的两栖情报顾问。该记录仅供 603 内部查阅。',egg:true},
   ],
   items: {
     hongpu:{name:'红朴裤',price:60,limit:2,bought:0,desc:'高饱和红色长裤，朴素耐穿，是 603 最醒目的下装装备。'},
@@ -390,6 +391,13 @@ const state = {
 
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
+const deferredImages=$$('.deferred-image');
+if('IntersectionObserver' in window){
+  const imageObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.remove('deferred-image');imageObserver.unobserve(entry.target);}
+  }),{rootMargin:'180px'});
+  deferredImages.forEach(image=>imageObserver.observe(image));
+}else deferredImages.forEach(image=>image.classList.remove('deferred-image'));
 
 /* ===================== 持久化（刷新/重访不丢进度） ===================== */
 const SAVE_KEY = 'dorm603_save_v1';
@@ -518,7 +526,7 @@ function switchView(id){
 }
 $$('nav.main a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();switchView(a.dataset.view);}));
 $('.logo').addEventListener('click',e=>{e.preventDefault();switchView('v-home');});
-$('#backBtn').addEventListener('click',()=>{ if(overlay.classList.contains('open')) overlay.classList.remove('open'); else switchView('v-home'); });
+$('#backBtn').addEventListener('click',()=>{ if(overlay.classList.contains('open')) closeModal('#evOverlay'); else switchView('v-home'); });
 
 $('#salaryBtn').addEventListener('click',()=>{
   const today = new Date().toDateString();
@@ -611,34 +619,78 @@ $('#censorBtn').addEventListener('click',()=>{
 });
 
 const overlay = $('#evOverlay');
-$$('[data-open-event]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();overlay.classList.add('open');}));
-$$('[data-close-event]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();overlay.classList.remove('open');}));
+$$('[data-open-event]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();openModal('#evOverlay');}));
+$$('[data-close-event]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();closeModal('#evOverlay');}));
 $('#rewardBtn').addEventListener('click',()=>{
   if(state.decode < 100){ toast('解密达到100%后可查看完整关系网。',true); return; }
   openModal('#rewardModal');
 });
 
-let priorFocus = null;
+const modalStack = [];
+const originalInert = new Map();
+let originalOverflow = '';
+function modalControls(modal){
+  return Array.from(modal.querySelectorAll('a[href],button,input,textarea,select,[tabindex]'))
+    .filter(el=>!el.disabled && el.tabIndex>=0 && !el.closest('[inert]') && el.getClientRects().length);
+}
+function syncModalBackground(){
+  const top=modalStack.at(-1)?.modal;
+  if(top){
+    for(const node of document.body.children){
+      if(['SCRIPT','STYLE'].includes(node.tagName) || node.id==='toast') continue;
+      if(!originalInert.has(node)) originalInert.set(node,node.inert);
+      node.inert=node!==top;
+    }
+    document.body.style.overflow='hidden';
+  }else{
+    originalInert.forEach((value,node)=>{node.inert=value;});
+    originalInert.clear();
+    document.body.style.overflow=originalOverflow;
+  }
+}
 function openModal(s){
-  priorFocus = document.activeElement;
-  const modal=$(s); modal.classList.add('open');
+  const modal=$(s);
+  if(modalStack.some(item=>item.modal===modal)) return;
+  if(!modalStack.length) originalOverflow=document.body.style.overflow;
+  modalStack.push({modal,priorFocus:document.activeElement});
+  modal.classList.add('open');
   modal.setAttribute('role','dialog');
   modal.setAttribute('aria-modal','true');
-  const focusTarget=modal.querySelector('input,textarea,button');
-  if(focusTarget) focusTarget.focus();
+  modal.removeAttribute('aria-hidden');
+  modal.tabIndex=-1;
+  const heading=modal.querySelector('h2,h3,.ev-title');
+  if(heading){heading.id ||= modal.id+'-title';modal.setAttribute('aria-labelledby',heading.id);}
+  syncModalBackground();
+  (modal.querySelector('input,textarea') || modalControls(modal)[0] || modal).focus();
 }
 function closeModal(s){
-  $(s).classList.remove('open');
-  if(priorFocus?.isConnected) priorFocus.focus();
+  const index=modalStack.findIndex(item=>item.modal===$(s));
+  if(index<0) return;
+  const closed=modalStack.splice(index);
+  closed.forEach(({modal})=>{modal.classList.remove('open');});
+  syncModalBackground();
+  const prior=closed[0].priorFocus;
+  if(prior?.isConnected && !prior.closest('[inert]')) prior.focus();
+  else modalStack.at(-1)?.modal.focus();
+  closed.forEach(({modal})=>modal.setAttribute('aria-hidden','true'));
 }
 $$('[data-close-modal]').forEach(b=>b.addEventListener('click',()=>closeModal('#'+b.closest('.modal').id)));
 $$('.modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) closeModal('#'+m.id); }));
 
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){
-    overlay.classList.remove('open');
-    $$('.modal.open').forEach(m=>closeModal('#'+m.id));
+  const top=modalStack.at(-1)?.modal;
+  if(!top) return;
+  if(e.key==='Escape'){e.preventDefault();closeModal('#'+top.id);}
+  if(e.key==='Tab'){
+    const controls=modalControls(top),first=controls[0],last=controls.at(-1);
+    if(!first){e.preventDefault();top.focus();}
+    else if(e.shiftKey && (document.activeElement===first || !controls.includes(document.activeElement))){e.preventDefault();last.focus();}
+    else if(!e.shiftKey && (document.activeElement===last || !controls.includes(document.activeElement))){e.preventDefault();first.focus();}
   }
+});
+document.addEventListener('focusin',e=>{
+  const top=modalStack.at(-1)?.modal;
+  if(top && !top.contains(e.target)) (modalControls(top)[0] || top).focus();
 });
 
 $('#endHuntBtn').addEventListener('click',()=>{

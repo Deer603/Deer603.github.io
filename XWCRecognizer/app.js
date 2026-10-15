@@ -1,7 +1,8 @@
 import { stabilizeMatches, validateProfiles, validDescriptor } from './core.js';
 import { rankDualProfiles, dualDecision, validateSFaceLibrary } from './ensemble.js';
 import { extractSFace } from './sface.js';
-import { loadModels } from './model-loader.js';
+import { loadModels, loadRuntime } from './model-loader.js';
+import { createResultsView } from './results-view.js';
 
 const $ = id => document.getElementById(id);
 const state = { people: [], ready: false, models: false, loading: false, stream: null, opening: false, session: 0, timer: null, faces: [], mode: 'idle', toastTimer: null };
@@ -10,6 +11,7 @@ let results = [];
 let sfacePeople = [];
 const ctx = $('overlay').getContext('2d');
 let detectionTail = Promise.resolve();
+const resultsView = createResultsView($('match-list'), $('match-announcement'));
 
 function element(tag, text, className) {
   const node = document.createElement(tag);
@@ -44,7 +46,7 @@ function detect(input) {
 }
 
 function loadingProgress(percent, message) {
-  $('loading-percent').textContent = `${percent}%`;
+  if ($('loading-percent').textContent !== `${percent}%`) $('loading-percent').textContent = `${percent}%`;
   $('loading-fill').style.width = `${percent}%`;
   $('loading-progress').setAttribute('aria-valuenow', String(percent));
   $('loading-message').textContent = message;
@@ -57,6 +59,9 @@ async function initialize() {
   $('loading-panel').hidden = false;
   $('idle-placeholder').hidden = true;
   $('loading-title').textContent = '正在加载模型';
+  $('load-models').hidden = true;
+  $('loading-percent').hidden = false;
+  $('loading-progress').hidden = false;
   $('loading-retry').hidden = true;
   loadingProgress(0, '正在准备');
   $('retry-model').disabled = true;
@@ -64,6 +69,7 @@ async function initialize() {
   $('model-detail').textContent = '读取本地模型与预设数据';
   controls();
   try {
+    await loadRuntime(loadingProgress);
     const api = window.faceapi;
     if (!api) throw new Error('识别脚本未加载，请刷新网页');
     if (!state.models) {
@@ -78,11 +84,11 @@ async function initialize() {
       state.models = true;
     }
     const response = await fetch('./presets/library.json');
-    if (!response.ok) throw new Error('预设人物库无法加载');
+    if (!response.ok) throw new Error(`预设人物库无法加载（HTTP${response.status}），请确认presets/library.json已部署。`);
     state.people = validateProfiles(await response.json());
     if (!state.people.length) throw new Error('预设人物库为空');
     const second = await fetch('./presets/sface-library.json');
-    if (!second.ok) throw new Error('第二模型参考库无法加载');
+    if (!second.ok) throw new Error(`第二模型参考库无法加载（HTTP${second.status}），请确认presets/sface-library.json已部署。`);
     sfacePeople = validateSFaceLibrary(await second.json(), state.people);
     loadingProgress(100, '加载完成');
     state.ready = true;
@@ -97,12 +103,18 @@ async function initialize() {
   } catch (error) {
     console.error(error);
     $('loading-title').textContent = '加载失败';
-    $('loading-message').textContent = '请检查网络连接后重试';
+    $('loading-message').textContent = error.message || '加载失败，请重试。';
     $('loading-retry').hidden = false;
     $('model-status').textContent = '加载失败';
     $('model-status').className = 'status-badge error';
-    $('model-detail').textContent = `${error.message}。请通过localhost或HTTPS打开，确认模型与预设文件在同一网站目录。`;
-  } finally { state.loading = false; $('retry-model').disabled = false; controls(); }
+    $('model-detail').textContent = error.message;
+    $('loading-retry').focus({ preventScroll: true });
+  } finally {
+    state.loading = false;
+    $('retry-model').disabled = false;
+    controls();
+    if (state.ready) $('start-camera').focus({ preventScroll: true });
+  }
 }
 
 async function enumerateCameras() {
@@ -219,7 +231,7 @@ async function loop(session) {
 function resetMatches() {
   state.faces = [];
   results = [];
-  $('match-list').replaceChildren(element('div', '等待画面', 'empty-state plain-empty'));
+  resultsView.reset();
   $('match-summary').textContent = '等待画面';
   ctx.clearRect(0, 0, $('overlay').width, $('overlay').height);
 }
@@ -232,7 +244,8 @@ function showResults(faces, frame, elapsed) {
   $('inference-time').textContent = String(Math.round(elapsed));
   evaluateMatches();
   renderMatches();
-  $('camera-message').textContent = faces.length ? `检测到${faces.length}张人脸` : '未检测到人脸';
+  const message = faces.length ? `检测到${faces.length}张人脸` : '未检测到人脸';
+  if ($('camera-message').textContent !== message) $('camera-message').textContent = message;
 }
 
 function evaluateMatches() {
@@ -251,30 +264,12 @@ function evaluateMatches() {
 function renderMatches() {
   const faces = state.faces;
   ctx.clearRect(0, 0, $('overlay').width, $('overlay').height);
-  $('match-list').replaceChildren();
-  $('match-summary').textContent = faces.length ? `${faces.length}张人脸` : '未检测到人脸';
-  if (!faces.length) { $('match-list').append(element('div', '未检测到人脸', 'empty-state plain-empty')); return; }
+  const summary = faces.length ? `${faces.length}张人脸` : '未检测到人脸';
+  if ($('match-summary').textContent !== summary) $('match-summary').textContent = summary;
+  resultsView.render(results, state.mode);
   faces.forEach((face, index) => {
     const { ranking, decision } = results[index];
-    const group = element('section', undefined, 'face-result');
-    if (faces.length > 1) group.append(element('div', `人脸${index + 1}`, 'result-heading'));
-    if (decision.type === 'pending' || currentQualityBlocked(face)) {
-      group.append(element('div', decision.type === 'pending' ? '正在识别…' : '请靠近镜头', 'empty-state plain-empty'));
-      $('match-list').append(group); drawFace(face, index, null); return;
-    }
-    ranking.forEach((person, position) => {
-      const row = element('div', undefined, `match-row${position === 0 ? ' best' : ''}`);
-      const top = element('div', undefined, 'match-top');
-      top.append(element('span', person.name, 'match-name'), element('span', `${person.score.toFixed(1)}%`, 'match-score'));
-      const bar = element('div', undefined, 'score-track');
-      const fill = element('span');
-      fill.style.width = `${person.score}%`;
-      bar.append(fill);
-      row.append(top, bar);
-      group.append(row);
-    });
-    $('match-list').append(group);
-    drawFace(face, index, ranking[0]);
+    drawFace(face, index, decision.type === 'pending' || currentQualityBlocked(face) ? null : ranking[0]);
   });
 }
 
@@ -327,6 +322,7 @@ async function comparePhoto(event) {
 }
 
 $('retry-model').addEventListener('click', initialize);
+$('load-models').addEventListener('click', initialize);
 $('loading-retry').addEventListener('click', initialize);
 $('start-camera').addEventListener('click', startCamera);
 $('stop-camera').addEventListener('click', stopCamera);
@@ -340,4 +336,3 @@ window.addEventListener('pagehide', stopCamera);
 navigator.mediaDevices?.addEventListener('devicechange', enumerateCameras);
 controls();
 enumerateCameras();
-initialize();

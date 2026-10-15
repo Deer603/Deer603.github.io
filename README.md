@@ -37,8 +37,9 @@ python -m http.server 8000 --bind 127.0.0.1
 |项目|预览时需要注意|
 |---|---|
 |青蛙的角落|使用ES Modules，需要HTTP服务；也可从根目录运行`python room/serve.py`，使用端口8765。|
+|加密鹿|使用Worker在后台转换文字，需要HTTP服务；每次原文最多4000字。|
 |夏炜城作品集|当前目录是Next.js静态导出文件，资源路径以`/xiaweicheng/`开头，应从仓库根目录启动服务。|
-|XWC检测器|摄像头需要HTTPS或localhost等安全上下文；也可运行`node XWCRecognizer/serve.mjs 8766`单独预览。|
+|XWC检测器|点击“开始使用”后加载模型与运行库；摄像头需要HTTPS或localhost等安全上下文。也可运行`node XWCRecognizer/serve.mjs 8766`单独预览。|
 
 独立预览服务可能使用相同端口，同时启动时需选择不同端口。浏览器处理的数据与交互方式见各子站说明。
 
@@ -73,15 +74,27 @@ python -m http.server 8000 --bind 127.0.0.1
 
 维护时保持目录大小写与链接完全一致：加密鹿使用`codec/`，XWC检测器使用`XWCRecognizer/`。不要创建仅大小写不同的重复目录。保留根目录的`.nojekyll`，避免静态导出中的`_next/`等目录被Jekyll规则忽略。
 
+### 网页图片
+
+首页使用[assets/optimized/](assets/optimized/)中的WebP展示图，原始PNG保留在`assets/`。头像使用160px版本，场景与大图按用途使用768px或1280px版本；较低位置的背景图在接近视口时加载。KunCode分别使用96px和400px的品牌图标。
+
+替换原图后，在已安装Pillow的Python环境中重新生成展示图：
+
+```sh
+python tools/optimize-site-images.py
+```
+
+该脚本处理首页PNG与KunCode品牌图标，保留原图。新增素材时，还需在页面中指定对应展示图路径。相册与作品集的资源组织方式见各自README。
+
 ### 分享信息
 
-根首页、加密鹿、魏鸡百科和KunCode的分享元信息由同一个脚本维护。在根目录运行：
+根首页、加密鹿、魏鸡百科、KunCode、青蛙的角落、XWC检测器和夏炜城作品集的分享元信息统一维护。在根目录运行：
 
 ```sh
 node tools/share-metadata.mjs
 ```
 
-该命令更新这四个站点及百科词条的分享信息，不覆盖其他子站。分享图片、文案配置与微信卡片说明见[网站分享信息](docs/sharing.md)。百科词条入口的维护命令另见[魏鸡百科README](weijiba/README.md#内容维护)。
+该命令更新7个首页、作品集的3个项目页及百科词条，并同步作品集静态HTML与Next.js导航数据中的元信息。603AI保留自身的分享配置。分享图片、文案配置与微信卡片说明见[网站分享信息](docs/sharing.md)。百科正文更新使用[词条维护命令](weijiba/README.md#内容维护)，该命令也会同步分享信息。
 
 ## 发布到GitHub Pages
 

@@ -32,6 +32,7 @@ python room/serve.py
 - 青蛙角色空间与返回寝室的场景过渡。
 - 12张摄影作品，按章节组织，配有翻页效果与作品信息。
 - 场景音效、翻页声音与声音开关。
+- 素材随寝室、角色空间和相册分阶段准备；翻页时预加载相邻页面。
 - 电脑与手机布局；浏览器不支持WebGL2时，相册使用直接换页方式。
 
 使用支持ES Modules的现代浏览器。桌面视野更适合查看寝室场景与相册细节。
@@ -44,6 +45,7 @@ python room/serve.py
 |[shell/](shell/)|寝室布局、床位切换、音频与场景过渡|
 |[characters/registry.js](characters/registry.js)|角色登记、床位位置与开放状态|
 |[characters/frog/content.js](characters/frog/content.js)|摄影标题、章节、作品信息与外部链接|
+|[characters/frog/index.js](characters/frog/index.js)、[characters/frog/preload.js](characters/frog/preload.js)|场景切换、分阶段素材加载与解码缓存|
 |[characters/frog/scenes/](characters/frog/scenes/)|青蛙空间与相册逻辑|
 |[characters/frog/assets/](characters/frog/assets/)|摄影、相册页、音效与字体|
 |[characters/penguin/](characters/penguin/)|未开放角色的内容与素材|
@@ -51,9 +53,13 @@ python room/serve.py
 
 修改作品文字编辑`content.js`；修改房间与切换方式编辑`shell/`。摄影原图和相册展示页分别存放，替换作品时同步对应资源。增加角色时，在`registry.js`登记模块、床位与素材。
 
+相册先准备当前页，再按翻页位置加载相邻页。新增摄影作品时同步作品登记和展示页，保持预加载范围围绕当前场景，避免在寝室入口一次加载整本相册。
+
 ## 发布与素材
 
 子站使用`/room/`路径，随仓库根目录发布，步骤见[根README](../README.md#发布到github-pages)。运行所需第三方库和字体位于本目录，摄影作品集链接保留原作者的外部地址。
+
+页面分享标题、简介和封面由根目录脚本统一维护，操作见[网站分享信息](../docs/sharing.md)。
 
 ## 素材与授权
 

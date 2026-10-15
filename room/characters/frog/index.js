@@ -2,7 +2,7 @@ import intro from './scenes/intro.js';
 import capture from './scenes/capture.js';
 import desk from './scenes/desk.js';
 import album from './scenes/album.js';
-import { drawOpeningPhotoId } from './opening-photo.js';
+import { drawOpeningPhotoId, openingPhotoId } from './opening-photo.js';
 import content from './content.js';
 import { decodeImages } from './preload.js';
 
@@ -27,16 +27,16 @@ const preloadIntro = () => decodeImages([
   new URL('./assets/portrait.webp', import.meta.url).href,
   new URL('./assets/dorm-silhouette-close-v5.webp', import.meta.url).href,
 ]);
-const preloadCapture = () => decodeImages([
-  ...content.photos.map(photo => photo.src),
+const preloadCapture = (photoIds = [openingPhotoId]) => decodeImages([
+  ...photoIds.map(id => content.findPhoto(id)?.src).filter(Boolean),
   new URL('./assets/gobo.webp', import.meta.url).href,
 ]);
-const preloadAlbum = () => preloadCapture().then(() => decodeImages([
+const preloadAlbum = () => decodeImages([
   new URL('./assets/hand.webp', import.meta.url).href,
-  ...content.spreads.flatMap(spread => [spread.left, spread.right].map(page =>
+  ...content.spreads.filter(spread => [spread.left, spread.right].some(page => page.photoIds.includes(openingPhotoId))).flatMap(spread => [spread.left, spread.right].map(page =>
     new URL(`./assets/pages/${page.id}.webp`, import.meta.url).href
   )),
-]));
+]);
 
 let active;
 function enter(shell) {

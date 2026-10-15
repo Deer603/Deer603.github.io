@@ -1769,40 +1769,20 @@
   window.WEIJIBA_ENTRY_TERMS = Object.entries(entries).map(([entrySlug, entry]) => [entry.title, entrySlug]);
   window.WEIJIBA_ENTRY_SLUGS = ["kunkun", ...Object.keys(entries)];
 
-  const querySlug = new URLSearchParams(window.location.search).get("entry");
-  const pathSlug = window.WEIJIBA_ENTRY_FROM_PATH?.(window.location.pathname) || "";
-  const slug = querySlug || pathSlug || "kunkun";
-  const canonicalEntryUrl = window.WEIJIBA_ENTRY_URL?.(slug);
-  const isLegacyEntryUrl = Boolean(querySlug && canonicalEntryUrl);
-  const isRootTemplateUrl = !querySlug && !pathSlug && /\/article\.html$/.test(window.location.pathname);
-  if (canonicalEntryUrl && (isLegacyEntryUrl || isRootTemplateUrl) && window.history?.replaceState) {
-    window.history.replaceState({}, "", canonicalEntryUrl);
-  }
-
-  const entry = entries[slug];
-  const article = document.querySelector(".article-main article");
-  const toc = document.querySelector("#toc");
-  if (!article || !toc) return;
-
-  const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (character) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
-  })[character]);
-
-  const entryLink = (relatedSlug) => window.WEIJIBA_ENTRY_URL?.(relatedSlug)
-    || `article.html?entry=${encodeURIComponent(relatedSlug)}`;
+  const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
+  const iconPaths = {
+    language: '<path d="M3 5h12M9 2v3m-4 3c1 4 4 7 8 9M13 5c-1 6-4 10-10 13m11 3 4-10 4 10m-6-4h4"/>',
+    chevron: '<path d="m6 9 6 6 6-6"/>',
+    info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.01"/>'
+  };
+  const icon = name => '<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + iconPaths[name] + '</svg>';
+  const entryLink = slug => window.WEIJIBA_ENTRY_URL?.(slug) || 'article.html?entry=' + encodeURIComponent(slug);
   const siteArticlesUrl = entryLink("luchun").replace(/[^/]+\/$/, "index.html#articles");
 
-  if (!entry) {
-    document.title = "未找到词条—魏鸡百科";
-    article.innerHTML = `<header class="article-heading"><div class="title-line"><h1>未找到词条</h1></div></header><div class="article-notice"><span class="notice-icon">i</span><p>这个词条暂时不存在。你可以返回<a href="${siteArticlesUrl}">魏鸡百科首页</a>继续浏览。</p></div>`;
-    toc.innerHTML = '<a class="is-active" href="#top">未找到词条</a>';
-    return;
-  }
-
-  document.title = `${entry.title}—魏鸡百科，困困的百科全书`;
-  const descriptionMeta = document.querySelector('meta[name="description"]');
-  if (descriptionMeta) descriptionMeta.setAttribute("content", `${entry.title}—${entry.description}`);
-
+  // 同一份渲染逻辑供静态生成器和旧地址入口使用。
+  function renderEntry(slug) {
+    const entry = entries[slug];
+    if (!entry) return null;
   const facts = entry.facts.map(([label, value]) => `<tr><th>${escapeHtml(label)}</th><td>${escapeHtml(value)}</td></tr>`).join("");
   const overview = entry.overview.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("");
   const sections = entry.sections.map((section) => `<section id="${escapeHtml(section.id)}" class="article-section"><h2><span>${escapeHtml(section.title)}</span><button type="button" data-demo="编辑${escapeHtml(section.title)}">编辑</button></h2>${section.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("")}</section>`).join("");
@@ -1827,21 +1807,21 @@
   const externalLinkItems = (entry.externalLinks || []).map(([title, url]) => `<li><a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a></li>`).join("");
   const externalLinksBlock = externalLinkItems ? `<section id="external-links" class="article-section external-links-section"><h2><span>外部入口</span></h2><p>原文与项目资料，将在新标签页打开。</p><ul class="see-also-list">${externalLinkItems}</ul></section>` : "";
 
-  article.innerHTML = `
+  const articleHtml = `
     <header class="article-heading">
       <div class="title-line">
         <h1>${escapeHtml(entry.title)}</h1>
-        <button class="language-button" type="button" id="article-language-button" aria-expanded="false" aria-controls="article-language-menu"><span aria-hidden="true">文</span> 2种语言</button>
+        <button class="language-button" type="button" id="article-language-button" aria-expanded="false" aria-controls="article-language-menu">${icon("language")} 2种语言</button>
         <div class="language-menu" id="article-language-menu" hidden><button type="button" data-language="简体中文">简体中文</button><button type="button" data-language="繁體中文">繁體中文</button></div>
       </div>
       <div class="article-toolbar">
         <div class="subject-tabs"><a class="active" href="#top">条目</a><button type="button" data-demo="讨论页">讨论</button></div>
-        <div class="variant-control"><button type="button" data-demo="字词转换">不转换⌄</button></div>
-        <div class="view-tabs"><a class="active" href="#top">阅读</a><button type="button" data-demo="编辑">编辑</button><button type="button" data-demo="查看历史">查看历史</button><button type="button" data-demo="工具">工具⌄</button></div>
+        <div class="variant-control"><button type="button" data-demo="字词转换">不转换${icon("chevron")}</button></div>
+        <div class="view-tabs"><a class="active" href="#top">阅读</a><button type="button" data-demo="编辑">编辑</button><button type="button" data-demo="查看历史">查看历史</button><button type="button" data-demo="工具">工具${icon("chevron")}</button></div>
       </div>
     </header>
     <p class="article-tagline">魏鸡百科，困困的百科全书</p>
-    <div class="article-notice" role="note"><span class="notice-icon" aria-hidden="true">i</span><p>${escapeHtml(entry.notice || "本文含趣味比喻；事实与材料出处见正文及资料来源。")}</p></div>
+    <div class="article-notice" role="note"><span class="notice-icon" aria-hidden="true">${icon("info")}</span><p>${escapeHtml(entry.notice || "本文含趣味比喻；事实与材料出处见正文及资料来源。")}</p></div>
     <aside class="infobox" aria-label="${escapeHtml(entry.title)}概要"><div class="infobox-title">${escapeHtml(entry.title)}</div><div class="infobox-subtitle">${escapeHtml(entry.type)}</div><table><tbody>${facts}</tbody></table></aside>
     ${overview}
     ${sections}
@@ -1853,6 +1833,37 @@
     <p class="last-edited" id="history-note">本页面最后修订于 2026 年 9 月 23 日。页面内容用于非官方群内文化记录与趣味阅读。</p>`;
 
   const extraSectionCount = (extensionItems ? 1 : 0) + (externalLinkItems ? 1 : 0);
-  toc.innerHTML = `<a class="is-active" href="#top">序言</a>${entry.sections.map((section, index) => `<a href="#${escapeHtml(section.id)}"><span>${index + 1}</span> ${escapeHtml(section.title)}</a>`).join("")}${extensionItems ? `<a href="#extensions"><span>${entry.sections.length + 1}</span> 拓展阅读</a>` : ""}${externalLinkItems ? `<a href="#external-links"><span>${entry.sections.length + (extensionItems ? 2 : 1)}</span> 外部入口</a>` : ""}<a href="#related"><span>${entry.sections.length + extraSectionCount + 1}</span> 相关条目</a><a href="#references"><span>${entry.sections.length + extraSectionCount + 2}</span> 资料来源</a>`;
+  const tocHtml = `<a class="is-active" href="#top">序言</a>${entry.sections.map((section, index) => `<a href="#${escapeHtml(section.id)}"><span>${index + 1}</span> ${escapeHtml(section.title)}</a>`).join("")}${extensionItems ? `<a href="#extensions"><span>${entry.sections.length + 1}</span> 拓展阅读</a>` : ""}${externalLinkItems ? `<a href="#external-links"><span>${entry.sections.length + (extensionItems ? 2 : 1)}</span> 外部入口</a>` : ""}<a href="#related"><span>${entry.sections.length + extraSectionCount + 1}</span> 相关条目</a><a href="#references"><span>${entry.sections.length + extraSectionCount + 2}</span> 资料来源</a>`;
+
+    return { title: entry.title, description: entry.title + '—' + entry.description, articleHtml, tocHtml };
+  }
+  window.WEIJIBA_RENDER_ENTRY = renderEntry;
+
+  const article = document.querySelector(".article-main article");
+  const toc = document.querySelector("#toc");
+  if (!article || !toc) return;
+  const querySlug = new URLSearchParams(window.location.search).get("entry");
+  const slug = querySlug || window.WEIJIBA_ENTRY_FROM_PATH?.(window.location.pathname) || "kunkun";
+  const rendered = renderEntry(slug);
+  if (!rendered) {
+    document.title = "未找到词条—魏鸡百科";
+    article.innerHTML = '<header class="article-heading"><h1>未找到词条</h1></header><p>这个词条暂时不存在。你可以返回<a href="' + siteArticlesUrl + '">魏鸡百科首页</a>继续浏览。</p>';
+    toc.innerHTML = '<a href="#top">未找到词条</a>';
+    return;
+  }
+  const canonical = window.WEIJIBA_ENTRY_URL?.(slug);
+  if (canonical && /\/article\.html$/.test(window.location.pathname)) {
+    // 导航到静态页，避免只改URL后相对资源解析到词条子目录。
+    window.location.replace(canonical + (window.location.hash || ""));
+    return;
+  }
+  document.title = rendered.title + "—魏鸡百科，困困的百科全书";
+  document.querySelector('meta[name="description"]')?.setAttribute("content", rendered.description);
+  article.innerHTML = rendered.articleHtml;
+  toc.innerHTML = rendered.tocHtml;
   window.WEIJIBA_NORMALIZE_ENTRY_LINKS?.();
+  // 旧入口在正文生成后定位章节；普通静态词条交给浏览器恢复滚动。
+  if (window.location.hash) {
+    try { document.getElementById(decodeURIComponent(window.location.hash.slice(1)))?.scrollIntoView(); } catch (_) {}
+  }
 })();

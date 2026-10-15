@@ -1392,11 +1392,13 @@ body.high-contrast {
     padding: 18px 20px 22px;
     box-shadow: 8px 0 22px rgba(0, 0, 0, 0.12);
     transform: translateX(-105%);
+    visibility: hidden;
     transition: transform 180ms ease;
   }
 
   body.sidebar-open .sidebar {
     transform: translateX(0);
+    visibility: visible;
   }
 
   .sidebar-mobile-head {
