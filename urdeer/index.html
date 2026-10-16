@@ -115,6 +115,7 @@
           <p id="match-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
         </section>
       </main>
+      <div class="page-tools">
       <details class="usage-guide">
         <summary>使用说明</summary>
         <div class="usage-guide-content">
@@ -122,8 +123,15 @@
           <p>请选择浏览器支持的图片，单张不超过20MB。</p>
           <p>相似度用于比较画面与已收录人物的接近程度，不是身份正确概率。光线、角度和清晰度会影响结果。</p>
           <p>点击“停止”即可结束摄像头使用。</p>
+          <p>“导出日志”会下载JSON诊断文件，包含本次运行事件、人脸数量和处理耗时的变化，可交给AI分析加载、性能与错误。日志不包含照片、姓名、匹配分数或人脸特征。</p>
+          <p>记录仅保存在当前页面内存中，刷新后清空。最多保留最近1000条事件和5000次处理记录，超过上限时覆盖最早记录，并在导出文件中注明。</p>
         </div>
       </details>
+      <div class="diagnostic-actions" aria-label="诊断日志">
+        <button id="export-logs" class="text-button" type="button" disabled>导出日志</button>
+        <button id="clear-logs" class="text-button" type="button" disabled>清空日志</button>
+      </div>
+      </div>
     </div>
     <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
   </body>
