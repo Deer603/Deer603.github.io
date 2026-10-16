@@ -3,6 +3,7 @@ import { rankDualProfiles, dualDecision, validateSFaceLibrary } from './ensemble
 import { extractSFace } from './sface.js';
 import { loadModels, loadRuntime } from './model-loader.js';
 import { createResultsView } from './results-view.js';
+import { createDiagnostics } from './diagnostics.js';
 
 const $ = id => document.getElementById(id);
 const state = { people: [], ready: false, models: false, loading: false, loadController: null, stream: null, opening: false, session: 0, timer: null, faces: [], mode: 'idle', toastTimer: null, photoJob: null, backgroundSince: 0, backgroundTimer: null };
@@ -13,6 +14,45 @@ let sfacePeople = [];
 const ctx = $('overlay').getContext('2d');
 let detectionTail = Promise.resolve();
 const resultsView = createResultsView($('match-list'), $('match-announcement'));
+const diagnostics = createDiagnostics();
+diagnostics.event('page_open', { online: navigator.onLine, hidden: document.hidden });
+
+function diagnosticEnvironment() {
+  const agent = navigator.userAgent;
+  const browsers = [['Edge', /Edg(?:e|A|iOS)?\/(\d+)/], ['Firefox', /(?:Firefox|FxiOS)\/(\d+)/], ['Chrome', /(?:Chrome|CriOS)\/(\d+)/], ['Safari', /Version\/(\d+).*Safari/]];
+  const browser = browsers.map(([name, pattern]) => ({ name, match: agent.match(pattern) })).find(item => item.match);
+  return {
+    browserName: browser?.name || 'Other', browserMajorVersion: browser ? Number(browser.match[1]) : null,
+    language: navigator.language, viewportWidth: window.innerWidth, viewportHeight: window.innerHeight,
+    secureContext: window.isSecureContext, online: navigator.onLine,
+    wasmSupported: typeof WebAssembly !== 'undefined', webglSupported: typeof WebGLRenderingContext !== 'undefined',
+  };
+}
+
+function exportLogs() {
+  const button = $('export-logs');
+  button.disabled = true;
+  let url, link;
+  try {
+    diagnostics.event('export_requested');
+    const data = diagnostics.exportData({ environment: diagnosticEnvironment() });
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
+    url = URL.createObjectURL(blob);
+    link = document.createElement('a');
+    link.href = url;
+    link.download = `urdeer-diagnostics-${new Date().toISOString().replace(/[:.]/g, '-')}.json`;
+    document.body.append(link);
+    link.click();
+    toast('日志已生成，请查看浏览器下载列表。');
+  } catch (error) {
+    console.error('Diagnostic export failed:', error);
+    toast('日志暂时无法导出，请稍后重试。');
+  } finally {
+    link?.remove();
+    if (url) setTimeout(() => URL.revokeObjectURL(url), 30000);
+    button.disabled = false;
+  }
+}
 
 function element(tag, text, className) {
   const node = document.createElement(tag);
@@ -55,7 +95,8 @@ function detect(input) {
   return task;
 }
 
-function loadingProgress(percent, message) {
+function loadingProgress(percent, message, phase) {
+  diagnostics.event('loading_progress', { percent, phase });
   const preparing = percent === null;
   $('loading-percent').textContent = preparing ? '准备中' : `${percent}%`;
   $('loading-percent').classList.toggle('is-preparing', preparing);
@@ -86,11 +127,14 @@ async function readLibrary(path, signal) {
 
 async function initialize() {
   if (state.loading || state.ready) return;
+  const started = performance.now();
+  let phase = 'runtime';
+  diagnostics.event('loading_start');
   state.loading = true;
   const controller = new AbortController();
   const { signal } = controller;
   state.loadController = controller;
-  const report = (percent, message) => { if (!signal.aborted) loadingProgress(percent, message); };
+  const report = (percent, message) => { if (!signal.aborted) loadingProgress(percent, message, phase); };
   $('model-line').hidden = true;
   $('loading-panel').hidden = false;
   $('idle-placeholder').hidden = true;
@@ -112,13 +156,17 @@ async function initialize() {
     const api = window.faceapi;
     if (!api) throw new Error('识别脚本未加载，请刷新网页');
     if (!state.models) {
+      phase = 'backend';
       let gpu = false;
-      try { gpu = await api.tf.setBackend('webgl'); } catch {}
+      try { gpu = await api.tf.setBackend('webgl'); }
+      catch (error) { diagnostics.event('loading_progress', { level: 'warn', phase, errorName: error?.name }); }
       signal.throwIfAborted();
       if (!gpu) await api.tf.setBackend('cpu');
       signal.throwIfAborted();
       await api.tf.ready();
       signal.throwIfAborted();
+      diagnostics.event('loading_progress', { phase, backend: gpu ? 'webgl' : 'cpu' });
+      phase = 'models';
       await loadModels(api, report, { signal });
       signal.throwIfAborted();
       const warm = document.createElement('canvas');
@@ -127,6 +175,7 @@ async function initialize() {
       signal.throwIfAborted();
       state.models = true;
     }
+    phase = 'data';
     const library = await readLibrary('./presets/library.json', signal);
     state.people = validateProfiles(library);
     if (!state.people.length) throw new Error('预设人物库为空');
@@ -143,8 +192,10 @@ async function initialize() {
     $('model-detail').textContent = '本机运行';
     $('retry-model').hidden = true;
     $('camera-message').textContent = '摄像头未开启';
+    diagnostics.event('loading_ready', { durationMs: performance.now() - started });
   } catch (error) {
     const cancelled = signal.aborted;
+    diagnostics.event(cancelled ? 'loading_cancelled' : 'loading_error', { level: cancelled ? 'info' : 'error', phase, errorName: error?.name, durationMs: performance.now() - started });
     if (!cancelled) console.error('Preparation failed:', error);
     $('loading-title').textContent = cancelled ? '已取消加载' : '暂时无法完成加载';
     $('loading-message').textContent = cancelled ? '准备好后，随时可以重新开始。'
@@ -169,8 +220,9 @@ async function initialize() {
   }
 }
 
-function cancelLoading() {
+function cancelLoading(reason = 'user') {
   if (!state.loadController || state.loadController.signal.aborted) return;
+  diagnostics.event('loading_cancel_requested', { reason });
   state.loadController.abort();
   $('loading-cancel').disabled = true;
   $('loading-message').textContent = '正在取消，请稍候。';
@@ -206,8 +258,12 @@ function cameraError(error) {
 
 async function startCamera() {
   if (!state.ready || state.opening || state.stream || state.photoJob) return;
-  if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) { cameraNotice('当前环境无法使用摄像头，请通过HTTPS地址或本地预览打开。'); return; }
-  stopCamera();
+  diagnostics.event('camera_request');
+  if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
+    diagnostics.event('camera_error', { level: 'error', errorName: 'SecurityError' });
+    cameraNotice('当前环境无法使用摄像头，请通过HTTPS地址或本地预览打开。'); return;
+  }
+  stopCamera('switch_to_camera');
   const session = ++state.session;
   state.opening = true;
   $('camera-message').textContent = '正在请求摄像头权限…';
@@ -226,11 +282,17 @@ async function startCamera() {
     await $('video').play();
     if (session !== state.session) return;
     state.mode = 'camera';
+    diagnostics.event('camera_started', { width: $('video').videoWidth, height: $('video').videoHeight, mirror: $('mirror').checked });
     $('video').hidden = false;
     $('still-canvas').hidden = true;
     $('camera-placeholder').hidden = true;
     $('camera-message').textContent = '正在检测人脸…';
-    acquired.getVideoTracks()[0].addEventListener('ended', () => { if (state.stream === acquired) { stopCamera(); toast('摄像头已断开，请重新开启。'); } });
+    acquired.getVideoTracks()[0].addEventListener('ended', () => {
+      if (state.stream === acquired) {
+        diagnostics.event('camera_disconnected', { level: 'warn' });
+        stopCamera('disconnected'); toast('摄像头已断开，请重新开启。');
+      }
+    });
     await enumerateCameras();
     if (session !== state.session) return;
     state.opening = false;
@@ -239,11 +301,16 @@ async function startCamera() {
     loop(session);
   } catch (error) {
     acquired?.getTracks().forEach(track => track.stop());
-    if (session === state.session) { console.error('Camera failed:', error); stopCamera(); cameraNotice(cameraError(error)); $('camera-message').textContent = '摄像头未开启'; }
+    if (session === state.session) {
+      diagnostics.event('camera_error', { level: 'error', errorName: error?.name });
+      console.error('Camera failed:', error); stopCamera('error'); cameraNotice(cameraError(error)); $('camera-message').textContent = '摄像头未开启';
+    }
   } finally { if (session === state.session) { state.opening = false; controls(); } }
 }
 
-function stopCamera() {
+function stopCamera(reason = 'user') {
+  if (state.stream || state.opening) diagnostics.event('camera_stopped', { reason });
+  if (state.photoJob && reason !== 'error') diagnostics.event('photo_cancelled', { reason, phase: state.photoJob.phase });
   ++state.session;
   clearTimeout(state.timer);
   clearTimeout(state.backgroundTimer);
@@ -270,13 +337,14 @@ function stopCamera() {
 
 function suspendCamera() {
   if (!state.stream && !state.opening) return;
-  stopCamera();
+  stopCamera('background');
   $('idle-message').textContent = '摄像头已暂停';
   $('camera-message').textContent = '摄像头已暂停';
   cameraNotice('离开页面一段时间，摄像头已自动关闭。', true);
 }
 
 function handleVisibility() {
+  diagnostics.event('visibility', { hidden: document.hidden });
   clearTimeout(state.backgroundTimer);
   if (document.hidden) {
     if (!state.stream && !state.opening) return;
@@ -311,7 +379,8 @@ async function loop(session) {
       if (!document.hidden) showResults(faces, frame, performance.now() - started);
     } catch (error) {
       if (session !== state.session) return;
-      stopCamera();
+      diagnostics.event('camera_error', { level: 'error', phase: 'processing', errorName: error?.name });
+      stopCamera('error');
       console.error('Camera processing failed:', error);
       cameraNotice('画面处理已中断，请重新开启摄像头。', true);
       return;
@@ -329,6 +398,7 @@ function resetMatches() {
 }
 
 function showResults(faces, frame, elapsed) {
+  diagnostics.sample({ mode: state.mode, faceCount: faces.length, processingMs: elapsed, width: frame.width, height: frame.height });
   state.faces = faces;
   $('overlay').width = frame.width;
   $('overlay').height = frame.height;
@@ -389,8 +459,9 @@ async function comparePhoto(event) {
   const file = event.target.files[0];
   event.target.value = '';
   if (!file || !state.ready || state.photoJob || state.opening) return;
-  if (!file.type.startsWith('image/')) { toast('请选择JPG、PNG或浏览器支持的图片。'); return; }
-  if (!file.size || file.size > 20 * 1024 * 1024) { toast('请选择20MB以内的有效图片。'); return; }
+  if (!file.type.startsWith('image/')) { diagnostics.event('photo_rejected', { level: 'warn', reason: 'invalid_type' }); toast('请选择JPG、PNG或浏览器支持的图片。'); return; }
+  if (!file.size || file.size > 20 * 1024 * 1024) { diagnostics.event('photo_rejected', { level: 'warn', reason: 'invalid_size' }); toast('请选择20MB以内的有效图片。'); return; }
+  diagnostics.event('photo_open');
   const job = { phase: 'decode', session: state.session, cancelled: false };
   state.photoJob = job;
   $('photo-processing').hidden = false;
@@ -404,11 +475,12 @@ async function comparePhoto(event) {
     const frame = snapshot(bitmap);
     // Commit the mode change only after the new image can be displayed.
     state.photoJob = null;
-    stopCamera();
+    stopCamera('switch_to_photo');
     job.phase = 'processing';
     job.session = state.session;
     state.photoJob = job;
     state.mode = 'processing';
+    diagnostics.event('photo_processing', { width: frame.width, height: frame.height });
     $('photo-processing').hidden = false;
     $('photo-processing-message').textContent = '正在处理照片';
     $('compare-photo').setAttribute('aria-busy', 'true');
@@ -423,10 +495,12 @@ async function comparePhoto(event) {
     $('still-canvas').hidden = false;
     $('camera-placeholder').hidden = true;
     showResults(faces, frame, performance.now() - started);
+    diagnostics.event('photo_done', { durationMs: performance.now() - started });
   } catch (error) {
     if (!job.cancelled && job === state.photoJob && job.session === state.session) {
+      diagnostics.event('photo_error', { level: 'error', phase: job.phase, errorName: error?.name });
       console.error('Photo processing failed:', error);
-      if (job.phase === 'processing') stopCamera();
+      if (job.phase === 'processing') stopCamera('error');
       toast(job.phase === 'decode' ? '无法打开这张照片，请选择有效的JPG或PNG图片。' : '照片处理未完成，请重试或选择其他照片。');
     }
   } finally {
@@ -443,6 +517,7 @@ async function comparePhoto(event) {
 function cancelPhoto() {
   const job = state.photoJob;
   if (!job) return;
+  diagnostics.event('photo_cancelled', { reason: 'user', phase: job.phase });
   job.cancelled = true;
   state.photoJob = null;
   $('photo-processing').hidden = true;
@@ -455,18 +530,26 @@ function cancelPhoto() {
 $('retry-model').addEventListener('click', initialize);
 $('load-models').addEventListener('click', initialize);
 $('loading-retry').addEventListener('click', initialize);
-$('loading-cancel').addEventListener('click', cancelLoading);
+$('loading-cancel').addEventListener('click', () => cancelLoading('user'));
 $('start-camera').addEventListener('click', startCamera);
 $('resume-camera').addEventListener('click', startCamera);
-$('stop-camera').addEventListener('click', stopCamera);
+$('stop-camera').addEventListener('click', () => stopCamera('user'));
 $('cancel-photo').addEventListener('click', cancelPhoto);
 $('compare-photo').addEventListener('click', () => $('compare-file').click());
 $('compare-file').addEventListener('change', comparePhoto);
-$('camera-select').addEventListener('change', async () => { if (state.stream) { stopCamera(); await startCamera(); } });
-$('mirror').addEventListener('change', () => { $('video').style.transform = $('mirror').checked ? 'scaleX(-1)' : ''; if (state.faces.length) renderMatches(); });
+$('camera-select').addEventListener('change', async () => { diagnostics.event('camera_selected'); if (state.stream) { stopCamera('switch_device'); await startCamera(); } });
+$('mirror').addEventListener('change', () => { diagnostics.event('mirror_change', { mirror: $('mirror').checked }); $('video').style.transform = $('mirror').checked ? 'scaleX(-1)' : ''; if (state.faces.length) renderMatches(); });
+$('export-logs').addEventListener('click', exportLogs);
+$('clear-logs').addEventListener('click', () => { diagnostics.clear(); toast('本次诊断记录已清空，开始记录新的运行过程。'); });
+$('export-logs').disabled = false;
+$('clear-logs').disabled = false;
 $('video').style.transform = $('mirror').checked ? 'scaleX(-1)' : '';
 document.addEventListener('visibilitychange', handleVisibility);
-window.addEventListener('pagehide', () => { cancelLoading(); stopCamera(); });
+window.addEventListener('pagehide', () => { cancelLoading('pagehide'); stopCamera('pagehide'); });
+window.addEventListener('online', () => diagnostics.event('network_change', { online: true }));
+window.addEventListener('offline', () => diagnostics.event('network_change', { online: false }));
+window.addEventListener('error', event => diagnostics.event('uncaught_error', { level: 'error', errorName: event.error?.name, source: (event.filename || '').split('/').pop(), line: event.lineno, column: event.colno }));
+window.addEventListener('unhandledrejection', event => diagnostics.event('uncaught_error', { level: 'error', errorName: event.reason?.name }));
 navigator.mediaDevices?.addEventListener('devicechange', enumerateCameras);
 controls();
 enumerateCameras();
