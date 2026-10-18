@@ -1,0 +1,285 @@
+@charset "utf-8";
+/* 方正正大黑简体 */
+@font-face { 
+    font-family: 'Fzzdhjw'; 
+    src: url('fzzdhjw.woff2') format('woff');
+    font-style: normal;
+  }
+
+.w1540{width: 1540px;margin:0 auto;}
+.list-more:hover{color: #36896d;}
+/* 列表通用样式 */
+.list_con{margin-top: 30px;margin-bottom: 66px;overflow: hidden;}
+.con_left{width: 335px;float: left;padding-right: 55px;box-sizing: border-box;}
+.left_list .list_ul{line-height: 57px;padding: 0px 38px;}
+.left_list .list_ul>a{font-size:18px;font-family: 'syhtR';}
+.left_list .list_ul:hover>a{color:#36896d}
+.left_list .list_ul.active{background-color: #acdfce;border-radius: 50px;background: #acdfce url(2025zygc_list_sanjiao01.png) no-repeat 94% center;line-height: 50px;}
+.left_list  .list_ul.active>a{font-weight: bold;color: #36896d;display: block;}
+.left_list .list_parent {background: url(2025zygc_list_sanjiao02.png) no-repeat 94% 20px;}
+.left_list .list_parent.slide {background: url(2025zygc_list_sanjiao03.png) no-repeat 94% 20px;}
+.left_list .list_ul ul {display: none;max-height: 357px;overflow-x: hidden;overflow-y: auto;-ms-overflow-style: -ms-autohiding-scrollbar;-webkit-overflow-scrolling: touch;border: 1px solid #e7ebea;border-radius: 5px;margin-bottom: 20px;}
+.list_ul_ul li{background-color:#fff;border-bottom:1px solid #f2f2f2;margin-left:10px;margin-right:10px;line-height: 50px;text-align: center;}
+.list_ul_ul li>a{font-size:16px;}
+
+.con_right{width: 1205px;float: right;border-left: 1px solid #ccc;box-sizing: border-box;padding-left: 58px;}
+.right_title{height: 30px;line-height: 38px;border-bottom: solid 1px #d8d8d8;background: url(2025zygc_list_tit01.png) no-repeat left 0;padding-left: 22px;padding-bottom: 22px;}
+.right_title span{font-size: 36px;font-family: "Fzzdhjw";font-style:italic;background-image: linear-gradient(to right, #36896d, #2f4858);background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;padding-right: 20px;}
+
+.con_right .right_list ul li{line-height: 60px;height: 70px;width: 96%;padding: 10px;border-bottom: 1px solid #eee;/* display: flex; *//* justify-content: flex-start; *//* margin-bottom: 12px; */margin-top: 12px;}
+.con_right .right_list ul li .date {width: 130px;height: 50px;margin-left: 30px;float: left;}
+.con_right .right_list ul li .date p {float: right;font-size: 22px;margin-bottom: 0px;color: #819694;font-family: Georgia, 'Times New Roman', Times, serif;}
+.con_right .right_list ul li .content {font-weight: 300;margin-left: 45px;font-size: 18px;/* width: 80%; */float: left;}
+.con_right .right_list ul li .content p a{display:block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.con_right .lanmu_content .collection{margin-left: 0px;border-top: 0px;}
+
+/* 新闻动态 */
+.xwdt-box{margin-bottom: 10px;margin-top: 25px;}
+.xwdt-list{padding-top: 36px;}
+.xwdt-list ul li{float: left;border: 1px solid #f2f5f7;width: calc((100% - 96px) / 3);margin-right: 48px;box-sizing: border-box;margin-bottom: 50px;}
+.xwdt-list ul li:nth-child(3n){margin-right: 0;}
+.xwdt-list ul li .list-img{overflow: hidden;}
+.xwdt-list ul li .list-img img{width: 100%;height: 318px;}
+.xwdt-list ul li .list-con{padding: 20px;/* box-sizing: border-box; */}
+.xwdt-list ul li .list-title{margin: 10px 0;}
+.xwdt-list ul li .list-title span{width:58px;display:block;text-align: center;font-size: 14px;color: #508513;float: left;margin-right: 20px;}
+.xwdt-list ul li .list-title span em{font-size: 40px;display: block;line-height: 45px;background-image: linear-gradient(to right, #b5c40c, #36896d);background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;}
+.xwdt-list ul li .list-title a{font-size: 18px;font-weight: bold;color: #36896d;line-height: 36px;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;height: 72px;}
+.xwdt-list ul li .list-title a:hover{color: #3ea984;}
+.xwdt-list ul li .list-abstract a{font-size: 16px;line-height: 32px;height: 64px;display: block;}
+.xwdt-list ul li .list-more{text-align: right;display: block;margin: 10px 0;font-weight: normal;}
+
+/* 学工动态 */
+.xgdt-list{padding-top: 30px;padding-bottom: 32px;}
+.xgdt-list ul li{float: left;border: 1px solid #f2f5f7;width: calc((100% - 96px) / 3);margin-right: 48px;box-sizing: border-box;margin-bottom: 42px;}
+.xgdt-list ul li:nth-child(3n){margin-right: 0;}
+.xgdt-list ul li .list-con{padding: 20px;}
+.xgdt-list ul li .list-img{overflow: hidden;}
+.xgdt-list ul li .list-img img{height: 230px;width: 100%;}
+.xgdt-list ul li span.list-time{font-size:18px;line-height: 30px;color:#999;display: block;padding: 5px 0px 15px 0px;}
+.xgdt-list ul li .list-con a{font-size: 18px;font-weight: bold;line-height: 30px;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;height: 60px;}
+.xgdt-list ul li .list-more{text-align: right;display: block;/* margin: 10px 0; */font-size: 16px;line-height: 20px;margin-top: 35px;font-weight: normal;}
+
+/* 学生创业 */
+.xscy-list{padding-top: 20px;}
+.xscy-list .xscy-img img{width: 100%;}
+
+/* 学生风采 */
+.xsfc-list{padding-top: 30px;}
+.xsfc-list ul li{padding-bottom: 52px;overflow: hidden;position: relative;margin-bottom: 42px;}
+.xsfc-list ul li::after{content: url(2025zygc_list_tiaowen01.png);width: 100%;height: 20px;display: block;overflow: hidden;position: absolute;bottom: 0px;}
+/* .xsfc-list ul li>div{margin-right: 20px;} */
+.xsfc-list .list-left{border-top: 2px solid #36896d;width: 107px;float: left;margin-right: 38px;padding-top: 20px;}
+.xsfc-list .list-left .t-year{color: #999;display: block;text-align: right;font-size: 16px;}
+.xsfc-list .list-left .t-day{font-size: 30px;font-weight: bold;color: #36896d;display: block;text-align: right;margin-bottom: 5px;}
+.xsfc-list .list-left .more{display: block;background: url(2025zygc_list_more01.png)no-repeat center;float: right;width: 61px;height: 61px;padding: 30px 0;background: none;}
+.xsfc-list .list-img{float: left;width: 325px;height: 217px;overflow: hidden;margin-right: 35px;}
+.xsfc-list .list-img img{width: 100%;height: 100%;}
+.xsfc-list .list-con{width: 610px;float: left;margin-right: 30px;}
+.xsfc-list .list-con a{font-size: 24px;font-weight: bold;color: #36896d;line-height: 40px;margin-top: 10px;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;overflow: hidden;}
+.xsfc-list .list-con p{font-size: 18px;line-height: 40px;display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden;}
+
+/* 学院领导 */
+.xyld-list{padding-top: 30px;min-height: 877px;}
+.xyld-list ul li{/* width: 490px; */height: 305px;padding: 24px 21px;box-sizing: border-box;background-color: #f2f5f7;}
+.xyld-list .list-img{float: left;width: 200px;height: 257px;}
+.xyld-list .list-img img{width: 100%;height: 100%;}
+.xyld-list .list-img img:hover{transform: scale(1);opacity: 1;}
+.xyld-list .list-con{float: left;width: 78%;margin-left: 21px;padding-top: 20px;}
+.xyld-list .list-con span{font-size: 22px;font-weight: bold;color:#36896d;line-height: 26px;display: block;}
+.xyld-list .list-con p a{display: block;line-height: 30px;width: calc(100% - 31px);float: right;max-height: 120px;overflow: hidden;}
+.xyld-list .list-con img{margin-right: 10px;display: inline-block;/* display: block; */}
+.xyld-list .list-con p{font-size: 16px;line-height: 30px;display: block;margin-top: 10px;}
+
+/* 专业介绍 */
+.zyjs-list{padding-top:30px;}
+.zyjs-list ul li{border: 1px solid #f2f5f7;float: left;width: calc((100% - 98px) / 3);box-sizing: border-box;margin-right: 49px;margin-bottom: 30px;}
+.zyjs-list ul li:nth-child(3n){margin-right: 0px;}
+.zyjs-list ul li .list-img{width: 100%;position: relative;height:230px}
+.zyjs-list ul li .list-img img{width:100%;height:100%;}
+.zyjs-list ul li .list-img img:hover{transform: scale(1);}
+.zyjs-list ul li .list-img span{position: absolute;font-size: 34px;font-weight: bold;left: 35px;bottom: 35px;color: #fff;}
+.zyjs-list ul li  a p{font-size: 22px;font-weight: bold;line-height: 28px;padding: 20px;}
+
+/* 组织机构 */
+.zzjg-list{padding-top: 30px;}
+.zzjg-list .zzjg-img{padding-top: 20px;text-align: center;}
+/* 2.28 改 */
+.zzjg-list .zzjg-img img{max-width: 100%;margin:0 auto;margin-bottom: 50px;width: 100% !important;}
+.zzjg-list .zzjg-img img:last-of-type{width: 86% !important;margin: 0px auto;}
+
+/* 新版底部 */
+.footer2025{background: url(2025zygc_footer_bg01.png)no-repeat;background-size: cover;}
+.footer2025 p, .footer2025 a{color: #fff;font-size: 16px;}
+.footer2025-con{padding: 0px 120px;}
+.footer2025-t{padding: 53px 0px 43px 0px;text-align: left;}
+.footer2025-t img{width: 558px;height: auto;}
+.footer2025-l, .footer2025-c, .footer2025-r, .footer2025-line{float: left;}
+.footer2025-line{background-color: #fff;opacity: 0.502;width: 1px;height: 163px;margin-top: 14px;}
+
+.footer2025-l{width: 330px;padding-right: 120px;}
+.footer2025-l ul li{border: 1px solid #fff;line-height: 38px;padding-left: 18px;margin-bottom: 10px;height: 40px;box-sizing: border-box;}
+.footer2025-l ul li img{margin-right: 15px;}
+.footer2025-l ul li p{display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: calc(100% - 40px);}
+
+.footer2025-c{width: 199px;padding: 0px 122px 0px 130px;}
+.footer2025-c ul li{border: 1px solid #fff;line-height: 38px;padding-left: 36px;margin-bottom: 10px;text-align: left;box-sizing: border-box;height: 40px;}
+.footer2025-c ul li img{margin-right: 15px;}
+
+.footer2025-r{padding-left: 116px;width: 275px;}
+.footer2025-r ul li{float: left;width: 130px;}
+.footer2025-r ul li:first-child{margin-right: 13px;}
+.footer2025-r ul li p{text-align: center;font-size: 14px;line-height: 20px;margin-top: 7px;}
+.footer2025-r ul li .ewm-img{border: 1px solid #fff;padding: 4px;}
+.footer2025-r ul li .ewm-img img{width: 120px;height: 120px;}
+
+.footer2025-link{border-bottom: 1px solid rgba(255, 255, 255, 0.502);margin-top: 5px;width: 1220px;}
+.footer2025-link p, .footer2025-link ul li{float: left;line-height: 50px;}
+.footer2025-link ul li{padding: 0 13px;}
+.footer2025-b{padding: 20px 0;}
+.footer2025-b p{line-height: 30px;text-align: center;}
+
+.footer2025 img:hover{transform: scale(1);opacity: 1;}
+.footer2025 a:hover{color: #acdfce;}
+
+  
+@media only screen and (max-width: 1540px){
+    .w1540{width: 98%;}
+    /* 新闻动态 */
+    .xwdt-list ul li .list-img img{height: 280px;}
+
+    .con_left{width: 25%;padding-right: 30px;}
+    .con_right{width: 75%;padding-left: 30px;}
+
+    /* 学生风采 */
+    .xsfc-list .list-left{width:10%;margin-right:20px;}
+    .xsfc-list .list-img{margin-right:20px;}
+    .xsfc-list .list-con{width:calc(100% - 10% - 365px);margin-right:0px;}
+
+    /* 学院领导 */
+    .xyld-list{min-height:auto;}
+
+    /* 新版底部 */
+    .footer2025-t{padding: 30px 0;}
+    .footer2025-t img{width: 40%;}
+    .footer2025-con{padding: 0px 20px;}
+    .footer2025-l{width: 34%;box-sizing: border-box;padding-right: 50px;}
+    .footer2025-c{width:34%;box-sizing:border-box;padding: 0px 120px;}
+    .footer2025-r{width:30%;box-sizing:border-box;padding-left: 50px;}
+    .footer2025-link{width: 100%;}
+    .footer2025-link p, .footer2025-link ul li{line-height: 30px;}
+}
+
+@media only screen and (max-width: 1200px){
+    /* 新闻动态 */
+    .xwdt-list ul li .list-img img{height: 250px;}
+
+    /* 学工动态 */
+    .xgdt-list ul li{width: calc(50% - 15px);margin-right: 30px !important;}
+    .xgdt-list ul li:nth-child(2n){margin-right: 0px !important;}
+    .xgdt-list ul li .list-img img{height: 260px;}
+    .xgdt-list ul li span.list-time{padding: 0px;}
+    .xgdt-list ul li .list-more{margin-top: 10px;}
+
+    /* 新版底部 */
+    .footer2025-l{width: 38%;}
+    .footer2025-c{padding: 0 50px;width: 28%;}
+    .footer2025-c ul li{text-align: center;padding-left: 0px;}
+    .footer2025-r{width: 263px;}
+    .footer2025-r ul li{width: 100px;}
+    .footer2025-r ul li .ewm-img img{width: 90px;height: 90px;}
+
+    /* 通用列表 */
+    .con_right .right_list ul li .date{width: 130px;margin-left:0px;}
+    .con_right .right_list ul li .content{width: calc(100% - 130px);margin-left:0px;padding-left:20px;box-sizing: border-box;}
+}
+
+@media only screen and (max-width: 900px){
+    /* 新闻动态 */
+    .xwdt-list ul li{width: calc(50% - 15px);margin-right: 30px !important;}
+    .xwdt-list ul li:nth-child(2n){margin-right: 0px !important;}
+
+    /* 通用列表 */
+    .con_left{display: none;}
+    .con_right{width: 100%;padding-left: 0px;border-left: none;}
+    .list_con{margin-bottom: 20px;}
+    .con_right .right_list ul li{line-height: 30px;height: 40px;}
+
+    /* 学工动态 */
+    .xgdt-list{padding-bottom: 0px;}
+
+    /* 专业介绍 */
+    .zyjs-list ul li{width:calc(50% - 15px);margin-right: 30px !important;}
+    .zyjs-list ul li:nth-child(2n){margin-right: 0px !important;}
+
+    /* 新版底部 */
+    .footer2025-t img{width: 50%;}
+    .footer2025-t{text-align: center;}
+    .footer2025-l{width: 100%;padding: 0px 5%;}
+    .footer2025-line{display: none;}
+    .footer2025-c{width: 100%;padding: 0px 5%;}
+    .footer2025-c ul li{float: left;width: calc(25% - 12px);box-sizing: border-box;margin-right: 16px;}
+    .footer2025-c ul li:last-child{margin-right: 0px;}
+    .footer2025-r{padding: 0px;margin: 0 auto;float: none;width: 213px;}
+    .footer2025-link{display: none;}
+    .footer2025-b{border-top: 1px solid rgba(255, 255, 255, 0.502);margin-top: 20px;padding: 10px 0;}
+}
+
+@media only screen and (max-width: 580px){
+    /* 新闻动态 */
+    .xwdt-list ul li{width: 100%;margin-right: 0px !important;margin-bottom: 30px;}
+    .xwdt-list ul li .list-img img{height: 300px;}
+
+    /* 学工动态 */
+    .xgdt-list ul li{width: 100%;margin-right: 0px !important;margin-bottom: 30px;}
+    .xgdt-list ul li .list-img img{height: 300px;}
+
+    /* 学生风采 */
+    .xsfc-list ul li{margin-bottom: 20px;padding-bottom: 32px;}
+    .xsfc-list .list-left{width:calc(100% - 350px);float:right;margin-right:0px;margin-left:20px;}
+    .xsfc-list .list-left span.t-year, .xsfc-list .list-left span.t-day{text-align:left;}
+    .xsfc-list .list-left .more{float:left;}
+    .xsfc-list .list-img{width:330px;height:220px;;margin-right:0px;}
+    .xsfc-list .list-con{width:100%;}
+
+    /* 学院领导 */
+    .xyld-list ul li{width: 100%;height:auto;padding: 20px 25px;}
+    .xyld-list .list-img{float: none;margin: 0 auto;}
+    .xyld-list .list-con{width:100%;margin-left:0px;float: none;}
+    .xyld-list .list-con span{text-align:center;}
+    .xyld-list .list-con p{overflow:hidden;}
+
+    /* 专业介绍 */
+    .zyjs-list ul li{width:80%;float: none;margin: 0 auto !important;margin-bottom: 15px !important;}
+    .zyjs-list ul li:nth-child(2n){margin: 0 auto !important;margin-bottom: 15px !important;}
+
+    /* 新版底部 */
+    .footer2025-t img{width: 300px;}
+    .footer2025-l, .footer2025-c{padding: 0px;}
+    .footer2025-c ul li{width: calc(50% - 10px);margin-right: 20px;}
+    .footer2025-c ul li:nth-child(2n){margin-right: 0px;}
+}
+
+@media only screen and (max-width: 420px){
+    /* 新闻动态 */
+     .xwdt-list ul li .list-img img{height: 250px;}
+
+    /* 学工动态 */
+    .xgdt-list ul li .list-img img{height: 250px;}
+
+    /* 学生风采 */
+    .xsfc-list .list-left{/* display: none; */width: 20%;}
+    .xsfc-list .list-img{width: calc(80% - 20px);height:200px;}
+
+    /* 专业介绍 */
+    .zyjs-list ul li{width:90%;}
+    .zyjs-list ul li .list-img{height: 200px;}
+
+    /* 通用列表 */
+    .con_right .right_list ul li .date p{font-size: 18px;}
+    .con_right .right_list ul li .date{width: 110px;}
+    .con_right .right_list ul li .content{width: calc(100% - 110px);}
+}
+
+/* 工会动态 */
+.ghdt .xwdt-list ul li .list-img img{height: 240px;}

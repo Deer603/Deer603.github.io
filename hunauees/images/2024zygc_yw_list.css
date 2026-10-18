@@ -1,0 +1,20 @@
+.floot .nav1>li{width: auto;padding: 0px 33px;}
+.banner-yw img{width: 100%;}
+.con01{margin-top: -200px;position: relative;margin-bottom: 50px;}
+.title-yw{padding-left: 30px; background: url(2024zygc_yw_titlebg.png) no-repeat left center;line-height: 114px;font-size: 36px;color: #fff;margin-bottom: -2px;}
+.content-yw {padding: 0px 90px;background-color: #fff;}
+.content-yw .tit{text-align: center;font-size: 36px;line-height: 120px;}
+.content-yw .hr{width: 100%;height: 8px;background-color: #36896d;margin: 0px 0px 30px 0px;}
+.content-yw .neirong p{text-indent: 2em;line-height: 2em;text-align: justify;font-size: 18px;}
+.footer-yw{background-color: #c6e6e2;padding: 25px 0px;text-align: center;line-height: 1.8em;}
+@media screen and (max-width: 768px) {
+    .lanmu{margin-top: 40px;}
+    .banner-yw img{height: 200px;object-fit: cover;}
+    .banner-yw{margin-top: 60px;}
+    .title-yw{line-height: 60px;font-size: 24px;background: none;color: #000;}
+    .content-yw .tit,.title-yw{font-size: 30px;}
+    .content-yw{padding: 0px;}
+    .con01{margin-top: 0px;}
+    .footer-yw{padding: 25px;}
+
+}
