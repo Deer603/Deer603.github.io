@@ -130,3 +130,8 @@
 .slideGroup .deer-roster .sPrev,.slideGroup .deer-roster .sNext{top:154px;padding:0;border:0;cursor:pointer;background-color:transparent}
 .slideGroup .deer-roster button:focus-visible{outline:3px solid #b6ed3e;outline-offset:3px}
 @media(max-width:600px){.deer-roster .dm-strip{gap:20px;padding:0 10px;scroll-padding-inline:10px}.deer-roster .dm-card{flex-basis:calc((100% - 20px)/2);height:210px}.deer-roster .dm-card>img,.deer-roster .dm-name-avatar{height:210px}.deer-roster .dm-card-copy h2{font-size:16px}.deer-roster .dm-card-copy .dm-tag{font-size:12px}.slideGroup .deer-roster .sPrev,.slideGroup .deer-roster .sNext{top:105px}}
+
+.dm-directory-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:20px;margin:30px 0 36px}
+.dm-directory-nav a{display:block;border:1px solid #36896d;border-radius:60px;padding:20px 32px;color:#111;font-size:21px;text-align:center;line-height:1.5}
+.dm-directory-nav a[aria-current="page"],.dm-directory-nav a:hover{background:#36896d;color:#fff}
+@media(max-width:600px){.dm-directory-nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}.dm-directory-nav a{font-size:15px;padding:12px 8px;display:flex;align-items:center;justify-content:center}}

@@ -47,3 +47,23 @@
 @media(max-width:600px){.banner{padding-top:60px;}#slideBox{height:auto;}#slideBox .hd{bottom:8px;}.dc-events{grid-template-columns:1fr;}.dc-poster h3{font-size:36px;}.dc-poster img{aspect-ratio:16/9;}.dc-grid{grid-template-columns:1fr;gap:20px;}.dc-heading span{font-size:16px;}.dc-card>div{padding:18px;}.dc-main h1{font-size:26px;}.dc-main article p{font-size:17px;}.dc-tabbar button{font-size:15px;padding:8px 12px;}}
 
 .dc-figure{margin:28px 0}.dc-figure .dc-cover{margin:0}.dc-figure figcaption{font-size:13px;color:#76877e;line-height:1.6;margin-top:9px}.dc-readings .dc-card{display:flex;flex-direction:column}.dc-readings .dc-card>div{flex:1}.dc-main article .dc-source{font-size:15px;border-top:1px solid #dce6e0;padding-top:20px}
+
+.xkjc .video video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#102e30}.xkjc_bg:has(#deer-academy-film){height:auto;min-height:555px}.xkjc:has(#deer-academy-film)::after{content:"";display:block;clear:both}.video:has(#deer-academy-film) p{font-size:16px;line-height:1.8;padding-top:12px}.xkjc_list .rq span:last-child{font-size:15px}
+.xkjc_bg:has(#deer-academy-film){min-height:0;padding:45px 0 30px}
+.xkjc_bg:has(#deer-academy-film) .floor1{position:relative;left:auto;top:auto;margin:0 auto;width:94%;max-width:1300px}
+.xkjc:has(#deer-academy-film){background:#fff}
+.xkjc:has(#deer-academy-film) .title1{right:0;width:56%;padding-left:0;background:#466f7a;box-sizing:border-box}
+.xkjc:has(#deer-academy-film) .title1 .img{margin:18px auto}
+.xkjc:has(#deer-academy-film) .xkjc_list ul{padding:20px 24px 0}
+.xkjc:has(#deer-academy-film) .xkjc_list ul li{margin:0 12px}
+@media(max-width:900px){
+  .xkjc:has(#deer-academy-film) .xkjc_list,.xkjc:has(#deer-academy-film) .video{float:none;width:100%}
+  .xkjc:has(#deer-academy-film) .title{width:auto;padding-left:20px}
+  .xkjc:has(#deer-academy-film) .title1{position:static;text-align:center;padding:0}
+  .xkjc:has(#deer-academy-film) .title1 .img{display:block;margin:0 auto;padding:18px 0}
+  .xkjc:has(#deer-academy-film) .title1 .img_sj{display:none}
+  .xkjc:has(#deer-academy-film) .video{padding:18px}
+  .xkjc:has(#deer-academy-film) .xkjc_list ul{padding:0 18px}
+  .xkjc:has(#deer-academy-film) .xkjc_list ul li{margin:0;width:100%;box-sizing:border-box}
+}
+

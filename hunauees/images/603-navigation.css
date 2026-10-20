@@ -1,0 +1,27 @@
+/* Keep the academy information navigation on every destination page. */
+.dc-news-shell{max-width:1520px;margin:40px auto 60px;padding:0 20px;box-sizing:border-box}
+.dc-news-shell>.dc-breadcrumb{margin-bottom:35px}
+.dc-news-layout{display:flex;gap:40px;align-items:stretch}
+.dc-news-layout>.sidebar{width:280px;flex-shrink:0;padding-right:40px;border-right:1px solid #ccc}
+.dc-news-layout .menu-list{list-style:none;margin:0;padding:0;font-size:18px}
+.dc-news-layout .menu-list a{display:block;padding:18px 40px;color:#333}
+.dc-news-layout .menu-list .on a{border-radius:32px;background:#acdfce url(2024zygc_listjtr.png) no-repeat right 20px center/15px;color:#36896d}
+.dc-news-layout>.dc-main{flex:1;min-width:0;width:auto;max-width:none;margin:0}
+.dc-news-layout>.dc-main>h1{margin-top:0}
+@media(max-width:1100px){.dc-news-layout{gap:24px}.dc-news-layout>.sidebar{width:200px;padding-right:20px}.dc-news-layout .menu-list a{padding-left:20px}.dc-news-layout .dc-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.dc-news-shell{padding:0 15px;margin-top:25px}.dc-news-layout{flex-direction:column}.dc-news-layout>.sidebar{width:100%;padding:0 0 16px;border-right:0;border-bottom:1px solid #ccc}.dc-news-layout .menu-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}.dc-news-layout .menu-list a{padding:12px 18px;font-size:16px}.dc-news-layout .menu-list .on a{background-image:none}}
+.dc-news-shell,.dc-news-shell *{box-sizing:border-box}
+.dc-news-shell .dc-breadcrumb{line-height:1.8;overflow-wrap:anywhere}
+.dc-news-shell .dc-main{overflow-wrap:anywhere}
+.dc-news-shell .dc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.dc-news-shell .dc-contact-content{width:100%;min-width:0}
+.dc-contact-content img{max-width:100%;height:auto}
+.dc-contact-content .news-list{display:block;width:100%;margin:0}
+.dc-contact-content .news-list>p{margin-bottom:25px}
+.dc-contact-content .full img{display:block;width:100%;height:auto;margin:0}
+.dc-contact-content .news-list-dz{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.dm-main,.dm-profile-head>div{min-width:0;overflow-wrap:anywhere}
+@media(max-width:1100px){.dc-news-shell .dc-grid{grid-template-columns:1fr}}
+@media(max-width:760px){.dc-news-layout{flex-direction:column}.dc-news-layout>.sidebar{width:100%;padding:0 0 16px;border-right:0;border-bottom:1px solid #ccc}.dc-news-layout .menu-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.dc-news-layout .menu-list a{padding:12px 18px;font-size:16px}.dc-news-layout .menu-list .on a{background-image:none}.dc-contact-content .news-list-dz{grid-template-columns:1fr}.dc-news-shell .dc-main h1{font-size:26px}}
+/* Maps are reading material, not zoom-on-hover thumbnails. */
+.dc-contact-content img:hover{transform:none;opacity:1}
