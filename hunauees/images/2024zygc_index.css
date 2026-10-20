@@ -2,32 +2,42 @@
 
 @font-face {
     font-family: 'syhtB';
-    src: url('syhtBold.ttf') format('truetype');
+    src: url('syhtBold.subset.woff2') format('woff2');
     font-style: normal;
+
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'syht';
-    src: url('syhtMedium.ttf') format('truetype');
+    src: url('syhtMedium.subset.woff2') format('woff2');
     font-style: normal;
+
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'syhtN';
-    src: url('syhtNormal.ttf') format('truetype');
+    src: url('syhtNormal.subset.woff2') format('woff2');
     font-style: normal;
+
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'syhtE';
-    src: url('syhtExtraLight.ttf') format('truetype');
+    src: url('syhtExtraLight.subset.woff2') format('woff2');
     font-style: normal;
+
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'syhtR';
-    src: url('syhtRegular.ttf') format('truetype');
+    src: url('syhtRegular.subset.woff2') format('woff2');
     font-style: normal;
+
+    font-display: swap;
 }
 
 .xkjc .xkjc_list ul li p:nth-child(2),.slideTxtBox1 .bd li .con04_r p:nth-child(1),.slideTxtBox .bd li p:nth-of-type(2),.tz_list1 li a
@@ -151,7 +161,7 @@ li a:hover,a:hover,.link_ul li a:hover{color: #33886b;}
 .title{line-height: 100px;}
 
 /* 新闻动态 */
-.xwdt{background: url(2024zygc_newsbg.png) no-repeat center;}
+.xwdt{background: url(../assets/optimized/images/2024zygc_newsbg.webp) no-repeat center;}
 .xwdt_bg{background: url(2024zygc_xwbg.png) no-repeat;background-position: bottom 0px left 0px;margin-left: -36px;  height: 480px;margin-bottom: 50px;padding-bottom: 40px;position: relative;}
 .xwdt_l{width: 56%;float: left;margin-left: 36px;position: relative;}
 .xwdt_l a{position: absolute;right: 0px;top: 0px;display: block;width: 100%;}
@@ -198,7 +208,7 @@ li a:hover,a:hover,.link_ul li a:hover{color: #33886b;}
 .con02_part02_li p a{font-size: 22px;color: #05322b; display: block;padding: 15px 0px;}
 
 /* 师资队伍 */
-.szdw_bg{height: 540px;background: url(2024zygc_szdwbg.png) no-repeat center;}
+.szdw_bg{height: 540px;background: url(../assets/optimized/images/2024zygc_szdwbg.webp) no-repeat center;}
 .slideGroup{margin: 0px -20px;}
 .slideGroup .parHd{ height:44px; padding:0 20px 36px 20px; position:relative;  }
 .slideGroup .parHd ul{display: flex;justify-content: center; height:44px;   }
@@ -262,8 +272,8 @@ li a:hover,a:hover,.link_ul li a:hover{color: #33886b;}
 ,.xkjc .xkjc_list ul li p:nth-child(2) a:hover,.txtScroll-left .bd ul li div p:nth-child(2) a:hover{color: #33886b;}
 .slideTxtBox1 .bd li .con04_r p:nth-child(2){font-size: 16px;color: #999;text-indent: 2em;padding-top: 8px;}
 /* 学科交叉 */
-.xkjc_bg{height: 555px; background: url(2024zygc_kxjcbg.png) no-repeat center;position: relative;padding-top: 45px;overflow: hidden;background-position: top;}
-.xkjc1_bg{background: url(2024zygc_kxjcbg1.png) no-repeat center;position: absolute;left: 50%;margin-left: -610px;width: 100%;height: 440px;top: 45px;z-index: 1;}
+.xkjc_bg{height: 555px; background: url(../assets/optimized/images/2024zygc_kxjcbg.webp) no-repeat center;position: relative;padding-top: 45px;overflow: hidden;background-position: top;}
+.xkjc1_bg{background: url(../assets/optimized/images/2024zygc_kxjcbg1.webp) no-repeat center;position: absolute;left: 50%;margin-left: -610px;width: 100%;height: 440px;top: 45px;z-index: 1;}
 .floor1{position: absolute;margin-left: -650px;left: 50%;top: 77px;z-index: 10;}
 .xkjc .title{background-color: #fff;padding-left: 40px;width: 22%;line-height: 68px;}
 .xkjc .xkjc_list{background-color: #fff;padding-bottom: 40px;}

@@ -2,8 +2,10 @@
 
 @font-face { 
     font-family: 'Fzzdhjw'; 
-    src: url('fzzdhjw.woff2') format('woff');
+    src: url('fzzdhjw.woff2') format('woff2');
     font-style: normal;
+
+font-display:swap;
 }
 
 .djdt .news-info h3,.news-title,.menu-list a,.fzlc .list p:nth-of-type(2),.xmkc .news-item p,.szdw1 .news-item p,.jycy .news-item li a
@@ -15,7 +17,7 @@ a{transition: all 0s;}
 .nav-left a:last-child{color: #36896d;}
 
 
-.banner1{width: 100%; background: url(2024zygc_listqt_banner.jpg) no-repeat center top / contain;height: 450px;margin: 0px auto;}
+.banner1{width: 100%; background: url(../assets/optimized/images/2024zygc_listqt_banner.webp) no-repeat center top / contain;height: 450px;margin: 0px auto;}
 .banner22{width: 100%;overflow: hidden;}
 .banner22 img{width: 100%;height: auto;transition: all 0.3s;}
 

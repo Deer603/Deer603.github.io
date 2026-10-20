@@ -2,9 +2,11 @@
 /* 方正正大黑简体 */
 @font-face { 
     font-family: 'Fzzdhjw'; 
-    src: url('fzzdhjw.woff2') format('woff');
+    src: url('fzzdhjw.woff2') format('woff2');
     font-style: normal;
-  }
+  
+font-display:swap;
+}
 
 .w1540{width: 1540px;margin:0 auto;}
 .list-more:hover{color: #36896d;}
@@ -109,7 +111,7 @@
 .zzjg-list .zzjg-img img:last-of-type{width: 86% !important;margin: 0px auto;}
 
 /* 新版底部 */
-.footer2025{background: url(2025zygc_footer_bg01.png)no-repeat;background-size: cover;}
+.footer2025{background: url(../assets/optimized/images/2025zygc_footer_bg01.webp)no-repeat;background-size: cover;}
 .footer2025 p, .footer2025 a{color: #fff;font-size: 16px;}
 .footer2025-con{padding: 0px 120px;}
 .footer2025-t{padding: 53px 0px 43px 0px;text-align: left;}

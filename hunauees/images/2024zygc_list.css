@@ -15,7 +15,7 @@
     {color: rgb(102 102 102 / var(--un-text-opacity));}
     
     
-    .banner1{width: 100%; background: url(2024zygc_listqt_banner.jpg) no-repeat center top / contain;height: 450px;margin: 0px auto;}
+    .banner1{width: 100%; background: url(../assets/optimized/images/2024zygc_listqt_banner.webp) no-repeat center top / contain;height: 450px;margin: 0px auto;}
     .banner22{width: 100%;overflow: hidden;}
     .banner22 img{width: 100%;height: auto;transition: all 0.3s;}
     @media screen and (max-width: 600px) {
