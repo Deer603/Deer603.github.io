@@ -1,0 +1,21 @@
+/* 鹿业大学页头标识 */
+.header .logo .deer-brand{display:flex;align-items:center;gap:16px;min-height:100px;line-height:1.25;color:#fff;}
+.header .logo .deer-brand img{display:block;flex:0 0 auto;width:80px;height:80px;margin:0;object-fit:contain;}
+.header .deer-brand-name{display:flex;flex-direction:column;gap:5px;white-space:nowrap;font-family:"Songti SC","STSong","SimSun",serif;font-weight:700;font-size:28px;letter-spacing:2px;}
+.header .deer-brand-name>span:last-child{font-size:24px;letter-spacing:3px;}
+@media screen and (min-width:992px){
+    .header .logo .deer-brand-light{color:#235e50;min-height:130px;}
+}
+@media screen and (max-width:900px){
+    .header .logo{width:calc(100% - 50px);}
+    .header .logo .deer-brand{gap:12px;}
+    .header .logo .deer-brand img{width:68px;height:68px;}
+    .header .deer-brand-name{font-size:26px;}
+    .header .deer-brand-name>span:last-child{font-size:22px;}
+}
+@media screen and (max-width:600px){
+    .header .logo .deer-brand{min-height:60px;gap:8px;}
+    .header .logo .deer-brand img{width:48px;height:48px;}
+    .header .deer-brand-name{font-size:19px;letter-spacing:1px;gap:2px;}
+    .header .deer-brand-name>span:last-child{font-size:16px;letter-spacing:2px;}
+}

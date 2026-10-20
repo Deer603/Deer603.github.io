@@ -283,3 +283,7 @@
 
 /* 工会动态 */
 .ghdt .xwdt-list ul li .list-img img{height: 240px;}
+
+/* 单个公众号二维码在原页脚区域居中显示。 */
+.footer2025-r ul li:only-child{float:none;width:130px;margin:0 auto;}
+.footer2025-r ul li:only-child .ewm-img img{display:block;width:100%;height:auto;}
