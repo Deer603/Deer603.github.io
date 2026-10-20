@@ -220,7 +220,7 @@
     .footer2025-c{width: 100%;padding: 0px 5%;}
     .footer2025-c ul li{float: left;width: calc(25% - 12px);box-sizing: border-box;margin-right: 16px;}
     .footer2025-c ul li:last-child{margin-right: 0px;}
-    .footer2025-r{padding: 0px;margin: 0 auto;float: none;width: 213px;}
+    .footer2025-r{padding: 0px;margin: 0 auto;float: none;clear: both;display: flow-root;width: 213px;}
     .footer2025-link{display: none;}
     .footer2025-b{border-top: 1px solid rgba(255, 255, 255, 0.502);margin-top: 20px;padding: 10px 0;}
 }

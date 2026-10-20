@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-10-20",
+  "kind": "AI-generated",
+  "event_date": null,
+  "version": 1,
+  "scenes": [
+    {
+      "id": "tea",
+      "text": "夏日校园树荫下，三位围坐木桌，黎健毓把一杯带冰块的琥珀色冰红茶递给魏子奇，夏炜城看着杯壁凝结水珠笑。桌上另有两杯茶、冰盒和一本无文字便签。午后柔和光线，青绿与琥珀色调，真实生活抓拍，温暖轻松。",
+      "prompt": "任务：生成一张横向16:9自然摄影效果的AI群体生活照片，作为鹿群学院网站的新闻插图。参考绑定：图1为夏炜城/xia-weicheng，图2为魏子奇/wei-ziqi，图3为黎健毓/li-jianyu；每张是同一角色的四角度参考，不是四个人。出场恰好这三位，各出现一次。夏炜城为绿色修长乌龟、蓬松黑卷发、黑衬衫格纹领、卡其裤，必须保留背部大龟壳；魏子奇为敦实绿色青蛙、顺滑黑色中分发、黑T黑短裤，没有龟壳；黎健毓为矮壮蓝白机器猫、黑色蓬松卷发、银色细框眼镜、红鼻、红颈圈金铃、白T黑裤。参考身高依次180cm、180cm、160cm，坐姿结合透视自然处理，保留体型差异。统一真实场景光线和材质，不改成人类或玩偶服，不串角色，不带背包相机，不加其他人物，不要画面文字、水印、拼贴。人物和关键动作置于画面中央70%，保留安全裁切空间。夏日校园树荫下，三位围坐木桌，黎健毓把一杯带冰块的琥珀色冰红茶递给魏子奇，夏炜城看着杯壁凝结水珠笑。桌上另有两杯茶、冰盒和一本无文字便签。午后柔和光线，青绿与琥珀色调，真实生活抓拍，温暖轻松。",
+      "refs": [
+        "/Users/roylyl/.codex/skills/DeerPhotos/assets/characters/xia-weicheng/turnaround-v1.png",
+        "/Users/roylyl/.codex/skills/DeerPhotos/assets/characters/wei-ziqi/turnaround-v1.png",
+        "/Users/roylyl/.codex/skills/DeerPhotos/assets/characters/li-jianyu/turnaround-v1.png"
+      ]
+    },
+    {
+      "id": "music",
+      "text": "傍晚排练室的小型音乐分享，夏炜城坐在中央轻拨木吉他，右边魏子奇坐着打节拍，左边黎健毓安静听歌。木地板、温暖台灯、一个小音箱，背景乐器架虚化。三位完整脸部与龟壳侧缘可见，不遮住手和乐器，沉静亲密的生活摄影，不是舞台演出。",
+      "prompt": "任务：生成一张横向16:9自然摄影效果的AI群体生活照片，作为鹿群学院网站的新闻插图。参考绑定：图1为夏炜城/xia-weicheng，图2为魏子奇/wei-ziqi，图3为黎健毓/li-jianyu；每张是同一角色的四角度参考，不是四个人。出场恰好这三位，各出现一次。夏炜城为绿色修长乌龟、蓬松黑卷发、黑衬衫格纹领、卡其裤，必须保留背部大龟壳；魏子奇为敦实绿色青蛙、顺滑黑色中分发、黑T黑短裤，没有龟壳；黎健毓为矮壮蓝白机器猫、黑色蓬松卷发、银色细框眼镜、红鼻、红颈圈金铃、白T黑裤。参考身高依次180cm、180cm、160cm，坐姿结合透视自然处理，保留体型差异。统一真实场景光线和材质，不改成人类或玩偶服，不串角色，不带背包相机，不加其他人物，不要画面文字、水印、拼贴。人物和关键动作置于画面中央70%，保留安全裁切空间。傍晚排练室的小型音乐分享，夏炜城坐在中央轻拨木吉他，右边魏子奇坐着打节拍，左边黎健毓安静听歌。木地板、温暖台灯、一个小音箱，背景乐器架虚化。三位完整脸部与龟壳侧缘可见，不遮住手和乐器，沉静亲密的生活摄影，不是舞台演出。",
+      "refs": [
+        "/Users/roylyl/.codex/skills/DeerPhotos/assets/characters/xia-weicheng/turnaround-v1.png",
+        "/Users/roylyl/.codex/skills/DeerPhotos/assets/characters/wei-ziqi/turnaround-v1.png",
+        "/Users/roylyl/.codex/skills/DeerPhotos/assets/characters/li-jianyu/turnaround-v1.png"
+      ]
+    },
+    {
+      "id": "workshop",
+      "text": "明亮的校园创客工作台，夏炜城在左侧侧身展示一个巴掌大小的桌面机器人原型，龟壳可见，魏子奇在中央观察电路板，黎健毓在右侧用笔记录。桌上笔记本电脑、低压开发板、收纳整齐的导线，不出现危险带电操作。窗外绿树，侧面自然日光，专注而轻松的协作瞬间。",
+      "prompt": "任务：生成一张横向16:9自然摄影效果的AI群体生活照片，作为鹿群学院网站的新闻插图。参考绑定：图1为夏炜城/xia-weicheng，图2为魏子奇/wei-ziqi，图3为黎健毓/li-jianyu；每张是同一角色的四角度参考，不是四个人。出场恰好这三位，各出现一次。夏炜城为绿色修长乌龟、蓬松黑卷发、黑衬衫格纹领、卡其裤，必须保留背部大龟壳；魏子奇为敦实绿色青蛙、顺滑黑色中分发、黑T黑短裤，没有龟壳；黎健毓为矮壮蓝白机器猫、黑色蓬松卷发、银色细框眼镜、红鼻、红颈圈金铃、白T黑裤。参考身高依次180cm、180cm、160cm，坐姿结合透视自然处理，保留体型差异。统一真实场景光线和材质，不改成人类或玩偶服，不串角色，不带背包相机，不加其他人物，不要画面文字、水印、拼贴。人物和关键动作置于画面中央70%，保留安全裁切空间。明亮的校园创客工作台，夏炜城在左侧侧身展示一个巴掌大小的桌面机器人原型，龟壳可见，魏子奇在中央观察电路板，黎健毓在右侧用笔记录。桌上笔记本电脑、低压开发板、收纳整齐的导线，不出现危险带电操作。窗外绿树，侧面自然日光，专注而轻松的协作瞬间。",
+      "refs": [
+        "/Users/roylyl/.codex/skills/DeerPhotos/assets/characters/xia-weicheng/turnaround-v1.png",
+        "/Users/roylyl/.codex/skills/DeerPhotos/assets/characters/wei-ziqi/turnaround-v1.png",
+        "/Users/roylyl/.codex/skills/DeerPhotos/assets/characters/li-jianyu/turnaround-v1.png"
+      ]
+    }
+  ]
+}
