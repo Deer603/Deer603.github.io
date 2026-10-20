@@ -1,7 +1,111 @@
 {
   "updated": "2026-10-20",
-  "basis": "用户授权的鹿群文化创作；公众号题材沿用content.json整理记录，未新核验原文全文",
+  "basis": "公众号题材采用腾讯元宝检索线索；具体成员乐器分工由用户提供，鹿院课程与排练场景为授权创作。未取得公众号原始图片。",
   "articles": [
+    {
+      "slug": "rainy-friends",
+      "group": "life",
+      "title": "雨夜取糕：彭鹏骑到北门之后",
+      "summary": "从603、604寝室为黎健毓筹备生日的故事，谈一次没有按计划抵达的惊喜。",
+      "scene": "tea",
+      "sections": [
+        {
+          "heading": "出发前的约定",
+          "text": "603、604寝室一起为黎健毓商量生日惊喜，蛋糕已经预订，取餐还需要有人跑一趟。根据元宝返回的文章转述，彭鹏在雨夜主动承担这件事，骑自行车前往学校北门。"
+        },
+        {
+          "heading": "空着的取餐点",
+          "text": "到了约定地点，蛋糕却不见了。原文章由此批评擅自拿走他人餐食的行为：一个包装盒背后，不只是价格，还有室友之间的筹备、奔赴与等待。"
+        },
+        {
+          "heading": "故事留下的问题",
+          "text": "鹿院沿着这个情节讨论日常互助：代取物品时把地点和联系方式说清，遇到意外及时沟通；放在公共取餐点的东西也属于具体的人。配图只演绎彭鹏雨夜到达取餐点的场景。"
+        }
+      ],
+      "updated": "2026-10-20",
+      "url": "campus/rainy-friends/index.html",
+      "image": "rainy-pickup-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
+    },
+    {
+      "slug": "bass-and-drums",
+      "group": "life",
+      "title": "黎健毓×李彦臻：贝斯和架子鼓先对齐",
+      "summary": "一把贝斯、一套架子鼓，从底鼓落点开始练习合奏。",
+      "scene": null,
+      "image": "rhythm-section-v1.png",
+      "sections": [
+        {
+          "heading": "谁负责什么",
+          "text": "黎健毓弹贝斯，李彦臻打架子鼓。这篇鹿院练习记录围绕两件乐器之间的关系展开：鼓提供节奏轮廓，贝斯把低音和和声接在一起。"
+        },
+        {
+          "heading": "先练四小节",
+          "text": "两人先选一个简短循环，保持速度不变，轮流听对方。黎健毓把贝斯的音头放到李彦臻的底鼓旁边，再留出一处错开的节奏，比较两种感觉。"
+        },
+        {
+          "heading": "把结束也练好",
+          "text": "一段合奏的结束不能只靠互相猜。一起确定最后一拍、收音和镲片延音，再给其他成员一个能看懂的提示。排练室里的默契，往往就来自这些细节。"
+        }
+      ],
+      "updated": "2026-10-20",
+      "url": "campus/bass-and-drums/index.html",
+      "kind": "鹿院创作",
+      "basis": "人物乐器分工由用户于2026-10-20明确提供，练习场景为据此创作"
+    },
+    {
+      "slug": "two-electric-guitars",
+      "group": "life",
+      "title": "唐博釜×罗宇伦：两把电吉他，别挤在同一条线上",
+      "summary": "从旋律与伴奏的分工，到两组音色怎样在合奏里互相让开。",
+      "scene": null,
+      "image": "dual-guitars-v1.png",
+      "sections": [
+        {
+          "heading": "同样的乐器，不同的位置",
+          "text": "唐博釜和罗宇伦都会弹电吉他。鹿院以此设计双吉他编配练习：一位先弹主旋律，另一位负责和弦或节奏，之后交换，听听同一个段落怎样产生不同重心。"
+        },
+        {
+          "heading": "从音量退一步",
+          "text": "两把琴同时响起时，先检查是否都在弹密集音符。少弹几个音、换一个音区或把其中一把琴的音色收干净，都可能比单纯增大音量更有效。"
+        },
+        {
+          "heading": "用录音作比较",
+          "text": "练习结束后分别听两把琴的独立片段和合起来的版本。把“这段有点糊”说得更具体：是节奏重叠、音符持续过长，还是两个人没有决定谁来带出旋律。"
+        }
+      ],
+      "updated": "2026-10-20",
+      "url": "campus/two-electric-guitars/index.html",
+      "kind": "鹿院创作",
+      "basis": "人物乐器分工由用户于2026-10-20明确提供，练习场景为据此创作"
+    },
+    {
+      "slug": "acoustic-guitar-practice",
+      "group": "life",
+      "title": "夏炜城的木吉他时间：先把这一小段弹顺",
+      "summary": "一把吉他、一张谱架，从换和弦到完整弹完一个段落。",
+      "scene": null,
+      "image": "acoustic-practice-v1.png",
+      "sections": [
+        {
+          "heading": "一人一琴",
+          "text": "这次题材把镜头留给夏炜城的吉他练习。靠窗摆一把椅子、一个谱架和节拍器，从很短的乐句开始，不急着把练习变成演出。"
+        },
+        {
+          "heading": "让左右手接上",
+          "text": "左手换和弦时，右手往往也会停顿。先慢下来，听清每个音的起点和结束，再逐渐恢复速度；练习目标是把乐句接顺，保持音符之间的呼吸。"
+        },
+        {
+          "heading": "给朋友听一小段",
+          "text": "录下一段自己能稳定弹出的内容，再拿到合奏里讨论。夏炜城的和声、黎健毓的贝斯、李彦臻的鼓，以及唐博釜和罗宇伦的电吉他，可以由同一个短段落找到彼此的位置。"
+        }
+      ],
+      "updated": "2026-10-20",
+      "url": "campus/acoustic-guitar-practice/index.html",
+      "kind": "鹿院创作",
+      "basis": "人物乐器分工由用户于2026-10-20明确提供，练习场景为据此创作"
+    },
     {
       "slug": "birthday-plan",
       "group": "notice",
@@ -23,7 +127,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/birthday-plan/index.html"
+      "url": "campus/birthday-plan/index.html",
+      "image": "rainy-pickup-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "tea-standard",
@@ -46,7 +153,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/tea-standard/index.html"
+      "url": "campus/tea-standard/index.html",
+      "image": "iced-tea-portrait-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "shared-archive",
@@ -69,7 +179,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/shared-archive/index.html"
+      "url": "campus/shared-archive/index.html",
+      "image": null,
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "practice-submissions",
@@ -92,7 +205,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/practice-submissions/index.html"
+      "url": "campus/practice-submissions/index.html",
+      "image": "workshop-campus-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "music-collection",
@@ -115,7 +231,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/music-collection/index.html"
+      "url": "campus/music-collection/index.html",
+      "image": "acoustic-practice-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "iced-tea-salon",
@@ -138,30 +257,36 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/iced-tea-salon/index.html"
+      "url": "campus/iced-tea-salon/index.html",
+      "image": "iced-tea-portrait-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "music-evening",
       "group": "event",
-      "title": "从麻田村到603：给日常配一首歌",
-      "summary": "一把吉他、一段节拍，还有愿意认真听完的朋友。",
+      "title": "鹿院排练开放日：让五件乐器各有位置",
+      "summary": "黎健毓的贝斯、李彦臻的鼓、夏炜城的吉他，加上唐博釜与罗宇伦的双电吉他。",
       "scene": "music",
       "sections": [
         {
-          "heading": "分享安排",
-          "text": "围绕603视界的麻田村音乐题材，设置“带来一首歌”“讲讲为什么”“一起试一段”三个环节。可以演奏，也可以只谈一段旋律怎样与自己的生活发生联系。"
+          "heading": "先把分工摆清楚",
+          "text": "这次开放日以五位鹿员的乐器特长为题材：黎健毓弹贝斯，李彦臻打架子鼓，夏炜城弹吉他，唐博釜和罗宇伦弹电吉他。每件乐器都安排一个能够被单独听见的片段，再进入合奏。"
         },
         {
-          "heading": "现场约定",
-          "text": "演奏者可以停下来重来，听众先听完再给建议。设备以能听清为准，不用音量制造热闹；录音与影像是否公开，由参与者共同决定。"
+          "heading": "分组再合起来",
+          "text": "练习从贝斯与鼓的节奏开始，接着加入木吉他的和声，最后讨论两把电吉他的旋律与伴奏分配。现场交流围绕实际声音展开：哪里抢了节奏，哪里遮住了另一件乐器，哪里可以少弹一点。"
         },
         {
-          "heading": "参与信息",
-          "text": "现开放节目和话题征集，时间、场地另行确认。欢迎提交原创片段、翻弹或歌单说明，不设技术等级门槛，也欢迎担任记录者和听众。"
+          "heading": "参与安排",
+          "text": "本页为鹿院活动策划，开放旁听与曲目建议征集。具体时间、场地和参与名单由成员确认后公布；有自己的乐器或录音经验，也欢迎提出可以一起练习的内容。"
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/music-evening/index.html"
+      "url": "campus/music-evening/index.html",
+      "image": "dual-guitars-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "prototype-workshop",
@@ -184,7 +309,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/prototype-workshop/index.html"
+      "url": "campus/prototype-workshop/index.html",
+      "image": "workshop-campus-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "culture-program",
@@ -207,7 +335,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/culture-program/index.html"
+      "url": "campus/culture-program/index.html",
+      "image": null,
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "maker-program",
@@ -230,7 +361,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/maker-program/index.html"
+      "url": "campus/maker-program/index.html",
+      "image": "workshop-campus-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "tea-lab",
@@ -253,7 +387,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/tea-lab/index.html"
+      "url": "campus/tea-lab/index.html",
+      "image": "iced-tea-portrait-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "meaning-lab",
@@ -276,7 +413,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/meaning-lab/index.html"
+      "url": "campus/meaning-lab/index.html",
+      "image": null,
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "toolbox",
@@ -299,7 +439,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/toolbox/index.html"
+      "url": "campus/toolbox/index.html",
+      "image": null,
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "quote-guide",
@@ -322,7 +465,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/quote-guide/index.html"
+      "url": "campus/quote-guide/index.html",
+      "image": null,
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "desk-incubator",
@@ -345,7 +491,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/desk-incubator/index.html"
+      "url": "campus/desk-incubator/index.html",
+      "image": "workshop-campus-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "editorial-studio",
@@ -368,30 +517,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/editorial-studio/index.html"
-    },
-    {
-      "slug": "rainy-friends",
-      "group": "life",
-      "title": "雨夜之后，先把朋友接回来",
-      "summary": "比一块没准时送到的蛋糕更重要的，是有人记得、有人接应。",
-      "scene": "tea",
-      "sections": [
-        {
-          "heading": "故事的起点",
-          "text": "在鹿院的生日故事里，热闹往往从一条简短消息开始：有人提议准备惊喜，有人负责联系，有人提醒别让主角提前知道。雨夜一来，原本顺畅的计划就多出好几个问号。"
-        },
-        {
-          "heading": "把事情接住",
-          "text": "这时最值得记录的，不是计划怎样落空，而是大家如何重新分工。有人确认位置，有人留意返程，有人把“到底怎么办”拆成下一件能做的小事，先让参与的人不用独自着急。"
-        },
-        {
-          "heading": "留下的记忆",
-          "text": "603视界“雨夜失糕”的题材被延续成一门日常功课：庆祝可以改期，关心不必等待完美场面。愿意把朋友接回来，已经让这个普通夜晚有了自己的重量。"
-        }
-      ],
-      "updated": "2026-10-20",
-      "url": "campus/rainy-friends/index.html"
+      "url": "campus/editorial-studio/index.html",
+      "image": null,
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "debug-together",
@@ -414,7 +543,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/debug-together/index.html"
+      "url": "campus/debug-together/index.html",
+      "image": "workshop-campus-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "tea-daily",
@@ -437,30 +569,36 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/tea-daily/index.html"
+      "url": "campus/tea-daily/index.html",
+      "image": "iced-tea-portrait-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "listen-together",
       "group": "life",
-      "title": "今晚先听完一首歌",
-      "summary": "暂时收起进度表，把注意力交给旋律和在场的人。",
+      "title": "合奏之前，先听见贝斯和鼓",
+      "summary": "黎健毓与李彦臻的节奏组，让一段练习先有稳定的重心。",
       "scene": "music",
       "sections": [
         {
-          "heading": "把节奏放慢",
-          "text": "从麻田村音乐题材延伸出来的鹿院小聚，不急着证明谁的技术更好。一位鹿员弹出一段熟悉的旋律，其他人先听完，再说说自己想起了什么。"
+          "heading": "把其他声音先收起来",
+          "text": "这组练习只保留黎健毓的贝斯和李彦臻的架子鼓。两人从简单节奏开始，让贝斯音头和底鼓的位置互相对齐，先听清拍子落在哪里。"
         },
         {
-          "heading": "让声音相遇",
-          "text": "有人习惯盯着和弦，有人注意节拍，也有人只记得某句歌词带来的感受。分享的意义在于让这些不同的入口碰到一起，而不是把每次听歌都变成技巧点评。"
+          "heading": "停顿也要一起处理",
+          "text": "除了音符，还要练习停下来的时机。贝斯收音以后，镲片是否继续延音；鼓停下时，低音是否也留出空间，这些细节共同决定段落的边界。"
         },
         {
-          "heading": "日常的配乐",
-          "text": "一段不够完美的录音也能记录一个阶段。愿意继续练习的人、愿意耐心听的人，共同让普通的夜晚有了可以被再次想起的声音。"
+          "heading": "给其他乐器留入口",
+          "text": "节奏组稳定后，再给吉他留出明确的进入提示。练习不以音量大小区分重要性，让同伴能准确接进来，本身就是合奏的一部分。"
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/listen-together/index.html"
+      "url": "campus/listen-together/index.html",
+      "image": "rhythm-section-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "circuit-story",
@@ -483,7 +621,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/circuit-story/index.html"
+      "url": "campus/circuit-story/index.html",
+      "image": "workshop-campus-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "campus-album",
@@ -506,30 +647,36 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/campus-album/index.html"
+      "url": "campus/campus-album/index.html",
+      "image": null,
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "guitar-notes",
       "group": "showcase",
-      "title": "鹿员风采：用一把吉他接住日常",
-      "summary": "从反复练习的一个和弦，到愿意分享的一段旋律。",
+      "title": "夏炜城的吉他练习：把换和弦的空隙缩短",
+      "summary": "从一组慢速和弦开始，让左手转换和右手节奏同时稳定下来。",
       "scene": "music",
       "sections": [
         {
-          "heading": "练习的起点",
-          "text": "音乐分享可以从最短的一段开始。把一个节奏放慢，听清每一下落点，重复到自己的手和耳朵逐渐达成一致，这种不起眼的练习也值得记录。"
+          "heading": "慢一点开始",
+          "text": "夏炜城的吉他题材从靠窗的独奏练习展开：先选一组熟悉和弦，把节拍器放慢。左手移动时，右手保持基本节奏，听清楚哪一次转换打断了旋律。"
         },
         {
-          "heading": "分享的方法",
-          "text": "带来一段练习录音，同时讲讲哪里还不稳定、下一步想怎样改。听众给出具体建议，也保留演奏者自己的表达方式，不急着把每个人拉到同一条标准线上。"
+          "heading": "不要跳过空隙",
+          "text": "比起一口气弹完，把最容易停顿的两拍单独练习更有针对性。用短录音回听，可以发现手上的动作已经完成，声音却还没有接上。"
         },
         {
-          "heading": "继续演奏",
-          "text": "鹿院的音乐题材希望保留这种轻松的认真：可以重新开始，可以只弹半首，也可以先做一个愿意听完的人。作品随着日常一点点长出来。"
+          "heading": "放回合奏",
+          "text": "换和弦顺畅后，再尝试给电吉他旋律作伴奏。吉他的节奏不必一直占满，和贝斯、鼓一起留出的空间，也能让旋律更清楚。"
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/guitar-notes/index.html"
+      "url": "campus/guitar-notes/index.html",
+      "image": "acoustic-practice-v1.png",
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "process-notes",
@@ -552,7 +699,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/process-notes/index.html"
+      "url": "campus/process-notes/index.html",
+      "image": null,
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "portfolio-demo",
@@ -575,7 +725,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/portfolio-demo/index.html"
+      "url": "campus/portfolio-demo/index.html",
+      "image": null,
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "handoff-ready",
@@ -598,7 +751,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/handoff-ready/index.html"
+      "url": "campus/handoff-ready/index.html",
+      "image": null,
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "project-budget",
@@ -621,7 +777,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/project-budget/index.html"
+      "url": "campus/project-budget/index.html",
+      "image": null,
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     },
     {
       "slug": "peer-review",
@@ -644,7 +803,10 @@
         }
       ],
       "updated": "2026-10-20",
-      "url": "campus/peer-review/index.html"
+      "url": "campus/peer-review/index.html",
+      "image": null,
+      "kind": "鹿院创作",
+      "basis": "用户授权的鹿群文化创作；不作为公众号原文转载或活动实录"
     }
   ]
 }

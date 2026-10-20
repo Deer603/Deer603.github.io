@@ -102,3 +102,31 @@
         font-size: 16px;
     }
 }
+
+/* Shared member directory and profile portraits. */
+.dm-main{max-width:1200px;width:calc(100% - 48px);margin:36px auto 72px;color:#163f38}
+.dm-main h1{font-size:34px;line-height:1.4;margin:18px 0}.dm-crumb{font-size:14px;line-height:1.8;margin-bottom:26px;color:#6c827c}.dm-crumb a{color:inherit}.dm-intro{font-size:17px;line-height:1.8;margin:0 0 30px;color:#667c75}
+.dm-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:30px 24px}
+.dm-card{display:block;min-width:0;background:#f3f8f6;border:1px solid #e1eae5;color:#163f38;text-decoration:none;overflow:hidden}
+.dm-card>img,.dm-name-avatar{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:contain;background:#4389c5}
+.dm-name-avatar{display:flex;align-items:center;justify-content:center;color:#fff;font-size:36px;letter-spacing:.15em;font-weight:500}
+.dm-card-copy{padding:18px}.dm-card h2{font-size:22px;margin:0 0 8px;line-height:1.4}.dm-card p{font-size:14px;line-height:1.75;margin:8px 0;color:#667c75}.dm-card .dm-tag{font-size:14px;color:#36896d;min-height:24px}.dm-card:hover,.dm-card:focus-visible{border-color:#36896d}.dm-card:focus-visible{outline:3px solid #4389c5;outline-offset:3px}
+.dm-profile{max-width:980px;margin:auto}.dm-profile-head{display:flex;gap:44px;align-items:center;border-bottom:1px solid #dbe6e0;padding:10px 0 36px}.dm-portrait{width:200px;flex:0 0 200px}.dm-portrait img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:contain;background:#4389c5}.dm-profile-head h1{font-size:36px}.dm-profile-head p{line-height:1.8;font-size:17px}.dm-profile-head .dm-eyebrow{font-size:14px;color:#788b84;letter-spacing:.12em}.dm-tag{color:#36896d}.dm-bio{margin:34px 0}.dm-bio h2{font-size:21px;margin:30px 0 12px;line-height:1.5}.dm-bio p{font-size:18px;line-height:1.95;color:#555;margin:12px 0}.dm-sources{border-top:1px solid #e1eae5;margin-top:36px;padding-top:6px}.dm-sources h2{font-size:17px}.dm-sources ul{padding-left:20px;list-style:disc}.dm-sources li{font-size:14px;line-height:1.9;margin:6px 0;color:#788b84}.dm-sources a{color:#36896d;text-decoration:underline}.dm-back{display:block;margin:30px auto 0;max-width:980px;color:#36896d}
+.slideGroup .deer-roster{padding:0 8px;box-sizing:border-box}.deer-roster .dm-strip{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:16px}.deer-roster .dm-card{flex:0 0 calc((100% - 80px)/5);scroll-snap-align:start}.deer-roster .dm-card-copy{text-align:left;padding:14px}.deer-roster .dm-card-copy h2{font-size:20px}.dm-directory-link{display:block;text-align:center;margin:20px auto;color:#205d4e;font-size:16px}.deer-roster .dm-name-avatar{font-size:28px}
+@media(max-width:1000px){.dm-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.deer-roster .dm-card{flex-basis:calc((100% - 40px)/3)}}
+@media(max-width:600px){.dm-main{width:calc(100% - 32px);margin:22px auto 44px}.dm-main h1{font-size:28px}.dm-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 12px}.dm-card-copy{padding:12px}.dm-card h2{font-size:20px}.dm-card p{font-size:13px}.dm-name-avatar{font-size:25px}.dm-profile-head{flex-direction:column;gap:20px;align-items:flex-start}.dm-portrait{width:160px;flex-basis:auto;align-self:center}.dm-profile-head h1{font-size:30px}.dm-bio p{font-size:16px}.deer-roster .dm-card{flex-basis:calc((100% - 16px)/2)}.deer-roster .dm-strip{gap:16px}.dm-crumb{font-size:13px}}
+.szdw_bg:has(.deer-roster){height:auto;background-size:cover;padding-bottom:28px}.szdw_bg .slideGroup:has(.deer-roster){margin:0}.deer-roster{scroll-margin-top:180px}.deer-roster .dm-directory-link{color:#fff}.dm-card>img:hover,.dm-portrait img:hover{transform:none;opacity:1}
+@media(max-width:600px){.deer-roster{scroll-margin-top:90px}}
+
+/* Match the enterprise mentor carousel on the homepage. */
+.deer-roster .dm-strip{gap:40px;scrollbar-width:none;padding:0 20px;scroll-padding-inline:20px}
+.deer-roster .dm-strip::-webkit-scrollbar{display:none}
+.deer-roster .dm-card{position:relative;flex:0 0 228px;height:308px;border:0;box-sizing:border-box}
+.deer-roster .dm-card>img,.deer-roster .dm-name-avatar{width:100%;height:308px;aspect-ratio:auto;object-fit:cover;object-position:center top}
+.deer-roster .dm-card-copy{position:absolute;bottom:0;left:0;right:0;padding:10px 4px;background:#395e65;text-align:center;color:#fff}
+.deer-roster .dm-card-copy h2{font-size:20px;line-height:1.5;margin:0;color:#fff;font-weight:400}
+.deer-roster .dm-card-copy p{display:none}
+.deer-roster .dm-card-copy .dm-tag{display:block;min-height:0;color:#fff;font-size:14px;line-height:1.5;margin:0}
+.slideGroup .deer-roster .sPrev,.slideGroup .deer-roster .sNext{top:154px;padding:0;border:0;cursor:pointer;background-color:transparent}
+.slideGroup .deer-roster button:focus-visible{outline:3px solid #b6ed3e;outline-offset:3px}
+@media(max-width:600px){.deer-roster .dm-strip{gap:20px;padding:0 10px;scroll-padding-inline:10px}.deer-roster .dm-card{flex-basis:calc((100% - 20px)/2);height:210px}.deer-roster .dm-card>img,.deer-roster .dm-name-avatar{height:210px}.deer-roster .dm-card-copy h2{font-size:16px}.deer-roster .dm-card-copy .dm-tag{font-size:12px}.slideGroup .deer-roster .sPrev,.slideGroup .deer-roster .sNext{top:105px}}

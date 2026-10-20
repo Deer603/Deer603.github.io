@@ -1,0 +1,431 @@
+{
+  "updated": "2026-10-20",
+  "source_method": "简介依据603视界文章的元宝检索转述；乐器特长由用户补充。名单核对群聊报告，未将报告人格分析写入简介。",
+  "members": [
+    {
+      "id": "xia-weicheng",
+      "name": "夏炜城",
+      "tag": "拓竹全栈工程师/吉他",
+      "summary": "从开发板到吉他，把动手实践带进日常。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "夏炜城，专职鹿员、拓竹全栈工程师，荣获湖南农业大学湘江卓越工程师学院2025年度优秀鹿员。关注硬件实践，也会弹吉他。"
+        },
+        {
+          "heading": "公众号里的工程日常",
+          "text": "603视界在《一场杜邦线引发的思考》中记录了他研究开发板、向魏子奇借用杜邦线的片段。一个小元件牵出一次寝室交流，工程实践也因此有了具体的生活场景。"
+        },
+        {
+          "heading": "一起把事情弄明白",
+          "text": "《为揭秘骗局，夏炜城以身入局》围绕一副低价耳机展开：文章写到他将买到的耳机交给罗宇伦辨别，魏子奇则检索类似线索。这段故事中的几位成员各自参与，把疑问放在一起讨论。"
+        },
+        {
+          "heading": "音乐与相处",
+          "text": "吉他是他的另一项兴趣。工程之外，他也出现在詹绍源生日聚餐的文章中，与朋友一起聊学习和接下来的打算。"
+        }
+      ],
+      "sources": [
+        {
+          "title": "603动态｜一场杜邦线引发的思考",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "603观察｜为揭秘骗局，夏炜城以身入局",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "603动态｜詹绍源生日宴，共话卓越工程师梦",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        }
+      ],
+      "status": "article-based",
+      "image": "assets/603/members/xia-weicheng-blue-v1.png",
+      "url": "xiaweicheng/index.html"
+    },
+    {
+      "id": "li-jianyu",
+      "name": "黎健毓",
+      "tag": "Desk Park贝斯手",
+      "summary": "低音声部之外，还有一杯一定要冰的冰红茶。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "黎健毓，专职鹿员，Desk Park乐队贝斯手。603视界的乐队成立篇和毕业晚会预告都记下了他的贝斯分工；在寝室故事中，大家也常以“书记”称呼他。"
+        },
+        {
+          "heading": "从排练到舞台",
+          "text": "《Desk Park乐队成立并投入排练》记录了乐队一起排练《热河》《春风十里》的起点。黎健毓的贝斯与鼓、吉他共同构成合奏，让各自的练习变成一支乐队的声音。"
+        },
+        {
+          "heading": "冰红茶与生日蛋糕",
+          "text": "《冰红茶一定要冰》从一句日常表达写起，把生活细节变成文章主题；《雨夜失糕》则记录了603、604寝室为他筹备生日惊喜、彭鹏冒雨取蛋糕的经过。饮料和蛋糕，也是朋友间相处的记忆。"
+        }
+      ],
+      "sources": [
+        {
+          "title": "603动态｜Desk Park乐队成立并投入排练",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "毕业晚会预告｜Desk Park乐队：以声浪开篇，送别滚烫青春",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "黎健毓“书记”：冰红茶一定要冰",
+          "url": "https://mp.weixin.qq.com/s?__biz=Mzk2NDAwMTc2Mw==&mid=2247483717&idx=1&sn=30134f1c35259985adb709893f559237",
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "603观察｜雨夜失糕，一份生日惊喜背后的感慨与深思",
+          "url": "https://mp.weixin.qq.com/s?__biz=Mzk2NDAwMTc2Mw==&mid=2247484523&idx=1&sn=0126b6171ac5374c8e13c881c806942f",
+          "evidence": "元宝公开文章检索摘要"
+        }
+      ],
+      "status": "article-based",
+      "image": "assets/603/members/li-jianyu-blue-v1.png",
+      "url": "members/li-jianyu/index.html"
+    },
+    {
+      "id": "luo-yulun",
+      "name": "罗宇伦",
+      "tag": "Desk Park电吉他手",
+      "summary": "在吉他声部、数码话题与朋友的交流之间。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "罗宇伦，专职鹿员，擅长电吉他。603视界在Desk Park乐队成立篇与毕业晚会预告中，将他列为吉他手，记录了他参与乐队排练与演出筹备的片段。"
+        },
+        {
+          "heading": "音乐中的协作",
+          "text": "与唐博釜同处吉他声部，和黎健毓的贝斯、李彦臻的鼓声一起完成合奏。乐队成立篇记录的《热河》《春风十里》，为这份共同兴趣留下了具体曲目。"
+        },
+        {
+          "heading": "数码与寝室日常",
+          "text": "《为揭秘骗局，夏炜城以身入局》写到他协助辨别耳机；《一场杜邦线引发的思考》里，他参与解释借线时的误会，帮助大家把话说明白。"
+        }
+      ],
+      "sources": [
+        {
+          "title": "603动态｜Desk Park乐队成立并投入排练",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "毕业晚会预告｜Desk Park乐队：以声浪开篇，送别滚烫青春",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "603观察｜为揭秘骗局，夏炜城以身入局",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "603动态｜一场杜邦线引发的思考",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        }
+      ],
+      "status": "article-based",
+      "image": "assets/603/members/luo-yulun-blue-v1.png",
+      "url": "members/luo-yulun/index.html"
+    },
+    {
+      "id": "li-yanzhen",
+      "name": "李彦臻",
+      "tag": "Desk Park鼓手",
+      "summary": "鼓点里的节奏，也是合奏中彼此照应的位置。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "李彦臻，专职鹿员，会打架子鼓。603视界的Desk Park乐队成立篇及毕业晚会预告均记录了他的鼓手分工，和贝斯、吉他成员共同参与排练。"
+        },
+        {
+          "heading": "乐队里的鼓手",
+          "text": "在《热河》《春风十里》的排练故事中，鼓声是乐队合奏的一部分。从各自演奏到共同进入一首歌，他的角色与黎健毓的贝斯声部相互配合。"
+        },
+        {
+          "heading": "公众号中的日常片段",
+          "text": "除乐队之外，他也出现在603寝室五排协作的文章里，文章用“吉吉毛毛”这一游戏昵称记录了他的参与。《李彦臻：我长大以后也要成为像书记一样的人》则以他与黎健毓的相处为叙事线索。"
+        }
+      ],
+      "sources": [
+        {
+          "title": "603动态｜Desk Park乐队成立并投入排练",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "毕业晚会预告｜Desk Park乐队：以声浪开篇，送别滚烫青春",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "青春风采603寝室：五排协作展默契，电竞场上显担当",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "李彦臻：我长大以后也要成为像书记一样的人",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        }
+      ],
+      "status": "article-based",
+      "image": "assets/603/members/li-yanzhen-blue-v1.png",
+      "url": "members/li-yanzhen/index.html"
+    },
+    {
+      "id": "peng-peng",
+      "name": "彭鹏",
+      "tag": "雨夜取糕/朋友相聚",
+      "summary": "一次冒雨骑行，留下了一段关于生日心意的故事。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "彭鹏，专职鹿员。603视界在《雨夜失糕，一份生日惊喜背后的感慨与深思》中，记录了他为朋友取生日蛋糕的雨夜经历。"
+        },
+        {
+          "heading": "雨夜中的一程",
+          "text": "603、604寝室共同为黎健毓准备生日惊喜，彭鹏主动骑自行车前往学校北门取蛋糕。到达约定地点时，预订的蛋糕已经不见。文章由这段经历谈起朋友的心意，以及校园生活中对他人善意的尊重。"
+        },
+        {
+          "heading": "相聚的日常",
+          "text": "在詹绍源生日宴的文章中，他也与603的朋友一起参加聚餐。从取蛋糕到围桌相聚，公众号留下的是一件件具体的小事。"
+        }
+      ],
+      "sources": [
+        {
+          "title": "603观察｜雨夜失糕，一份生日惊喜背后的感慨与深思",
+          "url": "https://mp.weixin.qq.com/s?__biz=Mzk2NDAwMTc2Mw==&mid=2247484523&idx=1&sn=0126b6171ac5374c8e13c881c806942f",
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "603动态｜詹绍源生日宴，共话卓越工程师梦",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        }
+      ],
+      "status": "article-based",
+      "image": "assets/603/members/peng-peng-blue-v1.png",
+      "url": "members/peng-peng/index.html"
+    },
+    {
+      "id": "wei-ziqi",
+      "name": "魏子奇",
+      "tag": "工程构思/资料检索",
+      "summary": "从杜邦线到水质检测船，把问题带入讨论。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "魏子奇，专职鹿员。603视界中的相关故事围绕资料检索、开发板配件与工程构思展开，他与夏炜城等成员一起出现在这些讨论中。"
+        },
+        {
+          "heading": "把线索查清楚",
+          "text": "《为揭秘骗局，夏炜城以身入局》写到他检索社交平台与投诉网站上的类似耳机事件；《一场杜邦线引发的思考》则从夏炜城向他借线的日常片段展开。"
+        },
+        {
+          "heading": "芙蓉智航的构想",
+          "text": "《芙蓉智航：我们的智能河道清污计划》记录了他与夏炜城关于智能水质检测船的构思，涉及视觉识别、树莓派与Arduino等方案。这是一份尚未制造实物的概念设计，也是一段从问题出发讨论工程方案的记录。"
+        }
+      ],
+      "sources": [
+        {
+          "title": "603观察｜为揭秘骗局，夏炜城以身入局",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "603动态｜一场杜邦线引发的思考",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "603创客｜芙蓉智航：我们的智能河道清污计划",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        }
+      ],
+      "status": "article-based",
+      "image": "assets/603/members/wei-ziqi-blue-v1.png",
+      "url": "members/wei-ziqi/index.html"
+    },
+    {
+      "id": "tang-bofu",
+      "name": "唐博釜",
+      "tag": "Desk Park电吉他手",
+      "summary": "在双吉他声部中，一起把排练变成完整的歌。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "唐博釜，专职鹿员，擅长电吉他。603视界在《Desk Park乐队成立并投入排练》中，将他列为乐队吉他手；毕业晚会预告中也保留了这一分工。"
+        },
+        {
+          "heading": "从第一场排练开始",
+          "text": "乐队成立篇记下了《热河》《春风十里》两首排练曲目，并写到他的吉他节奏。与罗宇伦的吉他、黎健毓的贝斯、李彦臻的鼓声配合，是文章中这段乐队生活的具体内容。"
+        },
+        {
+          "heading": "共同准备一场演出",
+          "text": "从成立篇到毕业晚会预告，公众号为他的音乐参与留下了连续线索：先一起排练，再为校园舞台做准备。"
+        }
+      ],
+      "sources": [
+        {
+          "title": "603动态｜Desk Park乐队成立并投入排练",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "毕业晚会预告｜Desk Park乐队：以声浪开篇，送别滚烫青春",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        }
+      ],
+      "status": "article-based",
+      "image": "assets/603/members/tang-bofu-blue-v1.png",
+      "url": "members/tang-bofu/index.html"
+    },
+    {
+      "id": "zhan-shaoyuan",
+      "name": "詹绍源",
+      "tag": "寝室日常/生日故事",
+      "summary": "一份失物、一块蛋糕，都是公众号记下的相处片段。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "詹绍源，专职鹿员。603视界以寝室长的角色记录了他的校园生活，相关篇目围绕拾金不昧、生日赠糕和朋友相聚展开。"
+        },
+        {
+          "heading": "骑行路上的失物",
+          "text": "《拾金不昧扬正气，善行微光暖芷兰》讲述了他骑行时拾到手机、随后送往派出所登记上交的故事。人物介绍中的这一片段取自公众号的校园叙事。"
+        },
+        {
+          "heading": "把蛋糕分给身边的人",
+          "text": "《詹绍源暖心赠糕，603寝室传递校园温情》记录了生日当天与室友分享蛋糕、将一份蛋糕送给徐智航的经过。《詹绍源生日宴，共话卓越工程师梦》则留下了603成员与彭鹏围桌相聚、聊起学习的场景。"
+        }
+      ],
+      "sources": [
+        {
+          "title": "603动态｜拾金不昧扬正气，善行微光暖芷兰",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "603动态｜詹绍源暖心赠糕，603寝室传递校园温情",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        },
+        {
+          "title": "603动态｜詹绍源生日宴，共话卓越工程师梦",
+          "url": null,
+          "evidence": "元宝公开文章检索摘要"
+        }
+      ],
+      "status": "article-based",
+      "image": "assets/603/members/zhan-shaoyuan-blue-v1.png",
+      "url": "members/zhan-shaoyuan/index.html"
+    },
+    {
+      "id": "tang-yinxin",
+      "name": "唐胤鑫",
+      "tag": "专职鹿员",
+      "summary": "公众号人物资料整理中。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "唐胤鑫，专职鹿员。相关603视界文章资料正在整理，人物故事将在取得对应篇目后补充。"
+        }
+      ],
+      "sources": [],
+      "status": "awaiting-article",
+      "image": "assets/603/members/tang-yinxin-blue-v1.png",
+      "url": "members/tang-yinxin/index.html"
+    },
+    {
+      "id": "tu-tenghui",
+      "name": "涂腾辉",
+      "tag": "专职鹿员",
+      "summary": "公众号人物资料整理中。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "涂腾辉，专职鹿员。相关603视界文章资料正在整理，人物故事将在取得对应篇目后补充。"
+        }
+      ],
+      "sources": [],
+      "status": "awaiting-article",
+      "image": "assets/603/members/tu-tenghui-blue-v1.png",
+      "url": "members/tu-tenghui/index.html"
+    },
+    {
+      "id": "wu-zixuan",
+      "name": "吴子轩",
+      "tag": "专职鹿员",
+      "summary": "公众号人物资料整理中。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "吴子轩，专职鹿员。相关603视界文章资料正在整理，人物故事将在取得对应篇目后补充。"
+        }
+      ],
+      "sources": [],
+      "status": "awaiting-article",
+      "image": null,
+      "url": "members/wu-zixuan/index.html"
+    },
+    {
+      "id": "deng-yuhang",
+      "name": "邓宇航",
+      "tag": "专职鹿员",
+      "summary": "公众号人物资料整理中。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "邓宇航，专职鹿员。相关603视界文章资料正在整理，人物故事将在取得对应篇目后补充。"
+        }
+      ],
+      "sources": [],
+      "status": "awaiting-article",
+      "image": null,
+      "url": "members/deng-yuhang/index.html"
+    },
+    {
+      "id": "chen-zuhan",
+      "name": "陈祖涵",
+      "tag": "专职鹿员",
+      "summary": "公众号人物资料整理中。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "陈祖涵，专职鹿员。相关603视界文章资料正在整理，人物故事将在取得对应篇目后补充。"
+        }
+      ],
+      "sources": [],
+      "status": "awaiting-article",
+      "image": null,
+      "url": "members/chen-zuhan/index.html"
+    },
+    {
+      "id": "wang-pengtao",
+      "name": "王鹏涛",
+      "tag": "专职鹿员",
+      "summary": "公众号人物资料整理中。",
+      "sections": [
+        {
+          "heading": "人物简介",
+          "text": "王鹏涛，专职鹿员。相关603视界文章资料正在整理，人物故事将在取得对应篇目后补充。"
+        }
+      ],
+      "sources": [],
+      "status": "awaiting-article",
+      "image": null,
+      "url": "members/wang-pengtao/index.html"
+    }
+  ]
+}

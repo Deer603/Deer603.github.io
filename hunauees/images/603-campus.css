@@ -45,3 +45,5 @@
 .dc-breadcrumb{font-size:15px;color:#657e72;}.dc-related{border-top:1px solid #dde8e2;padding-top:25px;margin-top:40px;}
 @media(max-width:900px){.banner{padding-top:100px;}#slideBox .hd{bottom:12px;}.dc-announcements{grid-template-columns:1fr;gap:32px;}.dc-section,.dc-main{width:92%;margin:32px auto;}.dc-heading{font-size:26px;}.dc-events{gap:12px;}.dc-poster h3{font-size:28px;}}
 @media(max-width:600px){.banner{padding-top:60px;}#slideBox{height:auto;}#slideBox .hd{bottom:8px;}.dc-events{grid-template-columns:1fr;}.dc-poster h3{font-size:36px;}.dc-poster img{aspect-ratio:16/9;}.dc-grid{grid-template-columns:1fr;gap:20px;}.dc-heading span{font-size:16px;}.dc-card>div{padding:18px;}.dc-main h1{font-size:26px;}.dc-main article p{font-size:17px;}.dc-tabbar button{font-size:15px;padding:8px 12px;}}
+
+.dc-figure{margin:28px 0}.dc-figure .dc-cover{margin:0}.dc-figure figcaption{font-size:13px;color:#76877e;line-height:1.6;margin-top:9px}.dc-readings .dc-card{display:flex;flex-direction:column}.dc-readings .dc-card>div{flex:1}.dc-main article .dc-source{font-size:15px;border-top:1px solid #dce6e0;padding-top:20px}
