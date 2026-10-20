@@ -1,4 +1,18 @@
 /* 鹿业大学页头标识 */
+.footer2025-t .deer-footer-brand{display:inline-flex;align-items:center;gap:16px;color:#fff;text-align:left;line-height:1.15;}
+.footer2025-t .deer-footer-brand img{display:block;flex:0 0 auto;width:80px;height:80px;object-fit:contain;}
+.footer2025-t .deer-footer-name{display:flex;flex-direction:column;gap:2px;white-space:nowrap;font-family:"Songti SC","STSong","SimSun",serif;font-weight:700;font-size:28px;letter-spacing:2px;}
+.footer2025-t .deer-footer-college{font-size:24px;letter-spacing:3px;}
+.footer2025-t .deer-footer-en{font-family:Arial,Helvetica,sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;line-height:1.2;}
+.footer2025-t .deer-footer-college-en{font-size:10px;letter-spacing:0.25px;}
+@media screen and (max-width:600px){
+    .footer2025-t .deer-footer-brand{gap:10px;}
+    .footer2025-t .deer-footer-brand img{width:64px;height:64px;}
+    .footer2025-t .deer-footer-name{font-size:24px;letter-spacing:1px;}
+    .footer2025-t .deer-footer-college{font-size:20px;letter-spacing:2px;}
+    .footer2025-t .deer-footer-en{font-size:9px;letter-spacing:0.5px;}
+    .footer2025-t .deer-footer-college-en{font-size:8px;letter-spacing:0;}
+}
 .header .logo .deer-brand{display:flex;align-items:center;gap:16px;min-height:100px;line-height:1.25;color:#fff;}
 .header .logo .deer-brand img{display:block;flex:0 0 auto;width:80px;height:80px;margin:0;object-fit:contain;}
 .header .deer-brand-name{display:flex;flex-direction:column;gap:2px;white-space:nowrap;font-family:"Songti SC","STSong","SimSun",serif;font-weight:700;font-size:28px;letter-spacing:2px;line-height:1.15;}
