@@ -2,17 +2,20 @@
 """Write static sharing metadata; rerun after adding or renaming academy pages."""
 
 import html
+import posixpath
 import re
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1] / "hunauees"
 BASE = "https://deer603.github.io/hunauees/"
 SITE = "湖南鹿业大学卓越鹿员学院"
-IMAGE = BASE + "images/603-academy-share.png"
+DEFAULT_IMAGE = "images/603-academy-share.png"
 START = "<!-- Deer Academy sharing metadata -->"
 END = "<!-- /Deer Academy sharing metadata -->"
+THUMB_START = "<!-- Deer Academy sharing thumbnail -->"
+THUMB_END = "<!-- /Deer Academy sharing thumbnail -->"
 REDIRECT_TITLES = {
     "xygk/index.html": "学院概况",
     "dqgz/index.html": "党群工作",
@@ -80,13 +83,32 @@ def keep_unmanaged_tag(match):
         name = a.get("name", "").lower()
         prop = a.get("property", "").lower()
         item = a.get("itemprop", "").lower()
-        if name == "description" or name.startswith("twitter:") or prop.startswith("og:"):
+        if name in ("description", "title", "image", "thumbnail") or name.startswith("twitter:") or prop.startswith("og:"):
             return ""
         if item in ("name", "description", "image"):
             return ""
     elif a.get("rel", "").lower() in ("canonical", "image_src"):
         return ""
     return tag
+
+
+def image_for(source):
+    # Only use explicit editorial covers. Navigation artwork and arbitrary
+    # images from mirrored pages do not stand in for article cover photos.
+    for match in re.finditer(r"<img\b[^>]*>", source, re.I):
+        image = attrs(match.group(0))
+        if "dc-cover" not in image.get("class", "").split():
+            continue
+        src = urlsplit(image.get("src", ""))
+        if src.scheme or src.netloc or not src.path:
+            continue
+        cover = Path(unquote(src.path))
+        if not cover.parts or cover.is_absolute():
+            continue
+        thumbnail = ROOT / "images" / "sharing" / (cover.stem + ".jpg")
+        if thumbnail.is_file():
+            return thumbnail.relative_to(ROOT).as_posix(), image.get("alt") or SITE, "image/jpeg"
+    return DEFAULT_IMAGE, SITE + "校徽", "image/png"
 
 
 def update_page(path):
@@ -119,31 +141,36 @@ def update_page(path):
     head = re.sub(r"<title\b[^>]*>.*?</title>", "", head, flags=re.I | re.S)
     url_path = "index.html" if relative == "index.original.html" else relative
     url = BASE + quote(url_path, safe="/")
+    image_path, image_alt, image_type = image_for(source)
+    image_url = BASE + quote(image_path, safe="/")
     kind = "article" if (relative.startswith("campus/") or
                          relative.startswith("articles/") and path.name != "index.html" or
                          re.search(r"/\d{6}/", relative)) else "website"
     values = [
         ("name", "description", description),
+        ("name", "title", title),
+        ("name", "image", image_url),
+        ("name", "thumbnail", image_url),
         ("property", "og:site_name", SITE),
         ("property", "og:title", title),
         ("property", "og:description", description),
         ("property", "og:type", kind),
         ("property", "og:url", url),
         ("property", "og:locale", "zh_CN"),
-        ("property", "og:image", IMAGE),
-        ("property", "og:image:secure_url", IMAGE),
-        ("property", "og:image:type", "image/png"),
+        ("property", "og:image", image_url),
+        ("property", "og:image:secure_url", image_url),
+        ("property", "og:image:type", image_type),
         ("property", "og:image:width", "400"),
         ("property", "og:image:height", "400"),
-        ("property", "og:image:alt", SITE + "校徽"),
+        ("property", "og:image:alt", image_alt),
         ("name", "twitter:card", "summary"),
         ("name", "twitter:title", title),
         ("name", "twitter:description", description),
-        ("name", "twitter:image", IMAGE),
-        ("name", "twitter:image:alt", SITE + "校徽"),
+        ("name", "twitter:image", image_url),
+        ("name", "twitter:image:alt", image_alt),
         ("itemprop", "name", title),
         ("itemprop", "description", description),
-        ("itemprop", "image", IMAGE),
+        ("itemprop", "image", image_url),
     ]
     block = [START, f"    <title>{html.escape(title)}</title>"]
     block += [
@@ -152,7 +179,7 @@ def update_page(path):
     ]
     block += [
         f'    <link rel="canonical" href="{url}">',
-        f'    <link rel="image_src" href="{IMAGE}">',
+        f'    <link rel="image_src" href="{image_url}">',
         END,
     ]
     # Keep metadata in the initial HTML, ahead of scripts and style sheets.
@@ -161,6 +188,21 @@ def update_page(path):
     insert_at = charset.end() if charset else 0
     head = head[:insert_at] + "\n    " + "\n".join(block) + "\n" + head[insert_at:].lstrip()
     updated = source[:match.start(2)] + "\n" + head.rstrip() + "\n" + source[match.end(2):]
+    updated = re.sub(
+        r"\s*" + re.escape(THUMB_START) + r".*?" + re.escape(THUMB_END),
+        "", updated, flags=re.S,
+    )
+    # Supply the same image in the initial body for crawlers without OG support.
+    # Keep it outside the layout and off the accessibility tree.
+    local_image = posixpath.relpath(image_path, posixpath.dirname(relative) or ".")
+    thumb = (
+        f'\n    {THUMB_START}\n'
+        f'    <img src="{html.escape(local_image, quote=True)}" width="400" height="400" '
+        'alt="" aria-hidden="true" fetchpriority="low" '
+        'style="position:absolute;left:-10000px;top:0;width:400px;height:400px;pointer-events:none">\n'
+        f'    {THUMB_END}'
+    )
+    updated = re.sub(r"(<body\b[^>]*>)", lambda m: m.group(1) + thumb, updated, count=1, flags=re.I)
     if updated != path.read_text(encoding="utf-8"):
         path.write_text(updated, encoding="utf-8")
         return True

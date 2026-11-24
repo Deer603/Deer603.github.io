@@ -13,6 +13,7 @@ SITES = [
     ('kuncode', 'code', 'KunCode', '让写代码变得更轻松', '开发工作台与困困AI', (10, 27, 23), (177, 228, 199)),
     ('room', 'room', '青蛙的角落', '从寝室走进个人世界', '寝室场景 · 摄影相册', (20, 30, 23), (212, 222, 181)),
     ('urdeer', 'face', '你是个鹿嘞', '检测你是哪一只鹿', '照片与摄像头 · 本地处理', (242, 242, 238), (45, 66, 53)),
+    ('joinus', '603', 'Deer603人才招聘', '鹿文化传播大使', '文化研究 · 内容创作 · 社区建设', (235, 241, 250), (24, 57, 102)),
 ]
 
 parser = argparse.ArgumentParser(description='Generate website share artwork.')
@@ -59,6 +60,13 @@ for directory,kind,title,subtitle,detail,bg,accent in SITES:
     if args.site and directory != args.site: continue
     if args.new_only and directory not in ('room','urdeer'): continue
     out=ROOT/directory
+    if directory == 'weijiba/assets':
+        with Image.open(out/'wikipedia-logo-v2.svg.webp') as source:
+            globe = ImageOps.contain(source.convert('RGBA'), (344, 344), Image.Resampling.LANCZOS)
+        square = Image.new('RGB', (400, 400), 'white')
+        square.paste(globe, ((400 - globe.width) // 2, (400 - globe.height) // 2), globe)
+        square.save(out/'share-globe.jpg', quality=92, optimize=True)
+        continue
     for square in [False,True]:
         w,h=(400,400) if square else (1200,630)
         im=Image.new('RGB',(w,h),bg)
@@ -69,7 +77,7 @@ for directory,kind,title,subtitle,detail,bg,accent in SITES:
             icon(d,kind,(200,158),170,accent)
             d.text((200,302),title,font=font(45 if len(title)<7 else 40,True),fill=accent,anchor='mm')
         else:
-            label={'assets':'603WEB','codec':'CODEC','weijiba/assets':'WEIJIBA','kuncode':'KUNCODE','room':'ROOM','urdeer':'URDEER','xiaweicheng/assets':'PORTFOLIO'}[directory]
+            label={'assets':'603WEB','codec':'CODEC','weijiba/assets':'WEIJIBA','kuncode':'KUNCODE','room':'ROOM','urdeer':'URDEER','joinus':'JOIN US'}[directory]
             d.text((76,92),'DEER603 / '+label,font=font(22),fill=accent)
             d.text((76,225),title,font=font(66 if len(title)>5 else 76,True),fill=accent)
             d.text((80,343),subtitle,font=font(37),fill=accent)

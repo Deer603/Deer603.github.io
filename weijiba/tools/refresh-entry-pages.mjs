@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import { refreshShareMetadata } from "../../tools/share-metadata.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const version = "20261015-pages";
+const version = "20261124-reading";
 const check = process.argv.includes("--check");
 const skipShare = process.argv.includes("--skip-share");
 const context = {
@@ -24,11 +24,24 @@ const plans = [];
 let pages = 0, missing = 0, archived = 0;
 const registeredPaths = new Set(Object.values(context.window.WEIJIBA_ENTRY_PATHS));
 
+function updateArtwork(source) {
+  return source
+    .replace(/assets\/(?:wikipedia-logo-v2\.svg\.webp|weijiba-favicon-64\.webp)(?:\?v=[\w-]+)?(?=")/g, "assets/weijiba-favicon-64.webp?v=wei")
+    .replace(/assets\/(?:weijiba-logo\.png|weijiba-logo-520\.webp)(?:\?v=[\w-]+)?(?=")/g, "assets/weijiba-logo-520.webp?v=wei")
+    .replace(/assets\/(?:weijiba-project\.png|weijiba-project-144\.webp)(?:\?v=[\w-]+)?(?=")/g, "assets/weijiba-project-144.webp?v=wei");
+}
+
 function updateShell(source, prefix, legacy = false) {
-  let next = source.replace(/^[ \t]*<script src="[^"]*(?:entry-routes|entry-writing|entry-data|focus-scope|article)\.js(?:\?[^"]*)?"><\/script>\r?\n/gm, "");
+  let next = updateArtwork(source).replace(/^[ \t]*<script src="[^"]*(?:entry-routes|entry-writing|entry-data|focus-scope|article)\.js(?:\?[^"]*)?"><\/script>\r?\n/gm, "");
   const scripts = ["entry-routes", ...(legacy ? ["entry-writing", "entry-data"] : []), "focus-scope", "article"];
   next = next.replace(/<\/body>/, scripts.map(name => `    <script src="${prefix}${name}.js?v=${version}"></script>`).join("\n") + "\n  </body>");
   next = next.replace(/article\.css\?v=[\w-]+/g, `article.css?v=${version}`);
+  next = next.replace(/<form\b(?=[^>]*\bid="article-search")[^>]*>/, tag =>
+    `${tag.slice(0, -1).replace(/\saction="[^"]*"/, "")} action="${prefix}index.html#search">`);
+  next = next.replace(/<input\b(?=[^>]*\bid="article-search-input")[^>]*>/, tag =>
+    `${tag.slice(0, -1).replace(/\sname="[^"]*"/, "")} name="q">`);
+  next = next.replace(/(<main class="article-main" id="article-content")(?: tabindex="-1")?>/, '$1 tabindex="-1">');
+  next = next.replace(/(<nav class="toc" id="toc")(?: aria-label="[^"]*")?>/, '$1 aria-label="本页目录">');
   next = next.replace(/(<aside class="main-menu"[^>]*)(>)/, (_, attributes) => attributes.includes(" inert") ? `${attributes}>` : `${attributes} inert>`);
   next = next.replace(/(aria-label="更多个人工具">)•••/, '$1<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>');
   return next;
@@ -37,13 +50,15 @@ function updateShell(source, prefix, legacy = false) {
 function generate(source, slug, prefix, legacy = false) {
   const rendered = context.window.WEIJIBA_RENDER_ENTRY(slug);
   if (!rendered) throw new Error(`词条缺少正文：${slug}`);
-  if (!/<article id="top">[\s\S]*?<\/article>/.test(source) || !/<nav class="toc" id="toc">[\s\S]*?<\/nav>/.test(source)) {
+  if (!/<article id="top">[\s\S]*?<\/article>/.test(source) || !/<nav class="toc" id="toc"[^>]*>[\s\S]*?<\/nav>/.test(source)) {
     throw new Error(`词条结构无法定位：${slug}`);
   }
   let next = source.replace(/(<article id="top">)[\s\S]*?(<\/article>)/, () => `<article id="top">${rendered.articleHtml}\n        </article>`);
-  next = next.replace(/(<nav class="toc" id="toc">)[\s\S]*?(<\/nav>)/, () => `<nav class="toc" id="toc">${rendered.tocHtml}</nav>`);
-  next = next.replace(/<title>[^<]*<\/title>/, `<title>${escape(rendered.title)}｜魏鸡百科</title>`);
-  next = next.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${escape(rendered.description)}">`);
+  next = next.replace(/(<nav class="toc" id="toc"[^>]*>)[\s\S]*?(<\/nav>)/, (_, start, end) => `${start}${rendered.tocHtml}${end}`);
+  if (!next.includes("<!-- share-metadata:start -->")) {
+    next = next.replace(/<title>[^<]*<\/title>/, () => `<title>${escape(rendered.title)}｜魏鸡百科</title>`);
+    next = next.replace(/<meta name="description" content="[^"]*">/, () => `<meta name="description" content="${escape(rendered.description)}">`);
+  }
   return updateShell(next, prefix, legacy);
 }
 
@@ -75,9 +90,11 @@ for (const item of fs.readdirSync(root, { withFileTypes: true })) {
     const title = escape(item.name);
     const description = escape(`${item.name}是旧版词条，当前词库暂未收录其正文。可返回魏鸡百科索引查找相关内容。`);
     next = source.replace(/<article id="top">[\s\S]*?<\/article>/, `<article id="top"><header class="article-heading"><h1>${title}</h1></header><p class="article-tagline">魏鸡百科旧词条</p><section class="article-section" id="unavailable"><h2>正文暂不可用</h2><p>这个地址来自旧版词条，当前词库暂未收录对应正文。我们保留原地址，方便你继续查找。</p><p><a href="../index.html#mega-index">浏览基础词条索引</a> · <a href="../index.html">返回魏鸡百科首页</a></p></section></article>`);
-    next = next.replace(/<nav class="toc" id="toc">[\s\S]*?<\/nav>/, '<nav class="toc" id="toc"><a href="#unavailable">正文暂不可用</a></nav>');
-    next = next.replace(/<title>[^<]*<\/title>/, `<title>${title}｜魏鸡百科旧词条</title>`);
-    next = next.replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${description}">`);
+    next = next.replace(/(<nav class="toc" id="toc"[^>]*>)[\s\S]*?<\/nav>/, '$1<a href="#unavailable">正文暂不可用</a></nav>');
+    if (!next.includes("<!-- share-metadata:start -->")) {
+      next = next.replace(/<title>[^<]*<\/title>/, () => `<title>${title}｜魏鸡百科旧词条</title>`);
+      next = next.replace(/<meta name="description" content="[^"]*">/, () => `<meta name="description" content="${description}">`);
+    }
     next = updateShell(next, "../");
     archived++;
   }
@@ -87,7 +104,7 @@ const legacy = generate(template, "kunkun", "", true);
 if (legacy !== template) plans.push({ file: path.join(root, "article.html"), next: legacy });
 const homeFile = path.join(root, "index.html");
 const home = fs.readFileSync(homeFile, "utf8");
-let nextHome = home.replace(/^[ \t]*<script src="(?:entry-writing|entry-data|focus-scope)\.js(?:\?[^"]*)?"><\/script>\r?\n/gm, "");
+let nextHome = updateArtwork(home).replace(/^[ \t]*<script src="(?:entry-writing|entry-data|focus-scope)\.js(?:\?[^"]*)?"><\/script>\r?\n/gm, "");
 nextHome = nextHome.replace(/((?:entry-routes|script)\.js|style\.css)\?v=[\w-]+/g, `$1?v=${version}`);
 nextHome = nextHome.replace(/([ \t]*)<script src="script\.js/, `$1<script src="focus-scope.js?v=${version}"></script>\n$1<script src="script.js`);
 if (nextHome !== home) plans.push({ file: homeFile, next: nextHome });

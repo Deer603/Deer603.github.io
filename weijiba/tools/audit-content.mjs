@@ -54,11 +54,13 @@ for (const [slug, entry] of all) {
   for (const [, href] of entry.externalLinks || []) assert(/^https?:\/\//.test(href), `${slug}: invalid external URL`);
   const page = path.join(root, site.WEIJIBA_ENTRY_PATHS[slug], "index.html");
   assert(fs.existsSync(page), `${slug}: missing physical route`);
-  const html = fs.readFileSync(page, "utf8");
-  assert(html.indexOf("entry-routes.js") < html.indexOf("entry-writing.js"), `${slug}: route load order`);
-  assert(html.indexOf("entry-writing.js") < html.indexOf("entry-data.js"), `${slug}: writing load order`);
-  assert(/entry-data\.js\?v=20260923-21/.test(html), `${slug}: stale cache version`);
-  assert(html.includes("wikipedia-logo-v2.svg.webp"), `${slug}: missing favicon`);
+  const html = fs.readFileSync(page, "utf8").replaceAll("\r\n", "\n");
+  const scripts = Array.from(html.matchAll(/<script src="\.\.\/([^"?]+)\?v=[^"]+"/g), match => match[1]);
+  assert.deepEqual(scripts, ["entry-routes.js", "focus-scope.js", "article.js"], `${slug}: unexpected article scripts`);
+  assert(html.includes("weijiba-favicon-64.webp"), `${slug}: missing favicon`);
+  const rendered = site.WEIJIBA_RENDER_ENTRY(slug);
+  assert(html.includes(`<article id="top">${rendered.articleHtml}\n        </article>`), `${slug}: stale static body`);
+  assert(html.includes(`<nav class="toc" id="toc" aria-label="本页目录">${rendered.tocHtml}</nav>`), `${slug}: stale table of contents`);
   introductions.add(entry.overview[0]);
   for (const paragraph of prose) {
     assert.equal(typeof paragraph, "string", `${slug}: paragraph is not text`);
@@ -76,10 +78,10 @@ for (const title of samples) {
   const match = all.find(([, entry]) => entry.title === title);
   assert(match, `Sample ${title} not in catalogue`);
   const [slug, entry] = match;
-  const rendered = loadCatalogue(`/weijiba/${encodeURIComponent(site.WEIJIBA_ENTRY_PATHS[slug])}/`, true);
-  assert(rendered.article.innerHTML.includes(`<h1>${entry.title}</h1>`), `${title}: wrong rendered heading`);
-  assert(rendered.article.innerHTML.includes(entry.overview[0].slice(0, 20)), `${title}: stale static body`);
-  assert(rendered.toc.innerHTML.includes("资料来源"), `${title}: missing TOC`);
+  const rendered = site.WEIJIBA_RENDER_ENTRY(slug);
+  assert(rendered.articleHtml.includes(`<h1>${entry.title}</h1>`), `${title}: wrong rendered heading`);
+  assert(rendered.articleHtml.includes(entry.overview[0].slice(0, 20)), `${title}: stale static body`);
+  assert(rendered.tocHtml.includes("资料来源"), `${title}: missing TOC`);
 }
 assert(catalog.kunkun.overview.join("").includes("詹绍源"));
 assert(catalog.kunkun.sections.some(s => s.id === "people-aside"));

@@ -10,6 +10,8 @@
   const searchForm = document.querySelector("#search-form");
   const searchInput = document.querySelector("#search-input");
   const searchStatus = document.querySelector("#search-status");
+  const searchResults = document.querySelector("#search-results");
+  const searchMore = document.querySelector("#search-more");
   const toast = document.querySelector("#toast");
   const modal = document.querySelector("#modal");
   const modalTitle = document.querySelector("#modal-title");
@@ -21,15 +23,30 @@
   const footerYear = document.querySelector("#footer-year");
   const megaEntryList = document.querySelector("#mega-entry-list");
   const megaEntryCount = document.querySelector("#mega-entry-count");
-  const searchableModules = [...document.querySelectorAll("[data-searchable]")];
+  const indexControls = document.querySelector("#index-controls");
+  const indexProgress = document.querySelector("#index-progress");
+  const indexPrev = document.querySelector("#index-prev");
+  const indexNext = document.querySelector("#index-next");
   let toastTimer;
   let lastFocusedElement;
   let releaseSidebarFocus = null;
+  let sidebarTrigger = null;
   let releaseModalFocus = null;
   const mobileNavigation = window.matchMedia("(max-width: 980px)");
 
   const getEntryUrl = (slug) => window.WEIJIBA_ENTRY_URL?.(slug)
     || `article.html?entry=${encodeURIComponent(slug)}`;
+
+  const normalizeSearch = (text) => text.normalize("NFKC").toLowerCase().replace(/\s+/g, "");
+  const searchCatalog = Object.entries(window.WEIJIBA_ENTRY_PATHS || {}).map(([slug, title]) => ({
+    slug, title, normalized: normalizeSearch(title)
+  }));
+  const indexRecords = window.WEIJIBA_BASE_ENTRY_RECORDS || [];
+  const searchPageSize = 12;
+  const indexPageSize = 48;
+  let matchingEntries = [];
+  let displayedMatches = 0;
+  let indexPage = 0;
 
   const modalViews = {
     source: {
@@ -153,59 +170,75 @@
     if (openSidebarButton) openSidebarButton.setAttribute("aria-expanded", String(open));
     if (sidebar) sidebar.inert = mobileNavigation.matches && !open;
     if (open && sidebar) {
+      if (!wasOpen) sidebarTrigger = document.activeElement;
       releaseSidebarFocus = window.WEIJIBA_FOCUS_SCOPE?.(sidebar, [sidebarBackdrop]);
-      const firstLink = sidebar.querySelector(".nav-link");
-      if (firstLink) firstLink.focus();
-    } else if (wasOpen && openSidebarButton) {
-      openSidebarButton.focus();
+      sidebar.querySelector("[data-close-sidebar]")?.focus();
+    } else if (wasOpen) {
+      if (mobileNavigation.matches) sidebarTrigger?.focus();
+      sidebarTrigger = null;
     }
   }
 
   openSidebarButton?.addEventListener("click", () => setSidebar(true));
-  focusSearchButton?.addEventListener("click", () => {
-    setSidebar(true);
-    window.setTimeout(() => searchInput?.focus(), 0);
-  });
+  focusSearchButton?.addEventListener("click", () => searchInput?.focus());
   closeSidebarButtons.forEach((button) => button.addEventListener("click", () => setSidebar(false)));
   sidebarBackdrop?.addEventListener("click", () => setSidebar(false));
   sidebar?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setSidebar(false)));
 
-  function updateSearchResults(query) {
-    const normalizedQuery = query.trim().toLocaleLowerCase();
-    searchableModules.forEach((module) => module.classList.remove("search-match"));
-
-    if (!normalizedQuery) {
-      if (searchStatus) searchStatus.textContent = "";
-      showToast("已清除搜索");
-      return;
+  function appendSearchResults(moveFocus = false) {
+    const fragment = document.createDocumentFragment();
+    const batch = matchingEntries.slice(displayedMatches, displayedMatches + searchPageSize);
+    for (const entry of batch) {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = getEntryUrl(entry.slug);
+      link.textContent = entry.title;
+      item.append(link);
+      fragment.append(item);
     }
+    const firstNewLink = fragment.querySelector("a");
+    searchResults.append(fragment);
+    displayedMatches += batch.length;
+    searchMore.hidden = displayedMatches >= matchingEntries.length;
+    if (moveFocus) firstNewLink?.focus();
+  }
 
-    const matches = searchableModules.filter((module) => module.textContent.toLocaleLowerCase().includes(normalizedQuery));
-    matches.forEach((module) => module.classList.add("search-match"));
-
-    if (!matches.length) {
-      if (searchStatus) searchStatus.textContent = "没有找到匹配模块";
-      showToast(`没有找到“${query.trim()}”`);
-      return;
+  function updateSearchResults(query, writeUrl = false) {
+    const term = query.trim();
+    const normalized = normalizeSearch(term);
+    searchResults.replaceChildren();
+    const exact = [], prefixes = [], other = [];
+    if (normalized) {
+      for (const entry of searchCatalog) {
+        if (entry.normalized === normalized) exact.push(entry);
+        else if (entry.normalized.startsWith(normalized)) prefixes.push(entry);
+        else if (entry.normalized.includes(normalized)) other.push(entry);
+      }
     }
-
-    if (searchStatus) searchStatus.textContent = `找到 ${matches.length} 个相关模块`;
-    matches[0].scrollIntoView({ behavior: "smooth", block: "center" });
-    showToast(`找到 ${matches.length} 个相关模块`);
+    matchingEntries = [...exact, ...prefixes, ...other];
+    displayedMatches = 0;
+    searchResults.hidden = matchingEntries.length === 0;
+    appendSearchResults();
+    searchStatus.textContent = normalized
+      ? (matchingEntries.length ? `找到${matchingEntries.length}个匹配词条` : `未找到“${term}”，试试更短的关键词。`)
+      : "";
+    if (writeUrl) {
+      const url = new URL(window.location.href);
+      if (term) url.searchParams.set("q", term);
+      else url.searchParams.delete("q");
+      if (url.href !== window.location.href) history.replaceState(history.state, "", url);
+    }
   }
 
   searchForm?.addEventListener("submit", (event) => {
     event.preventDefault();
-    updateSearchResults(searchInput?.value || "");
+    updateSearchResults(searchInput.value, true);
   });
 
-  searchInput?.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      searchInput.value = "";
-      updateSearchResults("");
-      searchInput.blur();
-    }
+  searchInput?.addEventListener("input", () => {
+    if (!searchInput.value) updateSearchResults("", true);
   });
+  searchMore?.addEventListener("click", () => appendSearchResults(true));
 
   document.querySelector("[data-close-notice]")?.addEventListener("click", () => {
     notice?.remove();
@@ -223,6 +256,7 @@
     button.addEventListener("click", () => {
       const language = button.getAttribute("data-language");
       setLanguagePanel(false);
+      languageToggle?.focus();
       showToast(`已选择：${language}（本地演示）`);
     });
   });
@@ -255,6 +289,9 @@
   document.querySelectorAll("[data-close-modal]").forEach((element) => element.addEventListener("click", closeModal));
 
   document.addEventListener("click", (event) => {
+    if (languagePanel && !languagePanel.hidden && !event.target.closest(".language-switcher")) {
+      setLanguagePanel(false);
+    }
     const actionButton = event.target.closest("[data-action]");
     if (actionButton) {
       const action = actionButton.getAttribute("data-action");
@@ -274,10 +311,12 @@
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
+    if (event.key !== "Escape") return;
+    if (modal && !modal.hidden) closeModal();
+    else if (body.classList.contains("sidebar-open")) setSidebar(false);
+    else if (languagePanel && !languagePanel.hidden) {
       setLanguagePanel(false);
-      setSidebar(false);
-      closeModal();
+      languageToggle?.focus();
     }
   });
 
@@ -300,32 +339,45 @@
     if (tag) tag.textContent = entry.tag;
     if (summary) summary.textContent = entry.summary;
     if (quote) quote.textContent = entry.quote;
+    const personFacts = document.querySelector("#featured .fact-grid");
+    if (personFacts) personFacts.hidden = entry !== randomEntries[0];
     showToast(`随机条目：${entry.title}`);
   }
 
-  function renderMegaEntryIndex() {
-    if (!megaEntryList) return;
-    const records = window.WEIJIBA_BASE_ENTRY_RECORDS || [];
-    if (!records.length) {
-      megaEntryList.textContent = "词条正在准备中……";
-      return;
-    }
+  function renderIndexPage(page, moveFocus = false) {
+    const lastPage = Math.ceil(indexRecords.length / indexPageSize) - 1;
+    indexPage = Math.max(0, Math.min(page, lastPage));
+    const start = indexPage * indexPageSize;
     const fragment = document.createDocumentFragment();
-    records.forEach((record) => {
+    const batch = indexRecords.slice(start, start + indexPageSize);
+    batch.forEach((record) => {
       const link = document.createElement("a");
       link.href = getEntryUrl(record.slug);
-      link.target = "_blank";
-      link.rel = "noopener";
       link.title = `${record.title}：基础词条，页面内含拓展阅读`;
       link.dataset.source = record.source || "常用词";
       link.textContent = `${String(record.index).padStart(3, "0")} · ${record.title}`;
       fragment.append(link);
     });
+    const firstNewLink = fragment.querySelector("a");
     megaEntryList.replaceChildren(fragment);
+    indexProgress.textContent = `第${indexPage + 1}/${lastPage + 1}页，共${indexRecords.length}个词条`;
+    indexPrev.disabled = indexPage === 0;
+    indexNext.disabled = indexPage === lastPage;
+    if (moveFocus) firstNewLink?.focus();
+  }
+
+  function renderMegaEntryIndex() {
+    if (!megaEntryList) return;
+    if (!indexRecords.length) {
+      megaEntryList.textContent = "暂无法载入词条索引，请刷新页面重试。";
+      return;
+    }
+    indexControls.hidden = false;
+    renderIndexPage(0);
+    indexPrev.addEventListener("click", () => renderIndexPage(indexPage - 1, true));
+    indexNext.addEventListener("click", () => renderIndexPage(indexPage + 1, true));
     if (megaEntryCount) {
-      const fromLuchun = records.filter((record) => record.source === "鹿群资料").length;
-      const fromPublicAccount = records.filter((record) => record.source === "公众号资料").length;
-      megaEntryCount.textContent = `${records.length} 个基础词条 · ${fromLuchun} 个来自鹿群资料 · ${fromPublicAccount} 个来自603视界公开资料`;
+      megaEntryCount.textContent = `${indexRecords.length}个词条`;
     }
   }
 
@@ -335,6 +387,11 @@
     if (modal && !modal.hidden) closeModal();
     setSidebar(false);
   });
+  const initialQuery = new URLSearchParams(window.location.search).get("q");
+  if (searchInput && initialQuery) {
+    searchInput.value = initialQuery;
+    updateSearchResults(initialQuery);
+  }
   renderMegaEntryIndex();
   window.WEIJIBA_NORMALIZE_ENTRY_LINKS?.();
 })();
