@@ -241,6 +241,129 @@ button:not(.dots button){transition:background-color .15s,border-color .15s,opac
 .mini-card::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(transparent 25%,rgba(9,22,38,.88))}
 .mini-card .m-btn{min-height:30px;line-height:1.4}
 .ev-title{padding-top:54px}
+
+/* Keep the store banner in normal flow so its copy can grow. */
+header.top :is(a,button):focus-visible,
+.dots button:focus-visible,
+#v-solutions button:focus-visible{
+  outline:2px solid #075fb8;
+  outline-offset:4px;
+}
+#v-home{
+  --home-gutter:clamp(16px,4.8vw,84px);
+  padding-bottom:100px;
+}
+#v-home .home-grid{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(20px,2.6vw,42px);
+  padding-inline:var(--home-gutter);
+}
+#v-home :is(.staff-cards,.voices){gap:8px}
+#v-home .voices{grid-template-columns:repeat(4,minmax(0,1fr))}
+#v-home .voice-card{padding:clamp(16px,2vw,28px) clamp(9px,1vw,16px) 14px}
+#v-home .voice-card b{font-size:clamp(15px,1.35vw,21px);letter-spacing:.02em}
+#v-home .profile-link{display:inline-flex;gap:2px;align-items:center}
+#v-home .profile-link .ui-icon{width:.8em;height:.8em;flex:none}
+#v-home > .chat{
+  position:static;
+  align-items:flex-start;
+  max-width:880px;
+  margin:24px var(--home-gutter) 0;
+}
+#v-home .chat-ava{width:48px;height:48px}
+#v-home .chat-box{padding:10px 14px}
+#v-home .chat-box p{font-size:14px}
+#v-home .dots{gap:4px;margin-top:14px}
+#v-home .dots button{
+  display:grid;
+  place-items:center;
+  width:44px;
+  height:44px;
+  border:0;
+  background:none;
+}
+#v-home .dots button::after{
+  content:"";
+  width:26px;
+  height:6px;
+  border:1px solid #7c94ac;
+}
+#v-home .dots button.on::after{background:var(--blue);border-color:var(--blue)}
+@media(max-width:1200px){
+  #v-home .home-grid{grid-template-columns:minmax(0,1fr)}
+}
+body:has(#v-home.active,#v-solutions.active) .edge-tab{display:none}
+
+#v-solutions .promo{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+  height:auto;
+  min-height:220px;
+  border:1px solid #344654;
+}
+#v-solutions .promo .ph{
+  position:relative;
+  inset:auto;
+  width:auto;
+  height:auto;
+  min-height:180px;
+  background-position:left center;
+}
+#v-solutions .promo-copy{
+  align-self:center;
+  width:auto;
+  margin:0;
+  padding:clamp(16px,2.5vw,36px);
+  text-align:left;
+}
+#v-solutions .promo-copy h2{font-size:clamp(22px,2.35vw,38px);line-height:1.2;font-weight:900;letter-spacing:.04em}
+#v-solutions .promo-copy .hl{font-size:clamp(13px,1.3vw,19px);letter-spacing:.06em}
+#v-solutions .promo-feats{justify-content:flex-start;flex-wrap:wrap;gap:6px;margin-top:16px}
+#v-solutions .promo-feats b{
+  margin:0;
+  padding:3px 8px;
+  border:1px solid #677a89;
+  font-size:12px;
+  white-space:nowrap;
+}
+#v-solutions .prod{
+  grid-template-columns:clamp(86px,10vw,148px) minmax(0,1fr) auto;
+  align-items:center;
+  gap:clamp(12px,2vw,24px);
+  padding:clamp(12px,1.6vw,24px);
+  border:1px solid #d1dde8;
+}
+#v-solutions .prod .p-img{width:100%;height:auto;aspect-ratio:4/3}
+#v-solutions .prod h4{font-size:clamp(16px,1.65vw,24px)}
+#v-solutions .prod h4 .limit{display:inline-block;font-size:13px;margin-left:6px}
+#v-solutions .prod .desc{font-size:clamp(13px,1.1vw,16px)}
+#v-solutions .prod-right{grid-column:auto;flex-direction:column;align-items:flex-end}
+#v-solutions .btn-buy{width:clamp(96px,10vw,152px);min-height:44px;padding:8px;font-size:16px}
+@media(max-width:900px){
+  #v-home .hero{margin-top:12px}
+  #v-home .hero-art{height:clamp(128px,36vw,230px);background-position:center 28%}
+  #v-home .hero-copy{padding:16px var(--home-gutter) 0}
+  #v-home .hero-copy .sub{font-size:14px;letter-spacing:.04em}
+  #v-home .dots{margin-top:6px}
+  #v-home .home-grid{padding-block:12px 0}
+  #v-home .voices{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #v-home .voice-card .portrait{height:clamp(96px,26vw,180px)}
+  #v-home > .chat{margin-top:18px}
+  #v-solutions .page > main{grid-row:1}
+  nav.main a{min-height:44px}
+}
+@media(max-width:640px){
+  header.top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px}
+  header.top .points{grid-column:2;grid-row:1;margin:0}
+  header.top .wallet{grid-column:1/-1;grid-row:2;margin:0;justify-content:flex-end}
+  header.top .wallet .get{min-height:36px}
+  header.top nav.main{grid-column:1/-1;grid-row:3;margin:0;padding-bottom:0}
+  nav.main a{padding-inline:4px;white-space:nowrap}
+  #v-solutions .promo{grid-template-columns:1fr}
+  #v-solutions .promo .ph{min-height:0;aspect-ratio:2.25;background-position:left center}
+  #v-solutions .prod{grid-template-columns:78px minmax(0,1fr)}
+  #v-solutions .prod-right{grid-column:1/-1;flex-direction:row;align-items:center}
+}
 @media(max-width:900px){
   .dots button{width:24px;height:10px}
   .staff-card .tag{right:10px}
