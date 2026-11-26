@@ -7,7 +7,9 @@ import { refreshShareMetadata } from "../../tools/share-metadata.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const version = "20261126-editorial";
-const homeVersion = "20261126-home-settings";
+const themeVersion = "20261126-vector-night";
+const vocabularyVersion = "20261126-group-sayings";
+const sharingVersion = "20261126-site-share";
 const check = process.argv.includes("--check");
 const skipShare = process.argv.includes("--skip-share");
 const context = {
@@ -34,8 +36,12 @@ function updateArtwork(source) {
 function updateShell(source, prefix, legacy = false) {
   let next = updateArtwork(source).replace(/^[ \t]*<script src="[^"]*(?:entry-routes|entry-writing|entry-data|focus-scope|article)\.js(?:\?[^"]*)?"><\/script>\r?\n/gm, "");
   const scripts = ["entry-routes", ...(legacy ? ["entry-writing", "entry-data"] : []), "focus-scope", "article"];
-  next = next.replace(/<\/body>/, scripts.map(name => `    <script src="${prefix}${name}.js?v=${version}"></script>`).join("\n") + "\n  </body>");
-  next = next.replace(/article\.css\?v=[\w-]+/g, `article.css?v=${version}`);
+  next = next.replace(/<\/body>/, scripts.map(name => {
+    const assetVersion = ["article", "entry-data"].includes(name) ? sharingVersion : name.startsWith("entry-") ? vocabularyVersion : version;
+    return `    <script src="${prefix}${name}.js?v=${assetVersion}"></script>`;
+  }).join("\n") + "\n  </body>");
+  next = next.replace(/article\.css\?v=[\w-]+/g, `article.css?v=${sharingVersion}`);
+  next = next.replace(/(<a class="brand"[^>]*>)\s*<img\b[^>]*>\s*(<\/a>)/, '$1<span class="brand-wordmark" aria-hidden="true"></span>$2');
   next = next.replace(/<form\b(?=[^>]*\bid="article-search")[^>]*>/, tag =>
     `${tag.slice(0, -1).replace(/\saction="[^"]*"/, "")} action="${prefix}index.html#search">`);
   next = next.replace(/<input\b(?=[^>]*\bid="article-search-input")[^>]*>/, tag =>
@@ -80,8 +86,12 @@ if (legacy !== template) plans.push({ file: path.join(root, "article.html"), nex
 const homeFile = path.join(root, "index.html");
 const home = fs.readFileSync(homeFile, "utf8");
 let nextHome = updateArtwork(home).replace(/^[ \t]*<script src="(?:entry-writing|entry-data|focus-scope)\.js(?:\?[^"]*)?"><\/script>\r?\n/gm, "");
-nextHome = nextHome.replace(/((?:entry-routes|script)\.js|style\.css)\?v=[\w-]+/g, `$1?v=${homeVersion}`);
-nextHome = nextHome.replace(/([ \t]*)<script src="script\.js/, `$1<script src="focus-scope.js?v=${homeVersion}"></script>\n$1<script src="script.js`);
+nextHome = nextHome.replace(/entry-routes\.js\?v=[\w-]+/g, `entry-routes.js?v=${vocabularyVersion}`);
+nextHome = nextHome.replace(/(style\.css|script\.js)\?v=[\w-]+/g, `$1?v=${themeVersion}`);
+nextHome = nextHome.replace(/style\.css\?v=[\w-]+/g, `style.css?v=${sharingVersion}`);
+nextHome = nextHome.replace(/(<ul class="reading-list site-directory" id="home-site-directory">)[\s\S]*?<\/ul>/,
+  (_, opening) => opening + "\n" + context.window.WEIJIBA_RENDER_SITE_DIRECTORY(true) + "\n</ul>");
+nextHome = nextHome.replace(/([ \t]*)<script src="script\.js/, `$1<script src="focus-scope.js?v=${version}"></script>\n$1<script src="script.js`);
 if (nextHome !== home) plans.push({ file: homeFile, next: nextHome });
 
 if (!check) {

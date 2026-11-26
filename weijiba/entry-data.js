@@ -1,6 +1,17 @@
 (() => {
   "use strict";
 
+  const communitySites = {
+    "dorm-web": ["603web", "https://deer603.github.io/"],
+    "frog-corner": ["青蛙的角落", "https://deer603.github.io/room/"],
+    "wei-encyclopedia": ["魏鸡百科", "https://deer603.github.io/weijiba/"],
+    "deer-codec": ["加密鹿", "https://deer603.github.io/codec/"],
+    "kuncode": ["KunCode官网", "https://deer603.github.io/kuncode/"],
+    "603-ai-android": ["603AI官网", "https://deer603.github.io/603ai/"],
+    "xia-portfolio": ["夏炜城作品集", "https://deer603.github.io/xiaweicheng/"],
+    "deer-taste-test": ["你是个鹿嘞", "https://deer603.github.io/urdeer/"]
+  };
+
   const entries = {
     ...window.WEIJIBA_PERSON_ENTRIES,
     "luchun": {
@@ -14,6 +25,9 @@
           "早期综合报告将校园事务、科技、娱乐及成员互动列为群内常见话题。课程讨论涉及作业、考试和机器人基础，工程讨论涉及设备选型、项目分工和软件工具。[1]",
           "聊天档案还记载了成员对603AI、KunCode和DeerPhotos等项目的分享。群内用语可见于提醒、评价和戏仿口号等不同情境。[2]"
         ] },
+        { id: "names", title: "成员间的称呼", paragraphs: [
+          "成员有时互称“鹿友”，也写作“🦌友”。2026年5月16日，有人问“中午吃什么🦌友们”。端午节当天，群里出现了问候语“端午快乐鹿友们”。复数称呼用于向全群说话，单数也可指其中一人，如6月28日的“鹿群有鹿友遇到困困”。[3]"
+        ] },
         { id: "archives", title: "档案与统计", paragraphs: [
           "截至2026年8月25日的综合报告统计了57,216条消息，覆盖471个日历日，其中469天有消息记录。报告以发言满100条为条件，将14人纳入核心成员分析。[1]",
           "2026年11月26日版导出覆盖2025年5月12日23:31:53至2026年11月26日13:59:36，49,393条消息分布于557天。该导出包含文本、引用、系统消息、链接、聊天记录、转账和红包七种类型。[2]"
@@ -21,10 +35,11 @@
       ],
       references: [
         "《鹿群聊天记录话题主轴综合分析报告》V1.0，统计范围与话题概览。",
-        "《鹿群20261126》导出清单及群聊记录。"
+        "《鹿群20261126》导出清单及群聊记录。",
+        "《鹿群20261126》群聊记录，2026年5月16日12:20、6月19日00:17及6月28日19:22。"
       ],
       categories: ["微信群", "鹿群文化"],
-      related: ["history", "tech", "high-cognition", "gonglu", "short-messages", "603-vision", "kuncode", "deerphotos"],
+      related: ["history", "tech", "you-are-a-deer", "high-cognition", "gonglu", "short-messages", "603-vision", "kuncode", "deerphotos"],
       revised: "2026年11月26日"
     },
     "history": {
@@ -271,6 +286,9 @@
         { id: "features", title: "扩展与助手", paragraphs: [
           "KunCode使用Open VSX作为扩展画廊。项目文档将困困AI描述为依赖本地语料与场景匹配的助手，可在离线状态下提供回应。[1][2]"
         ] },
+        { id: "website", title: "产品网站", paragraphs: [
+          "KunCode官网以模拟的编辑器工作台介绍软件。读者可在“安装报错”“论文选题”“小组协作”三个情境间切换，查看困困AI的预设对话和思考练习。下载区按操作系统列出安装包，Mac用户可选择Apple芯片或Intel处理器版本。[6]"
+        ] },
         { id: "luchun", title: "公开介绍与群内分享", paragraphs: [
           "603视界公众号主页曾置顶KunCode的macOS版本上线文章。2026年10月12日，鹿群聊天记录出现该项目的页面链接。[4][5]"
         ] }
@@ -280,11 +298,12 @@
         { title: "KunCode V2.0.0发行说明及安装包", url: "https://github.com/Roylyl/KunCode/releases/tag/V2.0.0" },
         "KunCode V1.0.0项目页面及安装信息，2026年9月4日资料快照。",
         "603视界公众号主页截图所示的KunCode macOS版上线文章。",
-        "《鹿群20261126》群聊记录，2026年10月12日。"
+        "《鹿群20261126》群聊记录，2026年10月12日。",
+        { title: "KunCode官网项目说明", url: "https://github.com/Deer603/Deer603.github.io/blob/main/kuncode/README.md" }
       ],
       categories: ["开源软件", "鹿群科技"],
       related: ["603-vision", "603-ai-android", "tech", "deerphotos"],
-      externalLinks: [["KunCode项目网站", "https://deer603.github.io/kuncode/"], ["KunCode发行记录", "https://github.com/Roylyl/KunCode/releases"]],
+      externalLinks: [["KunCode发行记录", "https://github.com/Roylyl/KunCode/releases"]],
       revised: "2026年11月26日"
     },
     "603-tech-light": {
@@ -318,16 +337,20 @@
         ] },
         { id: "distribution", title: "分发与群内分享", paragraphs: [
           "发布方以APK分发应用，并将系统要求标为Android 8.0或更高版本。2026年10月12日，成员在鹿群分享603AI项目页面。[1][2][3]"
+        ] },
+        { id: "website", title: "603AI官网", paragraphs: [
+          "603AI官网提供四个角色的预设问答。选择朴AI可以看到有关装机配置的问答，选择龟龟则会看到关于带队的提问。每个角色的头像、简介和答句随选择一同更换。读者可在官网预览这些片段，也可从下载区获取Android客户端，与角色对话。[2][4]"
         ] }
       ],
       references: [
         { title: "603视界《603视界AI安卓端应用程序》（2026年8月9日）", url: "http://mp.weixin.qq.com/s?__biz=Mzk2NDAwMTc2Mw==&mid=2247484595&idx=1&sn=bd45448c67a4b12038c9b169e82a8230&chksm=c5da99e9c37f5fa9531055d3320fb53b71a26d5747258f19e3646c6c9c0f691b8b1b6bd6a7b9#rd" },
         { title: "603AI项目页面及应用说明", url: "https://deer603.github.io/603ai/" },
-        "《鹿群20261126》群聊记录，2026年10月12日。"
+        "《鹿群20261126》群聊记录，2026年10月12日。",
+        { title: "603AI官网项目说明", url: "https://github.com/Deer603/Deer603.github.io/blob/main/603ai/README.md" }
       ],
       categories: ["鹿群项目", "鹿群科技"],
-      related: ["603-vision", "kuncode", "deerphotos", "tech"],
-      externalLinks: [],
+      related: ["603-vision", "kuncode", "deerphotos", "dorm-web", "tech"],
+      externalLinks: [["603AI应用发行页", "https://github.com/Deer603/603AI/releases"]],
       revised: "2026年11月26日"
     },
     "desk-park": {
@@ -440,7 +463,7 @@
       ],
       categories: ["鹿群项目", "生成式AI"],
       related: ["portrait-generator", "luo-yulun", "luchun", "history"],
-      externalLinks: [["DeerPhotos源代码仓库", "https://github.com/Roylyl/DeerPhotos"]],
+      website: ["DeerPhotos项目仓库", "https://github.com/Roylyl/DeerPhotos"],
       revised: "2026年11月26日"
     },
     "kun-coach": {
@@ -598,6 +621,276 @@
       related: ["603-vision", "603-lost-cake", "603-tech-light", "luchun"],
       revised: "2026年11月26日"
     },
+    "you-are-a-deer": {
+      title: "你是个鹿嘞",
+      website: communitySites["deer-taste-test"],
+      websiteAction: "打开同名测试网页《你是个鹿嘞》",
+      type: "鹿群用语",
+      description: "鹿群成员用来相互打趣的一句口头禅，常写作“你是个🦌嘞”，也可替换动物名接话。",
+      facts: [],
+      overview: ["“你是个鹿嘞”是鹿群成员用来相互打趣的一句口头禅。说话的人把对方叫作“鹿”，接话的人可以沿用“你是个……嘞”的句式，把“鹿”换成别的动物。群聊中既有人直接对别人说这句话，也有人教同伴“你对他喊你是个🦌嘞”。[1][2]"],
+      sections: [
+        { id: "variants", title: "写法与接话", paragraphs: [
+          "2026年8月24日，群里已有“你是个🦌嘞”的写法，用鹿的表情符号代替汉字。10月还出现过“你是个🫎嘞”，换用驼鹿表情。“你是个鹿累”既出现在点名时用的称呼里，也有人单独发过。另据群成员回忆，还有“你是个卢磊”的写法，两字都取近音。[1][3][4]",
+          "这种接话有时连换几个词。8月26日，罗宇伦先说“你是个鹿嘞”，七秒后又说“你是个水豚嘞”，魏子奇随即接了一句“你是个朴雷”。10月13日，李彦臻写下“你是个🦌嘞”，另一名成员则接成“你是个毛累”。[2][3]"
+        ] },
+        { id: "title", title: "作为网页题名", paragraphs: [
+          "2026年10月16日，罗宇伦在群里分享同名网页《你是个鹿嘞》，随后说“先做鹿味测试”。网页以这句口头禅为题，供使用者查看照片与群内各角色的相似度排行。[5][6]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊记录，2026年8月24日10:25:06、9月25日17:06:26。",
+        "《鹿群20261126》群聊记录，2026年8月26日16:17:58至16:18:08。",
+        "《鹿群20261126》群聊记录，2026年10月13日14:33:39至14:35:04、10月15日23:36:54及10月19日21:22:10。",
+        "群成员于2026年11月26日补记的口头变体“你是个卢磊”。",
+        "《鹿群20261126》群聊记录，2026年10月16日10:27:36、10:27:49。",
+        {"title":"你是个鹿嘞｜检测你是哪一只鹿","url":"https://deer603.github.io/urdeer/"}
+      ],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["deer-taste-test", "luchun", "short-messages"],
+      revised: "2026年11月26日"
+    },
+    "really-handsome": {
+      title: "这是真帅吧",
+      type: "鹿群用语",
+      description: "鹿群成员点评照片、视频或器物外观时使用的感叹句，亦作“这是真的帅吧”。",
+      facts: [["常见写法","这是真帅吧、这是真的帅吧、真帅吧"], ["使用场合","点评照片、视频和器物外观"]],
+      overview: ["“这是真帅吧”是鹿群成员点评外观时使用的口头禅。说话人用“真帅”表明自己的看法，再以“吧”收尾，邀其他人认同。“这”可以换成照片、人物或物件，也可以省去，只说“真帅吧”。[1]"],
+      sections: [
+        { id: "examples", title: "群聊用例", paragraphs: [
+          "2025年12月31日，一名成员在回复图片时说“这个第八张是真帅吧”，点明所指的是第八张图片。2026年4月3日晚，有人用“这是真帅吧”回复一段视频。接下来的二十分钟里，“这是真的帅吧”又出现两次，最后一次还点名招呼了另一位群友。[1]",
+          "这句评语也用在数码设备上。2026年6月9日，一名成员用“全家桶是真的帅吧”形容一套ROG设备，稍后有人接话说“我的键盘就是这个”。[1]"
+        ] },
+        { id: "variants", title: "句式变化", paragraphs: [
+          "“这是真……吧”还可以换掉“帅”。例如，2025年12月5日有人说“这是真强吧”，2026年1月14日又有“这是真工程师吧”。单就“帅”的一支而言，文字消息及引用回复的正文中，共有27条包含“真帅吧”或“真的帅吧”，分布在22个日期。[1]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊档案。句式用例见2025年12月5日15:49及12月31日12:51、2026年1月14日11:37、4月3日23:35至23:53、6月9日17:09至17:45。统计取消息发送者所写正文。"
+      ],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["short-messages", "feel-it"],
+      revised: "2026年11月26日"
+    },
+    "feel-it": {
+      title: "有感觉吗",
+      type: "鹿群用语",
+      description: "鹿群成员用来邀人接话的问句，常接在一件事或一个提议之后。",
+      facts: [["常见形式","单独发问、接在陈述之后"], ["见于档案","2026年4月至10月"]],
+      overview: ["“有感觉吗”是鹿群成员用来邀人接话的问句。它可以单独发出，让听者联系上一条消息来理解，也常接在一件事或一个提议之后。群聊中谈到画作、球拍租赁和暑假时，都有人用同样几个字收尾。[1]"],
+      sections: [
+        { id: "examples", title: "接话与改写", paragraphs: [
+          "2026年4月30日，有人谈起在香港拍画，一名成员接着问“莫奈的真迹有感觉吗”。5月7日，这一问句转而用在日常安排上。上午有人问“羽毛球拍租赁服务有感觉吗”，话题随后谈到“五块一节课”。临近中午，又出现了“两个月暑假有感觉吗”。[1]",
+          "句末也可以再加称呼。6月23日，一名成员讲完自己下午玩游戏的事，问“打了一下午火影忍者有感觉吗家人们”。在11月26日导出的文字消息和引用回复中，另有8条正文只有“有感觉吗”四字。[1]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊档案。示例见2026年4月20日00:00、4月30日15:26至15:29、5月7日10:59及11:58、6月23日18:31。独立短句按发送者正文去除首尾空白后完全匹配。"
+      ],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["short-messages", "really-handsome"],
+      revised: "2026年11月26日"
+    },
+    "second-notice": {
+      title: "依旧二次通知",
+      type: "鹿群用语",
+      description: "校园通知再次传到鹿群时，成员用来点明转发、模仿通知口吻的说法。",
+      facts: [],
+      overview: ["依旧二次通知是鹿群成员收到转来的校园通知时用的一句评语，也写作“鹿群二次通知”。“二次”点出同一件事已经在别处通知过，到了鹿群又被提醒了一遍。[1]"],
+      sections: [
+        { id: "examples", title: "转发与接话", paragraphs: [
+          "2026年4月27日，群里先后出现两条关于学生宿舍夜间供电的消息。有人接了一句“鲁群依然二次通知”，把群名中的“鹿”写成“鲁”。6月5日，两条用电检查通知接连出现，随后的回应缩短为“依旧二次通知”。[1]",
+          "5月19日，有人转来宿舍禁烟提醒，一名成员说“鹿群依然二次通知”。18秒后，另一名成员接上“鹿群三次重要提醒‼️”，顺着前一句把通知的次数又加了一次。[2]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊记录，2026年4月27日10:09、6月5日10:11及6月19日12:51。",
+        "《鹿群20261126》群聊记录，2026年5月19日09:46:34及09:46:52。"
+      ],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["luchun", "short-messages", "check-in-kids"],
+      revised: "2026年11月26日"
+    },
+    "queue-please": {
+      title: "求也得排队",
+      type: "鹿群用语",
+      description: "接在“我真求你了”等话语之后，把恳求说成要排队等候的固定答句。",
+      facts: [],
+      overview: ["求也得排队是鹿群中接在“求”字后面的一句玩笑话。有人说“我真的求你了”，另一人便把这句恳求按字面接下去，仿佛想求人还得先排队。在2025年9月至11月的聊天记录中，四名不同成员用过同一句答话。[1]"],
+      sections: [
+        { id: "dialogue", title: "问答形式", paragraphs: [
+          "2025年9月17日，前一句是“我真的求你了”。两天后，前一句换成了“我真求你们了”，接话仍然是“求也得排队”。10月24日，甚至有人只说了“同求”，也引出了这句回答。[1]",
+          "11月18日，“我真求你了”再次引出“求也得排队”。下一名发言者接过“排队”二字，说自己愿意排在另一名群友后面。[1]"
+        ] }
+      ],
+      references: ["《鹿群20261126》群聊记录，2025年9月17日21:49、9月19日16:47、10月24日18:28及11月18日11:28。"],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["short-messages", "he-meaning"],
+      revised: "2026年11月26日"
+    },
+    "water-pump": {
+      title: "水泵得住",
+      type: "鹿群用语",
+      description: "将“谁绷得住”写成“水泵得住”的谐音说法。",
+      facts: [],
+      overview: ["水泵得住是鹿群对“谁绷得住”的谐音改写。原句用反问表示眼前的事让人难以忍住笑或保持镇定。改写把“谁绷”换成读音相近的“水泵”，末尾仍是“得住”。成员也说“这水泵得住”，或在“这”和“水泵”之间加上粗口来加强语气。[1][2]"],
+      sections: [
+        { id: "reply", title: "群聊用例", paragraphs: [
+          "2026年8月11日凌晨，两名成员相隔8秒，先后发出一模一样的“这几把水泵得住”。当天夜里，有人说“这个b器人是真难绷吧”，紧接着的回应只有“水泵得住”。[1]",
+          "两种写法在群里并用。8月25日早上的讨论中，一名成员先说“这水泵得住”。四分钟后，另一条消息又用了“谁绷得住”的原写法。[2]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊记录，2026年8月11日00:49:36、00:49:44及23:02。",
+        "《鹿群20261126》群聊记录，2026年6月12日11:17、8月25日09:29及09:33。"
+      ],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["short-messages", "you-are-a-deer"],
+      revised: "2026年11月26日"
+    },
+    "try-a-taste": {
+      title: "试试味",
+      type: "鹿群用语",
+      description: "鹿群成员在分食、约饭时使用的说法，也写作“试下味”或“试味”。",
+      facts: [],
+      overview: ["试试味是鹿群成员约饭或想分一点东西尝尝时常说的一句话，也写作“试下味”或“试味”。2026年1月30日，一名成员说“试试味”，随后有人招呼群友来吃，另一人也说“我也想试味”。[1]"],
+      sections: [
+        { id: "meals", title: "约饭时的用法", paragraphs: [
+          "5月20日，群友谈起想吃的一道菜。有人说“下次我去试试味”，对方随即问“什么时候 带我一起”。6月16日聚餐时，有成员还堵在路上，便说“等一下过来菜要是没了我就真试试味了”，借这句话打趣自己赶到时恐怕只来得及尝一口。[1][2]"
+        ] },
+        { id: "wordplay", title: "谐音改写", paragraphs: [
+          "2025年12月27日晚，一条“市委书记”之后紧跟着“试味书记”，以“试味”近似“市委”的读音。下一句“经典试下味”又把这个称呼接回了原来的说法。[3]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊记录，2026年1月30日17:51至18:02、5月20日17:55至17:56。",
+        "《鹿群20261126》群聊记录，2026年6月16日17:46至17:54。",
+        "《鹿群20261126》群聊记录，2025年12月27日22:58。"
+      ],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["feel-it", "you-are-a-deer"],
+      revised: "2026年11月26日"
+    },
+    "dorm-web": {
+      title: "603web",
+      type: "寝室主题网站",
+      description: "以603寝室为背景，设有寝室论坛、虚拟小卖部和查寝解谜的交互网站。",
+      facts: [["首页题名","603，我们的家"], ["托管平台","GitHub Pages"]],
+      overview: ["603web是以603寝室为背景的交互网站，首页题为《603，我们的家》。访问者可以查看室友资料，在模拟的寝室论坛发帖，到小卖部购买物品，或根据“查寝通报”寻找线索。2026年9月25日，罗宇伦在鹿群中分享了首页地址。[1][2]"],
+      sections: [
+        { id: "activities", title: "论坛、小卖部与查寝", paragraphs: [
+          "论坛以“注意力点数”计算发帖消耗，每发一条新帖扣除8点。小卖部则使用另一种虚拟货币“鹿币”。访问者每天可领取一次100鹿币的“生活费”，商店按商品分别记录购买数量与限购额度。[1][3]",
+          "“查寝通报”把寝室点名编成解谜游戏。查看未归人员档案、阅读查寝日志、提供线索和结束悬赏各推进四分之一的进度。集齐四项后，可以查看完整关系网。[3]"
+        ] },
+        { id: "storage", title: "进度保存", paragraphs: [
+          "论坛中的新帖和回复只保存在发帖者当前的浏览器中。网页通过浏览器的本地存储（localStorage）保存帖子、点数、鹿币、购买记录和解谜进度，以便下次访问时继续。页面上的重置功能可以清除这份存档。[3]"
+        ] },
+        { id: "sites", title: "鹿群小站", siteDirectory: true, paragraphs: [
+          "仓库的站点导航收录了寝室主页、相册、百科、工具及应用官网。[4]"
+        ] }
+      ],
+      references: [
+        { title: "603web｜603，我们的家", url: "https://deer603.github.io/" },
+        "《鹿群20261126》群聊记录，2026年9月25日22:48:11。",
+        { title: "603web首页实现", url: "https://github.com/Deer603/Deer603.github.io/blob/main/index.html" },
+        { title: "603web与鹿群小站·站点导航", url: "https://github.com/Deer603/Deer603.github.io#站点导航" }
+      ],
+      categories: ["鹿群项目", "校园生活"],
+      related: ["base-0017", "frog-corner", "wei-encyclopedia", "deer-codec", "kuncode", "603-ai-android", "xia-portfolio", "deer-taste-test"],
+      revised: "2026年11月26日"
+    },
+    "xia-portfolio": {
+      title: "夏炜城作品集",
+      type: "个人作品集网站",
+      description: "收录夏炜城的工程项目案例、个人摄影与校园经历的网站。",
+      facts: [["展示形式","项目案例、摄影与个人经历"], ["站点目录","/xiaweicheng/"]],
+      overview: ["夏炜城作品集是以夏炜城的工程项目和个人摄影为主题的网站，与603web托管在同一站点。首页收录旅行摄影与校园经历，并有三个独立的项目页，分别介绍机器人功率控制板、智能泡茶机和摄影助手。[6]2026年10月15日和11月10日，罗宇伦两次在鹿群中分享该站地址。[1][2]"],
+      sections: [
+        { id: "hardware", title: "硬件项目", paragraphs: [
+          "RoboMaster案例围绕步兵机器人的供电问题展开，说明功率控制板如何配合超级电容应对负载变化。页面以机器人样机照片展示整机，以控制板三维渲染图说明元器件布局。[3]",
+          "智能泡茶机案例从“到家就能喝到温度合适的茶”这一需求出发。页面并列展示电路原理图、电路板布局图和上电前后的原型照片。通电后的显示屏可以显示水位和水温，家用机身外观和手机界面则以概念图展示。[4]"
+        ] },
+        { id: "photography", title: "LensPilot AI摄影助手", paragraphs: [
+          "LensPilot AI案例以摄影新手回看照片为应用场景。据项目页介绍，已完成的网页原型支持上传照片、生成本地缩略图和读取照片中的EXIF拍摄参数。个人摄影能力画像与七天学习计划列为后续设想，页面以概念界面说明其设计。[5]"
+        ] }
+      ],
+      references: [
+        { title: "夏炜城作品集", url: "https://deer603.github.io/xiaweicheng/" },
+        "《鹿群20261126》群聊记录，2026年10月15日10:34:43及11月10日20:53:21。",
+        { title: "RoboMaster步兵机器人电源与功率控制", url: "https://deer603.github.io/xiaweicheng/projects/robomaster-power-control/" },
+        { title: "智能泡茶机", url: "https://deer603.github.io/xiaweicheng/projects/smart-tea-machine/" },
+        { title: "LensPilot AI摄影助手", url: "https://deer603.github.io/xiaweicheng/projects/ai-photography-assistant/" },
+        { title: "夏炜城作品集项目说明", url: "https://github.com/Deer603/Deer603.github.io/blob/main/xiaweicheng/README.md" }
+      ],
+      categories: ["鹿群项目", "个人作品集"],
+      related: ["xia-weicheng", "dorm-web", "603-tech-light"],
+      revised: "2026年11月26日"
+    },
+    "frog-corner": {
+      title: "青蛙的角落",
+      type: "摄影网站",
+      description: "以六人寝室为入口、展出魏子奇摄影作品的互动网站。",
+      facts: [["相册名称","光的存档"], ["摄影作者","魏子奇（KEMA）"], ["收录作品","4组，共12张"]],
+      overview: ["青蛙的角落是603web与鹿群小站中的摄影网站，以一间六人寝室作为浏览入口。读者可以切换床位，在入口左侧找到角色“青蛙”，进入其个人空间，翻阅魏子奇以KEMA署名的摄影相册《光的存档》。[1][2][3]"],
+      sections: [
+        { id: "album", title: "光的存档", paragraphs: [
+          "相册按古建、双重曝光、人文街拍和展览雕塑分为四章。古建一章收录5张作品，拍摄西安香积寺的大雄宝殿、竹径和石狮等景物。第二章将石狮与书法叠在一起，在同一页上并列暗调和亮调两幅作品。[3]",
+          "后两章从寺院转向旷野、咖啡店和展厅。读者可逐页查看照片、图题和作者附记，也可通过章节标签跳到相应的作品组。[2][3]"
+        ] }
+      ],
+      references: [
+        { title: "603web与鹿群小站《青蛙的角落》项目说明", url: "https://github.com/Deer603/Deer603.github.io/blob/main/room/README.md" },
+        { title: "青蛙的角落·寝室故事与摄影相册", url: "https://deer603.github.io/room/" },
+        { title: "《光的存档》章节、作品与作者附记", url: "https://github.com/Deer603/Deer603.github.io/blob/main/room/characters/frog/content.js" }
+      ],
+      categories: ["鹿群项目", "摄影"],
+      related: ["wei-ziqi", "dorm-web", "base-0017", "xia-portfolio"],
+      revised: "2026年11月26日"
+    },
+    "deer-codec": {
+      title: "加密鹿",
+      type: "文字转换工具",
+      description: "把文字转换成鹿、草叶、星月等主题符号，并可用相同密钥还原的网页工具。",
+      facts: [["转换方向","文字转符号、符号转文字"], ["使用环境","网页浏览器"]],
+      overview: ["加密鹿是603web与鹿群小站中的文字转换工具。它用“鹿”、🦌、草叶、花朵、星月等符号表示一段文字，供群友将消息写成暗号。编码和还原都在浏览器中完成，中文、英文字母和表情均可作为原文。[1][2][3]"],
+      sections: [
+        { id: "message", title: "暗号的生成与还原", paragraphs: [
+          "页面将两个转换方向称为“鹿加密”和“鹿出来”。项目说明以“今晚603见”为例，选用“鹿群”作密钥，生成的符号串可以复制给他人。接收者把它放回输入框，填入同一密钥，便可读到原句。双方也可以约定将密钥留空。[1][2]",
+          "除手动指定方向外，页面还设有“智能转换”。程序根据输入中主题符号所占的比例，判断是将普通文字写成符号，还是将一串符号还原为文字。[1][3]"
+        ] }
+      ],
+      references: [
+        { title: "加密鹿·把文字藏进鹿群里", url: "https://deer603.github.io/codec/" },
+        { title: "《加密鹿》项目说明与转换示例", url: "https://github.com/Deer603/Deer603.github.io/blob/main/codec/README.md" },
+        { title: "加密鹿的主题符号及转换规则", url: "https://github.com/Deer603/Deer603.github.io/blob/main/codec/codec-core.js" }
+      ],
+      categories: ["鹿群项目", "工具"],
+      related: ["dorm-web", "luchun", "deer-taste-test"],
+      revised: "2026年11月26日"
+    },
+    "wei-encyclopedia": {
+      title: "魏鸡百科",
+      type: "群体文化网站",
+      description: "以鹿群聊天和公开项目资料为来源、采用百科全书体例的中文网站。",
+      facts: [["网站题名", "魏鸡百科"], ["副标题", "困困的百科全书"]],
+      overview: ["魏鸡百科是603web与鹿群小站收录的中文网站，副标题为“困困的百科全书”。它把鹿群聊天中出现的人物、口头禅和事件写成条目，也收录603视界的报道及成员的工程项目。读者可以从分类索引进入词条，或沿文内链接阅读相关的人和事。[1][2]"],
+      sections: [
+        { id: "history", title: "群内分享", paragraphs: [
+          "2026年9月4日，鹿群成员分享了位于roylyl.github.io的百科链接。随后有人提出共同维护的想法，并询问网站有没有后端。当天下午，同一地址再次出现在群里，紧接着的消息是“词条更新了”。Deer603网站的仓库导航将现有入口列在其weijiba目录下。[2][3]"
+        ] },
+        { id: "entries", title: "词条与编辑", paragraphs: [
+          "词条有独立的中文网址，附有目录、参考资料及相关条目。例如，“你是个鹿嘞”记载口头禅的写法和接话，“鹿味测试”介绍同名网页上的照片匹配功能。编辑者在网站仓库中修改词条，再由程序将正文和目录写入网页。[1]"
+        ] }
+      ],
+      references: [
+        { title: "魏鸡百科项目说明", url: "https://github.com/Deer603/Deer603.github.io/blob/main/weijiba/README.md" },
+        { title: "603web与鹿群小站·站点导航", url: "https://github.com/Deer603/Deer603.github.io#站点导航" },
+        "《鹿群20261126》群聊记录，2026年9月4日11:55及16:18。"
+      ],
+      categories: ["鹿群项目", "鹿群文化"],
+      related: ["dorm-web", "luchun", "603-vision", "you-are-a-deer"],
+      revised: "2026年11月26日"
+    },
     "deer-taste-test": {
       title: "鹿味测试",
       type: "鹿群网页项目",
@@ -605,16 +898,20 @@
       facts: [["网页名称", "你是个鹿嘞"], ["群内分享记录", "2026年10月16日"]],
       overview: ["鹿味测试是鹿群成员对网页《你是个鹿嘞》中相似度排行功能的称呼。页面说明列出照片和摄像头两种输入方式，并称画面在本机处理。[1][2]"],
       sections: [
+        { id: "matching", title: "照片与摄像头匹配", paragraphs: [
+          "网页比较输入的人脸与预设参考照片。face-api和SFace两套模型分别评分，页面取两者的平均值，按综合相似度列出结果。这个百分比表示与参考照片的相似程度。使用摄像头时，程序会综合连续画面，采集到至少三帧后才开始显示排行。[3]"
+        ] },
         { id: "history", title: "群内分享", paragraphs: [
           "2026年10月16日10:27，Roylyl在群内发送《你是个鹿嘞》的网页地址，13秒后又发送“先做鹿味测试”。[1]"
         ] }
       ],
       references: [
         "《鹿群20261126》群聊档案，2026年10月16日10:27:36、10:27:49。",
-        { title: "你是个鹿嘞", url: "https://deer603.github.io/urdeer/" }
+        { title: "你是个鹿嘞", url: "https://deer603.github.io/urdeer/" },
+        { title: "《你是个鹿嘞》网页项目说明及匹配方式", url: "https://github.com/Deer603/Deer603.github.io/blob/main/urdeer/README.md" }
       ],
       categories: ["鹿群术语", "鹿群项目"],
-      related: ["history", "luchun", "portrait-generator", "deerphotos"],
+      related: ["you-are-a-deer", "dorm-web", "history", "luchun", "portrait-generator", "deerphotos"],
       revised: "2026年11月26日"
     }
   };
@@ -642,6 +939,19 @@
   const icon = name => '<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + iconPaths[name] + '</svg>';
   const entryLink = slug => window.WEIJIBA_ENTRY_URL?.(slug) || 'article.html?entry=' + encodeURIComponent(slug);
   const siteArticlesUrl = entryLink("luchun").replace(/[^/]+\/$/, "index.html#articles");
+  const outboundLink = (label, url) => `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+
+  function renderSiteDirectory(withArticles) {
+    return Object.entries(communitySites).map(([slug, [name, url]]) => {
+      const articleLink = withArticles ? ` <small>（<a href="${entryLink(slug)}" aria-label="${escapeHtml(name)}的百科词条">词条</a>）</small>` : "";
+      return `<li>${outboundLink(name, url)}${articleLink}</li>`;
+    }).join("\n");
+  }
+  window.WEIJIBA_RENDER_SITE_DIRECTORY = renderSiteDirectory;
+  const shareImagePath = "/weijiba/assets/wikipedia-share-globe.jpg";
+  window.WEIJIBA_SHARE_IMAGE_PATH = shareImagePath;
+  const canonicalEntryUrl = slug => "https://deer603.github.io/weijiba/" + encodeURIComponent(window.WEIJIBA_ENTRY_PATHS[slug]) + "/";
+  window.WEIJIBA_CANONICAL_ENTRY_URL = canonicalEntryUrl;
 
   const formatProse = value => String(value)
     .replace(/(?<=[\p{Script=Han}]) +(?=[A-Za-z0-9/])/gu, "")
@@ -665,7 +975,10 @@
     const infobox = facts ? `<aside class="infobox" aria-label="${escapeHtml(entry.title)}概要"><div class="infobox-title">${escapeHtml(entry.title)}</div><div class="infobox-subtitle">${prose(entry.type)}</div><table><tbody>${facts}</tbody></table></aside>` : "";
     const notice = entry.notice ? `<div class="article-notice" role="note"><span class="notice-icon" aria-hidden="true">${icon("info")}</span><p>${prose(entry.notice)}</p></div>` : "";
 
-    const outboundLink = (label, url) => `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+    const website = entry.website || communitySites[slug];
+    const websiteLead = website
+      ? `<p class="entry-website">${outboundLink(entry.websiteAction || "访问" + website[0], website[1])}</p>`
+      : "";
     const entryAnchor = target => `<a href="${entryLink(target)}" target="_blank" rel="noopener">${escapeHtml(entries[target].title)}</a>`;
     const list = (items, tag = "ul") => `<${tag}${tag === "ul" ? ' class="see-also-list"' : ""}>${items.join("")}</${tag}>`;
     const dataTable = ({ caption, headers, rows }) => {
@@ -675,9 +988,10 @@
       return "<table class=\"article-data-table\"><caption>" + prose(caption) + "</caption><thead><tr>" + columns +
         "</tr></thead><tbody>" + body + "</tbody></table>";
     };
-    const sections = entry.sections.map(({ id, title, paragraphs: values, items, table }) => {
+    const sections = entry.sections.map(({ id, title, paragraphs: values, items, table, siteDirectory }) => {
       const itemList = items ? "<ul>" + items.map(item => "<li>" + prose(item) + "</li>").join("") + "</ul>" : "";
-      return { id, title, body: paragraphs(values) + itemList + (table ? dataTable(table) : "") };
+      const sites = siteDirectory ? '<ul class="see-also-list">' + renderSiteDirectory(false) + "</ul>" : "";
+      return { id, title, body: paragraphs(values) + itemList + (table ? dataTable(table) : "") + sites };
     });
 
     const related = entry.related;
@@ -688,7 +1002,8 @@
       return `<li id="ref-${index + 1}">${content}</li>`;
     });
     if (references.length) sections.push({ id: "references", title: "参考资料", body: list(references, "ol") });
-    const externalLinks = (entry.externalLinks || []).map(([title, url]) => `<li>${outboundLink(title, url)}</li>`);
+    const destinations = website ? [website, ...(entry.externalLinks || [])] : (entry.externalLinks || []);
+    const externalLinks = destinations.map(([title, url]) => `<li>${outboundLink(title, url)}</li>`);
     if (externalLinks.length) sections.push({ id: "external-links", title: "外部链接", body: list(externalLinks) });
 
     const sectionHtml = sections.map(({ id, title, body }) => `<section id="${escapeHtml(id)}" class="article-section${id === "references" ? " references" : ""}"><h2><span>${prose(title)}</span></h2>${body}</section>`).join("");
@@ -712,7 +1027,7 @@
         <div class="view-tabs"><a class="active" href="#top">阅读</a><button type="button" data-demo="编辑">编辑</button><button type="button" data-demo="查看历史">查看历史</button><button type="button" data-demo="工具">工具${icon("chevron")}</button></div>
       </div>
     </header>
-    <p class="article-tagline">魏鸡百科，困困的百科全书</p>
+    <div class="entry-byline"><p class="article-tagline">魏鸡百科，困困的百科全书</p><a id="share-entry" href="${escapeHtml(canonicalEntryUrl(slug))}"><img src="${shareImagePath}" alt="" width="400" height="400">分享词条</a></div>${websiteLead}
     ${notice}
     ${infobox}
     ${overview}

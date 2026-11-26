@@ -43,6 +43,18 @@
     "steady": "稳了",
     "six-six-six": "666",
     "nb-context": "nb",
+    "you-are-a-deer": "你是个鹿嘞",
+    "second-notice": "依旧二次通知",
+    "queue-please": "求也得排队",
+    "water-pump": "水泵得住",
+    "really-handsome": "这是真帅吧",
+    "feel-it": "有感觉吗",
+    "try-a-taste": "试试味",
+    "dorm-web": "603web",
+    "frog-corner": "青蛙的角落",
+    "deer-codec": "加密鹿",
+    "xia-portfolio": "夏炜城作品集",
+    "wei-encyclopedia": "魏鸡百科",
     "deer-taste-test": "鹿味测试",
     "base-0017": "603寝室"
   });

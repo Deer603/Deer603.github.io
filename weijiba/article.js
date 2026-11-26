@@ -136,6 +136,35 @@
     if (input) input.checked = true;
   }
 
+  const shareEntry = document.querySelector("#share-entry");
+  const canonicalUrl = document.querySelector('link[rel="canonical"]')?.href;
+  if (shareEntry && canonicalUrl && window.WEIJIBA_ENTRY_FROM_PATH?.(window.location.pathname)) {
+    shareEntry.addEventListener("click", async (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      const title = document.querySelector('meta[property="og:title"]')?.content || document.title;
+      const text = document.querySelector('meta[property="og:description"]')?.content || "";
+      if (navigator.share) {
+        try {
+          await navigator.share({ title, text, url: canonicalUrl });
+          return;
+        } catch (error) {
+          if (error?.name === "AbortError") return;
+        }
+      }
+      if (navigator.clipboard?.writeText) {
+        try {
+          await navigator.clipboard.writeText(canonicalUrl);
+          showToast("词条链接已复制");
+          return;
+        } catch (_) {
+          // Some embedded browsers disable clipboard access.
+        }
+      }
+      window.prompt("复制词条链接", canonicalUrl);
+    });
+  }
+
   function applyPreferences({ announce = false } = {}) {
     root.dataset.textSize = preferences.textSize;
     root.dataset.pageWidth = preferences.pageWidth;

@@ -87,14 +87,18 @@
         ] },
         { id: "projects", title: "工程项目展示", paragraphs: [
           "603视界于2025年9月发布的报道，将魏子奇和罗宇伦的超声波定向扬声器列入招新宣讲会后的工程项目展示。[2]"
+        ] },
+        { id: "photography", title: "摄影", paragraphs: [
+          "魏子奇以KEMA署名的摄影作品收录在青蛙的角落的相册《光的存档》中。相册分为古建、双重曝光、人文街拍和展览雕塑四组。[3]"
         ] }
       ],
       references: [
         "《鹿群20261126》群聊记录，2026年3月2日及8月6日。",
-        { title: "603视界《科技之光｜603寝室成员在招新宣讲会后展示创新成果》（2025年9月16日）", url: "https://mp.weixin.qq.com/s/PN3bXURXRR3MiOGZAhOxmg" }
+        { title: "603视界《科技之光｜603寝室成员在招新宣讲会后展示创新成果》（2025年9月16日）", url: "https://mp.weixin.qq.com/s/PN3bXURXRR3MiOGZAhOxmg" },
+        { title: "《光的存档》作品与作者附记", url: "https://github.com/Deer603/Deer603.github.io/blob/main/room/characters/frog/content.js" }
       ],
       categories: ["鹿群人物"],
-      related: ["robot-basics", "603-tech-light", "tech", "luo-yulun"],
+      related: ["frog-corner", "robot-basics", "603-tech-light", "tech", "luo-yulun"],
       revised: "2026年11月26日"
     },
     "xia-weicheng": {
@@ -119,7 +123,7 @@
         { title: "603视界《被刻进农专缝隙里的三个字》（2025年12月14日）", url: "http://mp.weixin.qq.com/s?__biz=Mzk2NDAwMTc2Mw==&mid=2247484383&idx=1&sn=1db3ec8ff30eb57496af632c21d68194&chksm=c5510935c7bd39dc03968b3f56779329cd538ba5c6e7493997330b84bff6a4e858487089ca4d#rd" }
       ],
       categories: ["鹿群人物"],
-      related: ["603-yueyang-trip", "603-tech-light", "jacobian-rapid", "603-vision"],
+      related: ["xia-portfolio", "603-yueyang-trip", "603-tech-light", "jacobian-rapid", "603-vision"],
       revised: "2026年11月26日"
     },
     "li-jianyu": {

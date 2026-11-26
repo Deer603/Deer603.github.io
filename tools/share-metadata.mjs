@@ -38,7 +38,7 @@ function update(file, {title, description, url, site, image, thumbnail, type = '
   // An early image is also available to crawlers that only inspect HTML images.
   const thumbnailUrl = new URL(thumbnail);
   const localThumbnail = path.relative(path.dirname(file), path.join(root,decodeURIComponent(thumbnailUrl.pathname))).replaceAll('\\','/').split('/').map(encodeURIComponent).join('/') + thumbnailUrl.search;
-  if (!next) html = html.replace(/(<body\b[^>]*>)/i, (_, body) => `${body}\n    <!-- share-thumbnail:start -->\n    <img src="${escape(localThumbnail)}" width="${imageWidth}" height="${imageHeight}" alt="" aria-hidden="true" fetchpriority="low" style="position:absolute;left:-10000px;top:0;pointer-events:none">\n    <!-- share-thumbnail:end -->`);
+  if (!next && !(site === '魏鸡百科' && type === 'article')) html = html.replace(/(<body\b[^>]*>)/i, (_, body) => `${body}\n    <!-- share-thumbnail:start -->\n    <img src="${escape(localThumbnail)}" width="${imageWidth}" height="${imageHeight}" alt="" aria-hidden="true" fetchpriority="low" style="position:absolute;left:-10000px;top:0;pointer-events:none">\n    <!-- share-thumbnail:end -->`);
   if (next) {
     // Keep Next's exported metadata in sync, including client-side navigation.
     const entries=[['$','title','share-title',{children:title}],...tags.map(([attr,key,value],i)=>['$','meta',`share-${i}`,{[attr]:key,content:value}]),['$','link','share-canonical',{rel:'canonical',href:url}],['$','link','share-image',{rel:'image_src',href:thumbnail}]];
@@ -119,6 +119,7 @@ export function refreshShareMetadata() {
   for (const name of ['entry-routes.js','entry-writing.js','entry-data.js']) vm.runInContext(fs.readFileSync(path.join(root,'weijiba',name),'utf8'),context);
   const routes = context.window.WEIJIBA_ENTRY_PATHS;
   const catalog = context.window.WEIJIBA_ENTRY_CATALOG;
+  const articleImage = new URL(context.window.WEIJIBA_SHARE_IMAGE_PATH, origin).href;
   let articles = 0;
   for (const [slug, directory] of Object.entries(routes)) {
     const entry = catalog[slug];
@@ -126,8 +127,9 @@ export function refreshShareMetadata() {
     if (!entry || !fs.existsSync(file)) continue;
     const name = entry.title;
     const description = `${name}—${entry.description}`.replace(/\s+/g, ' ').slice(0, 180);
-    const url = `${origin}/weijiba/${encodeURIComponent(directory)}/`;
-    update(file,{title:`${name}｜魏鸡百科`,description,site:'魏鸡百科',type:'article',url,...wikiShareArtwork});
+    const url = context.window.WEIJIBA_CANONICAL_ENTRY_URL(slug);
+    update(file,{title:`${name}｜魏鸡百科`,description,site:'魏鸡百科',type:'article',url,
+      image:articleImage,thumbnail:articleImage,imageAlt:'维基百科拼图地球标志',twitterCard:'summary'});
     articles++;
   }
   update(path.join(root,'weijiba/article.html'),{title:'词条入口｜魏鸡百科',description:'旧版魏鸡百科词条入口。打开页面后将跳转到对应词条。',site:'魏鸡百科',url:`${origin}/weijiba/`,...wikiShareArtwork});

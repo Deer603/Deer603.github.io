@@ -66,6 +66,14 @@ for (const [slug, entry] of all) {
   assert.deepEqual(scripts, ["entry-routes.js", "focus-scope.js", "article.js"], `${slug}: unexpected article scripts`);
   assert(html.includes("weijiba-favicon-64.webp"), `${slug}: missing favicon`);
   const rendered = site.WEIJIBA_RENDER_ENTRY(slug);
+  const publicUrl = 'https://deer603.github.io/weijiba/' + encodeURIComponent(paths[slug]) + '/';
+  const shareTitle = (entry.title + '｜魏鸡百科').replace(/[&<>"']/g, char => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'})[char]);
+  const shareImage = site.WEIJIBA_SHARE_IMAGE_PATH;
+  assert(html.includes(`<title>${shareTitle}</title>`) && html.includes(`property="og:title" content="${shareTitle}"`), `${slug}: stale share title`);
+  assert(html.includes(`rel="canonical" href="${publicUrl}"`) && html.includes(`property="og:url" content="${publicUrl}"`), `${slug}: incorrect public URL`);
+  assert(html.includes(`id="share-entry" href="${publicUrl}"`), `${slug}: sharing must use the public article URL`);
+  assert(html.includes(`property="og:image" content="https://deer603.github.io${shareImage}"`), `${slug}: incorrect card image`);
+  assert.equal(html.match(/<img\b[^>]*\bsrc="([^"]+)"/i)?.[1], shareImage, `${slug}: first image must match the card`);
   assert(html.includes(`<article id="top">${rendered.articleHtml}\n        </article>`), `${slug}: stale static body`);
   assert(html.includes(`<nav class="toc" id="toc" aria-label="本页目录">${rendered.tocHtml}</nav>`), `${slug}: stale table of contents`);
   introductions.add(entry.overview[0]);

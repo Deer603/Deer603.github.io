@@ -17,7 +17,7 @@
     </script>
     <link rel="icon" type="image/webp" href="assets/weijiba-favicon-64.webp?v=wei">
     <link rel="shortcut icon" type="image/webp" href="assets/weijiba-favicon-64.webp?v=wei">
-    <link rel="stylesheet" href="style.css?v=20261126-home-settings">
+    <link rel="stylesheet" href="style.css?v=20261126-site-share">
     <!-- share-metadata:start -->
     <meta name="description" content="记录鹿群人物、趣事、术语与科技话题。检索词条，阅读故事，发现群内共同记忆。">
     <meta name="title" content="魏鸡百科｜困困的百科全书">
@@ -90,6 +90,9 @@
         <a href="#search">搜索词条</a>
         <a href="#featured">特色条目</a>
         <a href="#news">群史纪要</a>
+        <a href="#people-index">鹿群人物</a>
+        <a href="#language-index">群内用语</a>
+        <a href="#community-sites">鹿群小站</a>
         <a href="#mega-index">分类索引</a>
         <a href="#about">资料说明</a>
       </nav>
@@ -106,13 +109,13 @@
         </nav>
 
         <section class="welcome" id="home" aria-labelledby="site-title">
-          <img class="welcome-globe" src="assets/share-globe.jpg?v=wei" width="400" height="400" alt="" aria-hidden="true">
+          <img class="welcome-globe" src="assets/weijiba-globe-320.webp" width="320" height="292" alt="" aria-hidden="true">
           <div class="welcome-copy">
             <h1 id="site-title">魏鸡百科</h1>
             <p>收录鹿群的人物、用语、事件与项目。</p>
           </div>
           <div class="welcome-directory">
-            <p>现有<a href="#mega-index"><strong>43</strong>个词条</a></p>
+            <p>现有<a href="#mega-index"><strong>55</strong>个词条</a></p>
             <nav aria-label="分类导航">
               <a href="#group-index">群体与记录</a>
               <a href="#people-index">鹿群人物</a>
@@ -127,13 +130,16 @@
             <section class="home-panel featured" id="featured" aria-labelledby="featured-heading">
               <h2 class="panel-heading" id="featured-heading">特色条目</h2>
               <div id="featured-content" aria-live="polite">
-                <img class="feature-image" id="featured-image" src="../kuncode/app-icon-400.webp" width="400" height="400" alt="KunCode应用图标">
-                <p class="featured-lead"><strong><a href="KunCode/" id="featured-title-link">KunCode</a></strong><span id="featured-summary">是由603维护的开源集成开发环境，基于Code - OSS，提供代码编辑、项目管理、终端、调试及扩展管理。扩展画廊使用Open VSX，内置离线助手困困AI。</span></p>
-                <p id="featured-detail">V2.0.0于2026年10月3日发布，提供Windows x64、macOS arm64及macOS x64安装包。10月12日，KunCode项目页面链接出现在鹿群聊天记录中。</p>
+                <figure class="feature-figure" id="featured-figure">
+                  <img id="featured-image" src="../room/characters/frog/assets/display/08-calligraphy-lions-light.webp" width="1364" height="1024" alt="书法字迹叠印在一对石狮上">
+                  <figcaption>《石狮与书法》（亮调）<br>摄影：魏子奇（KEMA）</figcaption>
+                </figure>
+                <p class="featured-lead"><strong><a href="%E9%9D%92%E8%9B%99%E7%9A%84%E8%A7%92%E8%90%BD/" id="featured-title-link">青蛙的角落</a></strong><span id="featured-summary">是一座从六人寝室场景进入的摄影网站。读者可以切换床位，走进角色“青蛙”的房间，翻开魏子奇以KEMA署名的相册《光的存档》。</span></p>
+                <p id="featured-detail">相册收入12张作品，分为古建、双重曝光、人文街拍和展览雕塑四章。第一章拍摄西安香积寺的殿宇、竹径和石狮。到了第二章，石狮与书法出现在同一幅画面里，暗调和亮调两幅作品并排展出。</p>
               </div>
               <div class="panel-links">
-                <a href="DeerPhotos/">DeerPhotos</a>
-                <a href="603%E8%A7%86%E7%95%8C/">603视界</a>
+                <a href="#community-sites">鹿群小站</a>
+                <a href="#language-index">群内用语</a>
                 <button class="link-button" id="random" type="button" data-action="random">随机推荐</button>
               </div>
             </section>
@@ -142,15 +148,23 @@
               <h2 class="panel-heading" id="did-you-know-title">你知道吗？</h2>
               <ul class="reading-list">
                 <li><a href="%E4%BA%BA%E7%89%A9%E7%BE%A4%E5%83%8F%E7%94%9F%E6%88%90%E5%99%A8/">人物群像生成器</a>的早期用例以伦勃朗的《夜巡》为构图参考。</li>
-                <li><a href="%E9%9B%85%E5%8F%AF%E6%AF%94%E9%80%9F%E9%97%AE%E9%80%9F%E7%AD%94/">雅可比速问速答</a>中，关于奇异性判定的提问引出了对矩阵含义的追问。</li>
+                <li>群友说“<a href="%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%B9%BF%E5%98%9E/">你是个鹿嘞</a>”时，也会把“鹿”换成🦌，或接一句“你是个水豚嘞”。</li>
                 <li><a href="Desk%20Park%E4%B9%90%E9%98%9F/">Desk Park乐队</a>首次排练的曲目为《热河》和《春风十里》。</li>
               </ul>
             </section>
 
-            <section class="home-panel" aria-labelledby="read-more-title">
-              <h2 class="panel-heading" id="read-more-title">推荐阅读</h2>
-              <p><a href="%E9%B9%BF%E7%BE%A4/">鹿群</a>以校园熟人为主，讨论涵盖课程、工程实践、数码设备和日常生活。2026年11月导出的49,393条消息分布于557天。</p>
-              <p><a href="%E7%9F%AD%E5%8F%A5%E8%BF%9E%E5%8F%91/">短句连发</a>记录了群内以连续短消息提醒、提问和回应的实例。</p>
+            <section class="home-panel" id="community-sites" aria-labelledby="read-more-title">
+              <h2 class="panel-heading" id="read-more-title">鹿群小站</h2>
+              <ul class="reading-list site-directory" id="home-site-directory">
+<li><a href="https://deer603.github.io/" target="_blank" rel="noopener noreferrer">603web</a> <small>（<a href="/weijiba/603web/" aria-label="603web的百科词条">词条</a>）</small></li>
+<li><a href="https://deer603.github.io/room/" target="_blank" rel="noopener noreferrer">青蛙的角落</a> <small>（<a href="/weijiba/%E9%9D%92%E8%9B%99%E7%9A%84%E8%A7%92%E8%90%BD/" aria-label="青蛙的角落的百科词条">词条</a>）</small></li>
+<li><a href="https://deer603.github.io/weijiba/" target="_blank" rel="noopener noreferrer">魏鸡百科</a> <small>（<a href="/weijiba/%E9%AD%8F%E9%B8%A1%E7%99%BE%E7%A7%91/" aria-label="魏鸡百科的百科词条">词条</a>）</small></li>
+<li><a href="https://deer603.github.io/codec/" target="_blank" rel="noopener noreferrer">加密鹿</a> <small>（<a href="/weijiba/%E5%8A%A0%E5%AF%86%E9%B9%BF/" aria-label="加密鹿的百科词条">词条</a>）</small></li>
+<li><a href="https://deer603.github.io/kuncode/" target="_blank" rel="noopener noreferrer">KunCode官网</a> <small>（<a href="/weijiba/KunCode/" aria-label="KunCode官网的百科词条">词条</a>）</small></li>
+<li><a href="https://deer603.github.io/603ai/" target="_blank" rel="noopener noreferrer">603AI官网</a> <small>（<a href="/weijiba/603%E8%A7%86%E7%95%8CAI%E5%AE%89%E5%8D%93%E7%AB%AF%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" aria-label="603AI官网的百科词条">词条</a>）</small></li>
+<li><a href="https://deer603.github.io/xiaweicheng/" target="_blank" rel="noopener noreferrer">夏炜城作品集</a> <small>（<a href="/weijiba/%E5%A4%8F%E7%82%9C%E5%9F%8E%E4%BD%9C%E5%93%81%E9%9B%86/" aria-label="夏炜城作品集的百科词条">词条</a>）</small></li>
+<li><a href="https://deer603.github.io/urdeer/" target="_blank" rel="noopener noreferrer">你是个鹿嘞</a> <small>（<a href="/weijiba/%E9%B9%BF%E5%91%B3%E6%B5%8B%E8%AF%95/" aria-label="你是个鹿嘞的百科词条">词条</a>）</small></li>
+</ul>
             </section>
           </div>
 
@@ -202,7 +216,7 @@
           <section class="index-section home-panel" id="mega-index" aria-labelledby="index-title">
             <div class="section-heading panel-heading">
               <h2 id="index-title">分类索引</h2>
-              <span class="entry-count">43个词条</span>
+              <span class="entry-count">55个词条</span>
             </div>
             <div class="index-grid" id="mega-entry-list">
               <section class="index-group" id="group-index">
@@ -254,12 +268,24 @@
                   <li><a href="%E7%A8%B3%E4%BA%86/">稳了</a></li>
                   <li><a href="666/">666</a></li>
                   <li><a href="nb/">nb</a></li>
-                  <li><a href="%E9%B9%BF%E5%91%B3%E6%B5%8B%E8%AF%95/">鹿味测试</a></li>
+                  <li><a href="%E4%BD%A0%E6%98%AF%E4%B8%AA%E9%B9%BF%E5%98%9E/">你是个鹿嘞</a></li>
+                  <li><a href="%E4%BE%9D%E6%97%A7%E4%BA%8C%E6%AC%A1%E9%80%9A%E7%9F%A5/">依旧二次通知</a></li>
+                  <li><a href="%E6%B1%82%E4%B9%9F%E5%BE%97%E6%8E%92%E9%98%9F/">求也得排队</a></li>
+                  <li><a href="%E6%B0%B4%E6%B3%B5%E5%BE%97%E4%BD%8F/">水泵得住</a></li>
+                  <li><a href="%E8%BF%99%E6%98%AF%E7%9C%9F%E5%B8%85%E5%90%A7/">这是真帅吧</a></li>
+                  <li><a href="%E6%9C%89%E6%84%9F%E8%A7%89%E5%90%97/">有感觉吗</a></li>
+                  <li><a href="%E8%AF%95%E8%AF%95%E5%91%B3/">试试味</a></li>
                 </ul>
               </section>
               <section class="index-group" id="technology-index">
                 <h3>科技与项目</h3>
                 <ul>
+                  <li><a href="603web/">603web</a></li>
+                  <li><a href="%E9%9D%92%E8%9B%99%E7%9A%84%E8%A7%92%E8%90%BD/">青蛙的角落</a></li>
+                  <li><a href="%E9%AD%8F%E9%B8%A1%E7%99%BE%E7%A7%91/">魏鸡百科</a></li>
+                  <li><a href="%E5%8A%A0%E5%AF%86%E9%B9%BF/">加密鹿</a></li>
+                  <li><a href="%E5%A4%8F%E7%82%9C%E5%9F%8E%E4%BD%9C%E5%93%81%E9%9B%86/">夏炜城作品集</a></li>
+                  <li><a href="%E9%B9%BF%E5%91%B3%E6%B5%8B%E8%AF%95/">鹿味测试</a></li>
                   <li><a href="%E9%B9%BF%E7%BE%A4%E7%A7%91%E6%8A%80%E8%AF%9D%E9%A2%98/">鹿群科技话题</a></li>
                   <li><a href="%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9F%BA%E7%A1%80/">机器人基础</a></li>
                   <li><a href="KunCode/">KunCode</a></li>
@@ -311,8 +337,8 @@
 
     <div class="appearance-backdrop" id="appearance-backdrop" hidden></div>
 
-    <script src="entry-routes.js?v=20261126-home-settings"></script>
-    <script src="focus-scope.js?v=20261126-home-settings"></script>
-    <script src="script.js?v=20261126-home-settings"></script>
+    <script src="entry-routes.js?v=20261126-group-sayings"></script>
+    <script src="focus-scope.js?v=20261126-editorial"></script>
+    <script src="script.js?v=20261126-vector-night"></script>
   </body>
 </html>

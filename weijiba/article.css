@@ -35,36 +35,62 @@ html[data-page-width="wide"] {
 
 html[data-color-mode="dark"] {
   --background: #101418;
-  --canvas: #0b0e11;
-  --surface: #151a1f;
-  --subtle-surface: #20262c;
-  --raised-surface: #252b32;
+  --canvas: #101418;
+  --surface: #101418;
+  --subtle-surface: #202122;
+  --raised-surface: #202122;
+  --control-text: #c8ccd1;
+  --radio-style: none;
+  --radio-fill: var(--surface);
+  --radio-border: 1px solid #72777d;
+  --radio-checked-border: 6px solid #36c;
+  --radio-checked-fill: #fff;
   --text: #eaecf0;
-  --muted: #c8ccd1;
+  --emphasized: #f8f9fa;
+  --muted: #a2a9b1;
   --quiet: #a2a9b1;
   --border: #72777d;
-  --light-border: #3b4249;
-  --link: #8ab4f8;
-  --link-visited: #c9a8ff;
-  --accent: #8ab4f8;
+  --light-border: #404244;
+  --link: #88a3e8;
+  --link-hover: #a6bbf5;
+  --link-visited: #a799cd;
+  --link-visited-hover: #c5b9dd;
+  --accent: #6485d1;
+  --brand-filter: invert(1);
+  --brand-blend: screen;
+  --brand-clip: inset(0 0 0 36%);
+  --brand-globe: url("assets/weijiba-globe-320.webp");
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   html[data-color-mode="auto"] {
     --background: #101418;
-    --canvas: #0b0e11;
-    --surface: #151a1f;
-    --subtle-surface: #20262c;
-    --raised-surface: #252b32;
+    --canvas: #101418;
+    --surface: #101418;
+    --subtle-surface: #202122;
+    --raised-surface: #202122;
+    --control-text: #c8ccd1;
+    --radio-style: none;
+    --radio-fill: var(--surface);
+    --radio-border: 1px solid #72777d;
+    --radio-checked-border: 6px solid #36c;
+    --radio-checked-fill: #fff;
     --text: #eaecf0;
-    --muted: #c8ccd1;
+    --emphasized: #f8f9fa;
+    --muted: #a2a9b1;
     --quiet: #a2a9b1;
     --border: #72777d;
-    --light-border: #3b4249;
-    --link: #8ab4f8;
-    --link-visited: #c9a8ff;
-    --accent: #8ab4f8;
+    --light-border: #404244;
+    --link: #88a3e8;
+    --link-hover: #a6bbf5;
+    --link-visited: #a799cd;
+    --link-visited-hover: #c5b9dd;
+    --accent: #6485d1;
+    --brand-filter: invert(1);
+    --brand-blend: screen;
+    --brand-clip: inset(0 0 0 36%);
+    --brand-globe: url("assets/weijiba-globe-320.webp");
     color-scheme: dark;
   }
 }
@@ -115,6 +141,14 @@ a:visited {
 
 a:hover {
   text-decoration: underline;
+}
+
+.article-main :where(p, li, td) a:hover {
+  color: var(--link-hover, var(--link));
+}
+
+.article-main :where(p, li, td) a:visited:hover {
+  color: var(--link-visited-hover, var(--link-visited));
 }
 
 button:focus-visible,
@@ -188,18 +222,34 @@ input:focus-visible {
 }
 
 .brand {
+  position: relative;
+  --brand-offset: translateY(-9px);
   display: block;
   width: 168px;
   height: 50px;
   overflow: hidden;
 }
 
-.brand img {
+.brand::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  aspect-ratio: 520 / 238;
+  transform: var(--brand-offset);
+  background: var(--brand-globe, none) 13% center / 25% auto no-repeat;
+}
+
+.brand-wordmark {
   display: block;
+  aspect-ratio: 520 / 238;
+  background: url("assets/weijiba-logo-520.webp?v=wei") center / contain no-repeat;
+  filter: var(--brand-filter, none);
+  mix-blend-mode: var(--brand-blend, normal);
+  clip-path: var(--brand-clip, none);
   width: 168px;
   max-width: none;
   height: auto;
-  transform: translateY(-9px);
+  transform: var(--brand-offset);
 }
 
 .header-search {
@@ -263,7 +313,7 @@ input:focus-visible {
   padding: 5px 12px;
   border: 0;
   border-left: 1px solid var(--border);
-  color: var(--text);
+  color: var(--control-text, var(--text));
   background: var(--subtle-surface);
   font-weight: 600;
 }
@@ -420,6 +470,7 @@ body:not(.has-toc-drawer) [data-collapse-toc] {
 
 .title-line h1 {
   margin: 0 0 7px;
+  color: var(--emphasized, var(--text));
   font-family: Georgia, "Songti SC", "STSong", serif;
   font-size: 2.25em;
   font-weight: 400;
@@ -535,8 +586,31 @@ body:not(.has-toc-drawer) [data-collapse-toc] {
   overflow-wrap: anywhere;
 }
 
+.entry-byline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  margin-block-start: 7px;
+}
+
+#share-entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 28px;
+  font-size: 0.875rem;
+}
+
+#share-entry img {
+  width: 24px;
+  height: 24px;
+  border-radius: 3px;
+}
+
 .article-tagline {
-  margin: 7px 0 0 !important;
+  margin: 0 !important;
   color: var(--muted);
   font-size: 0.84em;
   line-height: 1.5;
@@ -590,6 +664,7 @@ body:not(.has-toc-drawer) [data-collapse-toc] {
 
 .infobox-title {
   padding: 9px 10px 2px;
+  color: var(--emphasized, var(--text));
   font-size: 1.35em;
   font-weight: 700;
   text-align: center;
@@ -641,6 +716,7 @@ body:not(.has-toc-drawer) [data-collapse-toc] {
 
 .article-section h2 {
   display: flex;
+  color: var(--emphasized, var(--text));
   align-items: baseline;
   gap: 11px;
   margin: 1.2em 0 0.45em;
@@ -908,6 +984,20 @@ body:not(.has-toc-drawer) [data-collapse-toc] {
   accent-color: var(--accent);
 }
 
+@media (forced-colors: none) {
+  .appearance-group input {
+    appearance: var(--radio-style, auto);
+    border: var(--radio-border, revert);
+    border-radius: 50%;
+    background-color: var(--radio-fill, revert);
+  }
+
+  .appearance-group input:checked {
+    border: var(--radio-checked-border, revert);
+    background-color: var(--radio-checked-fill, revert);
+  }
+}
+
 .appearance-note {
   margin-top: 16px;
   color: var(--quiet);
@@ -1095,7 +1185,7 @@ body.menu-open .main-menu {
   }
 
   .brand,
-  .brand img {
+  .brand-wordmark {
     width: 145px;
   }
 
@@ -1198,17 +1288,17 @@ body.menu-open .main-menu {
   }
 
   .brand,
-  .brand img {
+  .brand-wordmark {
     width: 190px;
   }
 
   .brand {
     height: 50px;
+    --brand-offset: translate(-16px, -21px);
   }
 
-  .brand img {
+  .brand-wordmark {
     max-width: none;
-    transform: translate(-16px, -21px);
   }
 
   .header-search {
@@ -1413,17 +1503,17 @@ body.menu-open .main-menu {
   }
 
   .brand,
-  .brand img {
+  .brand-wordmark {
     width: clamp(105px, 39vw, 138px);
   }
 
   .brand {
     height: 50px;
+    --brand-offset: translate(0, -8px);
   }
 
-  .brand img {
+  .brand-wordmark {
     max-width: none;
-    transform: translate(0, -8px);
   }
 
   .article-layout,
