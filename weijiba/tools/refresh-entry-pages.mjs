@@ -7,6 +7,7 @@ import { refreshShareMetadata } from "../../tools/share-metadata.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const version = "20261126-editorial";
+const homeVersion = "20261126-wiki-home";
 const check = process.argv.includes("--check");
 const skipShare = process.argv.includes("--skip-share");
 const context = {
@@ -79,8 +80,8 @@ if (legacy !== template) plans.push({ file: path.join(root, "article.html"), nex
 const homeFile = path.join(root, "index.html");
 const home = fs.readFileSync(homeFile, "utf8");
 let nextHome = updateArtwork(home).replace(/^[ \t]*<script src="(?:entry-writing|entry-data|focus-scope)\.js(?:\?[^"]*)?"><\/script>\r?\n/gm, "");
-nextHome = nextHome.replace(/((?:entry-routes|script)\.js|style\.css)\?v=[\w-]+/g, `$1?v=${version}`);
-nextHome = nextHome.replace(/([ \t]*)<script src="script\.js/, `$1<script src="focus-scope.js?v=${version}"></script>\n$1<script src="script.js`);
+nextHome = nextHome.replace(/((?:entry-routes|script)\.js|style\.css)\?v=[\w-]+/g, `$1?v=${homeVersion}`);
+nextHome = nextHome.replace(/([ \t]*)<script src="script\.js/, `$1<script src="focus-scope.js?v=${homeVersion}"></script>\n$1<script src="script.js`);
 if (nextHome !== home) plans.push({ file: homeFile, next: nextHome });
 
 if (!check) {

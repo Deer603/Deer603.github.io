@@ -5,7 +5,8 @@
   const sidebarBackdrop = document.querySelector("#sidebar-backdrop");
   const openSidebarButton = document.querySelector("[data-open-sidebar]");
   const closeSidebarButton = sidebar.querySelector("[data-close-sidebar]");
-  const mobileNavigation = matchMedia("(max-width: 850px)");
+  const mobileSearch = matchMedia("(max-width: 690px)");
+  const searchPanel = document.querySelector("#search");
   const focusSearchButton = document.querySelector("[data-focus-search]");
   const searchForm = document.querySelector("#search-form");
   const searchInput = document.querySelector("#search-input");
@@ -71,8 +72,18 @@
   searchInput.addEventListener("input", () => {
     if (!searchInput.value) showResults("", true);
   });
-  focusSearchButton.addEventListener("click", () => searchInput.focus());
+  function setSearchOpen(open, moveFocus = false) {
+    searchPanel.toggleAttribute("data-expanded", open);
+    focusSearchButton.setAttribute("aria-expanded", String(open));
+    if (moveFocus) (open ? searchInput : focusSearchButton).focus();
+  }
+
+  focusSearchButton.addEventListener("click", () => setSearchOpen(!searchPanel.hasAttribute("data-expanded"), true));
+  window.addEventListener("hashchange", () => {
+    if (mobileSearch.matches && location.hash === "#search") setSearchOpen(true);
+  });
   const initialQuery = new URLSearchParams(location.search).get("q");
+  if (initialQuery || location.hash === "#search") setSearchOpen(true);
   if (initialQuery) {
     searchInput.value = initialQuery;
     showResults(initialQuery);
@@ -81,7 +92,6 @@
   let releaseSidebarFocus;
   function setSidebar(open, restoreFocus = true) {
     const wasOpen = document.body.classList.contains("sidebar-open");
-    open = open && mobileNavigation.matches;
     if (wasOpen === open) return;
     releaseSidebarFocus?.();
     document.body.classList.toggle("sidebar-open", open);
@@ -90,7 +100,7 @@
     if (open) {
       releaseSidebarFocus = window.WEIJIBA_FOCUS_SCOPE?.(sidebar, [sidebarBackdrop]);
       closeSidebarButton.focus();
-    } else if (restoreFocus && mobileNavigation.matches) {
+    } else if (restoreFocus) {
       openSidebarButton.focus();
     }
   }
@@ -99,25 +109,26 @@
   closeSidebarButton.addEventListener("click", () => setSidebar(false));
   sidebarBackdrop.addEventListener("click", () => setSidebar(false));
   sidebar.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setSidebar(false, false)));
-  mobileNavigation.addEventListener("change", () => setSidebar(false));
 
   const modal = document.querySelector("#modal");
-  const appearanceButton = document.querySelector('[data-action="appearance"]');
+  const appearanceButtons = document.querySelectorAll('[data-action="appearance"]');
   const contrast = document.querySelector("#high-contrast");
   let releaseModalFocus;
+  let appearanceOpener;
 
-  appearanceButton.addEventListener("click", () => {
+  appearanceButtons.forEach(button => button.addEventListener("click", () => {
+    appearanceOpener = button;
     modal.hidden = false;
     document.body.classList.add("modal-open");
     releaseModalFocus = window.WEIJIBA_FOCUS_SCOPE?.(modal.querySelector(".modal-card"), [modal.querySelector(".modal-backdrop")]);
     modal.querySelector(".modal-close").focus();
-  });
+  }));
 
   function closeModal() {
     releaseModalFocus?.();
     modal.hidden = true;
     document.body.classList.remove("modal-open");
-    appearanceButton.focus();
+    appearanceOpener?.focus();
   }
 
   modal.querySelectorAll("[data-close-modal]").forEach(element => element.addEventListener("click", closeModal));
@@ -126,25 +137,31 @@
     if (event.key !== "Escape") return;
     if (!modal.hidden) closeModal();
     else if (document.body.classList.contains("sidebar-open")) setSidebar(false);
+    else if (mobileSearch.matches && searchPanel.hasAttribute("data-expanded")) setSearchOpen(false, true);
   });
 
   const featured = [
-    ["deerphotos", "DeerPhotos又称鹿图，是以鹿群角色资料为参考的AI图像生成技能。"],
-    ["luchun", "鹿群是以校园熟人为主的微信群，讨论涉及课程、工程项目、数码设备、游戏、音乐及日常生活。"],
-    ["603-vision", "603视界是以603寝室及周边校园生活为主要题材的微信公众号。"],
-    ["desk-park", "Desk Park乐队是603视界报道的一支校园乐队，2025年11月23日首次排练。"],
-    ["he-meaning", "何意味是鹿群聊天中的问语，也可表示困惑或调侃。"],
-    ["jacobian-rapid", "雅可比速问速答记录了2026年6月23日群内关于雅可比矩阵的问答。"],
-    ["kuncode", "KunCode是603发布的集成开发环境，基于Code - OSS。"]
+    ["kuncode", "KunCode是由603维护的开源集成开发环境，基于Code - OSS，提供代码编辑、项目管理、终端、调试及扩展管理。扩展画廊使用Open VSX，内置离线助手困困AI。", "V2.0.0于2026年10月3日发布，提供Windows x64、macOS arm64及macOS x64安装包。10月12日，KunCode项目页面链接出现在鹿群聊天记录中。"],
+    ["deerphotos", "DeerPhotos又称鹿图，是以鹿群角色资料为参考的AI图像生成技能。它将姓名和别名映射到固定角色，由宿主工具根据参考图和场景描述生成图像。", "3.0.0版的项目说明列出11位角色和83个别名。2026年10月27日，项目仓库与发行页分别在鹿群分享。"],
+    ["luchun", "鹿群是以校园熟人为主的微信群，讨论涉及课程、工程项目、数码设备、游戏、音乐及日常生活。", "2026年11月版聊天导出的49,393条消息分布于557天，导出清单将群名记为“Zetacognition🦌”。"],
+    ["603-vision", "603视界是以603寝室及周边校园生活为主要题材的微信公众号，内容包括校园活动报道、工程项目介绍、寝室纪事、游记和人物特写。", "公开内容包括招新宣讲会后的工程项目展示、Desk Park乐队的首次排练，以及KunCode与603AI项目。"],
+    ["desk-park", "Desk Park乐队是603视界报道的一支校园乐队。乐队于2025年11月23日首次排练，为元旦晚会作准备。", "报道所列曲目为《热河》和《春风十里》。"],
+    ["he-meaning", "何意味是鹿群用来询问含义的简短问语，也可单独作为表达困惑或调侃的回应。", "2025年10月23日8:01至8:02，罗宇伦、陈祖涵和彭鹏相继发送这句话。"],
+    ["jacobian-rapid", "雅可比速问速答记录了2026年6月23日鹿群关于机器人运动学的一段对话。", "詹绍源提出雅可比矩阵的奇异性判定问题，夏炜城随后询问矩阵的含义。"]
   ];
   const featuredLink = document.querySelector("#featured-title-link");
   const featuredSummary = document.querySelector("#featured-summary");
+  const featuredDetail = document.querySelector("#featured-detail");
+  const featuredImage = document.querySelector("#featured-image");
   let featuredIndex = 0;
   document.querySelector('[data-action="random"]').addEventListener("click", () => {
     featuredIndex = (featuredIndex + 1 + Math.floor(Math.random() * (featured.length - 1))) % featured.length;
-    const [slug, summary] = featured[featuredIndex];
-    featuredLink.textContent = paths[slug];
+    const [slug, summary, detail] = featured[featuredIndex];
+    const title = paths[slug];
+    featuredLink.textContent = title;
     featuredLink.href = window.WEIJIBA_ENTRY_URL(slug);
-    featuredSummary.textContent = summary;
+    featuredSummary.textContent = summary.startsWith(title) ? summary.slice(title.length) : "。" + summary;
+    featuredDetail.textContent = detail;
+    featuredImage.hidden = slug !== "kuncode";
   });
 })();
