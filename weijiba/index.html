@@ -1,12 +1,23 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-text-size="standard" data-page-width="standard" data-color-mode="light">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>魏鸡百科｜困困的百科全书</title>
+    <script>
+      try {
+        const saved = JSON.parse(localStorage.getItem("weijiba-appearance") || "{}");
+        const root = document.documentElement;
+        root.dataset.systemColor = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        if (saved.homeAppearanceHidden) root.classList.add("home-appearance-hidden");
+        if (["small", "standard", "large"].includes(saved.textSize)) root.dataset.textSize = saved.textSize;
+        if (["standard", "wide"].includes(saved.pageWidth)) root.dataset.pageWidth = saved.pageWidth;
+        if (["auto", "light", "dark"].includes(saved.colorMode)) root.dataset.colorMode = saved.colorMode;
+      } catch (_) {}
+    </script>
     <link rel="icon" type="image/webp" href="assets/weijiba-favicon-64.webp?v=wei">
     <link rel="shortcut icon" type="image/webp" href="assets/weijiba-favicon-64.webp?v=wei">
-    <link rel="stylesheet" href="style.css?v=20261126-wiki-home">
+    <link rel="stylesheet" href="style.css?v=20261126-home-settings">
     <!-- share-metadata:start -->
     <meta name="description" content="记录鹿群人物、趣事、术语与科技话题。检索词条，阅读故事，发现群内共同记忆。">
     <meta name="title" content="魏鸡百科｜困困的百科全书">
@@ -63,7 +74,7 @@
         <div class="header-tools">
           <a class="masthead-index" href="#mega-index">分类索引</a>
           <button class="icon-button mobile-search-button" type="button" data-focus-search aria-label="搜索词条" aria-controls="search" aria-expanded="false"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.5 17a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13ZM16 16l4 4"/></svg></button>
-          <button class="quiet-button appearance-button" type="button" data-action="appearance">外观</button>
+          <button class="quiet-button appearance-button" type="button" data-open-appearance aria-controls="appearance-rail" aria-expanded="false">外观</button>
         </div>
       </div>
     </header>
@@ -101,7 +112,7 @@
             <p>收录鹿群的人物、用语、事件与项目。</p>
           </div>
           <div class="welcome-directory">
-            <p>现有<a href="#mega-index"><strong>25</strong>个词条</a></p>
+            <p>现有<a href="#mega-index"><strong>43</strong>个词条</a></p>
             <nav aria-label="分类导航">
               <a href="#group-index">群体与记录</a>
               <a href="#people-index">鹿群人物</a>
@@ -191,7 +202,7 @@
           <section class="index-section home-panel" id="mega-index" aria-labelledby="index-title">
             <div class="section-heading panel-heading">
               <h2 id="index-title">分类索引</h2>
-              <span class="entry-count">25个词条</span>
+              <span class="entry-count">43个词条</span>
             </div>
             <div class="index-grid" id="mega-entry-list">
               <section class="index-group" id="group-index">
@@ -203,6 +214,7 @@
                   <li><a href="Desk%20Park%E4%B9%90%E9%98%9F/">Desk Park乐队</a></li>
                   <li><a href="%E5%B2%B3%E9%98%B3%E6%A5%BC%EF%BC%8C%E6%9C%9B%E6%B5%99%E6%B1%9F/">岳阳楼，望浙江</a></li>
                   <li><a href="%E9%9B%A8%E5%A4%9C%E5%A4%B1%E7%B3%95/">雨夜失糕</a></li>
+                  <li><a href="603%E5%AF%9D%E5%AE%A4/">603寝室</a></li>
                 </ul>
               </section>
               <section class="index-group" id="people-index">
@@ -215,6 +227,14 @@
                   <li><a href="%E5%A4%8F%E7%82%9C%E5%9F%8E/">夏炜城</a></li>
                   <li><a href="%E9%BB%8E%E5%81%A5%E6%AF%93/">黎健毓</a></li>
                   <li><a href="%E6%9D%8E%E5%BD%A6%E8%87%BB/">李彦臻</a></li>
+                  <li><a href="%E5%94%90%E8%83%A4%E9%91%AB/">唐胤鑫</a></li>
+                  <li><a href="%E5%90%B4%E5%AD%90%E8%BD%A9/">吴子轩</a></li>
+                  <li><a href="%E9%99%88%E7%A5%96%E6%B6%B5/">陈祖涵</a></li>
+                  <li><a href="%E9%82%93%E5%AE%87%E8%88%AA/">邓宇航</a></li>
+                  <li><a href="%E5%94%90%E5%8D%9A%E9%87%9C/">唐博釜</a></li>
+                  <li><a href="%E7%8E%8B%E9%B9%8F%E6%B6%9B/">王鹏涛</a></li>
+                  <li><a href="%E6%B6%82%E8%85%BE%E8%BE%89/">涂腾辉</a></li>
+                  <li><a href="%E6%88%B4%E8%80%8C/">戴而</a></li>
                 </ul>
               </section>
               <section class="index-group" id="language-index">
@@ -226,6 +246,15 @@
                   <li><a href="%E7%9F%AD%E5%8F%A5%E8%BF%9E%E5%8F%91/">短句连发</a></li>
                   <li><a href="%E9%9B%85%E5%8F%AF%E6%AF%94%E9%80%9F%E9%97%AE%E9%80%9F%E7%AD%94/">雅可比速问速答</a></li>
                   <li><a href="%E4%BA%BA%E7%89%A9%E7%BE%A4%E5%83%8F%E7%94%9F%E6%88%90%E5%99%A8/">人物群像生成器</a></li>
+                  <li><a href="61/">61</a></li>
+                  <li><a href="%E5%9B%B0%E6%95%99%E7%BB%83/">困教练</a></li>
+                  <li><a href="%E5%AF%B9%E9%BD%90%E4%B8%80%E4%B8%8B%E9%A2%97%E7%B2%92%E5%BA%A6/">对齐一下颗粒度</a></li>
+                  <li><a href="%E9%80%90%E5%B8%A7%E5%AD%A6%E4%B9%A0/">逐帧学习</a></li>
+                  <li><a href="%E6%89%93%E5%8D%A1%E4%BA%86%E5%AD%A9%E5%AD%90%E4%BB%AC/">打卡了孩子们</a></li>
+                  <li><a href="%E7%A8%B3%E4%BA%86/">稳了</a></li>
+                  <li><a href="666/">666</a></li>
+                  <li><a href="nb/">nb</a></li>
+                  <li><a href="%E9%B9%BF%E5%91%B3%E6%B5%8B%E8%AF%95/">鹿味测试</a></li>
                 </ul>
               </section>
               <section class="index-group" id="technology-index">
@@ -244,9 +273,31 @@
         </div>
       </main>
 
-      <aside class="appearance-rail" aria-labelledby="appearance-heading">
-        <h2 id="appearance-heading">外观</h2>
-        <button class="quiet-button" type="button" data-action="appearance">显示设置</button>
+      <aside class="appearance-rail" id="appearance-rail" aria-labelledby="appearance-heading">
+        <div class="appearance-heading">
+          <h2 id="appearance-heading">外观</h2>
+          <button class="quiet-button appearance-dismiss" type="button" data-close-appearance>隐藏</button>
+        </div>
+
+        <fieldset class="appearance-group">
+          <legend>文本</legend>
+          <label><input type="radio" name="text-size" value="small"><span>小</span></label>
+          <label><input type="radio" name="text-size" value="standard" checked><span>标准</span></label>
+          <label><input type="radio" name="text-size" value="large"><span>大</span></label>
+        </fieldset>
+
+        <fieldset class="appearance-group">
+          <legend>宽度</legend>
+          <label><input type="radio" name="page-width" value="standard" checked><span>标准</span></label>
+          <label><input type="radio" name="page-width" value="wide"><span>宽</span></label>
+        </fieldset>
+
+        <fieldset class="appearance-group">
+          <legend>颜色</legend>
+          <label><input type="radio" name="color-mode" value="auto"><span>自动</span></label>
+          <label><input type="radio" name="color-mode" value="light" checked><span>浅色</span></label>
+          <label><input type="radio" name="color-mode" value="dark"><span>深色</span></label>
+        </fieldset>
       </aside>
     </div>
 
@@ -258,20 +309,10 @@
       <a href="https://github.com/Deer603/Deer603.github.io/tree/main/weijiba">查看源码</a>
     </footer>
 
-    <div class="modal" id="modal" hidden>
-      <div class="modal-backdrop" data-close-modal></div>
-      <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <button class="icon-button modal-close" type="button" data-close-modal aria-label="关闭窗口"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-        <h2 id="modal-title">外观</h2>
-        <div id="modal-content">
-          <label class="appearance-option"><input type="checkbox" id="high-contrast">首页高对比模式</label>
-          <p>词条页另提供字号、内容宽度与色彩选项。</p>
-        </div>
-      </section>
-    </div>
+    <div class="appearance-backdrop" id="appearance-backdrop" hidden></div>
 
-    <script src="entry-routes.js?v=20261126-wiki-home"></script>
-    <script src="focus-scope.js?v=20261126-wiki-home"></script>
-    <script src="script.js?v=20261126-wiki-home"></script>
+    <script src="entry-routes.js?v=20261126-home-settings"></script>
+    <script src="focus-scope.js?v=20261126-home-settings"></script>
+    <script src="script.js?v=20261126-home-settings"></script>
   </body>
 </html>

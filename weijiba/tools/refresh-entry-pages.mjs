@@ -7,7 +7,7 @@ import { refreshShareMetadata } from "../../tools/share-metadata.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const version = "20261126-editorial";
-const homeVersion = "20261126-wiki-home";
+const homeVersion = "20261126-home-settings";
 const check = process.argv.includes("--check");
 const skipShare = process.argv.includes("--skip-share");
 const context = {

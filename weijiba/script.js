@@ -19,7 +19,9 @@
     history: ["鹿群编年史"],
     "603-ai-android": ["603AI"],
     "jacobian-rapid": ["雅可比"],
-    "603-tech-light": ["科技之光"]
+    "603-tech-light": ["科技之光"],
+    "dai-er": ["戴而Dell", "Dell"],
+    "deer-taste-test": ["你是个鹿嘞"]
   };
   const paths = window.WEIJIBA_ENTRY_PATHS || {};
   const normalize = value => value.normalize("NFKC").toLocaleLowerCase("zh-CN").replace(/\s+/g, "");
@@ -110,32 +112,102 @@
   sidebarBackdrop.addEventListener("click", () => setSidebar(false));
   sidebar.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setSidebar(false, false)));
 
-  const modal = document.querySelector("#modal");
-  const appearanceButtons = document.querySelectorAll('[data-action="appearance"]');
-  const contrast = document.querySelector("#high-contrast");
-  let releaseModalFocus;
-  let appearanceOpener;
+  const root = document.documentElement;
+  const appearanceRail = document.querySelector("#appearance-rail");
+  const appearanceBackdrop = document.querySelector("#appearance-backdrop");
+  const openAppearanceButton = document.querySelector("[data-open-appearance]");
+  const closeAppearanceButton = document.querySelector("[data-close-appearance]");
+  const appearanceViewport = matchMedia("(max-width: 1100px)");
+  const systemColors = matchMedia("(prefers-color-scheme: dark)");
+  const storageKey = "weijiba-appearance";
+  const appearanceKeys = { "text-size": "textSize", "page-width": "pageWidth", "color-mode": "colorMode" };
+  let releaseAppearanceFocus;
+  let appearanceOpen = false;
 
-  appearanceButtons.forEach(button => button.addEventListener("click", () => {
-    appearanceOpener = button;
-    modal.hidden = false;
-    document.body.classList.add("modal-open");
-    releaseModalFocus = window.WEIJIBA_FOCUS_SCOPE?.(modal.querySelector(".modal-card"), [modal.querySelector(".modal-backdrop")]);
-    modal.querySelector(".modal-close").focus();
-  }));
-
-  function closeModal() {
-    releaseModalFocus?.();
-    modal.hidden = true;
-    document.body.classList.remove("modal-open");
-    appearanceOpener?.focus();
+  function saveAppearance(changes) {
+    try {
+      const stored = JSON.parse(localStorage.getItem(storageKey) || "{}") || {};
+      localStorage.setItem(storageKey, JSON.stringify({ ...stored, ...changes }));
+    } catch (_) {}
   }
 
-  modal.querySelectorAll("[data-close-modal]").forEach(element => element.addEventListener("click", closeModal));
-  contrast.addEventListener("change", () => document.body.classList.toggle("high-contrast", contrast.checked));
+  function applySystemColor() {
+    root.dataset.systemColor = systemColors.matches ? "dark" : "light";
+  }
+
+  systemColors.addEventListener("change", applySystemColor);
+  applySystemColor();
+
+  appearanceRail.querySelectorAll('input[type="radio"]').forEach(input => {
+    const key = appearanceKeys[input.name];
+    input.checked = root.dataset[key] === input.value;
+    input.addEventListener("change", () => {
+      if (!input.checked) return;
+      root.dataset[key] = input.value;
+      saveAppearance({ [key]: input.value });
+    });
+  });
+
+  function syncAppearance() {
+    const narrow = appearanceViewport.matches;
+    const expanded = narrow ? appearanceOpen : !root.classList.contains("home-appearance-hidden");
+    appearanceRail.hidden = !expanded;
+    appearanceBackdrop.hidden = !(narrow && appearanceOpen);
+    closeAppearanceButton.textContent = narrow ? "关闭" : "隐藏";
+    openAppearanceButton.setAttribute("aria-expanded", String(expanded));
+  }
+
+  function setAppearance(open) {
+    if (appearanceViewport.matches) {
+      appearanceOpen = open;
+      if (open) {
+        setSidebar(false, false);
+        document.body.classList.add("appearance-open");
+        appearanceRail.setAttribute("role", "dialog");
+        appearanceRail.setAttribute("aria-modal", "true");
+      }
+    } else {
+      root.classList.toggle("home-appearance-hidden", !open);
+      saveAppearance({ homeAppearanceHidden: !open });
+    }
+
+    if (!open) closeAppearanceDrawer();
+    syncAppearance();
+
+    if (open) {
+      if (appearanceViewport.matches) {
+        releaseAppearanceFocus = window.WEIJIBA_FOCUS_SCOPE?.(appearanceRail, [appearanceBackdrop]);
+      }
+      closeAppearanceButton.focus();
+    } else {
+      openAppearanceButton.focus();
+    }
+  }
+
+  function closeAppearanceDrawer() {
+    appearanceOpen = false;
+    releaseAppearanceFocus?.();
+    releaseAppearanceFocus = undefined;
+    document.body.classList.remove("appearance-open");
+    appearanceRail.removeAttribute("role");
+    appearanceRail.removeAttribute("aria-modal");
+  }
+
+  openAppearanceButton.addEventListener("click", () => setAppearance(true));
+  closeAppearanceButton.addEventListener("click", () => setAppearance(false));
+  appearanceBackdrop.addEventListener("click", () => setAppearance(false));
+  appearanceViewport.addEventListener("change", () => {
+    const wasOpen = appearanceOpen;
+    closeAppearanceDrawer();
+    syncAppearance();
+    if (wasOpen && !appearanceRail.hidden) closeAppearanceButton.focus();
+    else if (wasOpen) openAppearanceButton.focus();
+  });
+  syncAppearance();
+
   document.addEventListener("keydown", event => {
     if (event.key !== "Escape") return;
-    if (!modal.hidden) closeModal();
+    if (appearanceOpen) setAppearance(false);
     else if (document.body.classList.contains("sidebar-open")) setSidebar(false);
     else if (mobileSearch.matches && searchPanel.hasAttribute("data-expanded")) setSearchOpen(false, true);
   });

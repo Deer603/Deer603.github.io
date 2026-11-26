@@ -164,6 +164,177 @@
       categories: ["鹿群人物"],
       related: ["desk-park", "603-tech-light", "li-jianyu", "603-yueyang-trip"],
       revised: "2026年11月26日"
+    },
+    "tang-yinxin": {
+      title: "唐胤鑫",
+      type: "鹿群人物",
+      description: "鹿群成员，曾分享机器人课程资料并参与软件开发讨论。",
+      facts: [],
+      overview: ["唐胤鑫是鹿群成员，在群内分享过机器人课程资料，并曾讨论AI辅助编程及软件测试。他也在聊天中多次使用问语“何意味”。[1]"],
+      sections: [
+        { id: "technology", title: "技术交流", paragraphs: [
+          "2026年3月9日，唐胤鑫在鹿群分享题为《机器人坐标系构型及参考系讲解》的资料链接。同年7月30日，他在群内谈及将一项借助AI编程的项目交给测试人员，讨论随后涉及项目测试与说明实现细节。[1]"
+        ] },
+        { id: "language", title: "聊天用语", paragraphs: [
+          "《鹿群20261126》导出中，唐胤鑫有29条纯文本消息恰为“何意味”，其中包括2025年11月4日、11月23日和12月1日的记录。[1]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊档案，2025年11月4日、11月23日、12月1日及2026年3月9日、7月30日。用语条数按文本消息逐条匹配。"
+      ],
+      categories: ["鹿群人物"],
+      related: ["he-meaning", "robot-basics", "tech", "luchun"],
+      revised: "2026年11月26日"
+    },
+    "wu-zixuan": {
+      title: "吴子轩",
+      type: "鹿群人物",
+      description: "鹿群成员，群聊记录涉及采茶机建模和电脑外设。",
+      facts: [],
+      overview: ["吴子轩是鹿群成员。群聊档案记有他围绕采茶机建模、电气控制实验室设备和电脑外设展的发言。[1]"],
+      sections: [
+        { id: "engineering", title: "工程交流", paragraphs: [
+          "2026年6月9日，吴子轩在群内谈及采茶机建模的需求。同年10月28日，他提及在电气控制实验室接触设备的经历。[1]"
+        ] },
+        { id: "peripherals", title: "外设展讨论", paragraphs: [
+          "2026年11月21日，吴子轩向群友介绍外设展的参观情况，列举了鼠标、键盘、耳机等展会用品。随后，戴而等成员就外设展接续发言。[1]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊档案，2026年6月9日、10月28日、11月21日。"
+      ],
+      categories: ["鹿群人物"],
+      related: ["robot-basics", "tech", "dai-er", "luchun"],
+      revised: "2026年11月26日"
+    },
+    "chen-zuhan": {
+      title: "陈祖涵",
+      type: "鹿群人物",
+      description: "鹿群成员，曾在群内交流课程事项并参与短句接续。",
+      facts: [],
+      overview: ["陈祖涵是鹿群成员。现存群聊档案中有其有关课程安排的发言，也保存了他与其他成员接续使用“何意味”的例子。[1]"],
+      sections: [
+        { id: "course", title: "课程交流", paragraphs: [
+          "2025年6月3日，陈祖涵在群内询问线性代数论文的交稿时间。2026年5月27日，他在群内发送关于上课考勤时间的提醒。[1]"
+        ] },
+        { id: "phrase", title: "聊天用语", paragraphs: [
+          "2025年10月23日8时02分，陈祖涵在罗宇伦发出“何意味”后发送同一句话，彭鹏随后也以该句回应。三条相同的短消息在约41秒内发出。[1]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊档案，2025年6月3日、10月23日及2026年5月27日。"
+      ],
+      categories: ["鹿群人物"],
+      related: ["he-meaning", "short-messages", "luo-yulun", "peng-peng", "luchun"],
+      revised: "2026年11月26日"
+    },
+    "deng-yuhang": {
+      title: "邓宇航",
+      type: "鹿群人物",
+      description: "鹿群成员，群聊档案记有其课程讨论和“困困是谁”问句。",
+      facts: [],
+      overview: ["邓宇航是鹿群成员，曾参与机器人基础课程和摄影设备的群内讨论。鹿群档案亦记有他连续发送“困困是谁”的对话片段。[1]"],
+      sections: [
+        { id: "question", title: "群聊问句", paragraphs: [
+          "2025年6月5日14时51分16秒、18秒和19秒，邓宇航在鹿群连续发送三条“困困是谁？”。这三条属于当时连续出现的五条相关消息。[1]"
+        ] },
+        { id: "topics", title: "课程与数码讨论", paragraphs: [
+          "2026年6月22日，邓宇航在群内询问机器人基础课程的复习思路。同年9月10日，他在摄影功能讨论中提到可变光圈，并将相关操作与相机作比较。[1]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊档案，2025年6月5日及2026年6月22日、9月10日。"
+      ],
+      categories: ["鹿群人物"],
+      related: ["kunkun", "robot-basics", "tech", "history", "luchun"],
+      revised: "2026年11月26日"
+    },
+    "tang-bofu": {
+      title: "唐博釜",
+      type: "鹿群人物",
+      description: "鹿群成员、Desk Park乐队首次排练阵容中的吉他手。",
+      facts: [],
+      overview: ["唐博釜是鹿群成员。603视界报道记载，他在Desk Park乐队首次排练时担任吉他手。鹿群档案也记有他围绕ChatGPT和演示文稿制作向群友请教的发言。[1][2]"],
+      sections: [
+        { id: "music", title: "乐队活动", paragraphs: [
+          "据603视界2025年11月24日的报道，唐博釜和罗宇伦为Desk Park乐队的两位吉他手。乐队于11月23日首次排练，当次选曲包括《热河》和《春风十里》。[1]"
+        ] },
+        { id: "tools", title: "工具交流", paragraphs: [
+          "2026年5月21日，唐博釜在鹿群询问ChatGPT的使用方法。同年7月2日，他在群内询问演示文稿制作的学习途径。[2]"
+        ] }
+      ],
+      references: [
+        { title: "603视界《Desk Park乐队》（2025年11月24日）", url: "http://mp.weixin.qq.com/s?__biz=Mzk2NDAwMTc2Mw==&mid=2247484358&idx=1&sn=0e5dff2c5e1422576e9c315c4bd50538&chksm=c59ec3580a9e8f1181e008b8350b17f8abfeaf15d04b003e201090ecbd13c69e07afbed715d9#rd" },
+        "《鹿群20261126》群聊档案，2026年5月21日、7月2日。"
+      ],
+      categories: ["鹿群人物"],
+      related: ["desk-park", "luo-yulun", "tech", "luchun"],
+      revised: "2026年11月26日"
+    },
+    "wang-pengtao": {
+      title: "王鹏涛",
+      type: "鹿群人物",
+      description: "鹿群成员，群聊档案记有其演示资料与三维建模相关发言。",
+      facts: [],
+      overview: ["王鹏涛是鹿群成员。其群内发言涉及活动资料的整理与SolidWorks建模方法的讨论。[1]"],
+      sections: [
+        { id: "materials", title: "活动资料", paragraphs: [
+          "2026年2月6日，王鹏涛询问仍在活动现场的群友能否协助拍摄照片，以便制作演示文稿。[1]"
+        ] },
+        { id: "modeling", title: "建模讨论", paragraphs: [
+          "2026年7月13日，唐胤鑫请王鹏涛评价一个三维建模示例。王鹏涛在回应中提到SolidWorks，随后指出该示例使用了拉伸切除操作。[1]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊档案，2026年2月6日、7月13日。"
+      ],
+      categories: ["鹿群人物"],
+      related: ["tang-yinxin", "tech", "luchun"],
+      revised: "2026年11月26日"
+    },
+    "tu-tenghui": {
+      title: "涂腾辉",
+      type: "鹿群人物",
+      description: "鹿群成员，群聊档案记有其课程信息分享和短词回应的例子。",
+      facts: [],
+      overview: ["涂腾辉是鹿群成员，在群内分享过课程练习信息，并参与摄影器材和日常话题的讨论。[1]"],
+      sections: [
+        { id: "activities", title: "课程与摄影交流", paragraphs: [
+          "2026年5月19日，涂腾辉在鹿群发送有关录制羽毛球练习视频的要求。同年8月10日，邓宇航谈到拍摄时所见的相机和镜头，涂腾辉随后参与这一讨论。[1]"
+        ] },
+        { id: "language", title: "短词回应", paragraphs: [
+          "《鹿群20261126》导出中，涂腾辉有8条纯文本消息恰为“nb”。现存用例包括2025年12月12日和12月18日的记录。[1]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊档案，2025年12月12日、12月18日及2026年5月19日、8月10日。用语条数按文本消息逐条匹配。"
+      ],
+      categories: ["鹿群人物"],
+      related: ["short-messages", "deng-yuhang", "luchun"],
+      revised: "2026年11月26日"
+    },
+    "dai-er": {
+      title: "戴而",
+      type: "鹿群人物",
+      description: "在鹿群使用“戴而Dell”显示名的参与者，同名角色收录于DeerPhotos。",
+      facts: [["群聊显示名", "戴而Dell"]],
+      overview: ["戴而是鹿群参与者，导出档案中的显示名为“戴而Dell”。DeerPhotos 3.0.0版的公开项目资料另记有同名角色，采用白鹅形象。[1][2]"],
+      sections: [
+        { id: "archive", title: "群聊记录", paragraphs: [
+          "2026年10月15日，档案记有戴而加入鹿群及其发出的鹿表情。到同年11月26日的导出截止时间，以“戴而Dell”为发送者显示名的消息共482条，分布在29个日期。[1]",
+          "同年11月21日，吴子轩在群内介绍外设展情况，戴而随后询问展会地点。[1]"
+        ] },
+        { id: "character", title: "项目中的同名角色", paragraphs: [
+          "DeerPhotos 3.0.0版收录的“戴而”为白鹅角色。公开文档提供白底单人图和全身四视图，作为场景图像生成所用的参考素材。[2]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊档案，2026年10月15日、11月21日及截至11月26日的显示名消息记录。",
+        { title: "DeerPhotos 3.0.0项目文档中的新角色说明", url: "https://github.com/Roylyl/DeerPhotos/blob/V3.0.0/README.md" }
+      ],
+      categories: ["鹿群人物"],
+      related: ["deerphotos", "wu-zixuan", "luchun", "history"],
+      revised: "2026年11月26日"
     }
   };
 })();

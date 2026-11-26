@@ -57,7 +57,7 @@
         { title: "DeerPhotos V3.0.0发行页", url: "https://github.com/Roylyl/DeerPhotos/releases/tag/V3.0.0" }
       ],
       categories: ["群史", "鹿群文化"],
-      related: ["luchun", "high-cognition", "gonglu", "portrait-generator", "jacobian-rapid", "603-vision", "kuncode", "deerphotos"],
+      related: ["luchun", "high-cognition", "gonglu", "portrait-generator", "jacobian-rapid", "603-vision", "kuncode", "deerphotos", "deer-taste-test"],
       revised: "2026年11月26日"
     },
     "gonglu": {
@@ -120,7 +120,7 @@
         "鹿群初始聊天档案，2025年6月18日、10月23日。"
       ],
       categories: ["群聊语言"],
-      related: ["he-meaning", "kunkun", "peng-peng", "li-yanzhen", "luchun"],
+      related: ["he-meaning", "nb-context", "six-six-six", "steady", "check-in-kids", "kunkun", "peng-peng", "li-yanzhen", "luchun"],
       revised: "2026年11月26日"
     },
     "tech": {
@@ -255,7 +255,7 @@
         { title: "603视界《岳阳楼，望浙江》（2026年3月9日）", url: "http://mp.weixin.qq.com/s?__biz=Mzk2NDAwMTc2Mw==&mid=2247484454&idx=2&sn=475df4f1b0e1b233df4a6daab3285dbf&chksm=c57ba834577feab9417d34fa47d394579d9885ce18863cd67d59ba2c8a01dc11b8102a6abdf5#rd" }
       ],
       categories: ["校园媒体", "鹿群文化"],
-      related: ["603-tech-light", "603-lost-cake", "603-yueyang-trip", "desk-park", "kuncode", "603-ai-android", "luchun"],
+      related: ["base-0017", "603-tech-light", "603-lost-cake", "603-yueyang-trip", "desk-park", "kuncode", "603-ai-android", "luchun"],
       revised: "2026年11月26日"
     },
     "kuncode": {
@@ -441,6 +441,180 @@
       categories: ["鹿群项目", "生成式AI"],
       related: ["portrait-generator", "luo-yulun", "luchun", "history"],
       externalLinks: [["DeerPhotos源代码仓库", "https://github.com/Roylyl/DeerPhotos"]],
+      revised: "2026年11月26日"
+    },
+    "kun-coach": {
+      title: "困教练",
+      type: "鹿群称呼",
+      description: "詹绍源在鹿群使用的自称，常见于带有战术安排语气的发言。",
+      facts: [["使用者", "詹绍源"], ["档案用例", "2026年3月至4月"]],
+      overview: ["困教练是詹绍源在鹿群聊天中使用的自称，由其群内昵称“困困”和“教练”一词组成。现有用例中，这一称呼有时与安排战术的说法并用。[1]"],
+      sections: [
+        { id: "usage", title: "群内用法", paragraphs: [
+          "2026年3月15日23:50，詹绍源发出“困教练给你们安排战术”。4月2日10:17，他在另一段群聊中直接写道“我是困教练”。[1]"
+        ] }
+      ],
+      references: ["《鹿群20261126》群聊档案，2026年3月15日23:50:29、4月2日10:17:38。"],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["kunkun", "short-messages", "luchun"],
+      revised: "2026年11月26日"
+    },
+    "particle": {
+      title: "对齐一下颗粒度",
+      type: "鹿群用语",
+      description: "鹿群以沟通用语提示统一讨论的细节层次，也用作简短回应。",
+      facts: [["主要形式", "对齐一下颗粒度、对齐颗粒度"], ["档案用例", "2026年7月至11月"]],
+      overview: ["对齐一下颗粒度是鹿群使用的沟通用语。“颗粒度”在这一说法中指讨论或描述的细节层次，“对齐”指使参与者采用相近的尺度。档案亦记录了它作为独立短句和戏仿回应的用法。[1]"],
+      sections: [
+        { id: "usage", title: "群内用法", paragraphs: [
+          "2026年7月30日14:11，群内转发了一段标题含“对齐颗粒度”的电影相关内容。詹绍源接着发出“🦌群现在要对齐一下颗粒度”，次日又用“我们对齐一下颗粒度”。[1]",
+          "11月4日有成员单独发出“对齐一下颗粒度”，其后收到握手表情回应。11月19日的群聊中，另一条消息将“对齐颗粒度”与“战后复盘”并用。[1]"
+        ] }
+      ],
+      references: ["《鹿群20261126》群聊档案，2026年7月30日14:11至14:13、7月31日00:22、11月4日19:20、11月19日23:21。"],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["kunkun", "high-cognition", "short-messages"],
+      revised: "2026年11月26日"
+    },
+    "frame-study": {
+      title: "逐帧学习",
+      type: "鹿群用语",
+      description: "以视频逐帧观看的说法表示仔细观察和学习的群聊用语。",
+      facts: [["档案用例", "2026年3月17日及8月3日"], ["见载使用者", "詹绍源"]],
+      overview: ["逐帧学习是鹿群中用来表示仔细观察和学习的说法。用语借用了视频播放中逐帧观看的表达。詹绍源曾在对成员发言和面向群体的号召中使用它。[1]"],
+      sections: [
+        { id: "usage", title: "群内用例", paragraphs: [
+          "2026年3月17日14:40，詹绍源发出“你魏逐帧学习”。8月3日18:07，他改用“🦌群一起逐帧学习”，将称呼对象换成整个鹿群。[1]"
+        ] }
+      ],
+      references: ["《鹿群20261126》群聊档案，2026年3月17日14:40:03、8月3日18:07:38。"],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["kunkun", "high-cognition", "short-messages"],
+      revised: "2026年11月26日"
+    },
+    "check-in-kids": {
+      title: "打卡了孩子们",
+      type: "鹿群提醒语",
+      description: "彭鹏在2026年1月至2月用于晚间打卡提醒的固定说法。",
+      facts: [["使用者", "彭鹏"], ["用例时段", "2026年1月13日至2月3日"], ["档案匹配", "12条"]],
+      overview: ["打卡了孩子们是彭鹏在鹿群发出的固定提醒语。在现有聊天档案中，该句由同一发送者在12个不同的日期发出，形式均为单独一条文字消息。[1]"],
+      sections: [
+        { id: "records", title: "档案记录", paragraphs: [
+          "最早一条见于2026年1月13日22:03，此后1月17日、18日及19日连续三天均有记录。该时段最后一条为2月3日22:37的消息。[1]"
+        ] }
+      ],
+      references: ["《鹿群20261126》群聊档案，2026年1月13日22:03:53至2月3日22:37:20的匹配文本。"],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["peng-peng", "short-messages", "history"],
+      revised: "2026年11月26日"
+    },
+    "steady": {
+      title: "稳了",
+      type: "鹿群用语",
+      description: "在鹿群用于表示对结果的把握或作为简短回应的口语。",
+      facts: [],
+      overview: ["稳了是鹿群聊天中的常见简短发言，用于表示对结果的把握。档案中既有直接说明对象的“考试稳了”，也有单独发出“稳了”的用例。[1]"],
+      sections: [
+        { id: "usage", title: "群内用法", paragraphs: [
+          "2025年6月18日的考试讨论中，李彦臻先说“十有八九稳了”，随后发出“考试稳了”，表达对考试结果的预期。2026年8月6日，有成员在短视频讨论中仅回复“稳了”。[1]"
+        ] }
+      ],
+      references: ["《鹿群20261126》群聊档案，2025年6月18日10:59至11:00、2026年8月6日20:29。"],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["li-yanzhen", "short-messages", "nb-context"],
+      revised: "2026年11月26日"
+    },
+    "six-six-six": {
+      title: "666",
+      type: "鹿群用语",
+      description: "鹿群用于短评、接话和表达反应的数字写法。",
+      facts: [["档案匹配", "150条独立消息"], ["统计范围", "2026年11月26日导出中的文字及引用回复"]],
+      overview: ["666在鹿群聊天中常单独成句，出现在成员分享消息之后，可作短评、接话或表示赞叹。语气随讨论对象和前后发言而变化。[1]"],
+      sections: [
+        { id: "usage", title: "群内用法", paragraphs: [
+          "2025年9月2日，有成员提到可以把项目空间的桌子搬回寝室，随后有人发出“666”。10月13日，一条“666”出现在两名成员谈论分数的消息之间。[1]",
+          "以2026年11月26日版档案的文字消息及引用回复为范围，去除首尾空白后，消息正文恰为“666”的记录有150条。[1]"
+        ] }
+      ],
+      references: ["《鹿群20261126》群聊档案。示例见2025年9月2日18:11及10月13日01:25至01:32。"],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["nb-context", "steady", "short-messages"],
+      revised: "2026年11月26日"
+    },
+    "nb-context": {
+      title: "nb",
+      type: "鹿群用语",
+      description: "鹿群用于表示赞叹或作即时回应的字母缩写。",
+      facts: [["档案匹配", "191条独立消息"], ["统计范围", "2026年11月26日导出中的文字及引用回复"]],
+      overview: ["nb是鹿群聊天中用于表示赞叹或作即时回应的字母缩写。现有档案中，它多以一条独立的短消息出现。[1]"],
+      sections: [
+        { id: "usage", title: "群内用法", paragraphs: [
+          "2025年6月14日，群友谈及交完论文后的时间安排，随后一条消息回复“nb”。6月18日，谈到考试答题情况时也出现同样的独立回复。[1]",
+          "以2026年11月26日版档案的文字消息及引用回复为范围，去除首尾空白并忽略大小写后，消息正文恰为“nb”的记录有191条。[1]"
+        ] }
+      ],
+      references: ["《鹿群20261126》群聊档案。示例见2025年6月14日21:45及6月18日10:38。"],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["six-six-six", "steady", "short-messages"],
+      revised: "2026年11月26日"
+    },
+    "61": {
+      title: "61",
+      type: "鹿群用语",
+      description: "群内既用于指称某人，也见于普通数字计数的写法。",
+      facts: [],
+      overview: ["61在鹿群聊天中既可作为数字，也可用作对某人的指称。两种用法可由句子中的搭配和所讨论的内容区分。[1]"],
+      sections: [
+        { id: "usage", title: "群内用法", paragraphs: [
+          "2025年6月8日，有成员发出“截图发给61了”，“61”在句中指收取截图的人。2026年11月21日的团建讨论中，该写法也用来指称一名参与者。[1]",
+          "在2025年7月23日的一条消息“群人数刚好是61”中，“61”直接表示人数。[1]"
+        ] }
+      ],
+      references: ["《鹿群20261126》群聊档案，2025年6月8日20:07、7月23日18:10、2026年11月21日16:25。"],
+      categories: ["鹿群术语", "群聊语言"],
+      related: ["short-messages", "he-meaning", "luchun"],
+      revised: "2026年11月26日"
+    },
+    "base-0017": {
+      title: "603寝室",
+      type: "鹿群场所",
+      description: "湖南农业大学芷兰24栋南603，603视界所刊多篇校园生活记录的主要场景。",
+      facts: [["地点", "湖南农业大学芷兰24栋南603"], ["相关公众号", "603视界"]],
+      overview: ["603寝室是湖南农业大学芷兰24栋南603寝室。鹿群聊天中常简写为“603”。寝室及其周边生活是微信公众号603视界的主要题材之一。[1][2]"],
+      sections: [
+        { id: "publications", title: "刊文记录", paragraphs: [
+          "603视界的刊载记录包括《雨夜失糕》所述的生日筹备，以及招新宣讲会后由数名603成员介绍工程项目的报道。[1][3]"
+        ] },
+        { id: "chat", title: "群聊中的指称", paragraphs: [
+          "2026年10月31日00:03，黎健毓在群中发出“等下来603吃蛋糕”，将寝室号用作集合地点的简写。[2]"
+        ] }
+      ],
+      references: [
+        "《603视界》公开资料核查报告，公众号简介及公开刊文题材，检索截止2026年9月4日。",
+        "《鹿群20261126》群聊档案，2026年10月31日00:03:46。",
+        { title: "603视界《科技之光｜603寝室成员在招新宣讲会后展示创新成果》", url: "https://mp.weixin.qq.com/s/PN3bXURXRR3MiOGZAhOxmg" }
+      ],
+      categories: ["校园生活", "603视界"],
+      related: ["603-vision", "603-lost-cake", "603-tech-light", "luchun"],
+      revised: "2026年11月26日"
+    },
+    "deer-taste-test": {
+      title: "鹿味测试",
+      type: "鹿群网页项目",
+      description: "鹿群对网页《你是个鹿嘞》中相似度排行功能的称呼。",
+      facts: [["网页名称", "你是个鹿嘞"], ["群内分享记录", "2026年10月16日"]],
+      overview: ["鹿味测试是鹿群成员对网页《你是个鹿嘞》中相似度排行功能的称呼。页面说明列出照片和摄像头两种输入方式，并称画面在本机处理。[1][2]"],
+      sections: [
+        { id: "history", title: "群内分享", paragraphs: [
+          "2026年10月16日10:27，Roylyl在群内发送《你是个鹿嘞》的网页地址，13秒后又发送“先做鹿味测试”。[1]"
+        ] }
+      ],
+      references: [
+        "《鹿群20261126》群聊档案，2026年10月16日10:27:36、10:27:49。",
+        { title: "你是个鹿嘞", url: "https://deer603.github.io/urdeer/" }
+      ],
+      categories: ["鹿群术语", "鹿群项目"],
+      related: ["history", "luchun", "portrait-generator", "deerphotos"],
       revised: "2026年11月26日"
     }
   };

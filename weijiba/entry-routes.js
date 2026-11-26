@@ -26,7 +26,25 @@
     "wei-ziqi": "魏子奇",
     "xia-weicheng": "夏炜城",
     "li-jianyu": "黎健毓",
-    "li-yanzhen": "李彦臻"
+    "li-yanzhen": "李彦臻",
+    "61": "61",
+    "tang-yinxin": "唐胤鑫",
+    "wu-zixuan": "吴子轩",
+    "chen-zuhan": "陈祖涵",
+    "deng-yuhang": "邓宇航",
+    "tang-bofu": "唐博釜",
+    "wang-pengtao": "王鹏涛",
+    "tu-tenghui": "涂腾辉",
+    "dai-er": "戴而",
+    "kun-coach": "困教练",
+    "particle": "对齐一下颗粒度",
+    "frame-study": "逐帧学习",
+    "check-in-kids": "打卡了孩子们",
+    "steady": "稳了",
+    "six-six-six": "666",
+    "nb-context": "nb",
+    "deer-taste-test": "鹿味测试",
+    "base-0017": "603寝室"
   });
 
   const baseEntryRecords = Object.entries(entryPaths).map(([slug, title]) => ({ slug, title }));
