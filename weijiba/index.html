@@ -6,7 +6,7 @@
     <title>魏鸡百科｜困困的百科全书</title>
     <link rel="icon" type="image/webp" href="assets/weijiba-favicon-64.webp?v=wei">
     <link rel="shortcut icon" type="image/webp" href="assets/weijiba-favicon-64.webp?v=wei">
-    <link rel="stylesheet" href="style.css?v=20261124-reading">
+    <link rel="stylesheet" href="style.css?v=20261126-editorial">
     <!-- share-metadata:start -->
     <meta name="description" content="记录鹿群人物、趣事、术语与科技话题。检索词条，阅读故事，发现群内共同记忆。">
     <meta name="title" content="魏鸡百科｜困困的百科全书">
@@ -40,453 +40,188 @@
     <!-- share-thumbnail:start -->
     <img src="assets/share-globe.jpg?v=wei" width="400" height="400" alt="" aria-hidden="true" fetchpriority="low" style="position:absolute;left:-10000px;top:0;pointer-events:none">
     <!-- share-thumbnail:end -->
-    <a class="skip-link" href="#main-content">跳到内容</a>
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+    <header class="site-header">
+      <div class="masthead">
+        <button class="icon-button menu-button" type="button" data-open-sidebar aria-label="打开导航" aria-controls="sidebar" aria-expanded="false"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        <a class="topbar-brand" href="#home" aria-label="魏鸡百科首页"><img src="assets/weijiba-logo-520.webp?v=wei" width="520" height="238" alt="魏鸡百科，困困的百科全书"></a>
+        <nav class="primary-nav" aria-label="主导航">
+          <a href="#articles">分类索引</a>
+          <a href="#news">群史纪要</a>
+          <a href="#about">资料说明</a>
+        </nav>
+        <div class="header-tools">
+          <button class="icon-button mobile-search-button" type="button" data-focus-search aria-label="搜索词条"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.5 17a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13ZM16 16l4 4"/></svg></button>
+          <button class="quiet-button appearance-button" type="button" data-action="appearance">外观</button>
+        </div>
+      </div>
+    </header>
 
     <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
-    <div class="site-shell">
-      <aside class="sidebar" id="sidebar" aria-label="站点导航">
-        <div class="sidebar-mobile-head">
-          <span>魏鸡百科</span>
-          <button class="icon-button" type="button" data-close-sidebar aria-label="关闭导航"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
-        </div>
+    <aside class="sidebar" id="sidebar" aria-label="站点导航">
+      <div class="sidebar-heading">
+        <strong>魏鸡百科</strong>
+        <button class="icon-button" type="button" data-close-sidebar aria-label="关闭导航"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <nav class="sidebar-nav" aria-label="移动导航">
+        <a href="#home">首页</a>
+        <a href="#search">搜索词条</a>
+        <a href="#articles">分类索引</a>
+        <a href="#featured">特色条目</a>
+        <a href="#news">群史纪要</a>
+        <a href="#about">资料说明</a>
+      </nav>
+    </aside>
 
-        <a class="logo-link" href="#home" aria-label="魏鸡百科首页">
-          <img src="assets/weijiba-logo-520.webp?v=wei" alt="魏鸡百科，困困的百科全书">
-        </a>
-        <p class="sidebar-kicker">群内戏仿知识站</p>
-
-        <nav class="sidebar-nav" aria-label="主导航">
-          <p class="nav-heading">导航</p>
-          <a class="nav-link is-current" href="#home">首页</a>
-          <a class="nav-link" href="#search">搜索词条</a>
-          <a class="nav-link" href="#articles">分类索引</a>
-          <a class="nav-link" href="#mega-index">基础词条索引</a>
-          <a class="nav-link" href="#featured">特色内容</a>
-          <a class="nav-link" href="#news">新闻动态</a>
-          <a class="nav-link" href="#random">随机条目</a>
-          <a class="nav-link" href="#participate">联络我们</a>
-          <a class="nav-link" href="#about">关于魏鸡百科</a>
-
-          <p class="nav-heading nav-heading-spaced">贡献</p>
-          <a class="nav-link" href="#participate">帮助</a>
-          <a class="nav-link" href="#participate">编辑入门</a>
-          <a class="nav-link" href="#history">最近更改</a>
-          <a class="nav-link" href="#about">特殊页面</a>
-        </nav>
-
-        <div class="sidebar-note">
-          <span class="note-dot" aria-hidden="true"></span>
-          <p>这是一个非官方的群内戏仿百科。条目由鹿群公开导出资料二次编写，玩笑不等于事实。</p>
-        </div>
-
-        <div class="sidebar-tools">
-          <p class="nav-heading">页面工具</p>
-          <button class="text-button" type="button" data-action="source">查看源代码</button>
-          <button class="text-button" type="button" data-action="history">页面历史</button>
-          <button class="text-button" type="button" data-action="appearance">外观</button>
-        </div>
-      </aside>
-
-      <div class="page-area">
-        <header class="topbar">
-          <button class="menu-button" type="button" data-open-sidebar aria-label="菜单" aria-controls="sidebar" aria-expanded="false">
-            <span class="menu-icon" aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>
-            <span class="menu-label">菜单</span>
-          </button>
-          <a class="topbar-brand" href="#home" aria-label="魏鸡百科首页">
-            <img src="assets/weijiba-logo-520.webp?v=wei" alt="魏鸡百科，困困的百科全书">
-          </a>
-          <div class="topbar-context">魏鸡百科</div>
-          <button class="mobile-search-button" type="button" data-focus-search aria-label="搜索魏鸡百科">
-            <span aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></span>
-          </button>
-          <nav class="personal-links" aria-label="个人工具">
-            <button class="topbar-button" type="button" data-action="appearance">外观</button>
-            <button class="topbar-button" type="button" data-action="edit">创建账号</button>
-            <button class="topbar-button" type="button" data-action="edit">登录</button>
-          </nav>
-        </header>
-
-        <main id="main-content">
-          <section class="page-header" id="home">
-            <div class="breadcrumbs"><a href="#home">魏鸡百科</a><span aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg></span><span>首页</span></div>
-            <div class="title-row">
-              <h1>魏鸡百科：首页</h1>
-              <div class="page-actions" aria-label="页面操作">
-                <button class="page-action is-selected" type="button">阅读</button>
-                <button class="page-action" type="button" data-action="source">查看源代码</button>
-                <button class="page-action" type="button" data-action="history">查看历史</button>
-              </div>
-            </div>
-            <div class="language-row">
-              <nav class="tabs" aria-label="页面标签">
-                <a class="tab is-active" href="#home" aria-current="page">首页</a>
-                <a class="tab" href="#about">讨论</a>
-              </nav>
-              <div class="language-switcher">
-                <button class="language-toggle" id="language-toggle" type="button" aria-expanded="false" aria-controls="language-panel">
-                  <span aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 5h12M9 2v3m-4 3c1 4 4 7 8 9M13 5c-1 6-4 10-10 13m11 3 4-10 4 10m-6-4h4"/></svg></span> 不转换 <span class="chevron" aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg></span>
-                </button>
-                <div class="language-panel" id="language-panel" hidden>
-                  <button type="button" data-language="简体">简体</button>
-                  <button type="button" data-language="繁體">繁體</button>
-                  <button type="button" data-language="大陆简体">大陆简体</button>
-                  <button type="button" data-language="香港繁體">香港繁體</button>
-                </div>
-              </div>
-            </div>
-          </section>
-
+    <main class="page-wrap" id="main-content" tabindex="-1">
+      <section class="intro" id="home" aria-labelledby="site-title">
+        <div class="intro-copy">
+          <h1 id="site-title">魏鸡百科</h1>
+          <p class="intro-summary">收录鹿群的人物、用语、事件与项目。</p>
           <div class="home-search" id="search">
-            <form class="search-form" id="search-form" role="search" aria-label="搜索魏鸡百科">
+            <form id="search-form" role="search" aria-label="搜索魏鸡百科">
               <label class="sr-only" for="search-input">词条名称</label>
               <div class="search-box">
-                <input id="search-input" name="q" type="search" placeholder="搜索词条，如雅可比" autocomplete="off">
+                <input id="search-input" name="q" type="search" placeholder="搜索词条，如鹿图" autocomplete="off">
                 <button type="submit">搜索</button>
               </div>
             </form>
             <p class="search-status" id="search-status" role="status"></p>
             <ul class="home-search-results" id="search-results" aria-label="匹配词条" hidden></ul>
-            <button class="quiet-button load-more" id="search-more" type="button" hidden>显示更多结果</button>
           </div>
-
-          <div class="site-notice" id="site-notice" role="note">
-            <div class="notice-mark" aria-hidden="true"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.01"/></svg></div>
-            <p><strong>欢迎来到魏鸡百科。</strong> 从雅可比到吃什么，从一根线到一支乐队。这里收藏鹿群的小事，也给普通名词添一点玩笑。聊天原话标日期，小剧场不当群史。</p>
-            <button class="notice-close" type="button" data-close-notice aria-label="关闭提示"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
+          <div class="intro-links">
+            <a href="%E9%B9%BF%E7%BE%A4/">了解鹿群</a>
+            <a href="#mega-index">浏览25个词条</a>
           </div>
-
-          <div class="home-grid">
-            <section class="module module-featured" id="featured" data-searchable>
-              <header class="module-header">
-                <h2>特色条目</h2>
-                <span class="module-meta">今日重点</span>
-              </header>
-              <div class="module-body featured-body">
-                <div class="article-label" id="featured-tag">群内人物 · 从一句话认识</div>
-                <h3 id="featured-title"><a id="featured-title-link" href="article.html?entry=kunkun">困困</a></h3>
-                <p class="lead" id="featured-summary">困困即詹绍源。群友给他添了不少头衔，本人只说“我叫困困”。他会催大家对齐颗粒度，也会急着问雅可比；一个名字后面，藏着不止一种聊天现场。</p>
-                <blockquote id="featured-quote">“速问速答 雅可比怎么判断奇异”——然后夏炜城问：雅可比是什么？</blockquote>
-                <dl class="fact-grid">
-                  <div>
-                    <dt>常用名</dt>
-                    <dd>困困 · 詹哥 · 困教练</dd>
-                  </div>
-                  <div>
-                    <dt>语料样本</dt>
-                    <dd>约 1,800 条发言</dd>
-                  </div>
-                  <div>
-                    <dt>文本节奏</dt>
-                    <dd>中位数约 5 字</dd>
-                  </div>
-                  <div>
-                    <dt>活跃语境</dt>
-                    <dd>鹿群 / 603 系</dd>
-                  </div>
-                </dl>
-                <div class="module-footer">
-                  <a class="blue-link" id="featured-read-link" href="article.html?entry=kunkun">阅读条目</a>
-                  <button class="quiet-button" type="button" data-action="random">随机条目</button>
-                </div>
-              </div>
-            </section>
-
-            <section class="module module-dyk" id="did-you-know" data-searchable>
-              <header class="module-header">
-                <h2>你知道吗？</h2>
-                <span class="module-meta">鹿群冷知识</span>
-              </header>
-              <div class="module-body">
-                <ul class="fact-list">
-                  <li>“<a href="article.html?entry=kunkun">困困</a>”既是自称，也是群友对詹绍源的通用称呼，并非正式头衔。</li>
-                  <li>在一份文本样本中，约 77% 的詹绍源消息不超过 8 个字；参见<a href="article.html?entry=short-messages">短句连发</a>。</li>
-                  <li>“<a href="article.html?entry=gonglu">共🦌主义</a>”“<a href="article.html?entry=high-cognition">高认知</a>”“<a href="article.html?entry=kun-coach">困教</a>”主要是群内玩梗。</li>
-                  <li><a href="article.html?entry=luchun">鹿群</a>在报告统计期内有 471 个日历日，469 天出现过消息。</li>
-                  <li>“<a href="article.html?entry=61">61</a>”可能是数字、暗号，也可能只是当下语境里的接龙。</li>
-                  <li>群里的<a href="article.html?entry=tech">科技讨论</a>覆盖硬件、项目、平台、AI、学习、编码与安全七个方向。</li>
-                </ul>
-              </div>
-            </section>
+        </div>
+        <section class="featured" id="featured" aria-labelledby="featured-heading">
+          <h2 id="featured-heading">特色条目</h2>
+          <div id="featured-content" aria-live="polite">
+            <h3 id="featured-title"><a href="DeerPhotos/" id="featured-title-link">DeerPhotos</a></h3>
+            <p id="featured-summary">DeerPhotos又称鹿图，是以鹿群角色资料为参考的AI图像生成技能。</p>
           </div>
+          <button class="quiet-button" id="random" type="button" data-action="random">随机推荐</button>
+        </section>
+      </section>
 
-          <div class="content-grid" id="articles">
-            <section class="module" id="group-article" data-searchable>
-              <header class="module-header">
-                <h2>优良条目</h2>
-                <span class="module-meta">推荐阅读</span>
-              </header>
-              <div class="module-body article-body">
-                <h3><a href="article.html?entry=luchun">鹿群</a></h3>
-                <p>鹿群把课程、项目、数码和饭点装在同一个聊天窗口里。困困问雅可比怎么判断奇异，夏炜城先问雅可比是什么；电脑参数聊到最后，罗宇伦惦记的是接口够不够、充电器重不重。</p>
-                <p>57,216条消息里，未必每条都是大事。有人隔几天又回来提醒打卡，有人把同一句“何意味”接着发了一遍。熟人群聊的热闹，常常就藏在这些小地方。</p>
-                <div class="stat-strip">
-                  <div><strong>57,216</strong><span>导出消息</span></div>
-                  <div><strong>14</strong><span>核心成员</span></div>
-                  <div><strong>7</strong><span>科技话题方向</span></div>
-                </div>
-                <div class="module-footer"><a class="blue-link" href="article.html?entry=luchun">阅读完整条目</a><a class="blue-link" href="article.html?entry=chat-cycle">群聊结构</a></div>
-              </div>
+      <div id="articles">
+        <section class="index-section" id="mega-index" aria-labelledby="index-title">
+          <div class="section-heading">
+            <h2 id="index-title">分类索引</h2>
+            <span class="entry-count">25个词条</span>
+          </div>
+          <div class="index-grid" id="mega-entry-list">
+            <section class="index-group">
+              <h3>群体与记录</h3>
+              <ul>
+                <li><a href="%E9%B9%BF%E7%BE%A4/">鹿群</a></li>
+                <li><a href="%E7%BE%A4%E5%86%85%E7%BC%96%E5%B9%B4%E5%8F%B2%E4%B8%8E%E7%BE%A4%E5%8F%B2/">群内编年史与群史</a></li>
+                <li><a href="603%E8%A7%86%E7%95%8C/">603视界</a></li>
+                <li><a href="Desk%20Park%E4%B9%90%E9%98%9F/">Desk Park乐队</a></li>
+                <li><a href="%E5%B2%B3%E9%98%B3%E6%A5%BC%EF%BC%8C%E6%9C%9B%E6%B5%99%E6%B1%9F/">岳阳楼，望浙江</a></li>
+                <li><a href="%E9%9B%A8%E5%A4%9C%E5%A4%B1%E7%B3%95/">雨夜失糕</a></li>
+              </ul>
             </section>
-
-            <section class="module" id="topic-matrix" data-searchable>
-              <header class="module-header">
-                <h2><a href="article.html?entry=tech">鹿群话题矩阵</a></h2>
-                <span class="module-meta">科技话题报告</span>
-              </header>
-              <div class="module-body matrix-body">
-                <p class="module-intro">群聊里的技术讨论并不只有“写代码”，而是一条从设备、平台、AI 到项目实践的连续链路。</p>
-                <div class="bar-chart" role="img" aria-label="鹿群科技话题方向及消息数">
-                  <div class="bar-row"><a href="article.html?entry=hardware">硬件 / 数码</a><div class="bar-track"><i style="--bar-width: 100%"></i></div><b>503</b></div>
-                  <div class="bar-row"><a href="article.html?entry=projects">项目 / 竞赛</a><div class="bar-track"><i style="--bar-width: 95%"></i></div><b>480</b></div>
-                  <div class="bar-row"><a href="article.html?entry=platforms">数字平台</a><div class="bar-track"><i style="--bar-width: 64%"></i></div><b>323</b></div>
-                  <div class="bar-row"><a href="article.html?entry=ai-tools">AI / 大模型</a><div class="bar-track"><i style="--bar-width: 63%"></i></div><b>316</b></div>
-                  <div class="bar-row"><a href="article.html?entry=learning">学习 / 课程</a><div class="bar-track"><i style="--bar-width: 42%"></i></div><b>213</b></div>
-                  <div class="bar-row"><a href="article.html?entry=coding">编码 / 开发</a><div class="bar-track"><i style="--bar-width: 30%"></i></div><b>151</b></div>
-                  <div class="bar-row"><a href="article.html?entry=security">安全 / 数据</a><div class="bar-track"><i style="--bar-width: 27%"></i></div><b>136</b></div>
-                </div>
-                <p class="source-note">数字为报告中的主题分类统计，分类之间可能存在交叉。</p>
-              </div>
+            <section class="index-group">
+              <h3>鹿群人物</h3>
+              <ul>
+                <li><a href="%E5%9B%B0%E5%9B%B0/">困困</a></li>
+                <li><a href="%E7%BD%97%E5%AE%87%E4%BC%A6/">罗宇伦</a></li>
+                <li><a href="%E5%BD%AD%E9%B9%8F/">彭鹏</a></li>
+                <li><a href="%E9%AD%8F%E5%AD%90%E5%A5%87/">魏子奇</a></li>
+                <li><a href="%E5%A4%8F%E7%82%9C%E5%9F%8E/">夏炜城</a></li>
+                <li><a href="%E9%BB%8E%E5%81%A5%E6%AF%93/">黎健毓</a></li>
+                <li><a href="%E6%9D%8E%E5%BD%A6%E8%87%BB/">李彦臻</a></li>
+              </ul>
+            </section>
+            <section class="index-group">
+              <h3>用语与聊天事件</h3>
+              <ul>
+                <li><a href="%E5%85%B1%F0%9F%A6%8C%E4%B8%BB%E4%B9%89/">共🦌主义</a></li>
+                <li><a href="%E9%AB%98%E8%AE%A4%E7%9F%A5/">高认知</a></li>
+                <li><a href="%E4%BD%95%E6%84%8F%E5%91%B3/">何意味</a></li>
+                <li><a href="%E7%9F%AD%E5%8F%A5%E8%BF%9E%E5%8F%91/">短句连发</a></li>
+                <li><a href="%E9%9B%85%E5%8F%AF%E6%AF%94%E9%80%9F%E9%97%AE%E9%80%9F%E7%AD%94/">雅可比速问速答</a></li>
+                <li><a href="%E4%BA%BA%E7%89%A9%E7%BE%A4%E5%83%8F%E7%94%9F%E6%88%90%E5%99%A8/">人物群像生成器</a></li>
+              </ul>
+            </section>
+            <section class="index-group">
+              <h3>科技与项目</h3>
+              <ul>
+                <li><a href="%E9%B9%BF%E7%BE%A4%E7%A7%91%E6%8A%80%E8%AF%9D%E9%A2%98/">鹿群科技话题</a></li>
+                <li><a href="%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%9F%BA%E7%A1%80/">机器人基础</a></li>
+                <li><a href="KunCode/">KunCode</a></li>
+                <li><a href="DeerPhotos/">DeerPhotos</a></li>
+                <li><a href="603%E8%A7%86%E7%95%8CAI%E5%AE%89%E5%8D%93%E7%AB%AF%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">603视界AI安卓端应用程序</a></li>
+                <li><a href="%E7%A7%91%E6%8A%80%E4%B9%8B%E5%85%89%EF%BD%9C603%E5%AF%9D%E5%AE%A4%E6%88%90%E5%91%98%E5%9C%A8%E6%8B%9B%E6%96%B0%E5%AE%A3%E8%AE%B2%E4%BC%9A%E5%90%8E%E5%B1%95%E7%A4%BA%E5%88%9B%E6%96%B0%E6%88%90%E6%9E%9C/">科技之光｜603寝室成员在招新宣讲会后展示创新成果</a></li>
+              </ul>
             </section>
           </div>
-
-          <div class="content-grid nonsense-grid" id="nonsense-index">
-            <section class="module" data-searchable>
-              <header class="module-header">
-                <h2>魏鸡百科新词条</h2>
-                <span class="module-meta">本群专属 · 可疑但有据</span>
-              </header>
-              <div class="module-body">
-                <p class="module-intro">以下条目从聊天记录里的问号、饭点、数字、课程和突然升高的认知中长出来。它们看起来像制度，实际大多只是鹿群在某个瞬间共同承认过的笑点。</p>
-                <div class="nonsense-list">
-                  <article class="nonsense-item"><a href="article.html?entry=question-rain">问号瀑布</a><p>约 464 个纯问号组成的低成本围观系统。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=he-meaning">何意味</a><p>要求所有高认知消息先翻译成人话。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=eat-what">吃什么</a><p>每天重启一次、永远没有最终版本的民生议题。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=six-six-six">666量子态</a><p>在赞叹、围观和敷衍之间坍缩的数字。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=strong-chain">强三连</a><p>用表情给长文盖章，又不承担论证责任。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=steady">稳了</a><p>鹿群最短的项目进度报告和心理锁定。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=person">人物</a><p>把一个人、一句话或一张AI图送进群史的弹性名词。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=all-broadcast">全员广播</a><p>没有正式权力，却能瞬间召回所有人的公共地址。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=check-in-kids">打卡了孩子们</a><p>彭鹏在晚间留下的无强制签到仪式。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=dell-question">戴尔问号</a><p>品牌、设备和人物梗共用一个问号的硬件学。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=frame-study">逐帧学习</a><p>把看懂一件事写成不能跳过任何一帧的命令。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=jacobian-rapid">雅可比速问速答</a><p>从奇异性一路退回“雅可比是什么”的工程事件。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=robot-basics">机器人基础</a><p>把齿轮、矩阵、采茶机和控制理论放进群聊长文。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=seven-robots">七个机器人</a><p>让一个技术对象突然拥有组织架构和编制感。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=603-vision">603视界</a><p>寝室也有自己的新闻台：空调、蛋糕、乐队与代码轮流登场。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=cognition-universe">高认知宇宙</a><p>从大学到酒店，给一切普通事物加一层认知设施。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=kunkun-who">困困是谁</a><p>十秒内五次追问，把熟悉称呼伪装成身份悬案。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=silence-open">静音不开</a><p>四个字写成一条没有主语的设备操作哲学。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=portrait-generator">人物群像生成器</a><p>把昵称、动物表情和组织玩笑重新排成史诗舞台。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=six-reaction">6号反应</a><p>比 666 更轻、比问号更暧昧的即时评价。</p></article>
-                </div>
-                <div class="module-footer"><a class="blue-link" href="article.html?entry=person">先从“人物”开始阅读</a><a class="blue-link" href="article.html?entry=cognition-universe">进入高认知宇宙</a></div>
-              </div>
-            </section>
-
-            <section class="module" data-searchable>
-              <header class="module-header">
-                <h2>鹿群人物索引</h2>
-                <span class="module-meta">名字后面，都是具体的小事</span>
-              </header>
-              <div class="module-body">
-                <p class="module-intro">有人提醒打卡，有人数电脑接口，有人发现显示器挤走了鼠标。点开名字，看看当时说了什么。</p>
-                <div class="nonsense-list people-list">
-                  <article class="nonsense-item"><a href="article.html?entry=peng-peng">彭鹏</a><p>问号之外，还记得回来喊一声“打卡了孩子们”。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=wei-ziqi">魏子奇</a><p>能写长文，也会接着问：C口怎么供电？</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=tang-yinxin">唐胤鑫</a><p>前面那句话，能不能再说清楚一点？</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=wu-zixuan">吴子轩</a><p>话题可以很多，等下吃什么最好先定下来。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=xia-weicheng">夏炜城</a><p>奇异性先等等：雅可比是什么？鼠标又放哪？</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=chen-zuhan">陈祖涵</a><p>三个字“何意味”，也能接进一场集体追问。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=deng-yuhang">邓宇航</a><p>把“困困是谁”问得像第一次见到这个名字。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=li-jianyu">黎健毓</a><p>聊演奏之前，先确认贝斯有没有拿回来。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=zhan-shaoyuan">詹绍源</a><p>也就是困困。头衔可以很长，自我介绍只有四个字。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=luo-yulun">罗宇伦</a><p>Roylyl。代码与吉他之外，出门还得考虑充电器有多重。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=tang-bofu">唐博釜</a><p>音乐之外，也会直接求教ChatGPT怎么用。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=li-yanzhen">李彦臻</a><p>结果慢慢来，先给考试发一串“稳了”。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=wang-pengtao">王鹏涛</a><p>PPT缺照片，就向还在现场的人求助。</p></article>
-                  <article class="nonsense-item"><a href="article.html?entry=tu-tenghui">涂腾辉</a><p>不写长篇，也能用一句回应接住话题。</p></article>
-                </div>
-                <div class="module-footer"><a class="blue-link" href="article.html?entry=luchun">返回鹿群总条目</a><a class="blue-link" href="article.html?entry=chat-cycle">查看群聊回路</a></div>
-              </div>
-            </section>
-          </div>
-
-          <section class="module mega-index-module" id="mega-index" data-searchable>
-            <header class="module-header">
-              <h2>基础词条索引</h2>
-              <span class="module-meta" id="mega-entry-count">正在召集词条</span>
-            </header>
-            <div class="module-body">
-            <p class="module-intro">1000个基础名词，从鹿群常用语逛到天文、音乐、城市与数码。想查MacBook，就先点MacBook；想看它的操作手册、档案或拟人小剧场，再去词条底部的“拓展阅读”。这里把名字摆清楚，不把所有支线挤成一张长菜单。</p>
-              <div class="mega-entry-list" id="mega-entry-list"></div>
-              <div class="index-controls" id="index-controls" hidden>
-                <span id="index-progress" role="status"></span>
-                <div class="index-buttons">
-                  <button class="quiet-button load-more" id="index-prev" type="button" disabled>上一页</button>
-                  <button class="quiet-button load-more" id="index-next" type="button">下一页</button>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <div class="content-grid news-grid" id="news">
-            <section class="module" data-searchable>
-              <header class="module-header">
-                <h2>新闻动态</h2>
-                <span class="module-meta">群内编年史</span>
-              </header>
-              <div class="module-body">
-                <ul class="news-list">
-                  <li><time datetime="2026-08-09">2026-08-09</time><a href="article.html?entry=603-ai-android">603视界发布AI安卓端应用，困困、朴朴、龟龟与探戈进入同一间三维寝室。</a></li>
-                  <li><time datetime="2026-07-04">2026-07-04</time><a href="article.html?entry=603-root-trip">夏炜城与龟龟共用一张“寻根之旅”公路片海报，从长沙一路指向湘西。</a></li>
-                  <li><time datetime="2026-05-13">2026-05-13</time><a href="article.html?entry=603-air-conditioner-odor">空调滤网积灰受潮，南603暂停设备并进入“常温抗压模式”。</a></li>
-                  <li><time datetime="2026-03-22">2026-03-22</time><a href="article.html?entry=603-found-phone">文章称詹绍源骑行拾得手机并交至派出所，事件当晚回流603微信群。</a></li>
-                </ul>
-                <div class="module-footer"><a class="blue-link" href="article.html?entry=603-vision">更多603视界文章</a><a class="blue-link" href="article.html?entry=history">更多群史</a></div>
-              </div>
-            </section>
-
-            <section class="module" id="daily-picture" data-searchable>
-              <header class="module-header">
-                <h2><a href="article.html?entry=chat-cycle">每日图片</a></h2>
-                <span class="module-meta">群聊回路</span>
-              </header>
-              <div class="module-body picture-body">
-                <div class="conversation-map" role="img" aria-label="从问题到梗再回到结论的群聊回路">
-                  <span class="orbit orbit-one"></span>
-                  <span class="orbit orbit-two"></span>
-                  <span class="map-node node-question">问题</span>
-                  <span class="map-node node-ai">AI</span>
-                  <span class="map-node node-joke"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 10 6 4 3 2m3 2L6 1m2 9L3 8m13 2 2-6 3-2m-3 2V1m-2 9 5-2M8 10c-2 3-1 8 4 11 5-3 6-8 4-11ZM9 14v.01m6-.01v.01M11 18h2"/></svg></span>
-                  <span class="map-node node-result">稳了</span>
-                  <span class="map-center">鹿群<br><small>高语境回路</small></span>
-                </div>
-                <p class="picture-caption"><a href="article.html?entry=chat-cycle">一个工程问题，经过一个表情包，最后通常会回到“先把事做了”。</a></p>
-              </div>
-            </section>
-          </div>
-
-          <div class="content-grid" id="history">
-            <section class="module" data-searchable>
-              <header class="module-header">
-                <h2>群史里的几个瞬间</h2>
-                <span class="module-meta">档案节选</span>
-              </header>
-              <div class="module-body history-body">
-                <div class="history-item"><time datetime="2025-05-12">5 月 12 日</time><p><a href="article.html?entry=luchun">鹿群聊天档案</a>的早期记录从这里开始进入当前统计范围。</p></div>
-                <div class="history-item"><time datetime="2026-03-23">3 月 23 日</time><p><a href="article.html?entry=kunkun">詹绍源</a>说“我叫困困”。很长的人物介绍，也可以从很短的一句开始。</p></div>
-                <div class="history-item"><time datetime="2026-06-23">6 月 23 日</time><p><a href="article.html?entry=jacobian-rapid">雅可比速问速答</a>：一个问怎么判断奇异，另一个先问雅可比是什么。</p></div>
-                <div class="history-item"><time datetime="2026-07-30">7 月 30 日</time><p>困困提醒“<a href="article.html?entry=particle">对齐一下颗粒度</a>”。先确认大家说的是同一个尺度，再接着聊。</p></div>
-              </div>
-            </section>
-
-            <section class="module" id="random" data-searchable>
-              <header class="module-header">
-                <h2>动态热门</h2>
-                <span class="module-meta">正在发生</span>
-              </header>
-              <div class="module-body trending-body">
-                <div class="tag-cloud" aria-label="热门条目">
-                  <a href="article.html?entry=kunkun" class="tag tag-large">困困</a>
-                  <a href="article.html?entry=gonglu" class="tag">共🦌主义</a>
-                  <a href="article.html?entry=high-cognition" class="tag tag-medium">高认知</a>
-                  <a href="article.html?entry=ai-tools" class="tag">AI 工具</a>
-                  <a href="article.html?entry=projects" class="tag">工程设计</a>
-                  <a href="article.html?entry=61" class="tag tag-medium">61</a>
-                  <a href="article.html?entry=xu-ge" class="tag">徐哥</a>
-                  <a href="article.html?entry=secretary" class="tag">书记</a>
-                  <a href="article.html?entry=luchun" class="tag">鹿群</a>
-                </div>
-                <button class="outline-button" type="button" data-action="random">换一条随机条目</button>
-              </div>
-            </section>
-          </div>
-
-          <div class="content-grid" id="participate">
-            <section class="module participate-module" data-searchable>
-              <header class="module-header">
-                <h2>参与魏鸡百科</h2>
-                <span class="module-meta">人人可编辑</span>
-              </header>
-              <div class="module-body participate-body">
-                <div>
-                  <h3><a href="article.html?entry=nb-context">把一句“nb”放回它的上下文</a></h3>
-                  <p>魏鸡百科欢迎补充群史、术语与话题关系。编辑时请尽量保留时间、语境与说话人的原意，不把内部玩笑写成现实世界的结论。</p>
-                </div>
-                <div class="button-row"><button class="primary-button" type="button" data-action="edit">开始编辑</button><button class="outline-button" type="button" data-action="sources">查看资料说明</button></div>
-              </div>
-            </section>
-
-            <section class="module reminder-module" id="about" data-searchable>
-              <header class="module-header">
-                <h2>魏鸡百科提醒您</h2>
-                <span class="module-meta">阅读方法</span>
-              </header>
-              <div class="module-body reminder-body">
-                <p>高语境群聊请回到上下文。短句、引用、表情和熟人梗，不能脱离关系网络单独解读。</p>
-                <p class="reminder-signature">—— 先对齐颗粒度，再下结论</p>
-              </div>
-            </section>
-          </div>
-        </main>
-
-        <footer class="site-footer">
-          <div class="footer-rule"></div>
-          <div class="footer-top">
-            <div>
-              <h2>魏鸡百科</h2>
-              <p>一份把鹿群记忆整理成页面的个人项目。</p>
-            </div>
-            <div class="footer-links">
-              <a href="#home">移动访问</a>
-              <a href="#news">站点新闻</a>
-              <a href="#participate">联络我们</a>
-              <a href="#about">RSS</a>
-            </div>
-          </div>
-          <div class="footer-columns">
-            <div>
-              <h3>认识魏鸡百科</h3>
-              <a href="#about">关于本站</a>
-              <a href="#group-article">鹿群条目</a>
-              <a href="#featured">人物条目</a>
-            </div>
-            <div>
-              <h3>常用工具</h3>
-              <a href="#participate">编辑帮助</a>
-              <a href="#history">页面历史</a>
-              <a href="#home">返回首页</a>
-            </div>
-            <div class="footer-disclaimer">
-              <p>魏鸡百科是一个个人项目的非官方戏仿首页，与维基百科及任何学校、机构无关。</p>
-              <p>页面内容仅用于群内文化记录与轻松阅读。</p>
-            </div>
-          </div>
-          <div class="footer-bottom-row">
-            <p class="footer-bottom">文本由鹿群资料二次编写 · <span id="footer-year">2026</span> 魏鸡百科</p>
-            <a class="project-badge" href="index.html" aria-label="WEIJIBA project">
-              <img src="assets/weijiba-project-144.webp?v=wei" alt="">
-              <span><strong>WEIJIBA</strong><small>project</small></span>
-            </a>
-          </div>
-        </footer>
+        </section>
       </div>
-    </div>
+
+      <div class="overview-grid">
+        <section class="overview-section" id="news" aria-labelledby="history-title">
+          <div class="section-heading" id="history">
+            <h2 id="history-title">群史纪要</h2>
+            <a href="%E7%BE%A4%E5%86%85%E7%BC%96%E5%B9%B4%E5%8F%B2%E4%B8%8E%E7%BE%A4%E5%8F%B2/">完整编年</a>
+          </div>
+          <ol class="timeline">
+            <li><time datetime="2026-10-27">2026年10月27日</time><a href="DeerPhotos/">鹿群内分享DeerPhotos版本链接</a></li>
+            <li><time datetime="2026-06-23">2026年6月23日</time><a href="%E9%9B%85%E5%8F%AF%E6%AF%94%E9%80%9F%E9%97%AE%E9%80%9F%E7%AD%94/">群内讨论雅可比矩阵及其奇异性</a></li>
+            <li><time datetime="2026-05-13">2026年5月13日</time><a href="%E9%9B%A8%E5%A4%9C%E5%A4%B1%E7%B3%95/">603视界刊载《雨夜失糕》</a></li>
+            <li><time datetime="2026-03-09">2026年3月9日</time><a href="%E5%B2%B3%E9%98%B3%E6%A5%BC%EF%BC%8C%E6%9C%9B%E6%B5%99%E6%B1%9F/">603视界刊载《岳阳楼，望浙江》</a></li>
+            <li><time datetime="2025-11-24">2025年11月24日</time><a href="Desk%20Park%E4%B9%90%E9%98%9F/">603视界报道Desk Park乐队的首次排练</a></li>
+          </ol>
+        </section>
+        <section class="overview-section" id="topic-matrix" aria-labelledby="topics-title">
+          <div class="section-heading">
+            <h2 id="topics-title">科技话题</h2>
+            <a href="%E9%B9%BF%E7%BE%A4%E7%A7%91%E6%8A%80%E8%AF%9D%E9%A2%98/">查看统计口径</a>
+          </div>
+          <table class="topic-table">
+            <caption class="sr-only">专题报告的消息分类计数</caption>
+            <thead>
+              <tr><th scope="col" colspan="2">话题</th><th scope="col">消息数</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">硬件与数码</th><td class="topic-bar-cell" aria-hidden="true"><span class="topic-bar"><span style="--bar-size:100.0%"></span></span></td><td>503</td></tr>
+              <tr><th scope="row">项目与竞赛</th><td class="topic-bar-cell" aria-hidden="true"><span class="topic-bar"><span style="--bar-size:95.4%"></span></span></td><td>480</td></tr>
+              <tr><th scope="row">数字平台与产品</th><td class="topic-bar-cell" aria-hidden="true"><span class="topic-bar"><span style="--bar-size:64.2%"></span></span></td><td>323</td></tr>
+              <tr><th scope="row">AI与大模型</th><td class="topic-bar-cell" aria-hidden="true"><span class="topic-bar"><span style="--bar-size:62.8%"></span></span></td><td>316</td></tr>
+              <tr><th scope="row">学习与课程</th><td class="topic-bar-cell" aria-hidden="true"><span class="topic-bar"><span style="--bar-size:42.3%"></span></span></td><td>213</td></tr>
+              <tr><th scope="row">编码与开发</th><td class="topic-bar-cell" aria-hidden="true"><span class="topic-bar"><span style="--bar-size:30.0%"></span></span></td><td>151</td></tr>
+              <tr><th scope="row">安全与数据</th><td class="topic-bar-cell" aria-hidden="true"><span class="topic-bar"><span style="--bar-size:27.0%"></span></span></td><td>136</td></tr>
+            </tbody>
+          </table>
+          <p class="section-note">同一条消息可计入多个话题。</p>
+        </section>
+      </div>
+    </main>
+
+    <footer class="page-wrap site-footer" id="about">
+      <div>
+        <h2>资料说明</h2>
+        <p>条目依据鹿群聊天档案、公开文章与项目资料编写。具体出处见各词条的参考资料。</p>
+      </div>
+      <a href="https://github.com/Deer603/Deer603.github.io/tree/main/weijiba">查看源码</a>
+    </footer>
 
     <div class="modal" id="modal" hidden>
       <div class="modal-backdrop" data-close-modal></div>
       <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-        <button class="modal-close" type="button" data-close-modal aria-label="关闭窗口"><svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
-        <p class="modal-eyebrow">LOCAL PREVIEW</p>
-        <h2 id="modal-title">魏鸡百科</h2>
-        <div class="modal-content" id="modal-content"></div>
+        <button class="icon-button modal-close" type="button" data-close-modal aria-label="关闭窗口"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <h2 id="modal-title">外观</h2>
+        <div id="modal-content">
+          <label class="appearance-option"><input type="checkbox" id="high-contrast">首页高对比模式</label>
+          <p>词条页另提供字号、内容宽度与色彩选项。</p>
+        </div>
       </section>
     </div>
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <script src="entry-routes.js?v=20261124-reading"></script>
-    <script src="focus-scope.js?v=20261124-reading"></script>
-    <script src="script.js?v=20261124-reading"></script>
+    <script src="entry-routes.js?v=20261126-editorial"></script>
+    <script src="focus-scope.js?v=20261126-editorial"></script>
+    <script src="script.js?v=20261126-editorial"></script>
   </body>
 </html>

@@ -119,17 +119,14 @@ export function refreshShareMetadata() {
   for (const name of ['entry-routes.js','entry-writing.js','entry-data.js']) vm.runInContext(fs.readFileSync(path.join(root,'weijiba',name),'utf8'),context);
   const routes = context.window.WEIJIBA_ENTRY_PATHS;
   const catalog = context.window.WEIJIBA_ENTRY_CATALOG;
-  const routeKeys = new Map(Object.entries(routes).map(([key,title])=>[title,key]));
-  const entriesByTitle = new Map(Object.values(catalog).map(entry=>[entry.title,entry]));
   let articles = 0;
-  for (const item of fs.readdirSync(path.join(root,'weijiba'),{withFileTypes:true})) {
-    if (!item.isDirectory()) continue;
-    const file = path.join(root,'weijiba',item.name,'index.html');
-    if (!fs.existsSync(file)) continue;
-    const entry = catalog[routeKeys.get(item.name)] || entriesByTitle.get(item.name);
-    const name = entry?.title || item.name;
-    const description = `${name}—${entry?.description || '此旧词条暂不可用，原地址保留，可返回魏鸡百科首页查找现有词条。'}`.replace(/\s+/g,' ').slice(0,180);
-    const url = `${origin}/weijiba/${encodeURIComponent(item.name)}/`;
+  for (const [slug, directory] of Object.entries(routes)) {
+    const entry = catalog[slug];
+    const file = path.join(root, 'weijiba', directory, 'index.html');
+    if (!entry || !fs.existsSync(file)) continue;
+    const name = entry.title;
+    const description = `${name}—${entry.description}`.replace(/\s+/g, ' ').slice(0, 180);
+    const url = `${origin}/weijiba/${encodeURIComponent(directory)}/`;
     update(file,{title:`${name}｜魏鸡百科`,description,site:'魏鸡百科',type:'article',url,...wikiShareArtwork});
     articles++;
   }

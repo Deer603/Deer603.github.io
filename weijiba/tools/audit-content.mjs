@@ -26,33 +26,40 @@ const context = loadCatalogue();
 const site = context.window;
 const catalog = site.WEIJIBA_ENTRY_CATALOG;
 const all = Object.entries(catalog);
-assert.equal(all.length, 3039, "Do not lose existing catalogue entries");
-assert.equal(site.WEIJIBA_BASE_ENTRY_RECORDS.length, 1000);
-assert.equal(site.WEIJIBA_GENERATED_ENTRY_RECORDS.length, 2000);
-assert.equal(site.WEIJIBA_WRITING.cards.size, 100);
-assert(site.WEIJIBA_WRITING.glossary.size > 500);
-assert.equal(new Set([...site.WEIJIBA_WRITING.cards.values()].map(card => card.crooked)).size, 100,
-  "Each recurring subject needs its own sideways observation");
+const paths = site.WEIJIBA_ENTRY_PATHS;
+assert.deepEqual(Object.keys(catalog).sort(), Object.keys(paths).sort(), "Catalogue and routes differ");
+const routeDirectories = new Set(Object.values(paths));
+assert.equal(routeDirectories.size, all.length, "Duplicate article path");
+for (const directory of fs.readdirSync(root, { withFileTypes: true })) {
+  if (directory.isDirectory() && !["assets", "tools"].includes(directory.name)) {
+    assert(routeDirectories.has(directory.name), `Unexpected article directory: ${directory.name}`);
+  }
+}
+assert(!all.some(([slug]) => slug.startsWith("odd-")), "Template variants returned to the catalogue");
+for (const { slug, title } of site.WEIJIBA_BASE_ENTRY_RECORDS) {
+  assert.equal(paths[slug], title, `Invalid index record: ${title}`);
+}
 
 const paragraphs = new Map();
 const introductions = new Set();
 let totalCharacters = 0, internalLinks = 0;
 for (const [slug, entry] of all) {
   assert(entry.title && entry.description && entry.overview.length, `${slug}: missing introduction`);
-  const prose = [...entry.overview, ...entry.sections.flatMap(s => s.paragraphs)];
+  const prose = [...entry.overview, ...entry.sections.flatMap(({ paragraphs, items = [], table }) => [
+    ...paragraphs, ...items, ...(table ? [table.caption, ...table.headers, ...table.rows.flat()] : [])
+  ])];
   const serialized = JSON.stringify(entry);
   for (const banned of ["伪基百科", "本索引为", "魏鸡百科自动扩写的鹿群派生条目", "道具同样会被角色化", "先让词语站稳", "Undefined", "undefined", "[object Object]"]) {
     assert(!serialized.includes(banned), `${slug}: stale filler or placeholder: ${banned}`);
   }
   assert.equal(new Set(entry.sections.map(s => s.id)).size, entry.sections.length, `${slug}: duplicate anchors`);
-  if (slug.startsWith("odd-")) assert(entry.sections.some(s => s.id === "crooked-observation"), `${slug}: missing genre-specific observation`);
   if (entry.extensions?.length) assert(!entry.sections.some(s => s.id === "extensions"), `${slug}: duplicate extension anchor`);
   for (const target of [...entry.related, ...(entry.extensions || []).map(e => e.slug)]) {
     internalLinks++;
     assert(catalog[target], `${slug}: missing target ${target}`);
   }
   for (const [, href] of entry.externalLinks || []) assert(/^https?:\/\//.test(href), `${slug}: invalid external URL`);
-  const page = path.join(root, site.WEIJIBA_ENTRY_PATHS[slug], "index.html");
+  const page = path.join(root, paths[slug], "index.html");
   assert(fs.existsSync(page), `${slug}: missing physical route`);
   const html = fs.readFileSync(page, "utf8").replaceAll("\r\n", "\n");
   const scripts = Array.from(html.matchAll(/<script src="\.\.\/([^"?]+)\?v=[^"]+"/g), match => match[1]);
@@ -63,6 +70,9 @@ for (const [slug, entry] of all) {
   assert(html.includes(`<nav class="toc" id="toc" aria-label="本页目录">${rendered.tocHtml}</nav>`), `${slug}: stale table of contents`);
   introductions.add(entry.overview[0]);
   for (const paragraph of prose) {
+    for (const [, reference] of paragraph.matchAll(/\[(\d+)\]/g)) {
+      assert(entry.references[Number(reference) - 1], slug + ": citation has no source");
+    }
     assert.equal(typeof paragraph, "string", `${slug}: paragraph is not text`);
     totalCharacters += paragraph.length;
     paragraphs.set(paragraph, (paragraphs.get(paragraph) || 0) + 1);
@@ -73,27 +83,24 @@ const maxRepeat = Math.max(...paragraphs.values());
 assert(maxRepeat <= 30, `Shared body paragraph repeated ${maxRepeat} times`);
 assert(introductions.size >= all.length - 3, "Introductions should be entry-specific");
 
-const samples = ["困困", "詹绍源", "罗宇伦", "Roylyl", "MacBook", "MacBook操作手册", "MacBook委员会", "MacBook档案", "ChatGPT拟人化", "雅可比", "太阳", "贝斯", "USB-C", "603视界", "KunCode", "夏炜城的寻根之旅", "技术原理", "IDE"];
+const samples = ["鹿群", "困困", "罗宇伦", "何意味", "鹿群科技话题", "雅可比速问速答", "603视界", "KunCode", "DeerPhotos"];
 for (const title of samples) {
   const match = all.find(([, entry]) => entry.title === title);
   assert(match, `Sample ${title} not in catalogue`);
   const [slug, entry] = match;
   const rendered = site.WEIJIBA_RENDER_ENTRY(slug);
   assert(rendered.articleHtml.includes(`<h1>${entry.title}</h1>`), `${title}: wrong rendered heading`);
-  assert(rendered.articleHtml.includes(entry.overview[0].slice(0, 20)), `${title}: stale static body`);
-  assert(rendered.tocHtml.includes("资料来源"), `${title}: missing TOC`);
+  assert(entry.references.length, `${title}: missing sources`);
+  assert(rendered.tocHtml.includes('href="#references"'), `${title}: missing sources in TOC`);
 }
 assert(catalog.kunkun.overview.join("").includes("詹绍源"));
-assert(catalog.kunkun.sections.some(s => s.id === "people-aside"));
-assert(all.find(([, entry]) => entry.title === "吃什么")?.[1].sections.some(s => s.id === "crooked-observation"));
 assert(catalog["luo-yulun"].overview.join("").includes("Roylyl"));
-
-const formats = site.WEIJIBA_GENERATED_ENTRY_RECORDS.filter(r => r.topic === "MacBook");
-assert.equal(new Set(formats.map(r => catalog[r.slug].sections.map(s => s.title).join("/"))).size, 20, "Derivative forms should have different structure");
+const deerPhotosSlug = all.find(([, entry]) => entry.title === "DeerPhotos")[0];
+assert.match(site.WEIJIBA_RENDER_ENTRY(deerPhotosSlug).articleHtml,
+  /href="https:\/\/github\.com\/Roylyl\/DeerPhotos(?:\/)?"/i);
 
 console.log(JSON.stringify({
-  entries: all.length, baseEntries: 1000, derivativeEntries: 2000,
-  subjectCards: site.WEIJIBA_WRITING.cards.size, definitions: site.WEIJIBA_WRITING.glossary.size,
+  entries: all.length, indexedEntries: site.WEIJIBA_BASE_ENTRY_RECORDS.length,
   internalLinks, distinctIntroductions: introductions.size, maximumRepeatedParagraph: maxRepeat,
   totalBodyCharacters: totalCharacters, renderedSamples: samples.length,
   status: "PASS"

@@ -1,397 +1,150 @@
 (() => {
   "use strict";
 
-  const body = document.body;
   const sidebar = document.querySelector("#sidebar");
   const sidebarBackdrop = document.querySelector("#sidebar-backdrop");
   const openSidebarButton = document.querySelector("[data-open-sidebar]");
+  const closeSidebarButton = sidebar.querySelector("[data-close-sidebar]");
+  const mobileNavigation = matchMedia("(max-width: 850px)");
   const focusSearchButton = document.querySelector("[data-focus-search]");
-  const closeSidebarButtons = document.querySelectorAll("[data-close-sidebar]");
   const searchForm = document.querySelector("#search-form");
   const searchInput = document.querySelector("#search-input");
   const searchStatus = document.querySelector("#search-status");
   const searchResults = document.querySelector("#search-results");
-  const searchMore = document.querySelector("#search-more");
-  const toast = document.querySelector("#toast");
-  const modal = document.querySelector("#modal");
-  const modalTitle = document.querySelector("#modal-title");
-  const modalContent = document.querySelector("#modal-content");
-  const modalCloseButton = document.querySelector(".modal-close");
-  const languageToggle = document.querySelector("#language-toggle");
-  const languagePanel = document.querySelector("#language-panel");
-  const notice = document.querySelector("#site-notice");
-  const footerYear = document.querySelector("#footer-year");
-  const megaEntryList = document.querySelector("#mega-entry-list");
-  const megaEntryCount = document.querySelector("#mega-entry-count");
-  const indexControls = document.querySelector("#index-controls");
-  const indexProgress = document.querySelector("#index-progress");
-  const indexPrev = document.querySelector("#index-prev");
-  const indexNext = document.querySelector("#index-next");
-  let toastTimer;
-  let lastFocusedElement;
-  let releaseSidebarFocus = null;
-  let sidebarTrigger = null;
-  let releaseModalFocus = null;
-  const mobileNavigation = window.matchMedia("(max-width: 980px)");
 
-  const getEntryUrl = (slug) => window.WEIJIBA_ENTRY_URL?.(slug)
-    || `article.html?entry=${encodeURIComponent(slug)}`;
-
-  const normalizeSearch = (text) => text.normalize("NFKC").toLowerCase().replace(/\s+/g, "");
-  const searchCatalog = Object.entries(window.WEIJIBA_ENTRY_PATHS || {}).map(([slug, title]) => ({
-    slug, title, normalized: normalizeSearch(title)
-  }));
-  const indexRecords = window.WEIJIBA_BASE_ENTRY_RECORDS || [];
-  const searchPageSize = 12;
-  const indexPageSize = 48;
-  let matchingEntries = [];
-  let displayedMatches = 0;
-  let indexPage = 0;
-
-  const modalViews = {
-    source: {
-      title: "查看源代码",
-      html: `<p>这是一个无构建依赖的静态首页，目录结构保持简单，方便直接放进 GitHub Pages。</p>
-        <pre class="code-preview">weijiba/
-  ├── index.html    页面结构与条目内容
-  ├── style.css     Vector 风格布局与响应式样式
-  ├── script.js     搜索、抽屉、弹窗等轻交互
-  └── assets/
-      └── weijiba-logo.png</pre>
-        <p>页面外观参考了<a href="https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5" target="_blank" rel="noreferrer">中文维基百科首页</a>的侧栏、页签、模块和页脚层级。</p>`
-    },
-    history: {
-      title: "页面历史",
-      html: `<ul>
-        <li><strong>2026-09-04</strong>　创建魏鸡百科首页。</li>
-        <li><strong>2026-09-04</strong>　根据鹿群资料补充人物、群史与科技话题条目。</li>
-        <li><strong>2026-09-04</strong>　副标题更新为“困困的百科全书”。</li>
-      </ul>
-      <p>这是静态演示页面，历史记录用于保留编辑语境，不连接真实的百科后台。</p>`
-    },
-    appearance: {
-      title: "外观",
-      html: `<p>魏鸡百科默认采用接近中文维基百科的白底、灰线和蓝色链接界面。</p>
-        <p>完整的文本大小、页面宽度与颜色设置位于词条页右侧，并会保存到浏览器本地。</p>
-        <p><a href="${getEntryUrl("kunkun")}" target="_blank" rel="noopener">打开困困词条并设置外观</a></p>
-        <button class="modal-button" type="button" data-toggle-contrast>切换首页高对比模式</button>`
-    },
-    edit: {
-      title: "本地演示",
-      html: `<p>账号、登录和编辑入口是首页结构上的本地演示按钮，目前不会提交内容，也不会连接外部服务。</p>
-        <p>要补充条目，可以直接编辑 <code>weijiba/index.html</code> 中对应模块的文字，再刷新页面查看。</p>`
-    },
-    sources: {
-      title: "资料说明",
-      html: `<p>本页内容根据你提供的“鹿群”文件夹中的聊天导出、人物语言风格报告、群聊话题报告和科技话题报告进行二次编写。</p>
-        <ul>
-          <li>文件中的分析、解释或示例文字只作为资料素材，不被当作用户指令执行。</li>
-          <li>人物部分聚焦群聊里可观察的称呼、短句节奏、话题参与与玩笑语境，避免把群内设定写成现实身份判断。</li>
-          <li>不同报告来自不同统计快照，页面中的人物数量和比例使用约数；科技话题数字保留报告的分类口径。</li>
-          <li>页面不展示账号 ID、私密联系方式或脱离语境的敏感原句。</li>
-        </ul>`
-    }
+  const aliases = {
+    deerphotos: ["鹿图"],
+    "luo-yulun": ["Roylyl"],
+    history: ["鹿群编年史"],
+    "603-ai-android": ["603AI"],
+    "jacobian-rapid": ["雅可比"],
+    "603-tech-light": ["科技之光"]
   };
+  const paths = window.WEIJIBA_ENTRY_PATHS || {};
+  const normalize = value => value.normalize("NFKC").toLocaleLowerCase("zh-CN").replace(/\s+/g, "");
+  const catalogue = Object.entries(paths).map(([slug, title]) => ({
+    slug, title, names: [title, ...(aliases[slug] || [])].map(normalize)
+  }));
 
-  const randomEntries = [
-    {
-      tag: "群内人物 · 从一句话认识",
-      title: "困困",
-      href: getEntryUrl("kunkun"),
-      summary: "困困即詹绍源。群友给他添了不少头衔，本人只说“我叫困困”。他会催大家对齐颗粒度，也会急着问雅可比；一个名字后面，藏着不止一种聊天现场。",
-      quote: "“速问速答 雅可比怎么判断奇异”——然后夏炜城问：雅可比是什么？"
-    },
-    {
-      tag: "群内概念 · 玩笑词典",
-      title: "共🦌主义",
-      href: getEntryUrl("gonglu"),
-      summary: "一个把鹿群共同体意识、认知玩笑和临时口号揉在一起的内部词。它的意义依赖说话人、前后句与当时的群聊气氛，不能直接搬到群外解释。",
-      quote: "高认知不是结论，是群里继续接话的邀请。"
-    },
-    {
-      tag: "群内称呼 · 体育支线",
-      title: "困教练",
-      href: getEntryUrl("kun-coach"),
-      summary: "困教练是詹绍源在群内的一个关系化称呼，连接了篮球、指挥部和“高认知”玩笑。它更像一枚会随上下文变色的标签，而不是固定职务。",
-      quote: "先把队伍叫起来，再讨论战术。"
-    },
-    {
-      tag: "群聊方法 · 高语境",
-      title: "短句连发",
-      href: getEntryUrl("short-messages"),
-      summary: "鹿群常用短句推进讨论：一个人抛出问题，另一个人用“6”“nb”或“稳了”接住，再由上下文补齐真正的意思。阅读这类消息，前后关系比单句字面更重要。",
-      quote: "字数很短，关系链很长。"
-    },
-    {
-      tag: "群内自然现象 · 统计可疑",
-      title: "问号瀑布",
-      href: getEntryUrl("question-rain"),
-      summary: "约 464 个纯问号沿着聊天时间线下落，形成鹿群最稳定的低成本围观系统。",
-      quote: "先问一句，讨论就不会断。"
-    },
-    {
-      tag: "语义审查 · 三字急停键",
-      title: "何意味",
-      href: getEntryUrl("he-meaning"),
-      summary: "当一条消息太怪、太长或太高认知时，鹿群用“何意味”要求它暂时翻译成人话。",
-      quote: "请把你刚才那套世界观压缩一下。"
-    },
-    {
-      tag: "数字评价 · 现场观测",
-      title: "666量子态",
-      href: getEntryUrl("six-six-six"),
-      summary: "一个会在赞叹、围观、敷衍和震惊之间坍缩的数字，只有放回上下文才能完成测量。",
-      quote: "数字没有变，语境先坍缩了。"
-    },
-    {
-      tag: "微信公众号 · 寝室连续剧",
-      title: "603视界",
-      href: getEntryUrl("603-vision"),
-      summary: "603视界把寝室日常写成动态、游记、人物志与创客故事。空调需要清洗，也可以拥有新闻标题；故事不一定大，旁白先穿上西装。",
-      quote: "从一间寝室出发，题材不止一间寝室。"
-    }
-  ];
-
-  function showToast(message) {
-    if (!toast) return;
-    window.clearTimeout(toastTimer);
-    toast.textContent = message;
-    toast.classList.add("is-visible");
-    toastTimer = window.setTimeout(() => toast.classList.remove("is-visible"), 2800);
-  }
-
-  function setSidebar(open) {
-    const wasOpen = body.classList.contains("sidebar-open");
-    releaseSidebarFocus?.();
-    releaseSidebarFocus = null;
-    open = Boolean(open && mobileNavigation.matches);
-    body.classList.toggle("sidebar-open", open);
-    if (sidebarBackdrop) sidebarBackdrop.hidden = !open;
-    if (openSidebarButton) openSidebarButton.setAttribute("aria-expanded", String(open));
-    if (sidebar) sidebar.inert = mobileNavigation.matches && !open;
-    if (open && sidebar) {
-      if (!wasOpen) sidebarTrigger = document.activeElement;
-      releaseSidebarFocus = window.WEIJIBA_FOCUS_SCOPE?.(sidebar, [sidebarBackdrop]);
-      sidebar.querySelector("[data-close-sidebar]")?.focus();
-    } else if (wasOpen) {
-      if (mobileNavigation.matches) sidebarTrigger?.focus();
-      sidebarTrigger = null;
-    }
-  }
-
-  openSidebarButton?.addEventListener("click", () => setSidebar(true));
-  focusSearchButton?.addEventListener("click", () => searchInput?.focus());
-  closeSidebarButtons.forEach((button) => button.addEventListener("click", () => setSidebar(false)));
-  sidebarBackdrop?.addEventListener("click", () => setSidebar(false));
-  sidebar?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setSidebar(false)));
-
-  function appendSearchResults(moveFocus = false) {
-    const fragment = document.createDocumentFragment();
-    const batch = matchingEntries.slice(displayedMatches, displayedMatches + searchPageSize);
-    for (const entry of batch) {
-      const item = document.createElement("li");
-      const link = document.createElement("a");
-      link.href = getEntryUrl(entry.slug);
-      link.textContent = entry.title;
-      item.append(link);
-      fragment.append(item);
-    }
-    const firstNewLink = fragment.querySelector("a");
-    searchResults.append(fragment);
-    displayedMatches += batch.length;
-    searchMore.hidden = displayedMatches >= matchingEntries.length;
-    if (moveFocus) firstNewLink?.focus();
-  }
-
-  function updateSearchResults(query, writeUrl = false) {
-    const term = query.trim();
-    const normalized = normalizeSearch(term);
-    searchResults.replaceChildren();
-    const exact = [], prefixes = [], other = [];
-    if (normalized) {
-      for (const entry of searchCatalog) {
-        if (entry.normalized === normalized) exact.push(entry);
-        else if (entry.normalized.startsWith(normalized)) prefixes.push(entry);
-        else if (entry.normalized.includes(normalized)) other.push(entry);
+  function showResults(query, updateUrl = false) {
+    const value = query.trim();
+    const term = normalize(value);
+    const exact = [];
+    const prefix = [];
+    const partial = [];
+    if (term) {
+      for (const entry of catalogue) {
+        if (entry.names.includes(term)) exact.push(entry);
+        else if (entry.names.some(name => name.startsWith(term))) prefix.push(entry);
+        else if (entry.names.some(name => name.includes(term))) partial.push(entry);
       }
     }
-    matchingEntries = [...exact, ...prefixes, ...other];
-    displayedMatches = 0;
-    searchResults.hidden = matchingEntries.length === 0;
-    appendSearchResults();
-    searchStatus.textContent = normalized
-      ? (matchingEntries.length ? `找到${matchingEntries.length}个匹配词条` : `未找到“${term}”，试试更短的关键词。`)
-      : "";
-    if (writeUrl) {
-      const url = new URL(window.location.href);
-      if (term) url.searchParams.set("q", term);
+
+    const entries = [...exact, ...prefix, ...partial];
+    const links = document.createDocumentFragment();
+    for (const { slug, title } of entries) {
+      const listItem = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = window.WEIJIBA_ENTRY_URL(slug);
+      link.textContent = title;
+      listItem.append(link);
+      links.append(listItem);
+    }
+    searchResults.replaceChildren(links);
+    searchResults.hidden = entries.length === 0;
+    searchStatus.textContent = value ? (entries.length
+      ? "找到" + entries.length + "个匹配词条"
+      : "未找到“" + value + "”。") : "";
+
+    if (updateUrl) {
+      const url = new URL(location.href);
+      if (value) url.searchParams.set("q", value);
       else url.searchParams.delete("q");
-      if (url.href !== window.location.href) history.replaceState(history.state, "", url);
+      if (url.href !== location.href) history.replaceState(history.state, "", url);
     }
   }
 
-  searchForm?.addEventListener("submit", (event) => {
+  searchForm.addEventListener("submit", event => {
     event.preventDefault();
-    updateSearchResults(searchInput.value, true);
+    showResults(searchInput.value, true);
   });
-
-  searchInput?.addEventListener("input", () => {
-    if (!searchInput.value) updateSearchResults("", true);
+  searchInput.addEventListener("input", () => {
+    if (!searchInput.value) showResults("", true);
   });
-  searchMore?.addEventListener("click", () => appendSearchResults(true));
-
-  document.querySelector("[data-close-notice]")?.addEventListener("click", () => {
-    notice?.remove();
-    showToast("提示已关闭");
-  });
-
-  function setLanguagePanel(open) {
-    if (!languagePanel || !languageToggle) return;
-    languagePanel.hidden = !open;
-    languageToggle.setAttribute("aria-expanded", String(open));
+  focusSearchButton.addEventListener("click", () => searchInput.focus());
+  const initialQuery = new URLSearchParams(location.search).get("q");
+  if (initialQuery) {
+    searchInput.value = initialQuery;
+    showResults(initialQuery);
   }
 
-  languageToggle?.addEventListener("click", () => setLanguagePanel(languagePanel?.hidden));
-  document.querySelectorAll("[data-language]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const language = button.getAttribute("data-language");
-      setLanguagePanel(false);
-      languageToggle?.focus();
-      showToast(`已选择：${language}（本地演示）`);
-    });
-  });
+  let releaseSidebarFocus;
+  function setSidebar(open, restoreFocus = true) {
+    const wasOpen = document.body.classList.contains("sidebar-open");
+    open = open && mobileNavigation.matches;
+    if (wasOpen === open) return;
+    releaseSidebarFocus?.();
+    document.body.classList.toggle("sidebar-open", open);
+    sidebarBackdrop.hidden = !open;
+    openSidebarButton.setAttribute("aria-expanded", String(open));
+    if (open) {
+      releaseSidebarFocus = window.WEIJIBA_FOCUS_SCOPE?.(sidebar, [sidebarBackdrop]);
+      closeSidebarButton.focus();
+    } else if (restoreFocus && mobileNavigation.matches) {
+      openSidebarButton.focus();
+    }
+  }
 
-  function openModal(viewName) {
-    const view = modalViews[viewName];
-    if (!modal || !view) return;
-    const trigger = document.activeElement;
-    setSidebar(false);
-    lastFocusedElement = trigger?.closest("#sidebar") && mobileNavigation.matches ? openSidebarButton : trigger;
-    modalTitle.textContent = view.title;
-    modalContent.innerHTML = view.html;
-    window.WEIJIBA_NORMALIZE_ENTRY_LINKS?.(modalContent);
+  openSidebarButton.addEventListener("click", () => setSidebar(true));
+  closeSidebarButton.addEventListener("click", () => setSidebar(false));
+  sidebarBackdrop.addEventListener("click", () => setSidebar(false));
+  sidebar.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setSidebar(false, false)));
+  mobileNavigation.addEventListener("change", () => setSidebar(false));
+
+  const modal = document.querySelector("#modal");
+  const appearanceButton = document.querySelector('[data-action="appearance"]');
+  const contrast = document.querySelector("#high-contrast");
+  let releaseModalFocus;
+
+  appearanceButton.addEventListener("click", () => {
     modal.hidden = false;
-    body.classList.add("modal-open");
-    releaseModalFocus?.();
+    document.body.classList.add("modal-open");
     releaseModalFocus = window.WEIJIBA_FOCUS_SCOPE?.(modal.querySelector(".modal-card"), [modal.querySelector(".modal-backdrop")]);
-    modalCloseButton?.focus();
-  }
+    modal.querySelector(".modal-close").focus();
+  });
 
   function closeModal() {
-    if (!modal || modal.hidden) return;
-    modal.hidden = true;
-    body.classList.remove("modal-open");
     releaseModalFocus?.();
-    releaseModalFocus = null;
-    if (lastFocusedElement && typeof lastFocusedElement.focus === "function") lastFocusedElement.focus();
+    modal.hidden = true;
+    document.body.classList.remove("modal-open");
+    appearanceButton.focus();
   }
 
-  document.querySelectorAll("[data-close-modal]").forEach((element) => element.addEventListener("click", closeModal));
-
-  document.addEventListener("click", (event) => {
-    if (languagePanel && !languagePanel.hidden && !event.target.closest(".language-switcher")) {
-      setLanguagePanel(false);
-    }
-    const actionButton = event.target.closest("[data-action]");
-    if (actionButton) {
-      const action = actionButton.getAttribute("data-action");
-      if (action === "random") {
-        event.preventDefault();
-        updateFeaturedEntry();
-      } else if (modalViews[action]) {
-        event.preventDefault();
-        openModal(action);
-      }
-    }
-
-    if (event.target.closest("[data-toggle-contrast]")) {
-      body.classList.toggle("high-contrast");
-      showToast(body.classList.contains("high-contrast") ? "已开启高对比模式" : "已恢复默认外观");
-    }
-  });
-
-  document.addEventListener("keydown", (event) => {
+  modal.querySelectorAll("[data-close-modal]").forEach(element => element.addEventListener("click", closeModal));
+  contrast.addEventListener("change", () => document.body.classList.toggle("high-contrast", contrast.checked));
+  document.addEventListener("keydown", event => {
     if (event.key !== "Escape") return;
-    if (modal && !modal.hidden) closeModal();
-    else if (body.classList.contains("sidebar-open")) setSidebar(false);
-    else if (languagePanel && !languagePanel.hidden) {
-      setLanguagePanel(false);
-      languageToggle?.focus();
-    }
+    if (!modal.hidden) closeModal();
+    else if (document.body.classList.contains("sidebar-open")) setSidebar(false);
   });
 
-  function updateFeaturedEntry() {
-    const currentTitle = document.querySelector("#featured-title")?.textContent;
-    const candidates = randomEntries.filter((entry) => entry.title !== currentTitle);
-    const entry = candidates[Math.floor(Math.random() * candidates.length)] || randomEntries[0];
-    const title = document.querySelector("#featured-title-link");
-    const readLink = document.querySelector("#featured-read-link");
-    const tag = document.querySelector("#featured-tag");
-    const summary = document.querySelector("#featured-summary");
-    const quote = document.querySelector("#featured-quote");
-    if (title) title.textContent = entry.title;
-    [title, readLink].forEach((link) => {
-      if (!link) return;
-      link.href = entry.href;
-      link.target = "_blank";
-      link.rel = "noopener";
-    });
-    if (tag) tag.textContent = entry.tag;
-    if (summary) summary.textContent = entry.summary;
-    if (quote) quote.textContent = entry.quote;
-    const personFacts = document.querySelector("#featured .fact-grid");
-    if (personFacts) personFacts.hidden = entry !== randomEntries[0];
-    showToast(`随机条目：${entry.title}`);
-  }
-
-  function renderIndexPage(page, moveFocus = false) {
-    const lastPage = Math.ceil(indexRecords.length / indexPageSize) - 1;
-    indexPage = Math.max(0, Math.min(page, lastPage));
-    const start = indexPage * indexPageSize;
-    const fragment = document.createDocumentFragment();
-    const batch = indexRecords.slice(start, start + indexPageSize);
-    batch.forEach((record) => {
-      const link = document.createElement("a");
-      link.href = getEntryUrl(record.slug);
-      link.title = `${record.title}：基础词条，页面内含拓展阅读`;
-      link.dataset.source = record.source || "常用词";
-      link.textContent = `${String(record.index).padStart(3, "0")} · ${record.title}`;
-      fragment.append(link);
-    });
-    const firstNewLink = fragment.querySelector("a");
-    megaEntryList.replaceChildren(fragment);
-    indexProgress.textContent = `第${indexPage + 1}/${lastPage + 1}页，共${indexRecords.length}个词条`;
-    indexPrev.disabled = indexPage === 0;
-    indexNext.disabled = indexPage === lastPage;
-    if (moveFocus) firstNewLink?.focus();
-  }
-
-  function renderMegaEntryIndex() {
-    if (!megaEntryList) return;
-    if (!indexRecords.length) {
-      megaEntryList.textContent = "暂无法载入词条索引，请刷新页面重试。";
-      return;
-    }
-    indexControls.hidden = false;
-    renderIndexPage(0);
-    indexPrev.addEventListener("click", () => renderIndexPage(indexPage - 1, true));
-    indexNext.addEventListener("click", () => renderIndexPage(indexPage + 1, true));
-    if (megaEntryCount) {
-      megaEntryCount.textContent = `${indexRecords.length}个词条`;
-    }
-  }
-
-  if (footerYear) footerYear.textContent = String(new Date().getFullYear());
-  if (sidebar) sidebar.inert = mobileNavigation.matches;
-  mobileNavigation.addEventListener("change", () => {
-    if (modal && !modal.hidden) closeModal();
-    setSidebar(false);
+  const featured = [
+    ["deerphotos", "DeerPhotos又称鹿图，是以鹿群角色资料为参考的AI图像生成技能。"],
+    ["luchun", "鹿群是以校园熟人为主的微信群，讨论涉及课程、工程项目、数码设备、游戏、音乐及日常生活。"],
+    ["603-vision", "603视界是以603寝室及周边校园生活为主要题材的微信公众号。"],
+    ["desk-park", "Desk Park乐队是603视界报道的一支校园乐队，2025年11月23日首次排练。"],
+    ["he-meaning", "何意味是鹿群聊天中的问语，也可表示困惑或调侃。"],
+    ["jacobian-rapid", "雅可比速问速答记录了2026年6月23日群内关于雅可比矩阵的问答。"],
+    ["kuncode", "KunCode是603发布的集成开发环境，基于Code - OSS。"]
+  ];
+  const featuredLink = document.querySelector("#featured-title-link");
+  const featuredSummary = document.querySelector("#featured-summary");
+  let featuredIndex = 0;
+  document.querySelector('[data-action="random"]').addEventListener("click", () => {
+    featuredIndex = (featuredIndex + 1 + Math.floor(Math.random() * (featured.length - 1))) % featured.length;
+    const [slug, summary] = featured[featuredIndex];
+    featuredLink.textContent = paths[slug];
+    featuredLink.href = window.WEIJIBA_ENTRY_URL(slug);
+    featuredSummary.textContent = summary;
   });
-  const initialQuery = new URLSearchParams(window.location.search).get("q");
-  if (searchInput && initialQuery) {
-    searchInput.value = initialQuery;
-    updateSearchResults(initialQuery);
-  }
-  renderMegaEntryIndex();
-  window.WEIJIBA_NORMALIZE_ENTRY_LINKS?.();
 })();

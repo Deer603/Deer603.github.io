@@ -1,4 +1,4 @@
-// 从现有词库生成正文与目录，保留各页外围结构，不删除任何词条。
+// 同步现行条目的正文、目录与分享信息。
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import { refreshShareMetadata } from "../../tools/share-metadata.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const version = "20261124-reading";
+const version = "20261126-editorial";
 const check = process.argv.includes("--check");
 const skipShare = process.argv.includes("--skip-share");
 const context = {
@@ -21,8 +21,7 @@ for (const name of ["entry-routes.js", "entry-writing.js", "entry-data.js"]) {
 const template = fs.readFileSync(path.join(root, "article.html"), "utf8");
 const escape = value => String(value).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const plans = [];
-let pages = 0, missing = 0, archived = 0;
-const registeredPaths = new Set(Object.values(context.window.WEIJIBA_ENTRY_PATHS));
+let pages = 0, missing = 0;
 
 function updateArtwork(source) {
   return source
@@ -75,31 +74,6 @@ for (const [slug, title] of Object.entries(context.window.WEIJIBA_ENTRY_PATHS)) 
   if (!exists) missing++;
   if (next !== previous) plans.push({ file, next });
 }
-// 旧版本留下的物理地址继续可访问，避免把未登记词条显示成默认人物。
-for (const item of fs.readdirSync(root, { withFileTypes: true })) {
-  if (!item.isDirectory() || registeredPaths.has(item.name)) continue;
-  const file = path.join(root, item.name, "index.html");
-  if (!fs.existsSync(file)) continue;
-  const source = fs.readFileSync(file, "utf8");
-  if (!source.includes('class="article-main"')) continue;
-  const matching = Object.entries(context.window.WEIJIBA_ENTRY_CATALOG).find(([, entry]) => entry.title === item.name);
-  let next;
-  if (matching) {
-    next = generate(source, matching[0], "../");
-  } else {
-    const title = escape(item.name);
-    const description = escape(`${item.name}是旧版词条，当前词库暂未收录其正文。可返回魏鸡百科索引查找相关内容。`);
-    next = source.replace(/<article id="top">[\s\S]*?<\/article>/, `<article id="top"><header class="article-heading"><h1>${title}</h1></header><p class="article-tagline">魏鸡百科旧词条</p><section class="article-section" id="unavailable"><h2>正文暂不可用</h2><p>这个地址来自旧版词条，当前词库暂未收录对应正文。我们保留原地址，方便你继续查找。</p><p><a href="../index.html#mega-index">浏览基础词条索引</a> · <a href="../index.html">返回魏鸡百科首页</a></p></section></article>`);
-    next = next.replace(/(<nav class="toc" id="toc"[^>]*>)[\s\S]*?<\/nav>/, '$1<a href="#unavailable">正文暂不可用</a></nav>');
-    if (!next.includes("<!-- share-metadata:start -->")) {
-      next = next.replace(/<title>[^<]*<\/title>/, () => `<title>${title}｜魏鸡百科旧词条</title>`);
-      next = next.replace(/<meta name="description" content="[^"]*">/, () => `<meta name="description" content="${description}">`);
-    }
-    next = updateShell(next, "../");
-    archived++;
-  }
-  if (next !== source) plans.push({ file, next });
-}
 const legacy = generate(template, "kunkun", "", true);
 if (legacy !== template) plans.push({ file: path.join(root, "article.html"), next: legacy });
 const homeFile = path.join(root, "index.html");
@@ -116,5 +90,5 @@ if (!check) {
   }
   if (!skipShare) refreshShareMetadata();
 }
-console.log(JSON.stringify({ pages, archived, changed: plans.length, missing, check, version, shareUpdated: !check && !skipShare }));
+console.log(JSON.stringify({ pages, changed: plans.length, missing, check, version, shareUpdated: !check && !skipShare }));
 if (check && plans.length) process.exitCode = 1;

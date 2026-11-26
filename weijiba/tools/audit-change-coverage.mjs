@@ -1,5 +1,4 @@
-// Compare each existing entry's rendered prose with the editorial baseline.
-// This checks article content, not cache-busting changes in route HTML.
+// Report substantive edits, new articles and removed routes against a Git baseline.
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -9,7 +8,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const repoRoot = path.resolve(root, "..");
-const baseline = process.argv.find(arg => arg.startsWith("--base="))?.slice("--base=".length) || "b6ca120";
+const baseline = process.argv.find(arg => arg.startsWith("--base="))?.slice("--base=".length) || "HEAD";
 const scripts = ["entry-routes.js", "entry-writing.js", "entry-data.js"];
 const catalogue = committed => {
   const context = {
@@ -26,25 +25,39 @@ const catalogue = committed => {
       : fs.readFileSync(path.join(root, file), "utf8");
     vm.runInContext(source, context, { filename: file });
   }
-  return context.window.WEIJIBA_ENTRY_CATALOG;
+  return { articles: context.window.WEIJIBA_ENTRY_CATALOG, paths: context.window.WEIJIBA_ENTRY_PATHS };
 };
 
 const before = catalogue(true);
 const after = catalogue(false);
-assert.deepEqual(Object.keys(before).filter(slug => !after[slug]), [], "A baseline route disappeared");
-const prose = entry => [...entry.overview, ...entry.sections.flatMap(section => section.paragraphs)].join("\u0000");
-const unchanged = Object.entries(before).filter(([slug, entry]) => prose(entry) === prose(after[slug]));
-const byKind = kind => unchanged.filter(([slug]) => kind === "拓展" ? slug.startsWith("odd-") : kind === "基础" ? slug.startsWith("base-") : !/^(odd|base)-/.test(slug));
+const previous = Object.entries(before.articles);
+const retired = previous.filter(([slug]) => !after.articles[slug]);
+const kept = previous.filter(([slug]) => after.articles[slug]);
+const added = Object.keys(after.articles).filter(slug => !before.articles[slug]);
+const prose = entry => [...entry.overview, ...entry.sections.flatMap(({ paragraphs, items = [], table }) => [
+  ...paragraphs, ...items, ...(table ? [table.caption, ...table.headers, ...table.rows.flat()] : [])
+])].join("\u0000");
+const unchanged = kept.filter(([slug, entry]) => prose(entry) === prose(after.articles[slug]));
+const renamedPaths = kept.filter(([slug]) => before.paths[slug] !== after.paths[slug]);
+const activePaths = new Set(Object.values(after.paths));
+const removedPaths = new Set(retired.map(([slug]) => before.paths[slug]).filter(title => !activePaths.has(title)));
 const report = {
   baseline,
-  total: Object.keys(before).length,
-  added: Object.keys(after).length - Object.keys(before).length,
-  changed: Object.keys(before).length - unchanged.length,
+  before: previous.length,
+  after: Object.keys(after.articles).length,
+  added: added.length,
+  retired: retired.length,
+  changed: kept.length - unchanged.length,
   unchanged: unchanged.length,
-  unchangedByKind: Object.fromEntries(["基础", "拓展", "核心"].map(kind => [kind, byKind(kind).length])),
-  samples: unchanged.slice(0, 60).map(([slug, entry]) => `${entry.title} (${slug})`),
-  ...(process.argv.includes("--list") ? { unchangedCore: byKind("核心").map(([slug, entry]) => `${entry.title} (${slug})`) } : {}),
+  retiredPaths: removedPaths.size,
+  renamedPaths: renamedPaths.map(([slug]) => ({ slug, before: before.paths[slug], after: after.paths[slug] })),
+  ...(process.argv.includes("--list") ? { unchangedCore: unchanged.filter(([slug]) => !/^(odd|base)-/.test(slug)).map(([slug, entry]) => `${entry.title} (${slug})`) } : {}),
   ...(process.argv.includes("--inspect") ? { details: unchanged.map(([slug, entry]) => ({ slug, title: entry.title, opening: entry.overview[0], sections: entry.sections.map(s => s.title) })) } : {})
 };
 console.log(JSON.stringify(report, null, 2));
-if (process.argv.includes("--check")) assert.equal(unchanged.length, 0, "Every article needs a substantive prose change");
+if (process.argv.includes("--check")) {
+  assert.equal(renamedPaths.length, 0, "A retained article changed its canonical path");
+  for (const title of removedPaths) {
+    assert(!fs.existsSync(path.join(root, title)), title + ': removed article directory still exists');
+  }
+}
