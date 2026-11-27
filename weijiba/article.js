@@ -4,6 +4,9 @@
   const STORAGE_KEY = "weijiba-appearance";
   const root = document.documentElement;
   const body = document.body;
+  const i18n = window.WEIJIBA_I18N;
+  const t = text => i18n?.t(text) ?? text;
+  const language = i18n?.lang || root.lang;
   const appearanceRail = document.querySelector("#appearance-rail");
   const hideAppearanceButton = document.querySelector("#hide-appearance");
   const restoreAppearanceButton = document.querySelector("#appearance-restore");
@@ -41,12 +44,17 @@
     appearanceHidden: false
   };
 
-  const entryTerms = [
+  const aliases = [
     ["鹿图", "deerphotos"],
     ["Roylyl", "luo-yulun"],
-    ["603AI", "603-ai-android"],
-    ...(window.WEIJIBA_ENTRY_TERMS || Object.entries(window.WEIJIBA_ENTRY_PATHS || {}).map(([slug, title]) => [title, slug]))
-  ].sort((a, b) => b[0].length - a[0].length);
+    ["603AI", "603-ai-android"]
+  ];
+  const titles = window.WEIJIBA_ENTRY_TERMS || Object.entries(window.WEIJIBA_ENTRY_PATHS || {}).map(([slug, title]) => [title, slug]);
+  // Common English words and numbers have too many meanings for automatic links.
+  // Link only distinctive project names in English; other relationships are linked editorially.
+  const englishTerms = [["Roylyl", "luo-yulun"], ["603AI", "603-ai-android"], ["DeerPhotos", "deerphotos"], ["KunCode", "kuncode"], ["603web", "dorm-web"]];
+  const entryTerms = (language === "en" ? englishTerms : [...aliases, ...titles].map(([term, slug]) => [t(term), slug]))
+    .filter(([term]) => term).sort((a, b) => b[0].length - a[0].length);
 
   function escapeRegExp(value) {
     return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -54,7 +62,7 @@
 
   function enrichArticleLinks() {
     const article = document.querySelector(".article-main article");
-    if (!article || typeof NodeFilter === "undefined") return;
+    if (!article || !entryTerms.length || typeof NodeFilter === "undefined") return;
     const currentSlug = new URLSearchParams(window.location.search).get("entry")
       || window.WEIJIBA_ENTRY_FROM_PATH?.(window.location.pathname)
       || "kunkun";
@@ -84,16 +92,21 @@
       let match;
 
       while ((match = matcher.exec(text))) {
+        // Do not link a term inside a longer identifier, model number or English word.
+        const wordPart = /[a-z\d_]/i;
+        const matched = match[0];
+        if ((wordPart.test(matched[0]) && wordPart.test(text.charAt(match.index - 1)))
+          || (wordPart.test(matched.slice(-1)) && wordPart.test(text.charAt(matcher.lastIndex)))) continue;
         const target = termLookup.get(match[0].toLocaleLowerCase());
         if (!target || target.slug === currentSlug || linkedTargets.has(target.slug)) continue;
         fragment.append(document.createTextNode(text.slice(lastIndex, match.index)));
         const link = document.createElement("a");
-        link.href = window.WEIJIBA_ENTRY_URL?.(target.slug)
+        link.href = i18n?.routeEntry(target.slug) || window.WEIJIBA_ENTRY_URL?.(target.slug)
           || `article.html?entry=${encodeURIComponent(target.slug)}`;
         link.className = "auto-entry-link";
         link.target = "_blank";
         link.rel = "noopener";
-        link.title = `查看词条：${target.term}`;
+        link.title = t("查看词条：{term}").replace("{term}", target.term);
         link.textContent = match[0];
         fragment.append(link);
         lastIndex = match.index + match[0].length;
@@ -138,7 +151,7 @@
 
   const shareEntry = document.querySelector("#share-entry");
   const canonicalUrl = document.querySelector('link[rel="canonical"]')?.href;
-  if (shareEntry && canonicalUrl && window.WEIJIBA_ENTRY_FROM_PATH?.(window.location.pathname)) {
+  if (shareEntry && canonicalUrl) {
     shareEntry.addEventListener("click", async (event) => {
       if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
@@ -155,13 +168,13 @@
       if (navigator.clipboard?.writeText) {
         try {
           await navigator.clipboard.writeText(canonicalUrl);
-          showToast("词条链接已复制");
+          showToast(t("词条链接已复制"));
           return;
         } catch (_) {
           // Some embedded browsers disable clipboard access.
         }
       }
-      window.prompt("复制词条链接", canonicalUrl);
+      window.prompt(t("复制词条链接"), canonicalUrl);
     });
   }
 
@@ -179,7 +192,7 @@
     setChecked("text-size", preferences.textSize);
     setChecked("page-width", preferences.pageWidth);
     setChecked("color-mode", preferences.colorMode);
-    if (announce) showToast("外观设置已保存");
+    if (announce) showToast(t("外观设置已保存"));
   }
 
   function isNarrowScreen() {
@@ -313,22 +326,29 @@
     if (!languageMenu) return;
     languageMenu.hidden = !expanded;
     languageButton?.setAttribute("aria-expanded", String(expanded));
+    if (expanded) languageMenu.querySelector('[aria-current="true"]')?.focus();
     if (restoreFocus) languageButton?.focus();
   }
 
   languageButton?.addEventListener("click", () => setLanguageExpanded(Boolean(languageMenu?.hidden)));
 
-  document.querySelectorAll("[data-language]").forEach((button) => {
+  languageMenu?.querySelectorAll("[data-language]").forEach((button) => {
+    if (button.dataset.language === language) button.setAttribute("aria-current", "true");
     button.addEventListener("click", () => {
       setLanguageExpanded(false, true);
-      showToast(`已选择${button.dataset.language}（演示）`);
+      i18n?.setLanguage(button.dataset.language);
     });
   });
+  const variant = document.querySelector("#article-variant");
+  if (variant && language !== "en") {
+    variant.value = language;
+    variant.addEventListener("change", () => i18n?.setLanguage(variant.value));
+  }
 
   enrichArticleLinks();
 
   document.querySelectorAll("[data-demo]").forEach((button) => {
-    button.addEventListener("click", () => showToast(`${button.dataset.demo}为本地演示功能`));
+    button.addEventListener("click", () => showToast(t("“{feature}”为本地演示功能").replace("{feature}", t(button.dataset.demo))));
   });
 
   const homeLink = document.querySelector(".brand");
@@ -339,7 +359,7 @@
   function syncSearchToggle() {
     setSearchExpanded(false);
     if (!searchToggle) return;
-    searchToggle.setAttribute("aria-label", isNarrowScreen() ? "展开搜索框" : "定位搜索框");
+    searchToggle.setAttribute("aria-label", t(isNarrowScreen() ? "展开搜索框" : "定位搜索框"));
     if (!isNarrowScreen()) searchToggle.removeAttribute("aria-expanded");
   }
   syncSearchToggle();
@@ -355,7 +375,7 @@
     const query = searchInput?.value.trim() || "";
     if (!query) {
       event.preventDefault();
-      showToast("请输入搜索内容");
+      showToast(t("请输入搜索内容"));
       searchInput?.focus();
     } else {
       searchInput.value = query;
@@ -368,7 +388,8 @@
     tocTrigger.type = "button";
     tocTrigger.className = "toc-trigger";
     tocTrigger.setAttribute("aria-controls", tocRail.id);
-    tocTrigger.innerHTML = '<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg>目录';
+    tocTrigger.innerHTML = '<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg>';
+    tocTrigger.append(document.createTextNode(t("目录")));
     tocRail.before(tocTrigger);
     body.classList.add("has-toc-drawer");
 
@@ -376,7 +397,7 @@
     function syncTocButton() {
       const narrow = tocViewport.matches;
       toc.hidden = !narrow && collapsed;
-      collapseTocButton.textContent = narrow ? "关闭" : (collapsed ? "显示" : "隐藏");
+      collapseTocButton.textContent = t(narrow ? "关闭" : (collapsed ? "显示" : "隐藏"));
       collapseTocButton.setAttribute("aria-controls", toc.id);
       if (narrow) collapseTocButton.removeAttribute("aria-expanded");
       else collapseTocButton.setAttribute("aria-expanded", String(!collapsed));

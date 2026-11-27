@@ -31,7 +31,7 @@ assert.deepEqual(Object.keys(catalog).sort(), Object.keys(paths).sort(), "Catalo
 const routeDirectories = new Set(Object.values(paths));
 assert.equal(routeDirectories.size, all.length, "Duplicate article path");
 for (const directory of fs.readdirSync(root, { withFileTypes: true })) {
-  if (directory.isDirectory() && !["assets", "tools"].includes(directory.name)) {
+  if (directory.isDirectory() && !["assets", "tools", "zh-cn", "zh-tw", "en"].includes(directory.name)) {
     assert(routeDirectories.has(directory.name), `Unexpected article directory: ${directory.name}`);
   }
 }
@@ -42,6 +42,7 @@ for (const { slug, title } of site.WEIJIBA_BASE_ENTRY_RECORDS) {
 
 const paragraphs = new Map();
 const introductions = new Set();
+let localizedArticles = 0;
 let totalCharacters = 0, internalLinks = 0;
 for (const [slug, entry] of all) {
   assert(entry.title && entry.description && entry.overview.length, `${slug}: missing introduction`);
@@ -63,7 +64,7 @@ for (const [slug, entry] of all) {
   assert(fs.existsSync(page), `${slug}: missing physical route`);
   const html = fs.readFileSync(page, "utf8").replaceAll("\r\n", "\n");
   const scripts = Array.from(html.matchAll(/<script src="\.\.\/([^"?]+)\?v=[^"]+"/g), match => match[1]);
-  assert.deepEqual(scripts, ["entry-routes.js", "focus-scope.js", "article.js"], `${slug}: unexpected article scripts`);
+  assert.deepEqual(scripts, ["i18n.js", "locale-words.js", "article-ui-en.js", "entry-routes.js", "focus-scope.js", "article.js"], `${slug}: unexpected article scripts`);
   assert(html.includes("weijiba-favicon-64.webp"), `${slug}: missing favicon`);
   const rendered = site.WEIJIBA_RENDER_ENTRY(slug);
   const publicUrl = 'https://deer603.github.io/weijiba/' + encodeURIComponent(paths[slug]) + '/';
@@ -74,6 +75,27 @@ for (const [slug, entry] of all) {
   assert(html.includes(`id="share-entry" href="${publicUrl}"`), `${slug}: sharing must use the public article URL`);
   assert(html.includes(`property="og:image" content="https://deer603.github.io${shareImage}"`), `${slug}: incorrect card image`);
   assert.equal(html.match(/<img\b[^>]*\bsrc="([^"]+)"/i)?.[1], shareImage, `${slug}: first image must match the card`);
+  for (const [directory, lang, locale] of [["zh-cn", "zh-CN", "zh_CN"], ["zh-tw", "zh-TW", "zh_TW"], ["en", "en", "en_US"]]) {
+    const variant = fs.readFileSync(path.join(root, directory, paths[slug], "index.html"), "utf8");
+    const label = directory + "/" + slug;
+    const canonical = publicUrl.replace("/weijiba/", "/weijiba/" + directory + "/");
+    const title = variant.match(/<title>(.+?)<\/title>/)?.[1];
+    const heading = variant.match(/<h1>(.+?)<\/h1>/)?.[1]?.replaceAll("'", "&#39;").replaceAll('"', "&quot;");
+    const suffix = lang === "en" ? " | Weiji Encyclopedia" : lang === "zh-TW" ? "｜魏雞百科" : "｜魏鸡百科";
+    const description = variant.match(/<meta name="description" content="([^"]+)">/)?.[1];
+    assert(title && description && variant.includes('<html lang="' + lang + '"'), label + ": missing language or text");
+    assert(heading && title === heading + suffix, label + ": article heading differs from the share title");
+    for (const field of ['property="og:title"', 'name="twitter:title"', 'itemprop="name"']) {
+      assert(variant.includes(field + ' content="' + title + '"'), label + ": inconsistent card title");
+    }
+    assert(variant.includes('property="og:description" content="' + description + '"'), label + ": inconsistent description");
+    assert(variant.includes('property="og:locale" content="' + locale + '"'), label + ": wrong card language");
+    assert(variant.includes('rel="canonical" href="' + canonical + '"') && variant.includes('id="share-entry" href="' + canonical + '"') &&
+      variant.includes('property="og:url" content="' + canonical + '"'), label + ": wrong public share URL");
+    assert(variant.includes('property="og:image" content="https://deer603.github.io' + shareImage + '"') &&
+      variant.includes('<img src="' + shareImage + '"'), label + ": incorrect share artwork");
+    localizedArticles++;
+  }
   assert(html.includes(`<article id="top">${rendered.articleHtml}\n        </article>`), `${slug}: stale static body`);
   assert(html.includes(`<nav class="toc" id="toc" aria-label="本页目录">${rendered.tocHtml}</nav>`), `${slug}: stale table of contents`);
   introductions.add(entry.overview[0]);
@@ -108,7 +130,7 @@ assert.match(site.WEIJIBA_RENDER_ENTRY(deerPhotosSlug).articleHtml,
   /href="https:\/\/github\.com\/Roylyl\/DeerPhotos(?:\/)?"/i);
 
 console.log(JSON.stringify({
-  entries: all.length, indexedEntries: site.WEIJIBA_BASE_ENTRY_RECORDS.length,
+  entries: all.length, localizedArticles, indexedEntries: site.WEIJIBA_BASE_ENTRY_RECORDS.length,
   internalLinks, distinctIntroductions: introductions.size, maximumRepeatedParagraph: maxRepeat,
   totalBodyCharacters: totalCharacters, renderedSamples: samples.length,
   status: "PASS"

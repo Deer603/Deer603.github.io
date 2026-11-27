@@ -1,18 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import vm from 'node:vm';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const origin = 'https://deer603.github.io';
-const wikiGlobe = `${origin}/weijiba/assets/share-globe.jpg?v=wei`;
-const wikiShareArtwork = {
-  image: wikiGlobe, thumbnail: wikiGlobe, imageAlt: '魏鸡百科地球Logo', twitterCard: 'summary'
-};
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 
-function update(file, {title, description, url, site, image, thumbnail, type = 'website', next = false, flightFiles = true, imageType = 'image/jpeg', imageWidth = 400, imageHeight = 400, imageAlt = `${site}分享封面`, twitterCard = 'summary_large_image'}) {
-  let html = fs.readFileSync(file, 'utf8');
+export function renderShareMetadata(html, file, {title, description, url, site, image, thumbnail, type = 'website', locale = 'zh_CN', next = false, flightFiles = true, imageType = 'image/jpeg', imageWidth = 400, imageHeight = 400, imageAlt = `${site}分享封面`, twitterCard = 'summary_large_image'}) {
   html = html.replace(/<title>[\s\S]*?<\/title>/i, () => `<title>${escape(title)}</title>`)
     .replace(/\s*<meta\b[^>]*(?:name|property)=["'](?:description|og:[^"']+|twitter:[^"']+|image|thumbnail|title)["'][^>]*>/gi, '')
     .replace(/\s*<meta\b[^>]*itemprop=["'](?:name|description|image)["'][^>]*>/gi, '')
@@ -21,7 +16,7 @@ function update(file, {title, description, url, site, image, thumbnail, type = '
     .replace(/\s*<!-- share-thumbnail:start -->[\s\S]*?<!-- share-thumbnail:end -->/g, '');
   const tags = [
     ['name','description',description], ['name','title',title],
-    ['property','og:type',type], ['property','og:locale','zh_CN'],
+    ['property','og:type',type], ['property','og:locale',locale],
     ['property','og:site_name',site], ['property','og:title',title],
     ['property','og:description',description], ['property','og:url',url],
     ['property','og:image',thumbnail], ['property','og:image:secure_url',thumbnail],
@@ -38,7 +33,7 @@ function update(file, {title, description, url, site, image, thumbnail, type = '
   // An early image is also available to crawlers that only inspect HTML images.
   const thumbnailUrl = new URL(thumbnail);
   const localThumbnail = path.relative(path.dirname(file), path.join(root,decodeURIComponent(thumbnailUrl.pathname))).replaceAll('\\','/').split('/').map(encodeURIComponent).join('/') + thumbnailUrl.search;
-  if (!next && !(site === '魏鸡百科' && type === 'article')) html = html.replace(/(<body\b[^>]*>)/i, (_, body) => `${body}\n    <!-- share-thumbnail:start -->\n    <img src="${escape(localThumbnail)}" width="${imageWidth}" height="${imageHeight}" alt="" aria-hidden="true" fetchpriority="low" style="position:absolute;left:-10000px;top:0;pointer-events:none">\n    <!-- share-thumbnail:end -->`);
+  if (!next && type !== 'article') html = html.replace(/(<body\b[^>]*>)/i, (_, body) => `${body}\n    <!-- share-thumbnail:start -->\n    <img src="${escape(localThumbnail)}" width="${imageWidth}" height="${imageHeight}" alt="" aria-hidden="true" fetchpriority="low" style="position:absolute;left:-10000px;top:0;pointer-events:none">\n    <!-- share-thumbnail:end -->`);
   if (next) {
     // Keep Next's exported metadata in sync, including client-side navigation.
     const entries=[['$','title','share-title',{children:title}],...tags.map(([attr,key,value],i)=>['$','meta',`share-${i}`,{[attr]:key,content:value}]),['$','link','share-canonical',{rel:'canonical',href:url}],['$','link','share-image',{rel:'image_src',href:thumbnail}]];
@@ -76,14 +71,19 @@ function update(file, {title, description, url, site, image, thumbnail, type = '
     }
     if (!html.includes('src="/xiaweicheng/lightbox-accessibility.js"')) html=html.replace('</head>','<script src="/xiaweicheng/lightbox-accessibility.js" defer></script>\n</head>');
   }
-  if (html !== fs.readFileSync(file, 'utf8')) fs.writeFileSync(file, html);
+  return html;
+}
+
+function update(file, options) {
+  const previous = fs.readFileSync(file, 'utf8');
+  const html = renderShareMetadata(previous, file, options);
+  if (html !== previous) fs.writeFileSync(file, html);
 }
 
 export function refreshShareMetadata() {
   const sites = [
     ['', '603web｜603，我们的家', '寝室概况、论坛、小卖部与查寝通报。走进603，发现室友故事与鹿群小站。', '603web', 'assets'],
     ['codec', '加密鹿｜把文字藏进鹿群里', '将文字转换为鹿与森林符号，使用相同密钥还原。支持智能转换、逐字输出和一键复制。', '加密鹿', 'codec'],
-    ['weijiba', '魏鸡百科｜困困的百科全书', '记录鹿群人物、趣事、术语与科技话题。检索词条，阅读故事，发现群内共同记忆。', '魏鸡百科', 'weijiba/assets'],
     ['kuncode', 'KunCode｜开源开发工作台与困困AI', '认识KunCode与困困AI，了解中文开发工作台、水豚主题和Windows、macOS安装入口。', 'KunCode', 'kuncode'],
     ['room', '青蛙的角落｜寝室故事与摄影相册', '从六人寝室走进舍友的个人空间，翻阅青蛙的摄影作品与故事。', '青蛙的角落', 'room'],
     ['urdeer', '你是个鹿嘞｜检测你是哪一只鹿', '检测你是哪一只鹿。通过照片或摄像头查看相似度排行，画面在本机处理。', '你是个鹿嘞', 'urdeer'],
@@ -92,7 +92,7 @@ export function refreshShareMetadata() {
   ];
   for (const [directory,title,description,site,assets] of sites) {
     const portrait = directory==='xiaweicheng' ? {image:`${origin}/${assets}/xia-weicheng-portrait.png`,thumbnail:`${origin}/${assets}/xia-weicheng-portrait.png`,imageType:'image/png',imageWidth:517,imageHeight:607,imageAlt:'夏炜城个人照',twitterCard:'summary'} : {};
-    update(path.join(root,directory,'index.html'), {title,description,site,url:`${origin}/${directory ? directory+'/' : ''}`,image:`${origin}/${assets}/share-cover.jpg`,thumbnail:`${origin}/${assets}/share-thumb.jpg`,next:directory==='xiaweicheng',...portrait,...(directory==='weijiba' ? wikiShareArtwork : {})});
+    update(path.join(root,directory,'index.html'), {title,description,site,url:`${origin}/${directory ? directory+'/' : ''}`,image:`${origin}/${assets}/share-cover.jpg`,thumbnail:`${origin}/${assets}/share-thumb.jpg`,next:directory==='xiaweicheng',...portrait});
   }
   const icon603 = `${origin}/603ai/assets/share-thumb.png`;
   update(path.join(root,'603ai/index.html'),{
@@ -114,26 +114,8 @@ export function refreshShareMetadata() {
       imageAlt:'夏炜城个人照',twitterCard:'summary'
     });
   }
-  const context = { history:{}, URL, URLSearchParams, window:{location:{pathname:'/weijiba/',search:'',href:`${origin}/weijiba/`},scrollTo(){},addEventListener(){},setTimeout(){}},document:{querySelectorAll:()=>[],querySelector:()=>null} };
-  vm.createContext(context);
-  for (const name of ['entry-routes.js','entry-writing.js','entry-data.js']) vm.runInContext(fs.readFileSync(path.join(root,'weijiba',name),'utf8'),context);
-  const routes = context.window.WEIJIBA_ENTRY_PATHS;
-  const catalog = context.window.WEIJIBA_ENTRY_CATALOG;
-  const articleImage = new URL(context.window.WEIJIBA_SHARE_IMAGE_PATH, origin).href;
-  let articles = 0;
-  for (const [slug, directory] of Object.entries(routes)) {
-    const entry = catalog[slug];
-    const file = path.join(root, 'weijiba', directory, 'index.html');
-    if (!entry || !fs.existsSync(file)) continue;
-    const name = entry.title;
-    const description = `${name}—${entry.description}`.replace(/\s+/g, ' ').slice(0, 180);
-    const url = context.window.WEIJIBA_CANONICAL_ENTRY_URL(slug);
-    update(file,{title:`${name}｜魏鸡百科`,description,site:'魏鸡百科',type:'article',url,
-      image:articleImage,thumbnail:articleImage,imageAlt:'维基百科拼图地球标志',twitterCard:'summary'});
-    articles++;
-  }
-  update(path.join(root,'weijiba/article.html'),{title:'词条入口｜魏鸡百科',description:'旧版魏鸡百科词条入口。打开页面后将跳转到对应词条。',site:'魏鸡百科',url:`${origin}/weijiba/`,...wikiShareArtwork});
-  return {sites:sites.length+1,articles};
+  const wikiBuild = execFileSync(process.execPath, [path.join(root, 'weijiba/tools/refresh-entry-pages.mjs')], {encoding:'utf8'});
+  return {sites:sites.length+2, articles:JSON.parse(wikiBuild).entries};
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) console.log(JSON.stringify(refreshShareMetadata()));

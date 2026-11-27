@@ -58,19 +58,6 @@ html:is([data-color-mode="dark"], [data-color-mode="auto"][data-system-color="da
   --button-hover: #27292d;
 }
 
-html:is([data-color-mode="dark"], [data-color-mode="auto"][data-system-color="dark"]) .topbar-brand img {
-  filter: invert(1);
-  mix-blend-mode: screen;
-  clip-path: inset(0 0 0 37%);
-}
-
-html:is([data-color-mode="dark"], [data-color-mode="auto"][data-system-color="dark"]) .topbar-brand::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("assets/weijiba-globe-320.webp") 17.5% center / 23% auto no-repeat;
-}
-
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 
@@ -161,12 +148,16 @@ html[data-page-width="wide"] .page-wrap {
   min-height: 66px;
 }
 
-.topbar-brand { position: relative; display: flex; align-items: center; height: 66px; flex: none; }
+.topbar-brand { display: flex; align-items: center; gap: 6px; height: 66px; flex: none; color: var(--text); }
+.topbar-brand:hover { text-decoration: none; }
+.brand-type { display: grid; font: 600 1.45rem / 1.2 Georgia, "Songti SC", SimSun, serif; }
+.brand-type small { margin-top: 2px; font: 400 .65rem / 1.2 sans-serif; }
+:lang(en) > .brand-type { font-size: 1.1rem; }
 
 .topbar-brand img {
   display: block;
-  width: 164px;
-  max-height: 66px;
+  width: 47px;
+  height: auto;
   object-fit: contain;
 }
 
@@ -178,6 +169,34 @@ html[data-page-width="wide"] .page-wrap {
   white-space: nowrap;
   font-size: 0.875rem;
 }
+
+.home-languages { position: relative; }
+.home-languages summary {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px;
+  color: var(--link);
+  cursor: pointer;
+  list-style: none;
+}
+.home-languages summary::-webkit-details-marker { display: none; }
+.home-languages summary:hover { background: var(--surface); }
+.home-languages nav {
+  position: absolute;
+  z-index: 3;
+  inset-inline-end: 0;
+  min-width: 138px;
+  padding: 5px 0;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--paper);
+  box-shadow: 0 2px 7px rgb(0 0 0 / 15%);
+}
+.home-languages a { display: block; padding: 5px 12px; }
+.home-languages a:hover { background: var(--surface); }
+.home-languages a[aria-current="true"] { color: var(--text); font-weight: 700; }
+.appearance-button .ui-icon { display: none; }
 
 .quiet-button,
 .icon-button,
@@ -664,7 +683,7 @@ html[data-page-width="wide"] .page-wrap {
   .home-search { margin-inline-start: 8px; }
   .masthead-index { display: none; }
   .topbar-brand { height: 60px; }
-  .topbar-brand img { width: 132px; max-height: 60px; }
+  .topbar-brand img { width: 39px; }
   .home-panel { padding: 15px 18px; }
   .welcome { padding-inline-start: 150px; }
   .welcome-globe { width: 155px; inset-inline-start: -28px; inset-block-start: 3px; }
@@ -680,7 +699,13 @@ html[data-page-width="wide"] .page-wrap {
   .home-search[data-expanded] { display: block; }
   .mobile-search-button { display: inline-flex; }
   .topbar-brand { height: 53px; }
-  .topbar-brand img { width: 123px; max-height: 53px; mix-blend-mode: multiply; }
+  .topbar-brand img { width: 34px; }
+  .brand-type { font-size: 1.2rem; }
+  :lang(en) > .brand-type { font-size: .95rem; }
+  .brand-type small { font-size: .57rem; }
+  .home-languages summary span, .appearance-button span { display: none; }
+  .appearance-button .ui-icon { display: block; }
+  .appearance-button { border-color: transparent; background: transparent; padding: 4px 6px; }
   .site-header .icon-button { background: transparent; }
   .header-tools { gap: 2px; }
   .page-layout { margin-block-start: 4px; }
@@ -707,7 +732,8 @@ html[data-page-width="wide"] .page-wrap {
 
 @media (max-width: 365px) {
   .masthead { gap: 4px; }
-  .topbar-brand img { width: 112px; }
+  .topbar-brand { gap: 3px; }
+  .topbar-brand img { width: 30px; }
   .feature-figure { width: min(39vw, 125px); }
   .site-footer { align-items: start; flex-direction: column; }
 }

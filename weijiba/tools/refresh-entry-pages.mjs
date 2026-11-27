@@ -1,105 +1,119 @@
-// 同步现行条目的正文、目录与分享信息。
+// Generate shareable static pages for all three languages from the same article catalogue.
 import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
-import { refreshShareMetadata } from "../../tools/share-metadata.mjs";
+import { renderShareMetadata } from "../../tools/share-metadata.mjs";
+import { languages, origin, wiki, homeTitle, homeDescription, iconAlt, sharedEnglish, translator, localizePage } from "./localized-pages.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const version = "20261126-editorial";
-const themeVersion = "20261126-vector-night";
-const vocabularyVersion = "20261126-group-sayings";
-const sharingVersion = "20261126-site-share";
-const check = process.argv.includes("--check");
-const skipShare = process.argv.includes("--skip-share");
+const version = "20261127-language";
+const read = file => fs.readFileSync(path.join(root, file), "utf8").replaceAll("\r\n", "\n");
 const context = {
-  history: {}, URL, URLSearchParams,
-  window: { location: { pathname: "/weijiba/", search: "", hash: "", href: "https://deer603.github.io/weijiba/" } },
+  URL, URLSearchParams, history: {}, window: { location: new URL(wiki, origin) },
   document: { querySelectorAll: () => [], querySelector: () => null }
 };
 vm.createContext(context);
-for (const name of ["entry-routes.js", "entry-writing.js", "entry-data.js"]) {
-  vm.runInContext(fs.readFileSync(path.join(root, name), "utf8"), context, { filename: name });
+for (const file of ["entry-routes", "entry-writing", "entry-data", "entry-en", "home-i18n", "article-ui-en"]) {
+  vm.runInContext(read(file + ".js"), context, {filename: file + ".js"});
 }
-const template = fs.readFileSync(path.join(root, "article.html"), "utf8");
-const escape = value => String(value).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-const plans = [];
-let pages = 0, missing = 0;
+const site = context.window;
+const entries = Object.entries(site.WEIJIBA_ENTRY_PATHS);
+const words = { ...site.WEIJIBA_EN_TEXT, ...site.WEIJIBA_HOME_EN, ...site.WEIJIBA_UI_EN, ...sharedEnglish };
+const missing = new Set();
+const translations = Object.fromEntries(Object.keys(languages).map(lang => [lang, translator(lang, words, missing)]));
+// The renderer makes the opening title bold and turns [n] citations into links.
+// Remember the resulting English text nodes, including any Chinese examples they quote.
+const translatedValues = new Set();
+function rememberText(value) {
+  for (const text of value.split(/\[\d+\]/)) translatedValues.add(text.trim());
+}
+Object.values(words).forEach(rememberText);
+for (const entry of Object.values(site.WEIJIBA_ENTRY_CATALOG)) {
+  const title = translations.en(entry.title);
+  const lead = translations.en(entry.overview[0]);
+  if (lead.startsWith(title)) rememberText(lead.slice(title.length));
+}
+const plans = new Map();
+const image = new URL(site.WEIJIBA_SHARE_IMAGE_PATH, origin).href;
 
-function updateArtwork(source) {
-  return source
-    .replace(/assets\/(?:wikipedia-logo-v2\.svg\.webp|weijiba-favicon-64\.webp)(?:\?v=[\w-]+)?(?=")/g, "assets/weijiba-favicon-64.webp?v=wei")
-    .replace(/assets\/(?:weijiba-logo\.png|weijiba-logo-520\.webp)(?:\?v=[\w-]+)?(?=")/g, "assets/weijiba-logo-520.webp?v=wei")
-    .replace(/assets\/(?:weijiba-project\.png|weijiba-project-144\.webp)(?:\?v=[\w-]+)?(?=")/g, "assets/weijiba-project-144.webp?v=wei");
+function clean(source) {
+  return source.replace(/\s*<!-- share-(metadata|thumbnail):start -->[\s\S]*?<!-- share-\1:end -->/g, "")
+    .replace(/^[ \t]*<script src="[^"]*"><\/script>[ \t]*\n/gm, "");
+}
+function shell(source, prefix, scripts) {
+  let html = clean(source);
+  if (prefix) html = html.replace(/\b(src|href|action)="(?![a-z][a-z\d+.-]*:|\/|#)([^"]+)"/gi,
+    (_, key, value) => key + '="' + prefix + value + '"');
+  const script = name => '<script src="' + prefix + name + '.js?v=' + version + '"></script>';
+  html = html.replace(/(<meta charset="utf-8">)/, "$1\n    " + script("i18n"))
+    .replace(/(article\.css|style\.css)\?v=[\w-]+/g, "$1?v=" + version)
+    .replace(/[ \t]*<\/body>/, scripts.map(name => "    " + script(name)).join("\n") + "\n  </body>");
+  return html;
+}
+const articleSource = read("article.html");
+const legacyShell = shell(articleSource, "", ["locale-words", "article-ui-en", "entry-routes", "entry-writing", "entry-data", "focus-scope", "article"]);
+const articleShell = shell(articleSource, "../", ["locale-words", "article-ui-en", "entry-routes", "focus-scope", "article"]);
+const homeShell = shell(read("index.html"), "", ["locale-words", "entry-routes", "focus-scope", "home-i18n", "script"])
+  .replace(/(<ul class="reading-list site-directory" id="home-site-directory">)[\s\S]*?<\/ul>/,
+    (_, opening) => opening + "\n" + site.WEIJIBA_RENDER_SITE_DIRECTORY(true) + "\n</ul>");
+function articleBody(template, slug, translate, lang) {
+  const { articleHtml, tocHtml } = site.WEIJIBA_RENDER_ENTRY(slug, translate, lang);
+  return template.replace(/(<article id="top">)[\s\S]*?(<\/article>)/, (_, start, end) => start + articleHtml + "\n        " + end)
+    .replace(/(<nav class="toc" id="toc"[^>]*>)[\s\S]*?(<\/nav>)/, (_, start, end) => start + tocHtml + end);
 }
 
-function updateShell(source, prefix, legacy = false) {
-  let next = updateArtwork(source).replace(/^[ \t]*<script src="[^"]*(?:entry-routes|entry-writing|entry-data|focus-scope|article)\.js(?:\?[^"]*)?"><\/script>\r?\n/gm, "");
-  const scripts = ["entry-routes", ...(legacy ? ["entry-writing", "entry-data"] : []), "focus-scope", "article"];
-  next = next.replace(/<\/body>/, scripts.map(name => {
-    const assetVersion = ["article", "entry-data"].includes(name) ? sharingVersion : name.startsWith("entry-") ? vocabularyVersion : version;
-    return `    <script src="${prefix}${name}.js?v=${assetVersion}"></script>`;
-  }).join("\n") + "\n  </body>");
-  next = next.replace(/article\.css\?v=[\w-]+/g, `article.css?v=${sharingVersion}`);
-  next = next.replace(/(<a class="brand"[^>]*>)\s*<img\b[^>]*>\s*(<\/a>)/, '$1<span class="brand-wordmark" aria-hidden="true"></span>$2');
-  next = next.replace(/<form\b(?=[^>]*\bid="article-search")[^>]*>/, tag =>
-    `${tag.slice(0, -1).replace(/\saction="[^"]*"/, "")} action="${prefix}index.html#search">`);
-  next = next.replace(/<input\b(?=[^>]*\bid="article-search-input")[^>]*>/, tag =>
-    `${tag.slice(0, -1).replace(/\sname="[^"]*"/, "")} name="q">`);
-  next = next.replace(/(<main class="article-main" id="article-content")(?: tabindex="-1")?>/, '$1 tabindex="-1">');
-  next = next.replace(/(<nav class="toc" id="toc")(?: aria-label="[^"]*")?>/, '$1 aria-label="本页目录">');
-  next = next.replace(/(<aside class="main-menu"[^>]*)(>)/, (_, attributes) => attributes.includes(" inert") ? `${attributes}>` : `${attributes} inert>`);
-  next = next.replace(/(aria-label="更多个人工具">)•••/, '$1<svg class="ui-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>');
-  return next;
+const uiKeys = new Set([...Object.keys(site.WEIJIBA_HOME_EN), ...Object.keys(site.WEIJIBA_UI_EN), ...Object.keys(sharedEnglish),
+  ...Object.values(site.WEIJIBA_HOME_ALIASES || {}).flat(), ...entries.flatMap(([slug, dir]) => [dir, site.WEIJIBA_ENTRY_CATALOG[slug].title])]);
+const englishTitles = Object.fromEntries(entries.flatMap(([slug, dir]) => {
+  const title = site.WEIJIBA_ENTRY_CATALOG[slug].title;
+  return [dir, title].map(source => [source, translations.en(title)]);
+}));
+function globalDictionary(name, object) {
+  return "window." + name + " = " + JSON.stringify(object, null, 2) + ";\n";
 }
+plans.set("locale-words.js", "// Generated by tools/refresh-entry-pages.mjs.\n" +
+  globalDictionary("WEIJIBA_TW_UI", Object.fromEntries([...uiKeys].map(key => [key, translations["zh-TW"](key)]))) +
+  globalDictionary("WEIJIBA_TITLE_EN", {...sharedEnglish, ...englishTitles}));
 
-function generate(source, slug, prefix, legacy = false) {
-  const rendered = context.window.WEIJIBA_RENDER_ENTRY(slug);
-  if (!rendered) throw new Error(`词条缺少正文：${slug}`);
-  if (!/<article id="top">[\s\S]*?<\/article>/.test(source) || !/<nav class="toc" id="toc"[^>]*>[\s\S]*?<\/nav>/.test(source)) {
-    throw new Error(`词条结构无法定位：${slug}`);
+for (const lang of [null, ...Object.keys(languages)]) {
+  const t = translations[lang || "zh-CN"];
+  const bodyTranslation = lang === "en" ? t : translations["zh-CN"];
+  const dir = lang ? languages[lang] + "/" : "";
+  function save(tail, source, title, description, type = "website", legacy = false) {
+    const route = tail.replace(/index\.html$/, "");
+    const file = dir + tail;
+    const encoded = route.split("/").map(encodeURIComponent).join("/");
+    const url = origin + wiki + dir + (legacy ? "" : encoded);
+    let html = source;
+    if (lang) html = localizePage(html, origin + wiki + encoded, lang, t, lang === "en" ? translatedValues : null);
+    html = renderShareMetadata(html, path.join(root, file), {
+      title, description, url, type, site: t("魏鸡百科"), image, thumbnail: image,
+      imageAlt: t(iconAlt), twitterCard: "summary", locale: lang === "en" ? "en_US" : lang === "zh-TW" ? "zh_TW" : "zh_CN"
+    });
+    plans.set(file, html);
   }
-  let next = source.replace(/(<article id="top">)[\s\S]*?(<\/article>)/, () => `<article id="top">${rendered.articleHtml}\n        </article>`);
-  next = next.replace(/(<nav class="toc" id="toc"[^>]*>)[\s\S]*?(<\/nav>)/, (_, start, end) => `${start}${rendered.tocHtml}${end}`);
-  if (!next.includes("<!-- share-metadata:start -->")) {
-    next = next.replace(/<title>[^<]*<\/title>/, () => `<title>${escape(rendered.title)}｜魏鸡百科</title>`);
-    next = next.replace(/<meta name="description" content="[^"]*">/, () => `<meta name="description" content="${escape(rendered.description)}">`);
+  save("index.html", homeShell, t(homeTitle), t(homeDescription));
+  const siteTitle = name => name + (lang === "en" ? " | " : "｜") + t("魏鸡百科");
+  save("article.html", articleBody(legacyShell, "kunkun", bodyTranslation, lang), siteTitle(t("词条入口")), t("旧版魏鸡百科词条入口。打开页面后将跳转到对应词条。"), "website", true);
+  for (const [slug, directory] of entries) {
+    if (path.basename(directory) !== directory) throw new Error("Invalid route " + directory);
+    const entry = site.WEIJIBA_ENTRY_CATALOG[slug];
+    save(directory + "/index.html", articleBody(articleShell, slug, bodyTranslation, lang),
+      siteTitle(t(entry.title)), t(entry.description), "article");
   }
-  return updateShell(next, prefix, legacy);
 }
 
-// 先完成全部内存生成与内容检查，再开始写入，避免中途发现坏词条造成部分更新。
-for (const [slug, title] of Object.entries(context.window.WEIJIBA_ENTRY_PATHS)) {
-  const directory = path.resolve(root, title);
-  if (path.dirname(directory) !== root) throw new Error(`Unexpected route path: ${title}`);
-  const file = path.join(directory, "index.html");
-  const exists = fs.existsSync(file);
-  const previous = exists ? fs.readFileSync(file, "utf8") : null;
-  const source = previous ?? template.replace(/(src|href)="(?![a-z][a-z\d+.-]*:|\/|#)([^\"]+)"/gi, '$1="../$2"');
-  const next = generate(source, slug, "../");
-  pages++;
-  if (!exists) missing++;
-  if (next !== previous) plans.push({ file, next });
-}
-const legacy = generate(template, "kunkun", "", true);
-if (legacy !== template) plans.push({ file: path.join(root, "article.html"), next: legacy });
-const homeFile = path.join(root, "index.html");
-const home = fs.readFileSync(homeFile, "utf8");
-let nextHome = updateArtwork(home).replace(/^[ \t]*<script src="(?:entry-writing|entry-data|focus-scope)\.js(?:\?[^"]*)?"><\/script>\r?\n/gm, "");
-nextHome = nextHome.replace(/entry-routes\.js\?v=[\w-]+/g, `entry-routes.js?v=${vocabularyVersion}`);
-nextHome = nextHome.replace(/(style\.css|script\.js)\?v=[\w-]+/g, `$1?v=${themeVersion}`);
-nextHome = nextHome.replace(/style\.css\?v=[\w-]+/g, `style.css?v=${sharingVersion}`);
-nextHome = nextHome.replace(/(<ul class="reading-list site-directory" id="home-site-directory">)[\s\S]*?<\/ul>/,
-  (_, opening) => opening + "\n" + context.window.WEIJIBA_RENDER_SITE_DIRECTORY(true) + "\n</ul>");
-nextHome = nextHome.replace(/([ \t]*)<script src="script\.js/, `$1<script src="focus-scope.js?v=${version}"></script>\n$1<script src="script.js`);
-if (nextHome !== home) plans.push({ file: homeFile, next: nextHome });
-
-if (!check) {
-  for (const { file, next } of plans) {
-    fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.writeFileSync(file, next);
+if (missing.size) throw new Error("Missing English translations:\n" + [...missing].join("\n"));
+const check = process.argv.includes("--check");
+let changed = 0;
+for (const [file, contents] of plans) {
+  if (fs.existsSync(path.join(root, file)) && read(file) === contents) continue;
+  changed++;
+  if (!check) {
+    fs.mkdirSync(path.dirname(path.join(root, file)), {recursive: true});
+    fs.writeFileSync(path.join(root, file), contents);
   }
-  if (!skipShare) refreshShareMetadata();
 }
-console.log(JSON.stringify({ pages, changed: plans.length, missing, check, version, shareUpdated: !check && !skipShare }));
-if (check && plans.length) process.exitCode = 1;
+console.log(JSON.stringify({entries: entries.length, languages: Object.keys(languages), changed, check}));
+if (check && changed) process.exitCode = 1;

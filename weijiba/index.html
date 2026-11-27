@@ -2,6 +2,7 @@
 <html lang="zh-CN" data-text-size="standard" data-page-width="standard" data-color-mode="light">
   <head>
     <meta charset="utf-8">
+    <script src="i18n.js?v=20261127-language"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>魏鸡百科｜困困的百科全书</title>
     <script>
@@ -17,7 +18,7 @@
     </script>
     <link rel="icon" type="image/webp" href="assets/weijiba-favicon-64.webp?v=wei">
     <link rel="shortcut icon" type="image/webp" href="assets/weijiba-favicon-64.webp?v=wei">
-    <link rel="stylesheet" href="style.css?v=20261126-site-share">
+    <link rel="stylesheet" href="style.css?v=20261127-language">
     <!-- share-metadata:start -->
     <meta name="description" content="记录鹿群人物、趣事、术语与科技话题。检索词条，阅读故事，发现群内共同记忆。">
     <meta name="title" content="魏鸡百科｜困困的百科全书">
@@ -32,12 +33,12 @@
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="400">
     <meta property="og:image:height" content="400">
-    <meta property="og:image:alt" content="魏鸡百科地球Logo">
+    <meta property="og:image:alt" content="魏鸡百科拼图地球标志">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="魏鸡百科｜困困的百科全书">
     <meta name="twitter:description" content="记录鹿群人物、趣事、术语与科技话题。检索词条，阅读故事，发现群内共同记忆。">
     <meta name="twitter:image" content="https://deer603.github.io/weijiba/assets/share-globe.jpg?v=wei">
-    <meta name="twitter:image:alt" content="魏鸡百科地球Logo">
+    <meta name="twitter:image:alt" content="魏鸡百科拼图地球标志">
     <meta name="image" content="https://deer603.github.io/weijiba/assets/share-globe.jpg?v=wei">
     <meta name="thumbnail" content="https://deer603.github.io/weijiba/assets/share-globe.jpg?v=wei">
     <meta itemprop="name" content="魏鸡百科｜困困的百科全书">
@@ -56,7 +57,10 @@
     <header class="site-header">
       <div class="masthead">
         <button class="icon-button menu-button" type="button" data-open-sidebar aria-label="打开导航" aria-controls="sidebar" aria-expanded="false"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-        <a class="topbar-brand" href="#home" aria-label="魏鸡百科首页"><img src="assets/weijiba-logo-520.webp?v=wei" width="520" height="238" alt="魏鸡百科，困困的百科全书"></a>
+        <a class="topbar-brand" href="#home" aria-label="魏鸡百科首页">
+          <img src="assets/weijiba-globe-320.webp" width="320" height="292" alt="">
+          <span class="brand-type"><span>魏鸡百科</span><small>困困的百科全书</small></span>
+        </a>
       <div class="home-search" id="search">
         <form id="search-form" role="search" aria-label="搜索魏鸡百科">
           <label class="sr-only" for="search-input">词条名称</label>
@@ -73,8 +77,16 @@
       </div>
         <div class="header-tools">
           <a class="masthead-index" href="#mega-index">分类索引</a>
+          <details class="home-languages">
+            <summary aria-label="选择语言" title="选择语言"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h12M8 2v3M4 8c2 4 4 6 8 8M12 5c-1 5-4 9-9 12M13 21l4-11 4 11M15 17h4"/></svg><span>语言</span></summary>
+            <nav aria-label="可用语言">
+              <a data-language="zh-CN" lang="zh-Hans" hreflang="zh-Hans" href="/weijiba/zh-cn/">简体中文</a>
+              <a data-language="zh-TW" lang="zh-Hant" hreflang="zh-Hant" href="/weijiba/zh-tw/">繁體中文</a>
+              <a data-language="en" lang="en" hreflang="en" href="/weijiba/en/">English</a>
+            </nav>
+          </details>
           <button class="icon-button mobile-search-button" type="button" data-focus-search aria-label="搜索词条" aria-controls="search" aria-expanded="false"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.5 17a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13ZM16 16l4 4"/></svg></button>
-          <button class="quiet-button appearance-button" type="button" data-open-appearance aria-controls="appearance-rail" aria-expanded="false">外观</button>
+          <button class="quiet-button appearance-button" type="button" data-open-appearance aria-label="外观" title="外观" aria-controls="appearance-rail" aria-expanded="false"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/><path d="M8 3v6m8 0v6m-9 0v6" stroke-width="3"/></svg><span>外观</span></button>
         </div>
       </div>
     </header>
@@ -216,7 +228,7 @@
           <section class="index-section home-panel" id="mega-index" aria-labelledby="index-title">
             <div class="section-heading panel-heading">
               <h2 id="index-title">分类索引</h2>
-              <span class="entry-count">55个词条</span>
+              <span class="entry-count"><span>55</span>个词条</span>
             </div>
             <div class="index-grid" id="mega-entry-list">
               <section class="index-group" id="group-index">
@@ -337,8 +349,10 @@
 
     <div class="appearance-backdrop" id="appearance-backdrop" hidden></div>
 
-    <script src="entry-routes.js?v=20261126-group-sayings"></script>
-    <script src="focus-scope.js?v=20261126-editorial"></script>
-    <script src="script.js?v=20261126-vector-night"></script>
+    <script src="locale-words.js?v=20261127-language"></script>
+    <script src="entry-routes.js?v=20261127-language"></script>
+    <script src="focus-scope.js?v=20261127-language"></script>
+    <script src="home-i18n.js?v=20261127-language"></script>
+    <script src="script.js?v=20261127-language"></script>
   </body>
 </html>

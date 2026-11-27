@@ -1,13 +1,13 @@
 # 网站分享信息
 
-统一分享脚本维护根首页、各子站、作品集项目与魏鸡百科的分享信息。学院子站由`tools/update_hunauees_sharing.py`维护。魏鸡百科的每篇词条都有独立的正式网址，静态HTML中提供词条标题、简介和维基百科拼图地球缩略图。
+统一分享脚本维护根首页、各子站、作品集项目与魏鸡百科的分享信息。学院子站由`tools/update_hunauees_sharing.py`维护。魏鸡百科的简体、繁体和英文词条各有正式网址。每个网址的静态HTML提供对应语言的标题、简介和本站带“魏”字的地球缩略图。
 
 | 站点 | 分享封面 | 分享缩略图 |
 | --- | --- | --- |
 | 603web | [share-cover.jpg](../assets/share-cover.jpg) | [share-thumb.jpg](../assets/share-thumb.jpg) |
 | 加密鹿 | [share-cover.jpg](../codec/share-cover.jpg) | [share-thumb.jpg](../codec/share-thumb.jpg) |
 | 魏鸡百科首页及旧入口 | [本站地球Logo](../weijiba/assets/share-globe.jpg) | [本站地球Logo](../weijiba/assets/share-globe.jpg) |
-| 魏鸡百科词条 | [维基百科拼图地球](../weijiba/assets/wikipedia-share-globe.jpg) | [词条分享缩略图](../weijiba/assets/wikipedia-share-globe.jpg) |
+| 魏鸡百科词条 | [魏字拼图地球](../weijiba/assets/share-globe.jpg) | [词条分享缩略图](../weijiba/assets/share-globe.jpg) |
 | KunCode | [share-cover.jpg](../kuncode/share-cover.jpg) | [share-thumb.jpg](../kuncode/share-thumb.jpg) |
 | 青蛙的角落 | [share-cover.jpg](../room/share-cover.jpg) | [share-thumb.jpg](../room/share-thumb.jpg) |
 | 你是个鹿嘞 | [share-cover.jpg](../urdeer/share-cover.jpg) | [share-thumb.jpg](../urdeer/share-thumb.jpg) |
@@ -25,7 +25,7 @@ Open Graph和缩略图字段优先使用400×400的分享图，部分站点保�
 
 ## 修改标题与图片
 
-在仓库根目录执行：
+首次生成前，在仓库根目录执行`pnpm --dir weijiba/tools install --frozen-lockfile`安装构建用的繁简转换和HTML解析依赖。之后运行：
 
 ```sh
 node tools/share-metadata.mjs
@@ -56,10 +56,10 @@ node tools/share-metadata.mjs
 
 词条标题下的“分享词条”使用词条的正式网址，即使在本地预览中打开也是如此。支持系统分享的浏览器会打开分享面板，其他浏览器会复制链接。缩略图同时出现在分享入口和页面元信息中。
 
-词条卡片使用维基百科拼图地球标志。图形构思来自Paullusmagnus，第一版由Nohat制作，图源署名为Wikimedia。本站将原图等比缩放并加白底，制成400×400像素JPEG，沿用CC BY-SA 3.0许可。[原图与署名](https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg) · [许可](https://creativecommons.org/licenses/by-sa/3.0/)
+本站拼图地球使用“魏”字，卡片图片为400×400像素白底JPEG。拼图地球的原始图形构思来自Paullusmagnus，第一版由Nohat制作，图源署名为Wikimedia。本站改版沿用CC BY-SA 3.0许可。[原图与署名](https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg) · [许可](https://creativecommons.org/licenses/by-sa/3.0/)
 
 发布后应分享`https://deer603.github.io/`及各子站、词条的正式地址。本地的`127.0.0.1`地址无法供微信服务器访问。网页信息和图片更新后，微信可能继续使用已缓存的卡片。
 
 静态元信息为微信及其他平台提供抓取素材，不能保证微信每次都展示指定标题、简介与图片。需要在微信内稳定自定义分享内容时，应通过公众号JS-SDK配置分享接口，并在服务端生成签名、配置JS接口安全域名。当前GitHub Pages站点没有这套公众号与服务端配置；公众号密钥不应写入公开仓库或前端脚本。
 
-百科旧式`article.html?entry=...`地址打开后会跳转到独立词条。旧入口的查询参数共用同一个HTML。以[KunCode词条](https://deer603.github.io/weijiba/KunCode/)为例，转发地址为`https://deer603.github.io/weijiba/KunCode/`，卡片标题为“KunCode｜魏鸡百科”。
+百科旧式`article.html?entry=...`地址打开后会跳转到对应词条。无语言前缀的入口优先使用读者保存的选择，其次读取浏览器语言。带语言前缀的分享链接直接展示该版本。例如英文[KunCode词条](https://deer603.github.io/weijiba/en/KunCode/)的卡片标题为“KunCode | Weiji Encyclopedia”，繁体[KunCode词条](https://deer603.github.io/weijiba/zh-tw/KunCode/)的卡片标题为“KunCode｜魏雞百科”。

@@ -252,6 +252,56 @@ input:focus-visible {
   transform: var(--brand-offset);
 }
 
+.brand-wordmark > * {
+  display: none;
+}
+
+html:is(:lang(en), :lang(zh-TW)) .brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: max-content;
+  color: var(--emphasized, var(--text));
+  text-decoration: none;
+}
+
+html:is(:lang(en), :lang(zh-TW)) .brand::before {
+  position: static;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  transform: none;
+  background: url("assets/weijiba-globe-320.webp") center / contain no-repeat;
+}
+
+html:is(:lang(en), :lang(zh-TW)) .brand-wordmark {
+  display: grid;
+  width: auto;
+  aspect-ratio: auto;
+  background: none;
+  filter: none;
+  mix-blend-mode: normal;
+  clip-path: none;
+  transform: none;
+  font-family: Georgia, "Songti TC", serif;
+  line-height: 1.2;
+  text-align: center;
+}
+
+html:is(:lang(en), :lang(zh-TW)) .brand-wordmark > * {
+  display: block;
+  white-space: nowrap;
+}
+
+.brand-wordmark strong {
+  font-size: clamp(16px, 2.2vw, 21px);
+  font-weight: normal;
+}
+
+.brand-wordmark small {
+  font-size: 10px;
+}
+
 .header-search {
   display: flex;
   align-items: stretch;
@@ -527,6 +577,12 @@ body:not(.has-toc-drawer) [data-collapse-toc] {
   background: var(--subtle-surface);
 }
 
+.language-menu button[aria-current="true"] {
+  color: var(--text);
+  background: var(--subtle-surface);
+  font-weight: 600;
+}
+
 .article-toolbar {
   display: flex;
   align-items: stretch;
@@ -559,6 +615,32 @@ body:not(.has-toc-drawer) [data-collapse-toc] {
 }
 
 .variant-control {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.variant-control select {
+  max-width: 100%;
+  padding: 5px 2px;
+  border: 0;
+  border-radius: 0;
+  color: var(--link);
+  background-color: var(--surface);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.variant-control select:focus-visible {
+  outline: 2px solid var(--accent);
+}
+
+html:lang(en) .variant-control {
+  display: none;
+}
+
+html:lang(en) .view-tabs {
   margin-left: auto;
 }
 
@@ -1667,7 +1749,7 @@ body.menu-open .main-menu {
 .search-icon .ui-icon { width: 19px; height: 19px; }
 .language-button { display: inline-flex; align-items: center; gap: 5px; }
 .appearance-restore { align-items: center; gap: 5px; }
-[aria-label^="关闭"] { display: inline-flex; align-items: center; justify-content: center; }
+button[data-close-banner], button[data-close-drawers] { display: inline-flex; align-items: center; justify-content: center; }
 .notice-icon { border: 0; }
 .notice-icon .ui-icon { width: 21px; height: 21px; }
 

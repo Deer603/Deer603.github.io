@@ -948,7 +948,7 @@
     }).join("\n");
   }
   window.WEIJIBA_RENDER_SITE_DIRECTORY = renderSiteDirectory;
-  const shareImagePath = "/weijiba/assets/wikipedia-share-globe.jpg";
+  const shareImagePath = "/weijiba/assets/share-globe.jpg?v=wei";
   window.WEIJIBA_SHARE_IMAGE_PATH = shareImagePath;
   const canonicalEntryUrl = slug => "https://deer603.github.io/weijiba/" + encodeURIComponent(window.WEIJIBA_ENTRY_PATHS[slug]) + "/";
   window.WEIJIBA_CANONICAL_ENTRY_URL = canonicalEntryUrl;
@@ -959,18 +959,21 @@
     .replace(/(?<=[A-Za-z0-9]) +\/[ ]*(?=[A-Za-z0-9])|(?<=[A-Za-z0-9])\/ +(?=[A-Za-z0-9])/g, "/");
 
   // 同一份渲染逻辑供静态生成器和旧地址入口使用。
-  function renderEntry(slug) {
-    const entry = entries[slug];
-    if (!entry) return null;
+  function renderEntry(slug, translate = value => value, language = "zh-CN") {
+    if (!Object.hasOwn(entries, slug)) return null;
+    const original = entries[slug];
+    // Translate complete passages before splitting off the bold lead or citation markers.
+    const entry = { ...original, title: translate(original.title), overview: original.overview.map(translate) };
 
-    const prose = value => escapeHtml(formatProse(value)).replace(/\[(\d+)\]/g, (token, index) =>
+    const formatted = value => escapeHtml(language === "en" ? value : formatProse(value)).replace(/\[(\d+)\]/g, (token, index) =>
       entry.references[Number(index) - 1] ? `<sup class="citation"><a href="#ref-${index}" aria-label="参考资料${index}">${token}</a></sup>` : token);
-    const paragraphs = values => values.map(value => `<p>${prose(value)}</p>`).join("");
+    const prose = value => formatted(translate(value));
+    const paragraphs = (values, format = prose) => values.map(value => `<p>${format(value)}</p>`).join("");
     const [lead, ...intro] = entry.overview;
     const titles = [entry.title, window.WEIJIBA_ENTRY_PATHS[slug]].filter(Boolean);
     const openingTitle = titles.flatMap(title => [title, "《" + title + "》"]).find(title => lead.startsWith(title));
-    const leadHtml = openingTitle ? "<b>" + prose(openingTitle) + "</b>" + prose(lead.slice(openingTitle.length)) : prose(lead);
-    const overview = "<p>" + leadHtml + "</p>" + paragraphs(intro);
+    const leadHtml = openingTitle ? "<b>" + formatted(openingTitle) + "</b>" + formatted(lead.slice(openingTitle.length)) : formatted(lead);
+    const overview = "<p>" + leadHtml + "</p>" + paragraphs(intro, formatted);
     const facts = entry.facts.map(([label, value]) => `<tr><th scope="row">${prose(label)}</th><td>${prose(value)}</td></tr>`).join("");
     const infobox = facts ? `<aside class="infobox" aria-label="${escapeHtml(entry.title)}概要"><div class="infobox-title">${escapeHtml(entry.title)}</div><div class="infobox-subtitle">${prose(entry.type)}</div><table><tbody>${facts}</tbody></table></aside>` : "";
     const notice = entry.notice ? `<div class="article-notice" role="note"><span class="notice-icon" aria-hidden="true">${icon("info")}</span><p>${prose(entry.notice)}</p></div>` : "";
@@ -1018,12 +1021,16 @@
     <header class="article-heading">
       <div class="title-line">
         <h1>${escapeHtml(entry.title)}</h1>
-        <button class="language-button" type="button" id="article-language-button" aria-expanded="false" aria-controls="article-language-menu">${icon("language")} 2种语言</button>
-        <div class="language-menu" id="article-language-menu" hidden><button type="button" data-language="简体中文">简体中文</button><button type="button" data-language="繁體中文">繁體中文</button></div>
+        <button class="language-button" type="button" id="article-language-button" aria-expanded="false" aria-controls="article-language-menu">${icon("language")} 3种语言</button>
+        <div class="language-menu" id="article-language-menu" hidden>
+          <button type="button" data-language="zh-CN" lang="zh-CN" translate="no">简体中文</button>
+          <button type="button" data-language="zh-TW" lang="zh-TW" translate="no">繁體中文</button>
+          <button type="button" data-language="en" lang="en" translate="no">English</button>
+        </div>
       </div>
       <div class="article-toolbar">
         <div class="subject-tabs"><a class="active" href="#top">条目</a><button type="button" data-demo="讨论页">讨论</button></div>
-        <div class="variant-control"><button type="button" data-demo="字词转换">不转换${icon("chevron")}</button></div>
+        <div class="variant-control"><select id="article-variant" aria-label="中文变体"><option value="zh-CN" lang="zh-CN" translate="no">简体中文</option><option value="zh-TW" lang="zh-TW" translate="no">繁體中文</option></select></div>
         <div class="view-tabs"><a class="active" href="#top">阅读</a><button type="button" data-demo="编辑">编辑</button><button type="button" data-demo="查看历史">查看历史</button><button type="button" data-demo="工具">工具${icon("chevron")}</button></div>
       </div>
     </header>
@@ -1057,9 +1064,12 @@
   }
   const rendered = renderEntry(slug);
   if (!rendered) {
-    document.title = "未找到词条—魏鸡百科";
-    article.innerHTML = '<header class="article-heading"><h1>未找到词条</h1></header><p>这个词条暂时不存在。你可以返回<a href="' + siteArticlesUrl + '">魏鸡百科首页</a>继续浏览。</p>';
-    toc.innerHTML = '<a href="#top">未找到词条</a>';
+    const t = key => window.WEIJIBA_I18N?.t(key) ?? key;
+    const title = escapeHtml(t("未找到词条"));
+    document.title = t("未找到词条") + " | " + t("魏鸡百科");
+    article.innerHTML = '<header class="article-heading"><h1>' + title + '</h1></header><p>' +
+      escapeHtml(t("这个词条暂时不存在。")) + ' <a href="' + siteArticlesUrl + '">' + escapeHtml(t("返回百科首页")) + '</a></p>';
+    toc.innerHTML = '<a href="#top">' + title + '</a>';
     return;
   }
   document.title = rendered.title + "—魏鸡百科，困困的百科全书";

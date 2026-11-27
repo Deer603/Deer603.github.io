@@ -73,7 +73,9 @@
 
   function getEntryUrl(slug) {
     const path = entryPaths[slug];
-    return typeof path === "string" ? `${getSiteRoot()}${encodeURIComponent(path)}/` : "";
+    if (typeof path !== "string") return "";
+    const url = `${getSiteRoot()}${encodeURIComponent(path)}/`;
+    return window.WEIJIBA_I18N ? new URL(window.WEIJIBA_I18N.localizedUrl(url)).pathname : url;
   }
 
   function getEntryFromPath(pathname) {
@@ -81,7 +83,7 @@
     try {
       path = decodeURIComponent(path);
     } catch (_) {}
-    return slugByPath[path] || "";
+    return Object.hasOwn(slugByPath, path) ? slugByPath[path] : "";
   }
 
   function normalizeEntryLinks(root = document) {
