@@ -2,59 +2,42 @@
 
 # 603AI官网
 
-603AI的静态产品官网，介绍困困、朴AI、龟龟和探戈四个角色，展示角色语录，并提供Android应用下载入口。
+在网页上认识困困、朴AI、龟龟和探戈，切换头像、话题与预设语录。安装603AI后，可以和四位角色聊天、收藏语录，或从3D寝室场景进入对话。
 
-[![网页入口](https://img.shields.io/badge/网页-603ai-d79b20?style=flat-square)](https://deer603.github.io/603ai/)
-[![应用平台](https://img.shields.io/badge/应用-Android-555555?style=flat-square)](https://github.com/Deer603/603AI/releases)
-[![静态网站](https://img.shields.io/badge/网站-HTML%20%2F%20CSS%20%2F%20JavaScript-d79b20?style=flat-square)](#本地预览)
+[![网页入口](https://img.shields.io/badge/官网-603AI-d79b20?style=flat-square)](https://deer603.github.io/603ai/)
+[![系统要求](https://img.shields.io/badge/平台-Android%208.0%2B-555555?style=flat-square)](#下载与使用)
+[![应用下载](https://img.shields.io/badge/下载-APK-d79b20?style=flat-square)](https://github.com/Deer603/603AI/releases)
+[![问题反馈](https://img.shields.io/badge/GitHub-Issues-555555?style=flat-square)](https://github.com/Deer603/603AI/issues)
 
-[访问官网](https://deer603.github.io/603ai/) · [应用仓库](https://github.com/Deer603/603AI) · [本地预览](#本地预览) · [返回站点导航](../README.md#站点导航)
+[访问官网](https://deer603.github.io/603ai/) · [应用源码](https://github.com/Deer603/603AI) · [本地预览](#本地预览) · [站点导航](../README.md#站点导航)
 
-## 开始使用
+## 下载与使用
 
-网页提供角色切换、预设语录、应用介绍和下载区域。需要使用角色聊天时，前往[应用发行页](https://github.com/Deer603/603AI/releases)获取Android安装包。
+1. 使用Android8.0及以上设备，打开[官网下载区](https://deer603.github.io/603ai/#download)或[应用发行页](https://github.com/Deer603/603AI/releases)获取APK。当前官网指向[1.0.0发行版](https://github.com/Deer603/603AI/releases/tag/V1.0.0)。
+2. 打开APK，按系统提示安装。若系统询问安装权限，按提示为打开APK的应用授权。
+3. 在应用里选择角色开始对话。应用使用内置语料、关键词匹配与角色话术回复，安装后即可使用，无需注册或配置API密钥。
 
-网页上的对话是预设内容展示，不会调用聊天模型。页面当前配置的下载入口为`V1.0.0`下的`603AI-1.0.0.apk`；应用使用方式与发行说明由产品仓库维护。
+网页版提供角色介绍和预设语录。Android应用另外提供语录搜索、收藏、复制和分享，以及今日一句和使用统计。对话、收藏与统计保存在设备本地，清除应用数据前可复制或分享想保留的内容。
 
 ## 本地预览
 
-在仓库根目录运行：
+在仓库根目录用Python3启动静态服务器。
 
 ```sh
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-访问[本地603AI官网](http://127.0.0.1:8000/603ai/)，无需安装前端依赖。
+浏览[本地603AI官网](http://127.0.0.1:8000/603ai/)。官网使用原生HTML、CSS和JavaScript，可直接预览。
 
-## 页面功能
+## 维护官网
 
-- 四个角色的头像、简介、话题与语录切换。
-- Android安装包、发行说明和问题反馈入口。
-- 手机导航、滚动进度与响应式布局。
-- 下载地址为空时禁用下载按钮，并显示安装包待提供状态。
-
-## 维护说明
-
-|文件|用途|
+|维护内容|位置|
 |---|---|
-|[index.html](index.html)|页面文案、下载配置与分享元信息|
-|[style.css](style.css)|配色、布局、动画与响应式样式|
-|[script.js](script.js)|下载链接配置、手机导航与滚动进度|
-|[persona.js](persona.js)|角色头像、简介、问题与预设语录|
-|[assets/](assets/)|应用图标与角色图片|
+|产品文案、下载配置、默认下载链接|[index.html](index.html)|
+|角色头像、话题、问题和语录|[persona.js](persona.js)、[assets/](assets/)|
+|下载按钮、移动端导航和滚动进度|[script.js](script.js)|
+|配色和响应式布局|[style.css](style.css)|
 
-发行信息在`index.html`的meta标签中配置：
+应用发布新版后，更新`index.html`头部元信息中的`603ai-apk-url`、`603ai-release-url`、`603ai-release-date`和`603ai-apk-size`，再同步下载区的默认链接、版本号和文案。下载脚本只接受HTTPS链接，留空APK地址会禁用下载按钮。若产品仓库迁移，同步`603ai-repository`和页面中的仓库及反馈链接。
 
-|配置名|用途|
-|---|---|
-|`603ai-apk-url`|APK直链，仅接受HTTPS地址|
-|`603ai-release-url`|发行说明地址|
-|`603ai-release-date`|页面显示的发布日期|
-|`603ai-apk-size`|页面显示的安装包大小|
-|`603ai-repository`|产品仓库地址|
-
-更新发行时同步HTML里的默认链接与下载文案。修改角色展示编辑`persona.js`；页面资源使用版本参数时，也同步调整对应引用。
-
-## 发布与产品来源
-
-本目录仅保存官网页面，使用`/603ai/`路径，随整个网站发布。发布步骤见[根README](../README.md#发布到github-pages)。应用源码、APK、问题反馈与应用许可见[Deer603/603AI](https://github.com/Deer603/603AI)。
+官网随根站点发布在`/603ai/`。发布步骤和分享设置见[根README](../README.md#发布到github-pages)与[网站分享信息](../docs/sharing.md)。

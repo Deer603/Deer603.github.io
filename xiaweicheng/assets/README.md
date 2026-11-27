@@ -1,43 +1,29 @@
 # 作品集素材说明
 
-此目录保存[夏炜城作品集](../README.md)使用的项目图片、摄影作品、生活图片与下载素材。替换资源时保留文件名对应关系，并区分实物记录、工程渲染和概念表达。
+这里存放[夏炜城作品集](../README.md)使用的项目图片、个人照、摄影和生活素材，以及分享图和简历下载文件。
 
 ## 项目素材
 
-|文件|内容与用途|
-|---|---|
-|`rm-robot-prototype.webp`|机器人样机照片|
-|`rm-power-controller-cover.webp`|功率控制板3D渲染图|
-|`rm-system-concept.webp`|系统方案概念图，页面标注为AI生成|
-|`rm-testing-scene.webp`|测试场景示意，页面标注为AI生成|
-|`tea-machine-schematic.webp`|电路原理图|
-|`tea-machine-pcb-layout.webp`|PCB布局图|
-|`tea-machine-pcb-prototype.webp`|未上电硬件原型照片|
-|`tea-machine-pcb-powered.webp`|上电硬件原型照片|
-|`tea-machine-system-flow.svg`|系统架构示意|
-|`tea-machine-id-concept.webp`|产品外观概念图|
-|`tea-machine-lifestyle.webp`|家居使用场景概念图|
-|`tea-machine-ui-concept.webp`|设备与手机交互概念图|
-|`ai-photography-cover.webp`|LensPilot AI产品场景概念图|
-|`ai-photography-analysis-ui.webp`|照片分析工作台概念界面|
-|`ai-photography-learning-profile.webp`|能力画像与学习计划概念界面|
+|项目|素材用途|文件|
+|---|---|---|
+|RoboMaster功率控制|实物样机、功率控制板3D渲染|[样机照片](rm-robot-prototype.webp) · [控制板渲染](rm-power-controller-cover.webp)|
+|RoboMaster功率控制|AI生成的系统方案与测试场景示意|[方案概念图](rm-system-concept.webp) · [测试场景示意](rm-testing-scene.webp)|
+|智能泡茶机|工程图与系统架构|[电路原理图](tea-machine-schematic.webp) · [PCB布局](tea-machine-pcb-layout.webp) · [系统架构](tea-machine-system-flow.svg)|
+|智能泡茶机|硬件原型照片|[未上电原型](tea-machine-pcb-prototype.webp) · [上电原型](tea-machine-pcb-powered.webp)|
+|智能泡茶机|外观、家居场景与交互概念|[外观](tea-machine-id-concept.webp) · [家居场景](tea-machine-lifestyle.webp) · [设备与手机界面](tea-machine-ui-concept.webp)|
+|LensPilot AI摄影助手|AI生成的产品场景、照片分析与学习计划概念图|[产品场景](ai-photography-cover.webp) · [分析工作台](ai-photography-analysis-ui.webp) · [能力画像与计划](ai-photography-learning-profile.webp)|
 
-LensPilot AI的上述三张概念图为AI生成。概念图、渲染图和场景示意应保留相应标注，不替代实物照片或产品成果记录。
+## 首页与分享素材
 
-## 摄影与生活
+- `xia-weicheng-portrait.png`同时用于首页大图和首页分享。替换时保留照片原始比例。[个人照](xia-weicheng-portrait.png)
+- `photo-daily-`开头的是摄影素材，其中树林与湖面照片也用于LensPilot AI案例。[摄影样片](photo-daily-forest.webp)
+- `travel-`开头的图片用于旅行展示，页面标注为AI合影。吉他、健身、篮球和校园图片使用`life-`前缀。
+- 三个项目页各有一组以项目目录名开头的横版分享封面和方形缩略图。[分享图与生成方式](../../docs/sharing.md#修改标题与图片)
 
-- `photo-daily-forest.webp`、`photo-daily-sculpture.webp`、`photo-daily-sunset-detail.webp`、`photo-daily-night-drinks.webp`用于个人摄影展示。
-- `travel-*.webp`用于旅行展示。
-- `life-*.webp`用于吉他、健身、篮球和校园生活展示。
+## 替换资源
 
-图片的具体说明随页面内容维护，不根据文件名扩写拍摄时间、地点或经历。
+1. 沿用文件名时按原有用法替换图片。工程图保留可读的线条和标注，项目封面选用横图，二维码使用方图。展示照片可使用WebP或AVIF。
+2. 图片更名时，在原始工程中同步更新路径、替代文本与图注，再重新导出。更换项目图后仍按实际素材标注实物照片、工程渲染、概念图或AI生成图。
+3. 发布正式简历时，将PDF加入原始工程的公开资源目录，并将下载按钮切换到PDF。二维码补充后，同时更新展示与替代文本。[当前简历占位文件](resume-pdf-placeholder.txt)
 
-## 替换建议
-
-- 封面优先使用16:10或4:3横图，细节图使用4:3，二维码使用1:1。
-- 优先使用WebP或AVIF；照片长边约2400px即可作为常用展示尺寸。
-- 保留已有文件名可减少路径变更；更名后同步页面和原始工程中的引用。
-- `resume-pdf-placeholder.txt`是简历占位文件，应换成实际PDF并更新下载链接。
-- 微信二维码目前是页面占位区域，尚无对应二维码图片文件。
-
-页面结构与导出文件的更新方式见[作品集README](../README.md#维护方式)。
+[返回作品集维护说明](../README.md#维护方式)

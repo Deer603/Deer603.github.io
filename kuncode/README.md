@@ -2,75 +2,51 @@
 
 # KunCode官网
 
-KunCode开发工作台的静态产品官网，提供功能介绍、困困AI展示和Windows、macOS安装入口。官网页面由本仓库维护，应用源码与发行包位于[Roylyl/KunCode](https://github.com/Roylyl/KunCode)。
+KunCode是基于Code-OSS定制的中文开发工作台。官网介绍代码编辑、终端、调试、Git与扩展，展示困困AI的预设对话，并提供Windows和macOS安装入口。
 
-[![网页入口](https://img.shields.io/badge/网页-kuncode-527565?style=flat-square)](https://deer603.github.io/kuncode/)
-[![页面版本](https://img.shields.io/badge/页面展示版本-2.0.0-527565?style=flat-square)](index.html)
-[![应用下载](https://img.shields.io/badge/下载-Windows%20%7C%20macOS-555555?style=flat-square)](https://github.com/Roylyl/KunCode/releases)
+[![网页入口](https://img.shields.io/badge/官网-KunCode-527565?style=flat-square)](https://deer603.github.io/kuncode/)
+[![版本与下载](https://img.shields.io/badge/下载-2.0.0-527565?style=flat-square)](https://github.com/Roylyl/KunCode/releases/tag/V2.0.0)
+[![应用平台](https://img.shields.io/badge/平台-Windows%20%7C%20macOS-555555?style=flat-square)](#下载与使用)
+[![应用许可](https://img.shields.io/badge/应用许可-MIT-555555?style=flat-square)](https://github.com/Roylyl/KunCode/blob/main/LICENSE.txt)
 
-[访问官网](https://deer603.github.io/kuncode/) · [应用发行页](https://github.com/Roylyl/KunCode/releases) · [本地预览](#本地预览) · [返回站点导航](../README.md#站点导航)
+[访问官网](https://deer603.github.io/kuncode/) · [应用源码](https://github.com/Roylyl/KunCode) · [问题反馈](https://github.com/Roylyl/KunCode/issues) · [站点导航](../README.md#站点导航)
 
-## 下载应用
+## 下载与使用
 
-页面当前配置的版本为2.0.0，发行标签为`V2.0.0`。安装包按平台和处理器区分：
+打开[官网下载区](https://deer603.github.io/kuncode/#download)或[2.0.0发行页](https://github.com/Roylyl/KunCode/releases/tag/V2.0.0)，按设备选择安装包。Mac用户可在“关于本机”查看芯片或处理器类型。
 
-|平台|页面配置的安装包|
+|系统要求|安装包|
 |---|---|
-|Windows x64|`KunCode-Windows-x64-2.0.0.exe`|
-|Mac Apple Silicon|`KunCode-macOS-arm64-2.0.0.pkg`|
-|Mac Intel|`KunCode-macOS-x64-2.0.0.pkg`|
+|Windows10及以上，x64|`KunCode-Windows-x64-2.0.0.exe`|
+|macOS12及以上，Apple Silicon|`KunCode-macOS-arm64-2.0.0.pkg`|
+|macOS12及以上，Intel|`KunCode-macOS-x64-2.0.0.pkg`|
 
-通过[对应发行页](https://github.com/Roylyl/KunCode/releases/tag/V2.0.0)查看安装包和发行说明。Mac用户可在“关于本机”确认处理器，安装要求以应用发行说明为准。
+安装后打开项目文件夹，即可使用编辑器、集成终端和Git。可通过Open VSX安装开发语言或SDK所需的扩展。在应用聊天面板选择`Kunkun AI`或输入`@kunkun`开始交流，输入`/about`查看使用说明。
+
+官网的困困AI区提供安装报错、论文选题和小组协作三组预设对话与思考练习。
 
 ## 本地预览
 
-在仓库根目录运行：
+在仓库根目录用Python3启动静态服务器。
 
 ```sh
 python -m http.server 8000 --bind 127.0.0.1
 ```
 
-访问[本地官网](http://127.0.0.1:8000/kuncode/)。页面为原生HTML、CSS与JavaScript，无需安装依赖或执行构建，也可直接打开[index.html](index.html)。
+浏览[本地KunCode官网](http://127.0.0.1:8000/kuncode/)。官网由原生HTML、CSS和JavaScript组成，可直接预览。
 
-## 页面内容
+## 维护官网
 
-- 开发工作台介绍：代码编辑、文件管理、终端、调试、Git、扩展与中文界面。
-- 困困AI展示：可切换的静态对话示例与思考练习。
-- 下载区域：平台入口、安装说明、发行页和问题反馈。
-- 自动突出浏览器所在系统的下载入口，并保留Mac架构选择。
-- 暗绿色玻璃界面、响应式布局及减少动态效果偏好适配。
-
-页面中的编辑器是工作台示意，AI对话用于产品展示；实际应用功能由KunCode客户端提供。
-
-## 维护说明
-
-|文件|用途|
+|维护内容|位置|
 |---|---|
-|[index.html](index.html)|文案、发行配置、默认下载链接与分享信息|
-|[style.css](style.css)|主题、布局与响应式样式|
-|[script.js](script.js)|发行链接生成、系统判断与对话示例切换|
-|[app-icon.png](app-icon.png)|水豚品牌原图|
-|[app-icon-96.webp](app-icon-96.webp)、[app-icon-400.webp](app-icon-400.webp)|顶栏、对话头像和介绍区域使用的展示图|
-|[share-cover.jpg](share-cover.jpg)、[share-thumb.jpg](share-thumb.jpg)|分享封面与缩略图|
+|功能介绍、版本配置、默认下载链接|[index.html](index.html)|
+|系统识别、下载链接生成、对话示例|[script.js](script.js)|
+|主题与响应式布局|[style.css](style.css)|
+|水豚原图与网页展示图|[app-icon.png](app-icon.png)、[96px](app-icon-96.webp)、[400px](app-icon-400.webp)|
+|分享图与缩略图|[share-cover.jpg](share-cover.jpg)、[share-thumb.jpg](share-thumb.jpg)|
 
-更换品牌原图后，在安装Pillow的Python环境中从仓库根目录运行`python tools/optimize-site-images.py`，重新生成96px与400px展示图。该脚本同时更新首页的展示图片，并保留原始素材。
+1. 将`index.html`里的`kuncode-release`更新为发行标签（例如`V2.0.0`），`kuncode-version`更新为产品版本（例如`2.0.0`）。
+2. 对照发行附件更新`kuncode-windows-asset`、`kuncode-mac-arm64-asset`和`kuncode-mac-x64-asset`。模板中的`{version}`会替换为不带`V`的产品版本。
+3. 同步HTML里的默认下载链接、文件名、大小和版本文案，保留浏览器关闭JavaScript时的下载入口。
 
-### 更新版本
-
-在`index.html`头部维护以下配置：
-
-```html
-<meta name="kuncode-release" content="V2.0.0" />
-<meta name="kuncode-version" content="2.0.0" />
-<meta name="kuncode-windows-asset" content="KunCode-Windows-x64-{version}.exe" />
-<meta name="kuncode-mac-arm64-asset" content="KunCode-macOS-arm64-{version}.pkg" />
-<meta name="kuncode-mac-x64-asset" content="KunCode-macOS-x64-{version}.pkg" />
-```
-
-脚本据此生成下载链接。更新时同时调整HTML中的默认链接、文件名、包大小和版本文案，保持未启用JavaScript时仍可下载。文件名应与应用Release附件一致。
-
-分享文案由根目录`tools/share-metadata.mjs`统一维护，详见[分享信息说明](../docs/sharing.md)。只迁移官网托管位置时，保留应用源码、发行与反馈链接；产品仓库迁移时再同步`script.js`的`RELEASE_BASE`。
-
-## 发布与产品来源
-
-网站使用`/kuncode/`路径，发布方式见[根README](../README.md#发布到github-pages)。KunCode基于Code-OSS定制，应用许可与上游说明见[产品仓库](https://github.com/Roylyl/KunCode)及[许可证](https://github.com/Roylyl/KunCode/blob/main/LICENSE.txt)。
+更换水豚原图后，可在安装Pillow的Python环境下从仓库根目录运行`python tools/optimize-site-images.py`，更新展示图。官网使用`/kuncode/`路径。发布方式和分享设置见[根README](../README.md#发布到github-pages)与[网站分享信息](../docs/sharing.md)。
